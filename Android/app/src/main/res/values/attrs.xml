@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Text">
+        <attr name="text" format="string"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textStyle" format="integer">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+            <enum name="bolditalic" value="3"/>
+        </attr>
+        <attr name="font" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="Shadow">
+        <attr name="shadowDx" format="float|dimension"/>
+        <attr name="shadowDy" format="float|dimension"/>
+        <attr name="shadowColor" format="color"/>
+        <attr name="shadowRadius" format="float|dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="Border">
+        <attr name="borderRadius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="WavesView">
+        <attr name="text"/>
+        <attr name="textColor"/>
+        <attr name="textSize"/>
+        <attr name="textStyle"/>
+        <attr name="font"/>
+        <attr name="shadowDx"/>
+        <attr name="shadowDy"/>
+        <attr name="shadowColor"/>
+        <attr name="shadowRadius"/>
+        <attr name="activeBack" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="RelativeLayout">
+        <attr name="shadowDx"/>
+        <attr name="shadowDy"/>
+        <attr name="shadowColor"/>
+        <attr name="shadowRadius"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <declare-styleable name="InputLayout">
+        <attr name="label" format="string"/>
+        <attr name="labelColor" format="color"/>
+        <attr name="labelSize" format="dimension"/>
+        <attr name="labelFamily" format="reference"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="appName">SmartHome</string>
+
+    <string name="livingRoomName">Phòng khách</string>
+    <string name="bedRoomName">Phòng ngủ</string>
+    <string name="kitchenRoomName">Phòng bếp</string>
+    <string name="bathRoomName">Phòng tắm</string>
+    <string name="balconyRoomName">Ban công</string>
+    <string name="stairsRoomName">Cầu thang</string>
+    <string name="fenceRoomName">Sân nhà</string>
+    <string name="mezzanineRoomName">Gác lửng</string>
+    <string name="roofRoomName">Gác mái</string>
+
+    <string name="listRoomItemName">Phòng</string>
+    <string name="listRoomItemDeviceCount">${count} thiết bị</string>
+    <string name="addRoomTitle">Tạo phòng</string>
+    <string name="addRoomName">Tên phòng</string>
+    <string name="addRoomType">Loại phòng</string>
+    <string name="addRoomNameHint">Nhập tên phòng</string>
+    <string name="addRoomTypeHint">Chọn loại phòng</string>
+    <string name="addRoomButton">Tạo</string>
+    <string name="addRoomErrorRequiredName">Tên phòng trống</string>
+    <string name="addRoomErrorInvalidType">Loại phòng không hợp lệ</string>
+    <string name="addRoomErrorExistsName">Tên phòng đã tồn tại</string>
+    <string name="addRoomSuccess">Thêm phòng thành công</string>
+    <string name="roomMenuRename">Đổi tên</string>
+    <string name="roomMenuRemove">Loại bỏ</string>
+    <string name="deviceLight">Đèn</string>
+    <string name="deviceFan">Quạt</string>
+    <string name="deviceHeater">Bình nước nóng</string>
+
+</resources>

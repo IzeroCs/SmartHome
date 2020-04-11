@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.izerocs.smarthome.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listRoomWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:padding="@dimen/listRoomWrapperPadding"
+    android:background="@drawable/list_room_item_selectable"
+    app:borderRadius="@dimen/listRoomWrapperBorderRadius"
+    android:clickable="true"
+    android:focusable="true"
+    tools:ignore="UselessParent">
+
+    <ImageView
+        android:id="@+id/listRoomIcon"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/listRoomIconSize"
+        android:layout_height="@dimen/listRoomIconSize"
+        android:src="@drawable/ic_living_room"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/listRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listRoomIcon"
+        android:layout_marginTop="@dimen/listRoomNameMarginTop"
+        android:lines="1"
+        android:textSize="@dimen/listRoomNameTextSize"
+        android:textColor="@color/listRoomNameTextColor"
+        android:textStyle="normal"
+        android:ellipsize="end"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/listRoomItemName" />
+
+    <TextView
+        android:id="@+id/listRoomDeviceCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listRoomName"
+        android:layout_marginTop="@dimen/listRoomDeviceCountMaginTop"
+        android:textSize="@dimen/listRoomDeviceCountTextSize"
+        android:textColor="@color/listRoomDeviceCountTextColor"
+        android:textStyle="normal"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/listRoomItemDeviceCount" />
+
+    <ImageView
+        android:layout_below="@id/listRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/listRoomDeviceCountMaginTop"
+        android:src="@drawable/ic_arrow_right_alt"
+        android:tint="@color/primaryDark"
+        tools:ignore="ContentDescription" />
+
+</com.izerocs.smarthome.widget.RelativeLayout>

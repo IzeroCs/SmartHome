@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/formSpinnerPopupItemPadding">
+
+    <ImageView
+        android:id="@+id/spinnerIcon"
+        android:layout_width="@dimen/formSpinnerPopupItemIconSize"
+        android:layout_height="@dimen/formSpinnerPopupItemIconSize"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/formSpinnerPopupItemIconMargin"
+        android:layout_marginEnd="@dimen/formSpinnerPopupItemIconMargin" />
+
+    <TextView
+        android:id="@+id/spinnerValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/formSpinnerPopupItemText"
+        android:textSize="@dimen/formSpinnerPopupItemTextSize" />
+
+</LinearLayout>

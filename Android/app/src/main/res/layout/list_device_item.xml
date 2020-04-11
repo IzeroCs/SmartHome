@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.izerocs.smarthome.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listDeviceWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:clipToPadding="false"
+    android:background="#ff0000">
+
+    <RelativeLayout
+        android:id="@+id/listDeviceBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#f0f0f0"
+        android:padding="10dp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/listDeviceIcon"
+            android:layout_centerInParent="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_living_room"
+            android:tint="#ffffff"/>
+
+    </RelativeLayout>
+
+</com.izerocs.smarthome.widget.RelativeLayout>

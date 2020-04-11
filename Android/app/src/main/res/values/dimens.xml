@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toastyTextSize">20sp</dimen>
+    <dimen name="floatActionBarMargin">30dp</dimen>
+
+    <dimen name="waveTopForChild">100dp</dimen>
+    <dimen name="waveHeight">220dp</dimen>
+    <dimen name="waveIconMargin">10dp</dimen>
+    <dimen name="waveIconPadding">20dp</dimen>
+    <dimen name="waveShadowDx">2</dimen>
+    <dimen name="waveShadowDy">10</dimen>
+    <dimen name="waveShadowRadius">20</dimen>
+    <dimen name="waveTitleSize">32sp</dimen>
+    <dimen name="waveTitleShadowDx">2</dimen>
+    <dimen name="waveTitleShadowDy">2</dimen>
+    <dimen name="waveTitleShadowRadius">15</dimen>
+
+    <dimen name="formPaddingVertical">35dp</dimen>
+    <dimen name="formPaddingHorizontal">25dp</dimen>
+    <dimen name="formElementMarginVertical">35dp</dimen>
+    <dimen name="formElementPadding">25dp</dimen>
+    <dimen name="formElementBorderRadius">15dp</dimen>
+    <dimen name="formLabelTextSize">22sp</dimen>
+    <dimen name="formEditTextSize">20sp</dimen>
+    <dimen name="formStatusTextSize">20sp</dimen>
+    <dimen name="formSpinnerPopupItemPadding">15dp</dimen>
+    <dimen name="formSpinnerPopupItemTextSize">20sp</dimen>
+    <dimen name="formSpinnerPopupItemIconSize">34dp</dimen>
+    <dimen name="formSpinnerPopupItemIconMargin">20dp</dimen>
+    <dimen name="formButtonPaddingVertical">50dp</dimen>
+    <dimen name="formButtonTextSize">22sp</dimen>
+
+    <dimen name="listRoomItemSpaceHorizontal">30dp</dimen>
+    <dimen name="listRoomWrapperPadding">30dp</dimen>
+    <dimen name="listRoomWrapperShadowDx">15</dimen>
+    <dimen name="listRoomWrapperShadowDy">15</dimen>
+    <dimen name="listRoomWrapperShadowRadius">50</dimen>
+    <dimen name="listRoomWrapperBorderRadius">20dp</dimen>
+    <dimen name="listRoomIconSize">80dp</dimen>
+    <dimen name="listRoomNameTextSize">22sp</dimen>
+    <dimen name="listRoomNameMarginTop">25dp</dimen>
+    <dimen name="listRoomDeviceCountTextSize">20sp</dimen>
+    <dimen name="listRoomDeviceCountMaginTop">7dp</dimen>
+
+    <dimen name="listDeviceItemSpaceHorizontal">30dp</dimen>
+</resources>

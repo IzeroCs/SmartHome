@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.izerocs.smarthome">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <dist:module dist:instant="true" />
+
+    <application
+        android:name=".activity.SmartApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/appName"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.SmartActivity"
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.RoomActivity"
+            android:parentActivityName=".activity.SmartActivity"
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SmartActivity" />
+        </activity>
+        <activity
+            android:name=".activity.AddRoomActivity"
+            android:parentActivityName=".activity.SmartActivity"
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SmartActivity" />
+        </activity>
+    </application>
+
+</manifest>
