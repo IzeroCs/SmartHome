@@ -30,11 +30,11 @@ class RoomActivity : BaseActivity(),
             wavesView.setOnBackClickListener(this@RoomActivity)
         }
 
-        listDevice.add(DeviceItem(this, "Light 1", 1))
+        listDevice.add(DeviceItem(this, "Light 1", 1, 1))
         listDevice.add(DeviceItem(this, "Light 2", 1))
         listDevice.add(DeviceItem(this, "Light 3", 1))
         listDevice.add(DeviceItem(this, "Fan 1", 2))
-        listDevice.add(DeviceItem(this, "Fan 2", 2))
+        listDevice.add(DeviceItem(this, "Fan 2", 2, 1))
         listDevice.add(DeviceItem(this, "Heater 1", 3))
     }
 

@@ -2,24 +2,29 @@ package com.izerocs.smarthome.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
-import com.izerocs.smarthome.utils.GridSpacesItemDecoration
 
 /**
  * Created by IzeroCs on 2020-04-01
  */
 class ListRoomView(context: Context, attributeSet: AttributeSet) : RecyclerView(context, attributeSet) {
+
     init {
         clipChildren = false
         clipToPadding = false
         adapter = ListRoomAdapter(context)
-        layoutManager = GridLayoutManager(context, 2)
+        layoutManager = GridLayoutManager(context, 2, adapter)
 
-        addItemDecoration(GridSpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.listRoomItemSpaceHorizontal), true))
+        addItemDecoration(
+            GridLayoutManager.GridSpacesItemDecoration(
+                resources.getDimensionPixelSize(
+                    R.dimen.listRoomItemSpaceHorizontal
+                ), true
+            )
+        )
         setHasFixedSize(true)
         setItemViewCacheSize(20)
     }

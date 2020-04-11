@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.DeviceItem
+import com.izerocs.smarthome.widget.RecyclerView
 
 /**
  * Created by IzeroCs on 2020-03-26
@@ -16,7 +16,7 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     private val devices  : ArrayList<DeviceItem> = ArrayList()
     private val inflater : LayoutInflater = LayoutInflater.from(context)
 
-    class ViewHolder(context : Context, view : View) : RecyclerView.ViewHolder(view) {
+    open class ViewHolder(context : Context, view : View) : RecyclerView.ViewHolder(view) {
         private val mContext = context
 
         fun setName(name : String) {
@@ -39,6 +39,13 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
 
     override fun getItemCount() : Int {
         return devices.size
+    }
+
+    override fun getSpanSize(position : Int) : Int {
+        if (devices[position].getWidgetSize() == DeviceItem.WIDGET_SIZE_LARGE)
+            return 2
+
+        return 1
     }
 
     fun add(item : DeviceItem) : Boolean = devices.add(item)

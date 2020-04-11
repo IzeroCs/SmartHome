@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_room_item.view.*
 
 /**

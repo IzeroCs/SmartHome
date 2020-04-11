@@ -40,6 +40,7 @@ class SmartActivity : BaseActivity(),
 
         updateListAdapter()
         onItemClick(null, 0, false)
+
     }
 
     override fun onCreatePreferences() : SharedPreferences? {
