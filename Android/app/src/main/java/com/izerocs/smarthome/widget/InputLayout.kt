@@ -21,7 +21,7 @@ import com.izerocs.smarthome.R
 class InputLayout(context: Context, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {
     private val labelView  = TextView(context)
     private val statusView = TextView(context)
-    private var pathClip     : Path = Path()
+    private var clipPath     : Path = Path()
     private var borderRadius : Float = 0F
 
     init {
@@ -79,8 +79,7 @@ class InputLayout(context: Context, attributeSet: AttributeSet) : LinearLayout(c
 
         if (changed) {
             clipBounds = Rect(0, 0, measuredWidth, measuredHeight)
-
-            pathClip.run {
+            clipPath.run {
                 reset()
                 addRoundRect(RectF(clipBounds), borderRadius, borderRadius, Path.Direction.CW)
             }
@@ -88,7 +87,7 @@ class InputLayout(context: Context, attributeSet: AttributeSet) : LinearLayout(c
     }
 
     override fun draw(canvas: Canvas?) {
-        canvas?.clipPath(pathClip)
+        canvas?.clipPath(clipPath)
         super.draw(canvas)
     }
 

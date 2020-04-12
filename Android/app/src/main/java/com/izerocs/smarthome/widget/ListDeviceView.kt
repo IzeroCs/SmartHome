@@ -19,7 +19,7 @@ class ListDeviceView(context : Context, attributeSet: AttributeSet) : RecyclerVi
         addItemDecoration(
             GridLayoutManager.GridSpacesItemDecoration(
                 resources.getDimensionPixelSize(
-                    R.dimen.listDeviceItemSpaceHorizontal
+                    R.dimen.listDeviceSpacing
                 ), true
             )
         )

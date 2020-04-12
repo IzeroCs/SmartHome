@@ -38,10 +38,10 @@
     </declare-styleable>
 
     <declare-styleable name="RelativeLayout">
-        <attr name="shadowDx"/>
-        <attr name="shadowDy"/>
-        <attr name="shadowColor"/>
-        <attr name="shadowRadius"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <declare-styleable name="LinearLayout">
         <attr name="borderRadius"/>
     </declare-styleable>
 

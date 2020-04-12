@@ -5,6 +5,10 @@
     <color name="accent">#00a895</color>
     <color name="background">#fff</color>
 
+    <color name="deviceLight">#ffa426</color>
+    <color name="deviceFan">#0795fe</color>
+    <color name="deviceHeater">#e9573f</color>
+
     <color name="waveIcon">#ffffff</color>
     <color name="waveBackIconUnpressed">#00000000</color>
     <color name="waveBackIconPressed">#50ffffff</color>
@@ -42,8 +46,10 @@
     <color name="listRoomNameTextColor">#777</color>
     <color name="listRoomDeviceCountTextColor">#aaa</color>
 
-    <color name="deviceLight">#ffa426</color>
-    <color name="deviceFan">#0795fe</color>
-    <color name="deviceHeater">#e9573f</color>
+    <color name="listDeviceIconTint">@color/primaryDark</color>
+    <color name="listDeviceStatusTint">@color/primaryDark</color>
+    <color name="listDeviceIconBg">#1000a895</color>
+    <color name="listDeviceLabelText">#888</color>
+    <color name="listDeviceSubLabelText">#ccc</color>
 
 </resources>

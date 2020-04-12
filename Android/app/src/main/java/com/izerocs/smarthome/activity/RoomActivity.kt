@@ -30,12 +30,30 @@ class RoomActivity : BaseActivity(),
             wavesView.setOnBackClickListener(this@RoomActivity)
         }
 
-        listDevice.add(DeviceItem(this, "Light 1", 1, 1))
-        listDevice.add(DeviceItem(this, "Light 2", 1))
-        listDevice.add(DeviceItem(this, "Light 3", 1))
-        listDevice.add(DeviceItem(this, "Fan 1", 2))
-        listDevice.add(DeviceItem(this, "Fan 2", 2, 1))
-        listDevice.add(DeviceItem(this, "Heater 1", 3))
+        val arr = arrayListOf<HashMap<String, Any>>(
+            hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Trái"),
+            hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Phải"),
+            hashMapOf("name" to "Đèn ngủ", "type" to 1, "widget" to 1),
+            hashMapOf("name" to "Quạt trần", "type" to 2),
+            hashMapOf("name" to "Quạt đứng", "type" to 2),
+            hashMapOf("name" to "Bình nóng lạnh", "type" to 3, "widget" to 1)
+        )
+
+        for (i in 0 until arr.size) {
+            val maps = arr[i]
+            val device = DeviceItem(this).apply {
+                setName(maps["name"] as String)
+                setType(maps["type"] as Int)
+
+                if (maps.containsKey("descriptor"))
+                    setDescriptor(maps["descriptor"] as String)
+
+                if (maps.containsKey("widget"))
+                    setWidgetSize(maps["widget"] as Int)
+            }
+
+            listDevice.add(device)
+        }
     }
 
     override fun onCreateMenu() : Int? {

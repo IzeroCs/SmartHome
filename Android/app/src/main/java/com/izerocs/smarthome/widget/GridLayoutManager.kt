@@ -33,12 +33,16 @@ class GridLayoutManager(context : Context, spanCount : Int, adapter : ParentAdap
                 val layoutManager = parent.layoutManager as GridLayoutManager
                 val position       = parent.getChildAdapterPosition(view)
                 val spanCount      = layoutManager.spanCount
+                val spanSize       = layoutManager.spanSizeLookup.getSpanSize(position)
                 val spanIndex      = layoutManager.spanSizeLookup.getSpanIndex(position, spanCount)
                 val spanGroupIndex = layoutManager.spanSizeLookup.getSpanGroupIndex(position, spanCount)
 
                 if (includeEdge) {
-                    outRect.left = spacing - spanIndex * spacing / spanCount
-                    outRect.right = (spanIndex + 1) * spacing / spanCount
+                    outRect.left  = spacing - spanIndex * spacing / spanCount
+                    outRect.right = outRect.left
+
+                    if (spanSize < spanCount)
+                        outRect.right = (spanIndex + 1) * spacing / spanCount
 
                     if (spanGroupIndex == 0)
                         outRect.top = spacing
@@ -46,7 +50,10 @@ class GridLayoutManager(context : Context, spanCount : Int, adapter : ParentAdap
                     outRect.bottom = spacing
                 } else {
                     outRect.left  = spanIndex * spacing / spanCount
-                    outRect.right = spacing - (spanIndex + 1) * spacing / spanCount
+                    outRect.right = outRect.left
+
+                    if (spanSize < spanCount)
+                        outRect.right = spacing - (spanIndex + 1) * spacing / spanCount
 
                     if (spanGroupIndex > 0)
                         outRect.top = spacing

@@ -30,7 +30,7 @@
     <dimen name="formButtonPaddingVertical">50dp</dimen>
     <dimen name="formButtonTextSize">22sp</dimen>
 
-    <dimen name="listRoomItemSpaceHorizontal">30dp</dimen>
+    <dimen name="listRoomSpacing">30dp</dimen>
     <dimen name="listRoomWrapperPadding">30dp</dimen>
     <dimen name="listRoomWrapperShadowDx">15</dimen>
     <dimen name="listRoomWrapperShadowDy">15</dimen>
@@ -42,5 +42,16 @@
     <dimen name="listRoomDeviceCountTextSize">20sp</dimen>
     <dimen name="listRoomDeviceCountMaginTop">7dp</dimen>
 
-    <dimen name="listDeviceItemSpaceHorizontal">30dp</dimen>
+    <dimen name="listDeviceSpacing">30dp</dimen>
+    <dimen name="listDeviceSpaceVertical">15dp</dimen>
+    <dimen name="listDeviceSpaceHorizontal">15dp</dimen>
+    <dimen name="listDeviceWrapperBorderRadius">20dp</dimen>
+    <dimen name="listDeviceIconWrapperPadding">15dp</dimen>
+    <dimen name="listDeviceLabelWrapperPaddingHorizontal">15dp</dimen>
+    <dimen name="listDeviceIconSize">24dp</dimen>
+    <dimen name="listDeviceLabelTextSize">20sp</dimen>
+    <dimen name="listDeviceSubLabelTextSize">18sp</dimen>
+    <dimen name="listDeviceSubLabelMarginTop">6dp</dimen>
+    <dimen name="listDeviceStatusIconSize">17dp</dimen>
+
 </resources>

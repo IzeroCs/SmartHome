@@ -21,7 +21,7 @@ class ListRoomView(context: Context, attributeSet: AttributeSet) : RecyclerView(
         addItemDecoration(
             GridLayoutManager.GridSpacesItemDecoration(
                 resources.getDimensionPixelSize(
-                    R.dimen.listRoomItemSpaceHorizontal
+                    R.dimen.listRoomSpacing
                 ), true
             )
         )
