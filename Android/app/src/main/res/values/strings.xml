@@ -1,6 +1,7 @@
 <resources>
     <string name="appName">SmartHome</string>
     <string name="addRoomTitle">Add room</string>
+    <string name="addDeviceTitle">Add device for room</string>
 
     <string name="livingRoomName">Living room</string>
     <string name="bedRoomName">Bed room</string>
@@ -14,21 +15,28 @@
 
     <string name="listRoomItemName">Room</string>
     <string name="listRoomItemDeviceCount">${count} devices</string>
+
     <string name="addRoomName">Room name</string>
     <string name="addRoomType">Room type</string>
     <string name="addRoomNameHint">Input room name</string>
     <string name="addRoomTypeHint">Choose room type</string>
-    <string name="addRoomButton">Add</string>
+    <string name="addRoomButton">Create</string>
     <string name="addRoomErrorRequiredName">Required room name</string>
     <string name="addRoomErrorInvalidType">Room type invaild</string>
     <string name="addRoomErrorExistsName">Room name is exists</string>
     <string name="addRoomSuccess">Room added to success</string>
+
     <string name="roomMenuRename">Rename</string>
     <string name="roomMenuRemove">Remove</string>
+
     <string name="deviceLight">Light</string>
     <string name="deviceFan">Fan</string>
     <string name="deviceHeater">Heater</string>
     <string name="deviceStatusOnToast">${name} turn on</string>
     <string name="deviceStatusOffToast">${name} turn off</string>
 
+    <string name="addDeviceName">Device name</string>
+    <string name="addDeviceNameHint">Input device name</string>
+    <string name="addDeviceType">Device type</string>
+    <string name="addDeviceButton">Create</string>
 </resources>

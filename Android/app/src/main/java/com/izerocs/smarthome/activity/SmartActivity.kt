@@ -54,7 +54,8 @@ class SmartActivity : BaseActivity(),
     }
 
     override fun onClick(v: View?) {
-        startActivity(Intent(applicationContext, AddRoomActivity::class.java))
+        if (v == floatButton)
+            startActivity(Intent(applicationContext, AddRoomActivity::class.java))
     }
 
     override fun onItemClick(view: View?, position: Int, isLongClick: Boolean) {

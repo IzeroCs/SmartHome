@@ -10,12 +10,12 @@
 	<dimen name="formSpinnerPopupItemIconMargin">160.00dp</dimen>
 	<dimen name="formSpinnerPopupItemIconSize">272.00dp</dimen>
 	<dimen name="formSpinnerPopupItemPadding">120.00dp</dimen>
-	<dimen name="listDeviceIconSize">208.00dp</dimen>
+	<dimen name="listDeviceIconSize">224.00dp</dimen>
 	<dimen name="listDeviceIconWrapperPadding">120.00dp</dimen>
 	<dimen name="listDeviceLabelWrapperPaddingHorizontal">120.00dp</dimen>
-	<dimen name="listDeviceSpacing">240.00dp</dimen>
-	<dimen name="listDeviceSpacingHorizontal">120.00dp</dimen>
-	<dimen name="listDeviceSpacingVertical">120.00dp</dimen>
+	<dimen name="listDeviceSpacing">200.00dp</dimen>
+	<dimen name="listDeviceSpacingHorizontal">80.00dp</dimen>
+	<dimen name="listDeviceSpacingVertical">80.00dp</dimen>
 	<dimen name="listDeviceStatusIconSize">136.00dp</dimen>
 	<dimen name="listDeviceSubLabelMarginTop">48.00dp</dimen>
 	<dimen name="listDeviceWrapperBorderRadius">160.00dp</dimen>
@@ -28,7 +28,7 @@
 	<dimen name="waveHeight">1760.00dp</dimen>
 	<dimen name="waveIconMargin">80.00dp</dimen>
 	<dimen name="waveIconPadding">160.00dp</dimen>
-	<dimen name="waveTopForChild">800.00dp</dimen>
+	<dimen name="waveTopForChild">880.00dp</dimen>
 	<dimen name="formButtonTextSize">176.00sp</dimen>
 	<dimen name="formEditTextSize">160.00sp</dimen>
 	<dimen name="formLabelTextSize">176.00sp</dimen>

@@ -32,5 +32,10 @@
     <string name="deviceHeater">Bình nước nóng</string>
     <string name="deviceStatusOnToast">${name} bật</string>
     <string name="deviceStatusOffToast">${name} tắt</string>
+    <string name="addDeviceTitle">Thêm thiết bị cho phòng</string>
+    <string name="addDeviceName">Tên thiết bị</string>
+    <string name="addDeviceNameHint">Nhập tên thiết bị</string>
+    <string name="addDeviceType">Loại thiết bị</string>
+    <string name="addDeviceButton">Tạo</string>
 
 </resources>

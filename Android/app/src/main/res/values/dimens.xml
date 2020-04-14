@@ -3,7 +3,7 @@
     <dimen name="toastyTextSize">20sp</dimen>
     <dimen name="floatActionBarMargin">30dp</dimen>
 
-    <dimen name="waveTopForChild">100dp</dimen>
+    <dimen name="waveTopForChild">110dp</dimen>
     <dimen name="waveHeight">220dp</dimen>
     <dimen name="waveIconMargin">10dp</dimen>
     <dimen name="waveIconPadding">20dp</dimen>
@@ -42,13 +42,13 @@
     <dimen name="listRoomDeviceCountTextSize">20sp</dimen>
     <dimen name="listRoomDeviceCountMaginTop">7dp</dimen>
 
-    <dimen name="listDeviceSpacing">30dp</dimen>
-    <dimen name="listDeviceSpacingVertical">15dp</dimen>
-    <dimen name="listDeviceSpacingHorizontal">15dp</dimen>
+    <dimen name="listDeviceSpacing">25dp</dimen>
+    <dimen name="listDeviceSpacingVertical">10dp</dimen>
+    <dimen name="listDeviceSpacingHorizontal">10dp</dimen>
     <dimen name="listDeviceWrapperBorderRadius">20dp</dimen>
     <dimen name="listDeviceIconWrapperPadding">15dp</dimen>
     <dimen name="listDeviceLabelWrapperPaddingHorizontal">15dp</dimen>
-    <dimen name="listDeviceIconSize">26dp</dimen>
+    <dimen name="listDeviceIconSize">28dp</dimen>
     <dimen name="listDeviceLabelTextSize">20sp</dimen>
     <dimen name="listDeviceSubLabelTextSize">18sp</dimen>
     <dimen name="listDeviceSubLabelMarginTop">6dp</dimen>

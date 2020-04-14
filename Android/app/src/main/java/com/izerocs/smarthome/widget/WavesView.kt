@@ -99,7 +99,7 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
     private var activeBack      : Boolean          = false
     private val wavesPath       : Path             = Path()
     private var popupMenu       : PopupMenu?       = null
-    private var menuHelper : MenuPopupHelper? = null
+    private var menuHelper : MenuPopupHelper?      = null
 
     private var onBackClickListener     : OnBackClickListener?     = null
     private var onMenuClickListener     : OnMenuClickListener?     = null

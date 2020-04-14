@@ -31,4 +31,21 @@
 
     </RelativeLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="@dimen/floatActionBarMargin"
+        android:backgroundTint="@color/floatActionBarBackground"
+        android:tint="@color/floatActionBarTint"
+        android:src="@drawable/ic_add"
+        android:clickable="true"
+        android:focusable="true"
+        app:fabSize="normal"
+        app:layout_anchor="@id/listDevice"
+        app:layout_anchorGravity="right|bottom|end"
+        app:layout_behavior="com.izerocs.smarthome.animation.FloatingActionBehavior"
+        tools:ignore="RtlHardcoded" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

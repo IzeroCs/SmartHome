@@ -60,16 +60,6 @@ class AnimationUtil {
                 }
             }).run {
                 duration = (initalHeight / view.context.resources.displayMetrics.density).toLong()
-
-                setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationRepeat(animation : Animation?) { }
-                    override fun onAnimationStart(animation : Animation?) { }
-                    override fun onAnimationEnd(animation : Animation?) {
-                        view.visibility = View.GONE
-                        println("End animation")
-                    }
-                })
-
                 view.startAnimation(this)
             }
         }

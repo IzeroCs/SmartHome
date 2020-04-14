@@ -1,5 +1,6 @@
 package com.izerocs.smarthome.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -7,18 +8,15 @@ import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
 import com.izerocs.smarthome.model.DeviceItem
 import com.izerocs.smarthome.model.RoomItem
-import com.izerocs.smarthome.utils.AnimationUtil
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_room.*
-import kotlinx.android.synthetic.main.list_device_item.*
-import android.widget.LinearLayout as AndroidLinearLayout
 
 /**
  * Created by IzeroCs on 2020-04-03
  */
 class RoomActivity : BaseActivity(),
-    WavesView.OnBackClickListener, ListDeviceAdapter.OnItemClickListener
+    View.OnClickListener, WavesView.OnBackClickListener, ListDeviceAdapter.OnItemClickListener
 {
 
     private var roomItem : RoomItem? = null
@@ -35,6 +33,7 @@ class RoomActivity : BaseActivity(),
             wavesView.setOnBackClickListener(this@RoomActivity)
         }
 
+        floatButton.setOnClickListener(this)
         listDevice.setOnItemClickListener(this)
 
         val arr = arrayListOf<HashMap<String, Any>>(
@@ -74,18 +73,13 @@ class RoomActivity : BaseActivity(),
         super.onMenuItemClick(itemId, groupId, item)
     }
 
-    override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
-        if (v?.id == listDeviceWrapper.id) {
-            v.findViewById<AndroidLinearLayout>(R.id.listDeviceCollapse).run {
-                if (visibility == View.VISIBLE)
-                    AnimationUtil.collapse(this)
-                else
-                    AnimationUtil.expand(this)
+    override fun onClick(v : View?) {
+        if (v == floatButton)
+            startActivity(Intent(applicationContext, AddDeviceActivity::class.java))
+    }
 
-                v.requestLayout()
-                listDevice.requestLayout()
-            }
-        }
+    override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
+
     }
 
     override fun onIconClick(v : View?, position : Int, isLongClick : Boolean) {
@@ -109,6 +103,11 @@ class RoomActivity : BaseActivity(),
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        floatButton.show()
     }
 
     override fun onBack(backView: View, isLongClick: Boolean) {

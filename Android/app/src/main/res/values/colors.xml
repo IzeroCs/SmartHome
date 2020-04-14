@@ -20,7 +20,7 @@
     <color name="waveIconInMenu">#777</color>
     <color name="waveTextInMenu">#777</color>
 
-    <color name="formElementBackground">#f8f8f8</color>
+    <color name="formElementBackground">#fff</color>
     <color name="formLabel">#666</color>
     <color name="formEditText">#777</color>
     <color name="formEditHint">#ccc</color>

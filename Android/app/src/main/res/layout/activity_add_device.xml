@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.AddDeviceActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="false"
+    android:background="@color/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.izerocs.smarthome.widget.FormLayoutWrapper
+            android:id="@+id/formLayoutWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/waveTopForChild"
+            android:paddingTop="@dimen/waveTopForChild">
+
+            <com.izerocs.smarthome.widget.FormLayout
+                android:id="@+id/formLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.izerocs.smarthome.widget.InputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/formElementMarginVertical"
+                    app:label="@string/addDeviceName">
+
+                    <com.izerocs.smarthome.widget.EditTextView
+                        android:id="@+id/addDeviceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:hint="@string/addDeviceNameHint" />
+
+                </com.izerocs.smarthome.widget.InputLayout>
+
+                <com.izerocs.smarthome.widget.InputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/formElementMarginVertical"
+                    app:label="@string/addDeviceType">
+
+                    <com.izerocs.smarthome.widget.SpinnerView
+                        android:id="@+id/addDeviceType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dialog" />
+
+                </com.izerocs.smarthome.widget.InputLayout>
+
+                <com.izerocs.smarthome.widget.ButtonLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.izerocs.smarthome.widget.ButtonView
+                        android:id="@+id/addDeviceButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/addDeviceButton" />
+
+                </com.izerocs.smarthome.widget.ButtonLayout>
+
+            </com.izerocs.smarthome.widget.FormLayout>
+
+        </com.izerocs.smarthome.widget.FormLayoutWrapper>
+
+        <com.izerocs.smarthome.widget.WavesView
+            android:id="@+id/wavesView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/waveHeight"
+            android:layout_alignParentTop="true"
+            app:activeBack="true"
+            app:text="@string/addDeviceTitle"
+            tools:ignore="MissingConstraints" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

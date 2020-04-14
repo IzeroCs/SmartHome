@@ -94,19 +94,4 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/listDeviceCollapse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/listDeviceSpacingVertical"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test collapse"/>
-
-    </LinearLayout>
-
 </com.izerocs.smarthome.widget.LinearLayout>
