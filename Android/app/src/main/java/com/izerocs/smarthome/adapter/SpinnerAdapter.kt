@@ -2,11 +2,14 @@ package com.izerocs.smarthome.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
 import kotlinx.android.synthetic.main.spinne_single_item.view.*
 
@@ -55,11 +58,15 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }
 
         fun setImage(resId : Int) {
-            this.image = context?.getDrawable(resId)
+            this.setImage(context?.getDrawable(resId))
         }
 
-        fun setImage(drawable: Drawable) {
+        fun setImage(drawable: Drawable?) {
             this.image = drawable
+
+            if (this.image is VectorDrawable)
+                (this.image as VectorDrawable).setTintList(ColorStateList
+                    .valueOf(ContextCompat.getColor(context!!, R.color.primaryDark)))
         }
 
         fun setValue(value : String) {

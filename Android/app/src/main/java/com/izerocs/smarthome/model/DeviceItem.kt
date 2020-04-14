@@ -27,6 +27,38 @@ class DeviceItem {
 
         const val STATUS_OFF = 0
         const val STATUS_ON  = 1
+
+        fun getTypes() : IntArray {
+            return intArrayOf(TYPE_LIGHT, TYPE_FAN, TYPE_HEATER)
+        }
+
+        fun getTypeString(context : Context?, type : Int) : String {
+            var resString = 0
+
+            when (type) {
+                TYPE_LIGHT  -> resString = R.string.deviceLight
+                TYPE_FAN    -> resString = R.string.deviceFan
+                TYPE_HEATER -> resString = R.string.deviceHeater
+            }
+
+            if (resString != 0)
+                return context?.getString(resString) as String
+
+            return ""
+        }
+
+         fun getResourceIcon(type : Int) : Int {
+            var resIcon = 0
+
+            when (type) {
+                TYPE_LIGHT  -> resIcon = R.drawable.ic_device_light
+                TYPE_FAN    -> resIcon = R.drawable.ic_device_fan
+                TYPE_HEATER -> resIcon = R.drawable.ic_device_heater
+            }
+
+            return resIcon
+        }
+
     }
 
     constructor(context : Context) {
@@ -60,15 +92,7 @@ class DeviceItem {
     }
 
     private fun parseIcon() {
-        var resIcon = 0
-
-        when (this.type) {
-            TYPE_LIGHT  -> resIcon = R.drawable.ic_device_light
-            TYPE_FAN    -> resIcon = R.drawable.ic_device_fan
-            TYPE_HEATER -> resIcon = R.drawable.ic_device_heater
-        }
-
-        this.icon = resIcon
+        this.icon = Companion.getResourceIcon(this.type)
     }
 
     fun getName() : String {
@@ -98,18 +122,7 @@ class DeviceItem {
     }
 
     fun getTypeString() : String {
-        var resString = 0
-
-        when (this.type) {
-            TYPE_LIGHT  -> resString = R.string.deviceLight
-            TYPE_FAN    -> resString = R.string.deviceFan
-            TYPE_HEATER -> resString = R.string.deviceHeater
-        }
-
-        if (resString != 0)
-            return context?.getString(resString) as String
-
-        return ""
+       return Companion.getTypeString(this.context, this.type)
     }
 
     fun getColor() : Int {

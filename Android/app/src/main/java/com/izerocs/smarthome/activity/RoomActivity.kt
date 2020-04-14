@@ -63,6 +63,8 @@ class RoomActivity : BaseActivity(),
 
             listDevice.add(device)
         }
+
+        onClick(floatButton)
     }
 
     override fun onCreateMenu() : Int? {
