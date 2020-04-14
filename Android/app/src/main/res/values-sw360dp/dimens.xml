@@ -10,12 +10,12 @@
 	<dimen name="formSpinnerPopupItemIconMargin">15.00dp</dimen>
 	<dimen name="formSpinnerPopupItemIconSize">25.50dp</dimen>
 	<dimen name="formSpinnerPopupItemPadding">11.25dp</dimen>
-	<dimen name="listDeviceIconSize">18.00dp</dimen>
+	<dimen name="listDeviceIconSize">19.50dp</dimen>
 	<dimen name="listDeviceIconWrapperPadding">11.25dp</dimen>
 	<dimen name="listDeviceLabelWrapperPaddingHorizontal">11.25dp</dimen>
-	<dimen name="listDeviceSpaceHorizontal">11.25dp</dimen>
-	<dimen name="listDeviceSpaceVertical">11.25dp</dimen>
 	<dimen name="listDeviceSpacing">22.50dp</dimen>
+	<dimen name="listDeviceSpacingHorizontal">11.25dp</dimen>
+	<dimen name="listDeviceSpacingVertical">11.25dp</dimen>
 	<dimen name="listDeviceStatusIconSize">12.75dp</dimen>
 	<dimen name="listDeviceSubLabelMarginTop">4.50dp</dimen>
 	<dimen name="listDeviceWrapperBorderRadius">15.00dp</dimen>

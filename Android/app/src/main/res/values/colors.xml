@@ -3,7 +3,7 @@
     <color name="primary">#03dac5</color>
     <color name="primaryDark">#00a895</color>
     <color name="accent">#00a895</color>
-    <color name="background">#fff</color>
+    <color name="background">#fafafa</color>
 
     <color name="deviceLight">#ffa426</color>
     <color name="deviceFan">#0795fe</color>
@@ -39,16 +39,21 @@
     <color name="floatActionBarTint">#ffffff</color>
     <color name="floatActionBarBackground">@color/accent</color>
 
-    <color name="listRoomItemUnpressed">#f8f8f8</color>
-    <color name="listRoomItemPressed">#fafafa</color>
-    <color name="listRoomItemPressedRipple">#10000000</color>
+    <color name="listGridItemUnpressed">#fff</color>
+    <color name="listGridItemPressed">#fcfcfc</color>
+    <color name="listGridItemPressedRipple">#10000000</color>
+
     <color name="listRoomWrapperShadow">#11000000</color>
     <color name="listRoomNameTextColor">#777</color>
     <color name="listRoomDeviceCountTextColor">#aaa</color>
 
-    <color name="listDeviceIconTint">@color/primaryDark</color>
-    <color name="listDeviceStatusTint">@color/primaryDark</color>
-    <color name="listDeviceIconBg">#1000a895</color>
+    <color name="listDeviceIconTintStatusOn">@color/primaryDark</color>
+    <color name="listDeviceIconTintStatusOff">#ddd</color>
+    <color name="listDeviceStatusTintStatusOn">#80cbc4</color>
+    <color name="listDeviceStatusTintStatusOff">#ddd</color>
+    <color name="listDeviceIconBgUnpressed">#fafafa</color>
+    <color name="listDeviceIconBgPressed">#f3f3f3</color>
+    <color name="listDeviceIconBgPressedRipple">#08000000</color>
     <color name="listDeviceLabelText">#888</color>
     <color name="listDeviceSubLabelText">#ccc</color>
 

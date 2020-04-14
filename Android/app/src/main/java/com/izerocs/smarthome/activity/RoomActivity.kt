@@ -4,16 +4,21 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.izerocs.smarthome.R
+import com.izerocs.smarthome.adapter.ListDeviceAdapter
 import com.izerocs.smarthome.model.DeviceItem
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.utils.AnimationUtil
 import com.izerocs.smarthome.widget.WavesView
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_room.*
+import kotlinx.android.synthetic.main.list_device_item.*
+import android.widget.LinearLayout as AndroidLinearLayout
 
 /**
  * Created by IzeroCs on 2020-04-03
  */
 class RoomActivity : BaseActivity(),
-    WavesView.OnBackClickListener
+    WavesView.OnBackClickListener, ListDeviceAdapter.OnItemClickListener
 {
 
     private var roomItem : RoomItem? = null
@@ -30,12 +35,14 @@ class RoomActivity : BaseActivity(),
             wavesView.setOnBackClickListener(this@RoomActivity)
         }
 
+        listDevice.setOnItemClickListener(this)
+
         val arr = arrayListOf<HashMap<String, Any>>(
             hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Trái"),
             hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Phải"),
-            hashMapOf("name" to "Đèn ngủ", "type" to 1, "widget" to 1),
+            hashMapOf("name" to "Đèn ngủ", "type" to 1, "widget" to 1, "status" to 1),
             hashMapOf("name" to "Quạt trần", "type" to 2),
-            hashMapOf("name" to "Quạt đứng", "type" to 2),
+            hashMapOf("name" to "Quạt đứng", "type" to 2, "status" to 1),
             hashMapOf("name" to "Bình nóng lạnh", "type" to 3, "widget" to 1)
         )
 
@@ -50,6 +57,9 @@ class RoomActivity : BaseActivity(),
 
                 if (maps.containsKey("widget"))
                     setWidgetSize(maps["widget"] as Int)
+
+                if (maps.containsKey("status"))
+                    setStatus(maps["status"] as Int)
             }
 
             listDevice.add(device)
@@ -62,6 +72,43 @@ class RoomActivity : BaseActivity(),
 
     override fun onMenuItemClick(itemId : Int, groupId : Int, item : MenuItem?) {
         super.onMenuItemClick(itemId, groupId, item)
+    }
+
+    override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
+        if (v?.id == listDeviceWrapper.id) {
+            v.findViewById<AndroidLinearLayout>(R.id.listDeviceCollapse).run {
+                if (visibility == View.VISIBLE)
+                    AnimationUtil.collapse(this)
+                else
+                    AnimationUtil.expand(this)
+
+                v.requestLayout()
+                listDevice.requestLayout()
+            }
+        }
+    }
+
+    override fun onIconClick(v : View?, position : Int, isLongClick : Boolean) {
+        (listDevice.adapter as ListDeviceAdapter).run {
+            get(position).run {
+                toggleStatus()
+                notifyDataSetChanged()
+
+                var message = this@RoomActivity.getString(R.string.deviceStatusOffToast)
+
+                if (getStatus() == DeviceItem.STATUS_ON)
+                    message = this@RoomActivity.getString(R.string.deviceStatusOnToast)
+
+                if (message.isNotEmpty()) {
+                    message = message.replace("\${name}", getName())
+
+                    if (getStatus() == DeviceItem.STATUS_ON)
+                        Toasty.success(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()
+                    else
+                        Toasty.info(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun onBack(backView: View, isLongClick: Boolean) {

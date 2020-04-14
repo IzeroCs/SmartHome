@@ -2,13 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/listGridItemPressed" />
+            <corners android:radius="@dimen/listDeviceWrapperBorderRadius"/>
+            <solid android:color="@color/listDeviceIconBgPressed"/>
         </shape>
     </item>
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/listGridItemUnpressed" />
+            <corners android:radius="@dimen/listDeviceWrapperBorderRadius"/>
+            <solid android:color="@color/listDeviceIconBgUnpressed"/>
         </shape>
     </item>
 </selector>

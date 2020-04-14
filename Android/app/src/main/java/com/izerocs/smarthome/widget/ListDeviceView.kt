@@ -26,4 +26,11 @@ class ListDeviceView(context : Context, attributeSet: AttributeSet) : RecyclerVi
     }
 
     fun add(item : DeviceItem) : Boolean = (adapter as ListDeviceAdapter).add(item)
+
+    fun get(position : Int) : DeviceItem {
+        return (adapter as ListDeviceAdapter).get(position)
+    }
+
+    fun setOnItemClickListener(listener : ListDeviceAdapter.OnItemClickListener) :
+            Unit = (adapter as ListDeviceAdapter).setOnItemClickListener(listener)
 }

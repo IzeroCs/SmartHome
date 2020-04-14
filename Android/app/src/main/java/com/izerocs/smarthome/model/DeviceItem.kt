@@ -15,6 +15,7 @@ class DeviceItem {
     private var color      : Int      = 0
     private var widgetSize : Int      = 0
     private var icon       : Int      = 0
+    private var status     : Int      = 0
 
     companion object {
         const val TYPE_LIGHT  = 1
@@ -23,6 +24,9 @@ class DeviceItem {
 
         const val WIDGET_SIZE_SMALL = 0
         const val WIDGET_SIZE_LARGE = 1
+
+        const val STATUS_OFF = 0
+        const val STATUS_ON  = 1
     }
 
     constructor(context : Context) {
@@ -71,30 +75,26 @@ class DeviceItem {
         return this.name
     }
 
-    fun setName(nameDevice : String) : DeviceItem {
+    fun setName(nameDevice : String) {
         this.name = nameDevice
-        return this
     }
 
     fun getDescriptor() : String {
         return this.descriptor
     }
 
-    fun setDescriptor(descriptorDevice : String) : DeviceItem {
+    fun setDescriptor(descriptorDevice : String) {
         this.descriptor = descriptorDevice
-        return this
     }
 
     fun getType() : Int {
         return this.type
     }
 
-    fun setType(typeDevice : Int) : DeviceItem {
+    fun setType(typeDevice : Int) {
         this.type = typeDevice
         this.parseColor()
         this.parseIcon()
-
-        return this
     }
 
     fun getTypeString() : String {
@@ -116,29 +116,44 @@ class DeviceItem {
         return this.color
     }
 
-    fun setColor(color : Int) : DeviceItem {
+    fun setColor(color : Int) {
         this.color = color
-        return this
     }
 
     fun getWidgetSize() : Int {
         return this.widgetSize
     }
 
-    fun setWidgetSize(widgetSizeDevice : Int) : DeviceItem {
+    fun setWidgetSize(widgetSizeDevice : Int) {
         if (widgetSizeDevice != WIDGET_SIZE_SMALL && widgetSizeDevice != WIDGET_SIZE_LARGE)
             this.widgetSize = WIDGET_SIZE_SMALL
 
         this.widgetSize = widgetSizeDevice
-        return this
     }
 
     fun getResourceIcon() : Int {
         return this.icon
     }
 
-    fun setResourceIcon(resIcon : Int) : DeviceItem {
+    fun setResourceIcon(resIcon : Int) {
         this.icon = resIcon
-        return this
+    }
+
+    fun getStatus() : Int {
+        return this.status
+    }
+
+    fun setStatus(status : Int) {
+        if (status != STATUS_OFF && status != STATUS_ON)
+            this.status = STATUS_OFF
+
+        this.status = status
+    }
+
+    fun toggleStatus() {
+        if (status == STATUS_ON)
+            this.status = STATUS_OFF
+        else
+            this.status = STATUS_ON
     }
 }

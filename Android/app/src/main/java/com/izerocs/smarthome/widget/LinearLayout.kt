@@ -32,6 +32,7 @@ class LinearLayout(context: Context, attrs: AttributeSet) : android.widget.Linea
     override fun onLayout(changed : Boolean, l : Int, t : Int, r : Int, b : Int) {
         super.onLayout(changed, l, t, r, b)
 
+        println("onLayout: $changed")
         if (changed) {
             clipBounds = Rect(0, 0, measuredWidth, measuredHeight)
             clipPath.run {

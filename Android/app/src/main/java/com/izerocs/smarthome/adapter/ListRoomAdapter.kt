@@ -56,9 +56,7 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
     }
 
     interface OnItemClickListener {
-
         fun onItemClick(view : View?, position : Int, isLongClick : Boolean)
-
     }
 
     @SuppressLint("InflateParams")

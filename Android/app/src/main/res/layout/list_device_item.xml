@@ -5,81 +5,107 @@
     android:id="@+id/listDeviceWrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/listDeviceSpaceHorizontal"
-    android:paddingEnd="@dimen/listDeviceSpaceHorizontal"
-    android:paddingTop="@dimen/listDeviceSpaceVertical"
-    android:paddingBottom="@dimen/listDeviceSpaceVertical"
-    android:orientation="horizontal"
+    android:paddingStart="@dimen/listDeviceSpacingHorizontal"
+    android:paddingEnd="@dimen/listDeviceSpacingHorizontal"
+    android:paddingTop="@dimen/listDeviceSpacingVertical"
+    android:paddingBottom="@dimen/listDeviceSpacingVertical"
+    android:orientation="vertical"
     android:background="@drawable/list_grid_item_selectable"
     app:borderRadius="@dimen/listDeviceWrapperBorderRadius"
     android:clickable="true"
-    android:focusable="true"
-    android:clipToPadding="false">
+    android:focusable="true">
 
     <LinearLayout
-        android:id="@+id/listDeviceIconWrapper"
-        android:layout_width="wrap_content"
+        android:id="@+id/listDeviceQuickInfo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/ic_device_bg"
-        android:padding="@dimen/listDeviceIconWrapperPadding"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/listDeviceIconWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_device_bg_selectable"
+            android:padding="@dimen/listDeviceIconWrapperPadding"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="UselessParent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/listDeviceIcon"
+                android:layout_width="@dimen/listDeviceIconSize"
+                android:layout_height="@dimen/listDeviceIconSize"
+                android:src="@drawable/ic_device_light"
+                android:tint="@color/listDeviceIconTintStatusOn"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listDeviceLabelWrapper"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/listDeviceLabelWrapperPaddingHorizontal"
+            android:paddingEnd="@dimen/listDeviceLabelWrapperPaddingHorizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="InefficientWeight">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/listDeviceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/listDeviceLabelTextSize"
+                android:textColor="@color/listDeviceLabelText"
+                android:textStyle="normal"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/listDeviceSubLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/listDeviceSubLabelMarginTop"
+                android:textSize="@dimen/listDeviceSubLabelTextSize"
+                android:textColor="@color/listDeviceSubLabelText"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listDeviceStatusWrapper"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/listDeviceStatus"
+                android:layout_width="@dimen/listDeviceStatusIconSize"
+                android:layout_height="@dimen/listDeviceStatusIconSize"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_circle"
+                android:tint="@color/listDeviceStatusTintStatusOff"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listDeviceCollapse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/listDeviceSpacingVertical"
         android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:visibility="gone">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/listDeviceIcon"
-            android:layout_width="@dimen/listDeviceIconSize"
-            android:layout_height="@dimen/listDeviceIconSize"
-            android:src="@drawable/ic_device_light"
-            android:tint="@color/listDeviceIconTint"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/listDeviceLabelWrapper"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/listDeviceLabelWrapperPaddingHorizontal"
-        android:paddingEnd="@dimen/listDeviceLabelWrapperPaddingHorizontal"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/listDeviceLabel"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/listDeviceLabelTextSize"
-            android:textColor="@color/listDeviceLabelText"
-            android:textStyle="normal"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/listDeviceSubLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/listDeviceSubLabelMarginTop"
-            android:textSize="@dimen/listDeviceSubLabelTextSize"
-            android:textColor="@color/listDeviceSubLabelText"
-            android:textStyle="normal"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/listDeviceStatusWrapper"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/listDeviceStatusIconSize"
-            android:layout_height="@dimen/listDeviceStatusIconSize"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_circle"
-            android:alpha="0.3"
-            android:tint="@color/listDeviceStatusTint"
-            tools:ignore="ContentDescription" />
+            android:text="Test collapse"/>
 
     </LinearLayout>
 

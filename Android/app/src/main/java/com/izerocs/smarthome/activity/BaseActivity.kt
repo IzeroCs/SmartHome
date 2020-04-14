@@ -31,6 +31,7 @@ abstract class BaseActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
 
         Toasty.Config.getInstance()
+            .allowQueue(false)
             .setTextSize(resources.getDimensionPixelSize(R.dimen.toastyTextSize))
             .setToastTypeface(ResourcesCompat.getFont(this, R.font.ubuntu) as Typeface)
             .apply()

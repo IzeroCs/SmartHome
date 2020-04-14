@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/waveTopForChild"
-            android:paddingTop="@dimen/waveTopForChild" />
+            android:paddingTop="@dimen/waveTopForChild"/>
 
         <com.izerocs.smarthome.widget.WavesView
             android:id="@+id/wavesView"

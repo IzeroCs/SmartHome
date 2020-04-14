@@ -30,5 +30,7 @@
     <string name="deviceLight">Đèn</string>
     <string name="deviceFan">Quạt</string>
     <string name="deviceHeater">Bình nước nóng</string>
+    <string name="deviceStatusOnToast">${name} bật</string>
+    <string name="deviceStatusOffToast">${name} tắt</string>
 
 </resources>

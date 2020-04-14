@@ -2,9 +2,11 @@ package com.izerocs.smarthome.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.DeviceItem
 import com.izerocs.smarthome.widget.RecyclerView
@@ -16,8 +18,23 @@ import kotlinx.android.synthetic.main.list_device_item.view.*
 class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<ListDeviceAdapter.ViewHolder>() {
     private val devices  : ArrayList<DeviceItem> = ArrayList()
     private val inflater : LayoutInflater = LayoutInflater.from(context)
+    private var onItemClickListener : OnItemClickListener? = null
 
-    class ViewHolder(private val context : Context, view : View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(
+        private val context : Context,
+        private val view : View,
+        private val onItemClickListener : OnItemClickListener?
+    ) : RecyclerView.ViewHolder(view),
+            View.OnClickListener, View.OnLongClickListener
+    {
+        init {
+            itemView.listDeviceWrapper.setOnClickListener(this)
+            itemView.listDeviceWrapper.setOnLongClickListener(this)
+
+            itemView.listDeviceIconWrapper.setOnClickListener(this)
+            itemView.listDeviceIconWrapper.setOnLongClickListener(this)
+        }
+
         fun setLabel(label : String) {
             itemView.listDeviceLabel.text = label
             itemView.listDeviceSubLabel.visibility = View.GONE
@@ -35,6 +52,7 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
 
         fun setIcon(resIcon : Int) {
             itemView.listDeviceIcon.setImageResource(resIcon)
+            setStatusDevice(DeviceItem.STATUS_OFF)
         }
 
         fun setStatusVisibility(widgetSize : Int) {
@@ -43,11 +61,49 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
             else
                 itemView.listDeviceStatusWrapper.visibility = View.GONE
         }
+
+        fun setStatusDevice(status : Int) {
+            var resColorIcon = R.color.listDeviceIconTintStatusOff
+            var resColorStatus = R.color.listDeviceStatusTintStatusOff
+
+            if (status == DeviceItem.STATUS_ON) {
+                resColorIcon = R.color.listDeviceIconTintStatusOn
+                resColorStatus = R.color.listDeviceStatusTintStatusOn
+            }
+
+            itemView.listDeviceIcon.imageTintList = ColorStateList.valueOf(ContextCompat
+                .getColor(context, resColorIcon))
+
+            itemView.listDeviceStatus.imageTintList = ColorStateList.valueOf(ContextCompat
+                .getColor(context, resColorStatus))
+        }
+
+        override fun onClick(v : View?) {
+            if (v == itemView.listDeviceWrapper)
+                onItemClickListener?.onItemClick(v, adapterPosition, false)
+            else if (v == itemView.listDeviceIconWrapper)
+                onItemClickListener?.onIconClick(v, adapterPosition, false)
+        }
+
+        override fun onLongClick(v : View?) : Boolean {
+            if (v == itemView.listDeviceWrapper)
+                onItemClickListener?.onItemClick(v, adapterPosition, false)
+            else if (v == itemView.listDeviceIconWrapper)
+                onItemClickListener?.onIconClick(v, adapterPosition, false)
+
+            return false
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(v : View?, position : Int, isLongClick : Boolean)
+        fun onIconClick(v : View?, position : Int, isLongClick : Boolean)
     }
 
     @SuppressLint("InflateParams")
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ViewHolder {
-        return ViewHolder(context, inflater.inflate(R.layout.list_device_item, null))
+        return ViewHolder(context, inflater.inflate(R.layout.list_device_item, null),
+            onItemClickListener)
     }
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int) {
@@ -57,6 +113,7 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
         holder.setSubLabel(device.getDescriptor())
         holder.setIcon(device.getResourceIcon())
         holder.setStatusVisibility(device.getWidgetSize())
+        holder.setStatusDevice(device.getStatus())
     }
 
     override fun getItemCount() : Int {
@@ -71,4 +128,12 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     }
 
     fun add(item : DeviceItem) : Boolean = devices.add(item)
+
+    fun get(position : Int) : DeviceItem {
+        return devices[position]
+    }
+
+    fun setOnItemClickListener(listener : OnItemClickListener?) {
+        onItemClickListener = listener
+    }
 }

@@ -28,5 +28,7 @@
     <string name="deviceLight">Light</string>
     <string name="deviceFan">Fan</string>
     <string name="deviceHeater">Heater</string>
+    <string name="deviceStatusOnToast">${name} turn on</string>
+    <string name="deviceStatusOffToast">${name} turn off</string>
 
 </resources>
