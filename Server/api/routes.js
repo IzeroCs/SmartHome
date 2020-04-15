@@ -23,13 +23,14 @@ const routes = async (app, db) => {
         });
     }
 
-    require("./device/routes")({
+
+    [ "device", "room" ].forEach(name => require("./" + name +"/routes")({
         app      : app,
         db       : db,
         route    : route,
         check    : check,
         validator: validationResult
-    });
+    }));
 };
 
 module.exports = routes;

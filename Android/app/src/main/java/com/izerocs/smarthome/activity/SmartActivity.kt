@@ -6,6 +6,9 @@ import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.network.NetworkCallback
+import com.izerocs.smarthome.network.NetworkProvider
+import com.izerocs.smarthome.network.service.RoomService
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import kotlinx.android.synthetic.main.activity_smart.*
@@ -39,8 +42,10 @@ class SmartActivity : BaseActivity(),
         }
 
         updateListAdapter()
-        onItemClick(null, 0, false)
+        NetworkProvider.service(RoomService::class.java).getTypes()
+            .enqueue(object : NetworkCallback<RoomItem.RoomItemData>() {
 
+            })
     }
 
     override fun onCreatePreferences() : SharedPreferences? {
