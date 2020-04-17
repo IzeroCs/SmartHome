@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/formSpinnerPopupItemPadding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/spinnerIcon"
         android:layout_width="@dimen/formSpinnerPopupItemIconSize"
         android:layout_height="@dimen/formSpinnerPopupItemIconSize"
@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/formSpinnerPopupItemIconMargin"
         android:layout_marginEnd="@dimen/formSpinnerPopupItemIconMargin" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/spinnerValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

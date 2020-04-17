@@ -64,9 +64,12 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         fun setImage(drawable: Drawable?) {
             this.image = drawable
 
-            if (this.image is VectorDrawable)
-                (this.image as VectorDrawable).setTintList(ColorStateList
-                    .valueOf(ContextCompat.getColor(context!!, R.color.primaryDark)))
+            if (this.image is VectorDrawable) {
+                this.image = (this.image as VectorDrawable).mutate().apply {
+                    setTintList(ColorStateList.valueOf(ContextCompat
+                        .getColor(context!!, R.color.primaryDark)))
+                }
+            }
         }
 
         fun setValue(value : String) {
@@ -106,7 +109,7 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
                         visibility = View.GONE
                     } else {
                         visibility = View.VISIBLE
-                        background = getImage()
+                        setImageDrawable(getImage())
                     }
                 }
 

@@ -7,21 +7,24 @@ const io        = require("socket.io")(server);
 const os        = require("os");
 const firebase  = require("firebase-admin");
 
-let host = "127.0.0.1";
+let host = null;
 let port = "80";
 
 let idClients = [];
 let database  = null;
 let networks  = os.networkInterfaces();
 
-// Object.keys(networks).forEach(key => {
-//     networks[key].forEach(interface => {
-//         if ("IPv4" !== interface.family || interface.internal !== false || host !== null)
-//             return;
+Object.keys(networks).forEach(key => {
+    if (key.startsWith("VirtualBox"))
+        return;
 
-//         host = interface.address;
-//     });
-// });
+    networks[key].forEach(interface => {
+        if ("IPv4" !== interface.family || interface.internal !== false || host !== null)
+            return;
+
+        host = interface.address;
+    });
+});
 
 firebase.initializeApp({
     credential : firebase.credential.cert(require("./firebase.json")),

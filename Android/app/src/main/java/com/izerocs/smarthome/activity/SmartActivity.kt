@@ -6,9 +6,7 @@ import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
-import com.izerocs.smarthome.network.NetworkCallback
-import com.izerocs.smarthome.network.NetworkProvider
-import com.izerocs.smarthome.network.service.RoomService
+import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import kotlinx.android.synthetic.main.activity_smart.*
@@ -34,7 +32,7 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
 
         if (preferences?.empty()!!) {
-            RoomItem.getTypes().forEach {
+            RoomType.getTypes().forEach {
                 preferences?.run {
                     put(size().plus(1).toString(), RoomItem(this@SmartActivity, it).toData())
                 }
@@ -42,14 +40,15 @@ class SmartActivity : BaseActivity(),
         }
 
         updateListAdapter()
-        NetworkProvider.service(RoomService::class.java).getTypes()
-            .enqueue(object : NetworkCallback<RoomItem.RoomItemData>() {
-
-            })
     }
 
     override fun onCreatePreferences() : SharedPreferences? {
         return RoomPreferences(this)
+    }
+
+    override fun onFetched(type : Int) {
+        super.onFetched(type)
+        updateListAdapter()
     }
 
     override fun onResume() {
@@ -80,9 +79,9 @@ class SmartActivity : BaseActivity(),
             listRoom.clear()
             list?.forEach {
                 val item = getObject(it.key, RoomItem.RoomItemData::class.java)
-                val roomItem = RoomItem(this@SmartActivity, item.name, item.type)
 
-                listRoom.add(roomItem)
+                if (RoomType.isTypeValid(item.type))
+                    listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
             }
         }
     }

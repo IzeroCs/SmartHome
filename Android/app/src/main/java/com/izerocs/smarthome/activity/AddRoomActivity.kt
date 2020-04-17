@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.FormLayout
@@ -28,7 +29,7 @@ class AddRoomActivity : BaseActivity(),
         addRoomButton.setOnClickListener(this)
         addRoomType.setEditTextBinder(addRoomName)
 
-        RoomItem.getTypeItems(applicationContext).forEach {
+        RoomType.getTypeItems(applicationContext).forEach {
             addRoomType.add(it.getName(), it.getIconResource(), it.getType())
         }
     }
@@ -44,7 +45,7 @@ class AddRoomActivity : BaseActivity(),
 
             if (name.isEmpty()) {
                 addRoomName.setStatusError(R.string.addRoomErrorRequiredName)
-            } else if (!RoomItem.isTypeValid(type)) {
+            } else if (!RoomType.isTypeValid(type)) {
                 addRoomType.setStatusError(R.string.addRoomErrorInvalidType)
             } else if (isNameExists(name)) {
                 addRoomName.setStatusError(R.string.addRoomErrorExistsName)

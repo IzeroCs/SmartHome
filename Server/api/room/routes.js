@@ -10,7 +10,7 @@ const rooms = ({ route, db }) => {
         };
     })();
 
-    route("room/type",  caller);
+    route("room/types",  caller);
 };
 
 module.exports = rooms;

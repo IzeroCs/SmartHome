@@ -1,6 +1,5 @@
 package com.izerocs.smarthome.network.service
 
-import com.izerocs.smarthome.model.RoomItem
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -9,5 +8,5 @@ import retrofit2.http.GET
  */
 interface RoomService {
     @GET("room/types")
-    fun getTypes() : Call<RoomItem.RoomItemData>
+    fun getTypes() : Call<List<String>>
 }

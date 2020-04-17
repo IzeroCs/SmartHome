@@ -5,12 +5,15 @@ import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import com.izerocs.smarthome.R
+import com.izerocs.smarthome.model.RoomType
+import com.izerocs.smarthome.network.NetworkProvider
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
@@ -26,10 +29,16 @@ abstract class BaseActivity : AppCompatActivity(),
     private   var rootView    : View? = null
     protected var preferences : SharedPreferences? = null
 
+    companion object {
+        const val FETCH_ROOM_TYPE = 1
+    }
+
     @SuppressLint("SourceLockedOrientationActivity", "CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        NetworkProvider.self(this)
+        RoomType.fetchTypes(this, ::onFetched)
         Toasty.Config.getInstance()
             .allowQueue(false)
             .setTextSize(resources.getDimensionPixelSize(R.dimen.toastyTextSize))
@@ -49,6 +58,10 @@ abstract class BaseActivity : AppCompatActivity(),
 
     open fun onCreatePreferences() : SharedPreferences? {
         return null
+    }
+
+    open fun onFetched(type : Int) {
+        Log.d(BaseActivity::class.java.toString(), "onFetch: $type")
     }
 
     @MenuRes

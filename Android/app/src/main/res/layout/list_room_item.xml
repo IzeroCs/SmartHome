@@ -13,15 +13,15 @@
     android:focusable="true"
     tools:ignore="UselessParent">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/listRoomIcon"
         android:layout_centerHorizontal="true"
         android:layout_width="@dimen/listRoomIconSize"
         android:layout_height="@dimen/listRoomIconSize"
-        android:src="@drawable/ic_living_room"
+        app:srcCompat="@drawable/ic_living_room"
         tools:ignore="ContentDescription" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/listRoomName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:fontFamily="@font/ubuntu"
         android:text="@string/listRoomItemName" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/listRoomDeviceCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,14 +47,14 @@
         android:fontFamily="@font/ubuntu"
         android:text="@string/listRoomItemDeviceCount" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_below="@id/listRoomName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/listRoomDeviceCountMaginTop"
-        android:src="@drawable/ic_arrow_right_alt"
+        app:srcCompat="@drawable/ic_arrow_right_alt"
         android:tint="@color/primaryDark"
         tools:ignore="ContentDescription" />
 

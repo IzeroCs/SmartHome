@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_room_item.view.*
 
@@ -29,7 +30,7 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
         }
 
         fun setIcon(type : Int) {
-            val resIcon : Int = RoomItem.getIconResource(type)
+            val resIcon : Int = RoomType.getIconResource(type)
 
             if (resIcon != -1)
                 itemView.listRoomIcon.setImageResource(resIcon)
