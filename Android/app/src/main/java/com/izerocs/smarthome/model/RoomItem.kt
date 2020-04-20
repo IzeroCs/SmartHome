@@ -27,7 +27,7 @@ class RoomItem {
     constructor(context: Context, nameRoom : String, typeRoom : String) {
         this.context = context
         this.name    = nameRoom
-        this.type    = RoomType.stringForType(typeRoom)
+        this.type    = RoomType.stringToType(typeRoom)
     }
 
     constructor(context: Context, typeRoom: Int) {
@@ -38,7 +38,7 @@ class RoomItem {
 
     constructor(context: Context, typeRoom: String) {
         this.context = context
-        this.type    = RoomType.stringForType(typeRoom)
+        this.type    = RoomType.stringToType(typeRoom)
         this.name    = getDefaultName(this.type)
     }
 

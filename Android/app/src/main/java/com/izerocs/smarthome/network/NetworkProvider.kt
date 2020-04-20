@@ -62,18 +62,22 @@ class NetworkProvider(private val context : Context?) {
                 }
             }
         }
+
+        fun getHostConnect(context : Context?) : String {
+            val connectType = getConnectType(context!!)
+            var host = "127.0.0.1"
+
+            if (connectType == CONNECT_TYPE_WIFI)
+                host = "192.168.31.106"
+            else if (connectType == CONNECT_TYPE_MOBILE)
+                host = "192.168.42.244"
+
+            return host
+        }
     }
 
     private var retrofit : Retrofit = Retrofit.Builder().apply {
-        val connectType = getConnectType(context!!)
-        var baseUrl = "127.0.0.1"
-
-        if (connectType == CONNECT_TYPE_WIFI)
-            baseUrl = "192.168.31.106"
-        else if (connectType == CONNECT_TYPE_MOBILE)
-            baseUrl = "192.168.42.244"
-
-        baseUrl("http://$baseUrl:80/api/")
+        baseUrl("http://${getHostConnect(context)}:80/api/")
             .client(OkHttpClient.Builder().build())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
     }.build()

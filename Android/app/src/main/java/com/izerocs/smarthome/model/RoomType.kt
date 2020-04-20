@@ -1,14 +1,11 @@
 package com.izerocs.smarthome.model
 
 import android.content.Context
+import com.github.nkzawa.emitter.Emitter
+import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.activity.BaseActivity
-import com.izerocs.smarthome.network.NetworkCallback
-import com.izerocs.smarthome.network.NetworkProvider
-import com.izerocs.smarthome.network.service.RoomService
-import com.izerocs.smarthome.preferences.RoomTypePreferences
-import retrofit2.Call
-import retrofit2.Response
+import org.json.JSONArray
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.reflect.KFunction1
@@ -30,36 +27,20 @@ class RoomType {
 
         private var types = mutableListOf<Int>()
 
-        fun fetchTypes(context : Context, callback : KFunction1<Int, Unit>) {
+        fun fetchTypes(context : Context, socket : Socket, callback : KFunction1<Int, Unit>) {
             if (types.isNotEmpty())
                 return
 
-            val preferences = RoomTypePreferences(context)
+            socket.on("room/types", Emitter.Listener {
+                println("Array types fetch")
+                println(it[0])
+                (it[0] as JSONArray).run {
+                    for (i in 0 until length())
+                        types.add(stringToType(getString(i)))
 
-            preferences.getAll()?.forEach {
-                types.add(it.key.toInt())
-            }
-
-            NetworkProvider.service(RoomService::class.java).getTypes()
-                .enqueue(object : NetworkCallback<List<String>>() {
-                    override fun onResponse(
-                        call : Call<List<String>>,
-                        response : Response<List<String>>
-                    ) {
-                        super.onResponse(call, response)
-
-                        types.clear()
-                        preferences.clear()
-                        response.body()?.forEach {
-                            val type = stringForType(it)
-
-                            types.add(type)
-                            preferences.put(type.toString(), it)
-                        }
-
-                        callback(BaseActivity.FETCH_ROOM_TYPE)
-                    }
-                })
+                    callback(BaseActivity.FETCH_ROOM_TYPE)
+                }
+            }).emit("room/types")
         }
 
         fun getTypes() : MutableList<Int> {
@@ -112,14 +93,14 @@ class RoomType {
         }
 
         fun getIconResource(type : String) : Int {
-            return getIconResource(stringForType(type))
+            return getIconResource(stringToType(type))
         }
 
         fun isTypeValid(typeRoom : Int) : Boolean {
             return getTypes().contains(typeRoom)
         }
 
-        fun stringForType(type : String) : Int {
+        fun stringToType(type : String) : Int {
             var typeInt = 0
 
             when (type.toLowerCase(Locale.ROOT)) {

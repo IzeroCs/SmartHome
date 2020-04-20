@@ -72,16 +72,20 @@ class SmartActivity : BaseActivity(),
     }
 
     private fun updateListAdapter() {
-        preferences?.run {
-            val list = getAll()
-                ?.toSortedMap(Comparator<String> { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
+        runOnUiThread {
+            preferences?.run {
+                println("preferences run")
+                println(RoomType.getTypes().toString())
+                val list = getAll()
+                    ?.toSortedMap(Comparator<String> { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
 
-            listRoom.clear()
-            list?.forEach {
-                val item = getObject(it.key, RoomItem.RoomItemData::class.java)
+                listRoom.clear()
+                list?.forEach {
+                    val item = getObject(it.key, RoomItem.RoomItemData::class.java)
 
-                if (RoomType.isTypeValid(item.type))
-                    listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
+                    if (RoomType.isTypeValid(item.type))
+                        listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
+                }
             }
         }
     }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomType
-import com.izerocs.smarthome.network.NetworkProvider
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
@@ -25,9 +24,8 @@ import kotlinx.android.synthetic.main.activity_room.*
 abstract class BaseActivity : AppCompatActivity(),
     WavesView.OnBackClickListener, WavesView.OnMenuItemClickListener
 {
-
-    private   var rootView    : View? = null
-    protected var preferences : SharedPreferences? = null
+    private   var rootView         : View? = null
+    protected var preferences      : SharedPreferences? = null
 
     companion object {
         const val FETCH_ROOM_TYPE = 1
@@ -37,8 +35,7 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        NetworkProvider.self(this)
-        RoomType.fetchTypes(this, ::onFetched)
+        onSocketReconnect()
         Toasty.Config.getInstance()
             .allowQueue(false)
             .setTextSize(resources.getDimensionPixelSize(R.dimen.toastyTextSize))
@@ -64,6 +61,10 @@ abstract class BaseActivity : AppCompatActivity(),
         Log.d(BaseActivity::class.java.toString(), "onFetch: $type")
     }
 
+    open fun onSocketReconnect() {
+        RoomType.fetchTypes(this, getRootApplication().getSocket(), ::onFetched)
+    }
+
     @MenuRes
     open fun onCreateMenu() : Int? {
         return null
@@ -73,11 +74,11 @@ abstract class BaseActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        (applicationContext as SmartApplication).setCurrentActivity(this)
+        getRootApplication().setCurrentActivity(this)
     }
 
     override fun onDestroy() {
-        (applicationContext as SmartApplication).setCurrentActivity(null)
+        getRootApplication().setCurrentActivity(null)
         super.onDestroy()
     }
 
@@ -134,6 +135,10 @@ abstract class BaseActivity : AppCompatActivity(),
 
     fun getRootView() : View? {
         return rootView
+    }
+
+    fun getRootApplication() : SmartApplication {
+        return application as SmartApplication
     }
 
 }
