@@ -1,7 +1,8 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"name": "ESP8266",
+			"path": "ESP8266"
 		}
 	],
 	"settings": {}
