@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "profile.h"
+#include "network.h"
 
 #define PIN_COUNT_MAP 3
 
@@ -10,6 +12,9 @@ uint8_t pinInStatus[PIN_COUNT_MAP] = {  0,  0,  0 };
 
 void setup() {
     Serial.begin(115200);
+    Profile.begin();
+    Network.wifiBegin();
+    Network.wifiConnect();
 
     for (int i = 0; i < PIN_COUNT_MAP; ++i) {
         pinMode(pinInMaps[i], INPUT);
