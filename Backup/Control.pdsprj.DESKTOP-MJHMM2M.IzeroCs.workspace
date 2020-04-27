@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
- <FRAME activewindow="1">
-  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
+ <FRAME activewindow="0">
+  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
   <WINDOW type="default" module="ARES"/>
   <WINDOW type="VIEW3D" module="VIEW3D">
    <camera>
-    <position x="-4596570" y="-1847065" z="-6229778"/>
-    <focus x="-5805997" y="-1890790" z="-553771"/>
-    <up x="-172691" y="984538" z="-29205"/>
+    <position x="-6399910" y="-6688783" z="6178841"/>
+    <focus x="-6637467" y="-4784699" z="-1715860"/>
+    <up x="415983" y="886800" z="201365"/>
    </camera>
   </WINDOW>
  </FRAME>
