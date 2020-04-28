@@ -2,24 +2,25 @@
 #include "network.h"
 
 void NetworkClass::wifiBegin() {
-    ssidStation = ssidStationMake();
-    passStation = passStationMake();
+    ssidAccessPoint = ssidAccessPointMake();
+    passAccessPoint = passAccessPointMake();
 
     WiFi.persistent(false);
     WiFi.mode(WIFI_AP_STA);
-    //WiFi.softAP()
+    WiFi.hostname(ssidAccessPoint);
+    WiFi.softAP(ssidAccessPoint, passAccessPoint);
 }
 
 void NetworkClass::wifiConnect() {
 
 }
 
-String NetworkClass::ssidStationMake() {
-    return "";
+String NetworkClass::ssidAccessPointMake() {
+    return Profile.getSn() + Profile.getSc();
 }
 
-String NetworkClass::passStationMake() {
-    return "";
+String NetworkClass::passAccessPointMake() {
+    return Profile.getSc();
 }
 
 NetworkClass Network;

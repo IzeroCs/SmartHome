@@ -6,16 +6,16 @@
 
 class NetworkClass {
 private:
-    String ssidStation;
-    String passStation;
+    String ssidAccessPoint;
+    String passAccessPoint;
 
 public:
     void wifiBegin();
     void wifiConnect();
 
 protected:
-    String ssidStationMake();
-    String passStationMake();
+    String ssidAccessPointMake();
+    String passAccessPointMake();
 };
 
 extern NetworkClass Network;
