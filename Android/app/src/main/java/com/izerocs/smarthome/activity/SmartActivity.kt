@@ -40,6 +40,7 @@ class SmartActivity : BaseActivity(),
         }
 
         updateListAdapter()
+        startActivity(Intent(applicationContext, EspActivity::class.java))
     }
 
     override fun onCreatePreferences() : SharedPreferences? {
@@ -74,8 +75,6 @@ class SmartActivity : BaseActivity(),
     private fun updateListAdapter() {
         runOnUiThread {
             preferences?.run {
-                println("preferences run")
-                println(RoomType.getTypes().toString())
                 val list = getAll()
                     ?.toSortedMap(Comparator<String> { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
 

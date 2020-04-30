@@ -14,6 +14,7 @@ uint8_t pinInStatus[PIN_COUNT_MAP] = {  0,  0,  0 };
 
 void setup() {
     Serial.begin(115200);
+    Serial.println("Smart Home ESP8266");
     Record.begin();
     Profile.begin();
     Network.wifiBegin();

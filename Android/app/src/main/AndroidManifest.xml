@@ -41,6 +41,15 @@
                 android:value=".activity.SmartActivity" />
         </activity>
         <activity
+            android:name=".activity.EspActivity"
+            android:parentActivityName=".activity.SmartActivity"
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SmartActivity" />
+        </activity>
+        <activity
             android:name=".activity.AddRoomActivity"
             android:parentActivityName=".activity.SmartActivity"
             android:screenOrientation="unspecified"
