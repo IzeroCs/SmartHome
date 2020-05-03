@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.izerocs.smarthome.widget.FormLayoutWrapper
+        <com.izerocs.smarthome.widget.form.FormLayoutWrapper
             android:id="@+id/formLayoutWrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,27 +22,27 @@
             android:layout_marginTop="@dimen/waveTopForChild"
             android:paddingTop="@dimen/waveTopForChild">
 
-            <com.izerocs.smarthome.widget.FormLayout
+            <com.izerocs.smarthome.widget.form.FormLayout
                 android:id="@+id/formLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.izerocs.smarthome.widget.InputLayout
+                <com.izerocs.smarthome.widget.form.InputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/formElementMarginVertical"
                     app:label="@string/addRoomName">
 
-                    <com.izerocs.smarthome.widget.EditTextView
+                    <com.izerocs.smarthome.widget.form.EditTextView
                         android:id="@+id/addRoomName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lines="1"
                         android:hint="@string/addRoomNameHint" />
 
-                </com.izerocs.smarthome.widget.InputLayout>
+                </com.izerocs.smarthome.widget.form.InputLayout>
 
-                <com.izerocs.smarthome.widget.InputLayout
+                <com.izerocs.smarthome.widget.form.InputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/formElementMarginVertical"
@@ -54,23 +54,23 @@
                         android:layout_height="wrap_content"
                         android:spinnerMode="dialog" />
 
-                </com.izerocs.smarthome.widget.InputLayout>
+                </com.izerocs.smarthome.widget.form.InputLayout>
 
-                <com.izerocs.smarthome.widget.ButtonLayout
+                <com.izerocs.smarthome.widget.form.ButtonLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.izerocs.smarthome.widget.ButtonView
+                    <com.izerocs.smarthome.widget.form.ButtonView
                         android:id="@+id/addRoomButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/addRoomButton" />
 
-                </com.izerocs.smarthome.widget.ButtonLayout>
+                </com.izerocs.smarthome.widget.form.ButtonLayout>
 
-            </com.izerocs.smarthome.widget.FormLayout>
+            </com.izerocs.smarthome.widget.form.FormLayout>
 
-        </com.izerocs.smarthome.widget.FormLayoutWrapper>
+        </com.izerocs.smarthome.widget.form.FormLayoutWrapper>
 
         <com.izerocs.smarthome.widget.WavesView
             android:id="@+id/wavesView"

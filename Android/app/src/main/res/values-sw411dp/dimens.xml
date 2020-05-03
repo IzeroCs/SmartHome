@@ -19,6 +19,12 @@
 	<dimen name="listDeviceStatusIconSize">14.56dp</dimen>
 	<dimen name="listDeviceSubLabelMarginTop">5.14dp</dimen>
 	<dimen name="listDeviceWrapperBorderRadius">17.13dp</dimen>
+	<dimen name="listEspIconPadding">8.56dp</dimen>
+	<dimen name="listEspIconSize">30.83dp</dimen>
+	<dimen name="listEspSpacing">21.41dp</dimen>
+	<dimen name="listEspSpacingHorizontal">8.56dp</dimen>
+	<dimen name="listEspSpacingVertialcal">8.56dp</dimen>
+	<dimen name="listEspWrapperBorderRadius">17.13dp</dimen>
 	<dimen name="listRoomDeviceCountMaginTop">5.99dp</dimen>
 	<dimen name="listRoomIconSize">68.50dp</dimen>
 	<dimen name="listRoomNameMarginTop">21.41dp</dimen>
@@ -36,6 +42,7 @@
 	<dimen name="formStatusTextSize">17.13sp</dimen>
 	<dimen name="listDeviceLabelTextSize">17.13sp</dimen>
 	<dimen name="listDeviceSubLabelTextSize">15.41sp</dimen>
+	<dimen name="listEspSsidTextSize">17.13sp</dimen>
 	<dimen name="listRoomDeviceCountTextSize">17.13sp</dimen>
 	<dimen name="listRoomNameTextSize">18.84sp</dimen>
 	<dimen name="toastyTextSize">17.13sp</dimen>

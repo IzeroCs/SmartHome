@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.list
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.widget.manager.GridLayoutManager
 
 /**
  * Created by IzeroCs on 2020-04-01
@@ -16,7 +17,12 @@ class ListRoomView(context: Context, attributeSet: AttributeSet) : RecyclerView(
         clipChildren = false
         clipToPadding = false
         adapter = ListRoomAdapter(context)
-        layoutManager = GridLayoutManager(context, 2, adapter)
+        layoutManager =
+            GridLayoutManager(
+                context,
+                2,
+                adapter
+            )
 
         addItemDecoration(
             GridLayoutManager.GridSpacesItemDecoration(

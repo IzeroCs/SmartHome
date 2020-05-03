@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.setPadding
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.SpinnerAdapter
+import com.izerocs.smarthome.widget.form.InputLayout
 
 /**
  * Created by IzeroCs on 2020-04-05

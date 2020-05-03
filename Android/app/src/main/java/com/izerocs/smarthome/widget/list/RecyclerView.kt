@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.list
 
 import android.content.Context
 import android.util.AttributeSet

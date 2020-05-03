@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.annotation.MenuRes
 import androidx.annotation.NonNull
+import androidx.annotation.StringRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
@@ -267,6 +268,10 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
 
     fun setTitle(@NonNull title : String) {
         this.title = title
+    }
+
+    fun setTitle(@StringRes resTitle : Int) {
+        setTitle(context.getString(resTitle))
     }
 
     @SuppressLint("RestrictedApi")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.izerocs.smarthome.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.izerocs.smarthome.widget.layout.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/listDeviceWrapper"
@@ -94,4 +94,4 @@
 
     </LinearLayout>
 
-</com.izerocs.smarthome.widget.LinearLayout>
+</com.izerocs.smarthome.widget.layout.LinearLayout>

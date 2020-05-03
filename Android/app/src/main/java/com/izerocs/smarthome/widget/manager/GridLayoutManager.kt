@@ -1,8 +1,9 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.manager
 
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
+import com.izerocs.smarthome.widget.list.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager as ParentGridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup as ParentSpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView as ParentRecyclerView
@@ -24,7 +25,10 @@ class GridLayoutManager(context : Context, spanCount : Int, adapter : ParentAdap
 
     }
 
-    class GridSpacesItemDecoration(private val spacing : Int, private val includeEdge : Boolean) : ParentRecyclerView.ItemDecoration() {
+    class GridSpacesItemDecoration(
+        private val spacing : Int,
+        private val includeEdge : Boolean
+    ) : ParentRecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect : Rect, view : View, parent : ParentRecyclerView, state : ParentRecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
@@ -64,6 +68,9 @@ class GridLayoutManager(context : Context, spanCount : Int, adapter : ParentAdap
 
 
     init {
-        spanSizeLookup = SpanSizeLookup(adapter)
+        spanSizeLookup =
+            SpanSizeLookup(
+                adapter
+            )
     }
 }

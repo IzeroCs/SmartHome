@@ -39,9 +39,13 @@
     <color name="floatActionBarTint">#ffffff</color>
     <color name="floatActionBarBackground">@color/accent</color>
 
-    <color name="listGridItemUnpressed">#fff</color>
-    <color name="listGridItemPressed">#fcfcfc</color>
-    <color name="listGridItemPressedRipple">#10000000</color>
+    <color name="listItemUnpressed">#fff</color>
+    <color name="listItemPressed">#fcfcfc</color>
+    <color name="listItemPressedRipple">#10000000</color>
+
+    <color name="listGridItemUnpressed">@color/listItemUnpressed</color>
+    <color name="listGridItemPressed">@color/listItemPressed</color>
+    <color name="listGridItemPressedRipple">@color/listItemPressedRipple</color>
 
     <color name="listRoomWrapperShadow">#11000000</color>
     <color name="listRoomNameTextColor">#777</color>
@@ -57,4 +61,7 @@
     <color name="listDeviceLabelText">#888</color>
     <color name="listDeviceSubLabelText">#ccc</color>
 
+    <color name="listEspText">#888</color>
+    <color name="listEspIconTint">@color/primaryDark</color>
+    <color name="listEspIconSignalTint">#ccc</color>
 </resources>

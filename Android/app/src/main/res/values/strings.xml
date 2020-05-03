@@ -2,6 +2,7 @@
     <string name="appName">SmartHome</string>
     <string name="addRoomTitle">Add room</string>
     <string name="addDeviceTitle">Add device for room</string>
+    <string name="listEspTitle">List module</string>
 
     <string name="livingRoomName">Living room</string>
     <string name="bedRoomName">Bed room</string>
@@ -39,4 +40,8 @@
     <string name="addDeviceNameHint">Input device name</string>
     <string name="addDeviceType">Device type</string>
     <string name="addDeviceButton">Create</string>
+
+    <string name="listEspScanSuccess">Scan success</string>
+    <string name="listEspScanFailed">Scan failed</string>
+    <string name="listEspSsidDefault">SSID</string>
 </resources>

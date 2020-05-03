@@ -54,4 +54,11 @@
     <dimen name="listDeviceSubLabelMarginTop">6dp</dimen>
     <dimen name="listDeviceStatusIconSize">17dp</dimen>
 
+    <dimen name="listEspSpacing">25dp</dimen>
+    <dimen name="listEspSpacingVertialcal">10dp</dimen>
+    <dimen name="listEspSpacingHorizontal">10dp</dimen>
+    <dimen name="listEspWrapperBorderRadius">20dp</dimen>
+    <dimen name="listEspIconSize">36dp</dimen>
+    <dimen name="listEspIconPadding">10dp</dimen>
+    <dimen name="listEspSsidTextSize">20sp</dimen>
 </resources>

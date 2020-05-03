@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.SmartActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.RoomActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.izerocs.smarthome.widget.list.ListRoomView
-            android:id="@+id/listRoom"
+        <com.izerocs.smarthome.widget.list.ListEspView
+            android:id="@+id/listEsp"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/waveTopForChild"
-            android:paddingTop="@dimen/waveTopForChild" />
+            android:paddingTop="@dimen/waveTopForChild"/>
 
         <com.izerocs.smarthome.widget.WavesView
             android:id="@+id/wavesView"
@@ -39,11 +39,11 @@
         android:layout_margin="@dimen/floatActionBarMargin"
         android:backgroundTint="@color/floatActionBarBackground"
         android:tint="@color/floatActionBarTint"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_refresh"
         android:clickable="true"
         android:focusable="true"
         app:fabSize="normal"
-        app:layout_anchor="@id/listRoom"
+        app:layout_anchor="@id/listEsp"
         app:layout_anchorGravity="right|bottom|end"
         app:layout_behavior="com.izerocs.smarthome.animation.FloatingActionBehavior"
         tools:ignore="RtlHardcoded" />

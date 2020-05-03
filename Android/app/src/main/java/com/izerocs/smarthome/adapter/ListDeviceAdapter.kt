@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.DeviceItem
-import com.izerocs.smarthome.widget.RecyclerView
+import com.izerocs.smarthome.widget.list.RecyclerView
 import kotlinx.android.synthetic.main.list_device_item.view.*
 
 /**

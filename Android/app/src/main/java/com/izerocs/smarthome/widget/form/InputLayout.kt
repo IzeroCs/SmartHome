@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.form
 
 import android.annotation.SuppressLint
 import android.content.Context

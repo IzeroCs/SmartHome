@@ -37,5 +37,9 @@
     <string name="addDeviceNameHint">Nhập tên thiết bị</string>
     <string name="addDeviceType">Loại thiết bị</string>
     <string name="addDeviceButton">Tạo</string>
+    <string name="listEspTitle">Danh sách mô-đun</string>
+    <string name="listEspScanSuccess">Quét thành công</string>
+    <string name="listEspScanFailed">Quét thất bại</string>
+    <string name="listEspSsidDefault">SSID</string>
 
 </resources>

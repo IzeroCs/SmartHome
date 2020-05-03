@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.layout
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,18 +14,17 @@ import com.izerocs.smarthome.R
 /**
  * Created by IzeroCs on 2020-04-03
  */
-class LinearLayout(context: Context, attrs: AttributeSet) : android.widget.LinearLayout(context, attrs) {
+class RelativeLayout(context: Context, attrs: AttributeSet) : android.widget.RelativeLayout(context, attrs) {
     private val clipPath     : Path = Path()
     private var borderRadius : Float = 0F
 
     init {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LinearLayout, 0, 0)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RelativeLayout, 0, 0)
 
         typedArray.run {
             borderRadius = getBackgroundColorAttr(this)
             recycle()
         }
-
     }
 
     @SuppressLint("DrawAllocation")
@@ -49,11 +48,11 @@ class LinearLayout(context: Context, attrs: AttributeSet) : android.widget.Linea
     private fun getBackgroundColorAttr(typedArray: TypedArray) : Float {
         val colorValue = TypedValue()
 
-        if (typedArray.getValue(R.styleable.LinearLayout_borderRadius, colorValue)) {
+        if (typedArray.getValue(R.styleable.RelativeLayout_borderRadius, colorValue)) {
             if (colorValue.type == TypedValue.TYPE_FLOAT)
-                return typedArray.getFloat(R.styleable.LinearLayout_borderRadius, 0F)
+                return typedArray.getFloat(R.styleable.RelativeLayout_borderRadius, 0F)
             else if (colorValue.type == TypedValue.TYPE_DIMENSION)
-                return typedArray.getDimension(R.styleable.LinearLayout_borderRadius, 0F)
+                return typedArray.getDimension(R.styleable.RelativeLayout_borderRadius, 0F)
         }
 
         return 0F

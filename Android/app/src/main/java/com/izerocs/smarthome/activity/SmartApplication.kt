@@ -14,13 +14,13 @@ import com.github.nkzawa.socketio.client.Socket
 class SmartApplication : Application() {
     private var currentActivity : BaseActivity? = null
     private var currentSocket   : Socket        = IO.socket("http://192.168.42.244:80").apply {
-        on(Socket.EVENT_CONNECT_ERROR, Emitter.Listener { Log.e(this::class.java.toString(), "Connect Error") })
-        on(Socket.EVENT_CONNECT_TIMEOUT, Emitter.Listener { Log.e(this::class.java.toString(), "Connect Timeout") })
-        on(Socket.EVENT_RECONNECTING, Emitter.Listener { Log.d(this::class.java.toString(), "Reconnecting") })
+        on(Socket.EVENT_CONNECT_ERROR, Emitter.Listener     { Log.e(this::class.java.toString(), "Connect Error")    })
+        on(Socket.EVENT_CONNECT_TIMEOUT, Emitter.Listener   { Log.e(this::class.java.toString(), "Connect Timeout")  })
+        on(Socket.EVENT_RECONNECTING, Emitter.Listener      { Log.d(this::class.java.toString(), "Reconnecting")     })
         on(Socket.EVENT_RECONNECT_ATTEMPT, Emitter.Listener { Log.d(this::class.java.toString(), "Reconnect Attemp") })
-        on(Socket.EVENT_RECONNECT_ERROR, Emitter.Listener { Log.d(this::class.java.toString(), "Reconnect Error") })
-        on(Socket.EVENT_RECONNECT_FAILED, Emitter.Listener { Log.e(this::class.java.toString(), "Reconnect Failed") })
-        on(Socket.EVENT_DISCONNECT, Emitter.Listener { Log.d(this::class.java.toString(), "Disconnect") })
+        on(Socket.EVENT_RECONNECT_ERROR, Emitter.Listener   { Log.d(this::class.java.toString(), "Reconnect Error")  })
+        on(Socket.EVENT_RECONNECT_FAILED, Emitter.Listener  { Log.e(this::class.java.toString(), "Reconnect Failed") })
+        on(Socket.EVENT_DISCONNECT, Emitter.Listener        { Log.d(this::class.java.toString(), "Disconnect")       })
 
         on(Socket.EVENT_RECONNECT, Emitter.Listener {
             Log.d(this::class.java.toString(), "Reconnect")
@@ -50,7 +50,7 @@ class SmartApplication : Application() {
         super.onCreate()
         lifecycle()
         self = this
-        currentSocket.connect()
+//        currentSocket.connect()
     }
 
     private fun lifecycle() {

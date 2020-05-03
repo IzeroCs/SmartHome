@@ -7,7 +7,7 @@ import com.izerocs.smarthome.model.RoomItem
 import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
-import com.izerocs.smarthome.widget.FormLayout
+import com.izerocs.smarthome.widget.form.FormLayout
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_add_room.*

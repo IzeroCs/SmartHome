@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.widget
+package com.izerocs.smarthome.widget.form
 
 import android.content.Context
 import android.content.res.ColorStateList

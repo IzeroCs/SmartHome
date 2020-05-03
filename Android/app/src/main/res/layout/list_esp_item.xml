@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.izerocs.smarthome.widget.layout.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/listEspWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/listEspSpacingHorizontal"
+    android:paddingTop="@dimen/listEspSpacingVertialcal"
+    android:paddingEnd="@dimen/listEspSpacingHorizontal"
+    android:paddingBottom="@dimen/listEspSpacingVertialcal"
+    android:orientation="horizontal"
+    android:background="@drawable/list_item_selectable"
+    app:borderRadius="@dimen/listEspWrapperBorderRadius"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/listEspIconWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="@dimen/listEspIconPadding">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/listEspIcon"
+            android:layout_width="@dimen/listEspIconSize"
+            android:layout_height="@dimen/listEspIconSize"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/listEspIconTint"
+            app:srcCompat="@drawable/ic_chipset"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/listEspSsid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textSize="@dimen/listEspSsidTextSize"
+        android:textColor="@color/listEspText"
+        android:text="@string/listEspSsidDefault"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/listEspSignal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/listEspIconPadding"
+        android:tint="@color/listEspIconSignalTint"
+        app:srcCompat="@drawable/ic_signal_wifi_0"/>
+
+</com.izerocs.smarthome.widget.layout.LinearLayout>

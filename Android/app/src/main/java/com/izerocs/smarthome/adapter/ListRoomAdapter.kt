@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomItem
 import com.izerocs.smarthome.model.RoomType
-import com.izerocs.smarthome.widget.RecyclerView
+import com.izerocs.smarthome.widget.list.RecyclerView
 import kotlinx.android.synthetic.main.list_room_item.view.*
 
 /**
