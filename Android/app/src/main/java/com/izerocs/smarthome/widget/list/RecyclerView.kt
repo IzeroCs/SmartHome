@@ -49,10 +49,10 @@ abstract class RecyclerView(context : Context, attributeSet : AttributeSet) : Pa
                     if (this@RecyclerView.adapter == null || emptyView == null)
                         return
 
-                    if (this@RecyclerView.adapter?.itemCount == 0)
-                        emptyView?.visibility = View.VISIBLE
-                    else
+                    if (this@RecyclerView.adapter?.itemCount!! >= 0)
                         emptyView?.visibility = View.GONE
+                    else
+                        emptyView?.visibility = View.VISIBLE
                 }
             }
         }
@@ -65,5 +65,12 @@ abstract class RecyclerView(context : Context, attributeSet : AttributeSet) : Pa
 
     fun setEmptyList(view : View) {
         emptyView = view
+
+        emptyView.run {
+            if (adapter == null || adapter?.itemCount!! <= 0)
+                this?.visibility = View.VISIBLE
+            else
+                this?.visibility = View.GONE
+        }
     }
 }

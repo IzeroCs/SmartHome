@@ -82,7 +82,7 @@
                         android:paddingStart="@dimen/listEspSpacingHorizontal"
                         android:textSize="@dimen/listEspTitleTextSize"
                         android:textColor="@color/listEspTitleText"
-                        android:text="@string/listEspScanTitle"
+                        android:text="@string/listEspConnectedTitle"
                         tools:ignore="RtlSymmetry" />
 
                     <TextView

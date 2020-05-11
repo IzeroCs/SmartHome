@@ -80,7 +80,11 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
                 val data = getObject(it.key, EspItem.EspDataItem::class.java)
 
                 if (EspItem.isMatchEsp(data.ssid))
-                    listEspScan.add(EspItem(data.ssid, data.level))
+                    listEspScan.add(EspItem(data.ssid, data.level, data.capabilities))
+            }
+
+            runOnUiThread {
+                listEspScan.notifyDataSetChanged()
             }
         }
 
@@ -110,7 +114,14 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     private fun onItemScanClick(v : View, position : Int) {
         val item = listEspScan.get(position)
 
+        item.addNetwork(wifiManager)
         println(item)
+
+        println("ConfigList")
+        wifiManager?.configuredNetworks?.forEach {
+            println("Item")
+            println(it)
+        }
     }
 
     private fun onItemConnectedClick(v : View, position : Int) {
