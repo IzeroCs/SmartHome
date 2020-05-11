@@ -13,13 +13,101 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.izerocs.smarthome.widget.list.ListEspView
-            android:id="@+id/listEsp"
-            android:layout_alignParentBottom="true"
+        <ScrollView
+            android:id="@+id/scrollListEsp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="@dimen/waveTopForChild"
-            android:paddingTop="@dimen/waveTopForChild"/>
+            android:paddingTop="@dimen/waveTopForChild">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/listEspScanWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/listEspSpacing"
+                        android:layout_marginTop="@dimen/listEspSpacingVertialcal"
+                        android:layout_marginBottom="@dimen/listEspSpacingVertialcal"
+                        android:paddingStart="@dimen/listEspSpacingHorizontal"
+                        android:textSize="@dimen/listEspTitleTextSize"
+                        android:textColor="@color/listEspTitleText"
+                        android:text="@string/listEspScanTitle"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/listEspScanEmpty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/listEspSpacing"
+                        android:layout_marginBottom="@dimen/listEspSpacing"
+                        android:textSize="@dimen/listEspEmptyTextSize"
+                        android:textColor="@color/listEspEmptyText"
+                        android:text="@string/listEspScanEmpty"
+                        tools:ignore="RtlSymmetry" />
+
+                    <com.izerocs.smarthome.widget.list.ListEspView
+                        android:id="@+id/listEspScan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:empty="@id/listEspScanEmpty"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/listEspConnectedWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/listEspSpacing"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/listEspSpacing"
+                        android:layout_marginTop="@dimen/listEspSpacingVertialcal"
+                        android:layout_marginBottom="@dimen/listEspSpacingVertialcal"
+                        android:paddingStart="@dimen/listEspSpacingHorizontal"
+                        android:textSize="@dimen/listEspTitleTextSize"
+                        android:textColor="@color/listEspTitleText"
+                        android:text="@string/listEspScanTitle"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/listEspConnectedEmpty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/listEspSpacing"
+                        android:layout_marginBottom="@dimen/listEspSpacing"
+                        android:textSize="@dimen/listEspEmptyTextSize"
+                        android:textColor="@color/listEspEmptyText"
+                        android:text="@string/listEspConnectedEmpty"
+                        tools:ignore="RtlSymmetry" />
+
+                    <com.izerocs.smarthome.widget.list.ListEspView
+                        android:id="@+id/listEspConnected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:empty="@id/listEspConnectedEmpty"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
 
         <com.izerocs.smarthome.widget.WavesView
             android:id="@+id/wavesView"
@@ -43,7 +131,7 @@
         android:clickable="true"
         android:focusable="true"
         app:fabSize="normal"
-        app:layout_anchor="@id/listEsp"
+        app:layout_anchor="@id/scrollListEsp"
         app:layout_anchorGravity="right|bottom|end"
         app:layout_behavior="com.izerocs.smarthome.animation.FloatingActionBehavior"
         tools:ignore="RtlHardcoded" />

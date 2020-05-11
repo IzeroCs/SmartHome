@@ -19,11 +19,10 @@ class EspItem {
         const val SIGNAL_MIN = 0
         const val SIGNAL_MAX = 4
 
-        private val patternSsid = "^ESP[a-z0-9]+SC[a-z0-9]+$".toRegex(RegexOption.IGNORE_CASE)
+        private val patternSsid = "^(ESP[a-z0-9]+)(SC[a-z0-9]+)$".toRegex(RegexOption.IGNORE_CASE)
 
         fun isMatchEsp(ssid : String) : Boolean {
-            return true
-//            return patternSsid.matches(ssid)
+            return patternSsid.matches(ssid)
         }
 
         fun calculateSignalLevel(level : Int) : Int {
@@ -38,8 +37,12 @@ class EspItem {
         this.level  = level
         this.signal = calculateSignalLevel(level)
 
-        this.sn = ssid
-        this.sc = ssid
+        patternSsid.find(ssid)?.run {
+            val (sn, sc) = this.destructured
+
+            this@EspItem.sn = sn
+            this@EspItem.sc = sc
+        }
     }
 
     fun getSsid() : String {
@@ -62,4 +65,7 @@ class EspItem {
         return EspDataItem(ssid, level)
     }
 
+    override fun toString() : String {
+        return "${super.toString()} { ssid: $ssid, sn: $sn, sc: $sc, level: $level, signal: $signal }"
+    }
 }

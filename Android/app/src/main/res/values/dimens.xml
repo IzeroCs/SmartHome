@@ -61,4 +61,6 @@
     <dimen name="listEspIconSize">36dp</dimen>
     <dimen name="listEspIconPadding">10dp</dimen>
     <dimen name="listEspSsidTextSize">20sp</dimen>
+    <dimen name="listEspTitleTextSize">22sp</dimen>
+    <dimen name="listEspEmptyTextSize">20sp</dimen>
 </resources>

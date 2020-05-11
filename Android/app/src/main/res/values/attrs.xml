@@ -52,4 +52,8 @@
         <attr name="labelFamily" format="reference"/>
         <attr name="borderRadius"/>
     </declare-styleable>
+
+    <declare-styleable name="RecyclerView">
+        <attr name="empty" format="integer"/>
+    </declare-styleable>
 </resources>

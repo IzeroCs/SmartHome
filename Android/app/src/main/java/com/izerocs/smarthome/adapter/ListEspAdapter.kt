@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.widget.list.RecyclerView
 import kotlinx.android.synthetic.main.list_esp_item.view.*
 
 /**
@@ -22,7 +22,13 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         private val context : Context,
         private val view : View,
         private val onItemClickListener : OnItemClickListener?
-    ) : RecyclerView.ViewHolder(view) {
+    ) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener
+    {
+        init {
+            itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
+        }
+
         fun setSsid(ssid : String) {
             itemView.listEspSsid.text = ssid
         }
@@ -39,6 +45,15 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
 
             itemView.listEspSignal.setImageResource(resIcon)
         }
+
+        override fun onClick(v : View?) {
+            onItemClickListener?.onItemClick(v, adapterPosition, false)
+        }
+
+        override fun onLongClick(v : View?) : Boolean {
+            onItemClickListener?.onItemClick(v, adapterPosition, true)
+            return false
+        }
     }
 
     interface OnItemClickListener {
@@ -54,7 +69,7 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
     override fun onBindViewHolder(holder : ViewHolder, position : Int) {
         val esp = esps[position]
 
-        holder.setSsid(esp.getSsid())
+        holder.setSsid(esp.getSn())
         holder.setSignal(esp.getSignal())
     }
 

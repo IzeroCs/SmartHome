@@ -42,7 +42,9 @@
 	<dimen name="formStatusTextSize">106.67sp</dimen>
 	<dimen name="listDeviceLabelTextSize">106.67sp</dimen>
 	<dimen name="listDeviceSubLabelTextSize">96.00sp</dimen>
+	<dimen name="listEspEmptyTextSize">106.67sp</dimen>
 	<dimen name="listEspSsidTextSize">106.67sp</dimen>
+	<dimen name="listEspTitleTextSize">117.33sp</dimen>
 	<dimen name="listRoomDeviceCountTextSize">106.67sp</dimen>
 	<dimen name="listRoomNameTextSize">117.33sp</dimen>
 	<dimen name="toastyTextSize">106.67sp</dimen>

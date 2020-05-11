@@ -64,4 +64,6 @@
     <color name="listEspText">#888</color>
     <color name="listEspIconTint">@color/primaryDark</color>
     <color name="listEspIconSignalTint">#ccc</color>
+    <color name="listEspTitleText">#888</color>
+    <color name="listEspEmptyText">#ccc</color>
 </resources>

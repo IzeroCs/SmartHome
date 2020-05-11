@@ -44,4 +44,8 @@
     <string name="listEspScanSuccess">Scan success</string>
     <string name="listEspScanFailed">Scan failed</string>
     <string name="listEspSsidDefault">SSID</string>
+    <string name="listEspScanTitle">Scanned module</string>
+    <string name="listEspConnectedTitle">Module connected</string>
+    <string name="listEspScanEmpty">No scanning module found</string>
+    <string name="listEspConnectedEmpty">No modules connected</string>
 </resources>
