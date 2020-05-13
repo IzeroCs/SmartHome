@@ -1,7 +1,6 @@
 package com.izerocs.smarthome.model
 
 import android.net.wifi.ScanResult
-import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 
 /**
@@ -62,33 +61,6 @@ class EspItem {
 
     fun getSc() : String {
         return sc
-    }
-
-    fun addNetwork(wifiManager : WifiManager?) {
-        @Suppress("DEPRECATION")
-        val wifi = WifiConfiguration().apply {
-            this.SSID = "\"$ssid\""
-            this.preSharedKey = "\"$sc\""
-            this.status = WifiConfiguration.Status.ENABLED
-
-            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
-            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP)
-            this.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK)
-            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
-            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
-            this.allowedProtocols.set(WifiConfiguration.Protocol.RSN)
-        }
-
-        println(wifi)
-        @Suppress("DEPRECATION")
-        wifiManager?.run {
-            val id = this.addNetwork(wifi)
-
-            println("Id add: $id")
-            disconnect()
-            wifiManager.enableNetwork(id, false)
-            reconnect()
-        }
     }
 
     fun toData() : EspDataItem {

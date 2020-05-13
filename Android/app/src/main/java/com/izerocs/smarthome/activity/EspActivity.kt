@@ -6,11 +6,19 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
+import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import android.net.wifi.WifiNetworkSpecifier
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
@@ -112,16 +120,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     }
 
     private fun onItemScanClick(v : View, position : Int) {
-        val item = listEspScan.get(position)
-
-        item.addNetwork(wifiManager)
-        println(item)
-
-        println("ConfigList")
-        wifiManager?.configuredNetworks?.forEach {
-            println("Item")
-            println(it)
-        }
+        addWifiToModule(listEspScan.get(position))
     }
 
     private fun onItemConnectedClick(v : View, position : Int) {
@@ -191,4 +190,91 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     private fun isScanThrottleEnabled() : Boolean {
         return Settings.Global.getInt(contentResolver, "wifi_scan_throttle_enabled") == 1
     }
+
+    private fun addWifiToModule(item : EspItem) {
+        var connected = false
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            connected = connectNetworkAndroidQ(item)
+        else
+            connected = connectNetworkPreAndroidQ(item)
+
+        println("addWifiToModule")
+        println("connected: $connected")
+    }
+
+    @Suppress("DEPRECATION")
+    private fun connectNetworkPreAndroidQ(item : EspItem) : Boolean {
+        val wifi = WifiConfiguration().apply {
+            this.SSID = "\"${item.getSsid()}\""
+            this.preSharedKey = "\"${item.getSc()}\""
+            this.status = WifiConfiguration.Status.ENABLED
+
+            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
+            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP)
+            this.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK)
+            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
+            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
+            this.allowedProtocols.set(WifiConfiguration.Protocol.RSN)
+        }
+
+        wifiManager?.run {
+            val id = this.addNetwork(wifi)
+
+            if (id != -1) {
+                disconnect()
+                enableNetwork(id, false)
+                reconnect()
+
+                return@connectNetworkPreAndroidQ true
+            }
+        }
+
+        return false
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private fun connectNetworkAndroidQ(item : EspItem) : Boolean {
+//        val suggestion = WifiNetworkSuggestion.Builder()
+//            .setSsid(item.getSsid())
+//            .setWpa2Passphrase(item.getSc())
+//            .build()
+//
+//        wifiManager?.run {
+//            val status = addNetworkSuggestions(listOf(suggestion))
+//
+//            if (status == WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS)
+//                return@connectNetworkAndroidQ true
+//        }
+
+        val specifier = WifiNetworkSpecifier.Builder()
+            .setSsid(item.getSsid())
+            .setWpa2Passphrase(item.getSc())
+            .build()
+
+        val request = NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .setNetworkSpecifier(specifier)
+            .build()
+
+        val callback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network : Network) {
+                super.onAvailable(network)
+                println("onAvailable")
+                println(network)
+            }
+
+            override fun onUnavailable() {
+                super.onUnavailable()
+                println("onUnavailable")
+            }
+        }
+
+        val connectivity = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        connectivity.requestNetwork(request, callback)
+        return false
+    }
+
 }

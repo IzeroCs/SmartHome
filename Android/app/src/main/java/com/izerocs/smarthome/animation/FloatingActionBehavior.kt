@@ -24,6 +24,7 @@ class FloatingActionBehavior(context: Context, attributeSet: AttributeSet) : Flo
         coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, target: View,
         dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int
     ) {
+        @Suppress("DEPRECATION")
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed,
             dxUnconsumed, dyUnconsumed, type)
 
