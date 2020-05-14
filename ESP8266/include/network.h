@@ -3,20 +3,33 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 
 class NetworkClass {
 private:
-    String ssidAccessPoint;
-    String passAccessPoint;
+    String ssidApStation;
+    String passApStation;
 
     WiFiEventHandler stationConnectedHanlder;
     WiFiEventHandler stationDisconnectedHandler;
     WiFiEventHandler apStationConnectedHandler;
     WiFiEventHandler apStationDisconnectedHandler;
 
+    ESP8266WebServer apStationServer;
+    IPAddress apStationIp;
+    IPAddress apStationGateway;
+    IPAddress apStationSubnet;
+
 public:
+    NetworkClass() : apStationServer(80) {}
+
+    void begin();
+    void loop();
     void wifiBegin();
-    void wifiConnect();
+    void serverBegin();
+
+    void onServerHandleRoot();
+    void onServerHandleWifi();
 
     static void onStationConnected(const WiFiEventStationModeConnected & evt);
     static void onStationDisconnected(const WiFiEventStationModeDisconnected & evt);
@@ -26,8 +39,8 @@ public:
     static String macToString(const unsigned char* mac);
 
 protected:
-    String ssidAccessPointMake();
-    String passAccessPointMake();
+    String ssidApStationMake();
+    String passApStationMake();
 };
 
 extern NetworkClass Network;

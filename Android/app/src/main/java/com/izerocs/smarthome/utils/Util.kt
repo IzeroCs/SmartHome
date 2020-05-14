@@ -2,8 +2,11 @@ package com.izerocs.smarthome.utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.os.Build
+import android.text.format.Formatter
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import java.util.*
 import kotlin.math.min
 
 /**
@@ -41,6 +44,19 @@ class Util {
         fun hideSoftInput(view : View?) {
             (view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
                 .hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        fun formatIPAddress(ip : Int) : String {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+                return String.format(Locale.US, "%d.%d.%d.%d",
+                    ip.and(0xff),
+                    ip.shr(8).and(0xff),
+                    ip.shr(16).and(0xff),
+                    ip.shr(24).and(0xff))
+
+
+            @Suppress("DEPRECATION")
+            return Formatter.formatIpAddress(ip)
         }
     }
 

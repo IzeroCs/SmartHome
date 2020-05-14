@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
@@ -24,8 +25,12 @@ import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.preferences.EspPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
+import com.izerocs.smarthome.utils.Util
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_esp.*
+import java.net.ConnectException
+import java.net.HttpURLConnection
+import java.net.URL
 
 /**
  * Created by IzeroCs on 2020-04-30
@@ -36,6 +41,8 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     private var currentWifiInfo : WifiInfo? = null
     private var refreshAnimator : ObjectAnimator? = null
     private var wifiManager : WifiManager? = null
+    private var connectivityManager : ConnectivityManager? = null
+    private var networkCallback : NetworkCallback? = null
 
     private val wifiScanReceiver = object : BroadcastReceiver() {
         override fun onReceive(context : Context, intent : Intent) {
@@ -73,6 +80,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         listEspConnected.setOnItemClickListener(this)
 
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         currentWifiInfo = wifiManager?.connectionInfo
 
         refreshAnimator = ObjectAnimator.ofFloat(floatButton, "rotation", 0F, 360F)
@@ -97,6 +105,14 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         }
 
         startScan()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            networkCallback?.let { connectivityManager?.unregisterNetworkCallback(networkCallback) }
+        }
     }
 
     override fun onCreatePreferences() : SharedPreferences? {
@@ -192,19 +208,14 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     }
 
     private fun addWifiToModule(item : EspItem) {
-        var connected = false
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            connected = connectNetworkAndroidQ(item)
+            connectNetworkAndroidQ(item)
         else
-            connected = connectNetworkPreAndroidQ(item)
-
-        println("addWifiToModule")
-        println("connected: $connected")
+            connectNetworkPreAndroidQ(item)
     }
 
     @Suppress("DEPRECATION")
-    private fun connectNetworkPreAndroidQ(item : EspItem) : Boolean {
+    private fun connectNetworkPreAndroidQ(item : EspItem) {
         val wifi = WifiConfiguration().apply {
             this.SSID = "\"${item.getSsid()}\""
             this.preSharedKey = "\"${item.getSc()}\""
@@ -221,32 +232,21 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         wifiManager?.run {
             val id = this.addNetwork(wifi)
 
+            println("addNetwork: $id")
+
             if (id != -1) {
                 disconnect()
                 enableNetwork(id, false)
                 reconnect()
-
-                return@connectNetworkPreAndroidQ true
+                sendWifiToModule()
+            } else {
+                failedConnectNetwork()
             }
         }
-
-        return false
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private fun connectNetworkAndroidQ(item : EspItem) : Boolean {
-//        val suggestion = WifiNetworkSuggestion.Builder()
-//            .setSsid(item.getSsid())
-//            .setWpa2Passphrase(item.getSc())
-//            .build()
-//
-//        wifiManager?.run {
-//            val status = addNetworkSuggestions(listOf(suggestion))
-//
-//            if (status == WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS)
-//                return@connectNetworkAndroidQ true
-//        }
-
         val specifier = WifiNetworkSpecifier.Builder()
             .setSsid(item.getSsid())
             .setWpa2Passphrase(item.getSc())
@@ -258,23 +258,64 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
             .setNetworkSpecifier(specifier)
             .build()
 
-        val callback = object : ConnectivityManager.NetworkCallback() {
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network : Network) {
                 super.onAvailable(network)
-                println("onAvailable")
-                println(network)
+                sendWifiToModule()
             }
 
             override fun onUnavailable() {
                 super.onUnavailable()
-                println("onUnavailable")
+                connectivityManager?.unregisterNetworkCallback(networkCallback)
+                failedConnectNetwork()
             }
         }
 
-        val connectivity = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        connectivity.requestNetwork(request, callback)
+        connectivityManager?.requestNetwork(request, networkCallback)
         return false
     }
 
+    private fun sendWifiToModule() {
+        wifiManager?.run {
+            val ipAddress = Util.formatIPAddress(dhcpInfo.gateway)
+
+            println("sendWifiToModule: $ipAddress")
+
+            if (ipAddress != "192.168.31.15")
+                return failedValidateNetwork()
+
+            println("Send wifi to module: $ipAddress")
+
+            val url = URL("http://${ipAddress}/wifi")
+            val builder = StringBuilder()
+
+            try {
+                with(url.openConnection() as HttpURLConnection) {
+                    requestMethod = "GET"
+
+                    println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+
+                    inputStream.bufferedReader(Charsets.UTF_8).use {
+                        it.forEachLine { builder.append(it) }
+
+                        println("Builder: ${builder.toString()}")
+                    }
+                }
+            } catch (e : ConnectException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun failedConnectNetwork() {
+
+    }
+
+    private fun failedValidateNetwork() {
+
+    }
+
+    private fun failedSendDataNetwork() {
+
+    }
 }

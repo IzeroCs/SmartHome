@@ -17,14 +17,34 @@ void NetworkClass::onAPStationDisconnected(const WiFiEventSoftAPModeStationDisco
     Serial.println("onAPStationDisconnected: " + macToString(evt.mac));
 }
 
-void NetworkClass::wifiBegin() {
-    ssidAccessPoint = ssidAccessPointMake();
-    passAccessPoint = passAccessPointMake();
+void NetworkClass::onServerHandleRoot() {
+    Serial.println("onServerHandleRoot");
+    apStationServer.send(200, "text/html", "ESP8266");
+}
 
+void NetworkClass::onServerHandleWifi() {
+    Serial.println("onSeverHandleWifi");
+    apStationServer.send(200, "text/html", "ESP8266 Wifi Receive");
+}
+
+void NetworkClass::begin() {
+    ssidApStation = ssidApStationMake();
+    passApStation = passApStationMake();
+
+    apStationIp      = IPAddress(192, 168, 31, 15);
+    apStationGateway = IPAddress(192, 168, 31, 15);
+    apStationSubnet  = IPAddress(255, 255, 255, 0);
+
+    wifiBegin();
+    serverBegin();
+}
+
+void NetworkClass::wifiBegin() {
     WiFi.persistent(false);
     WiFi.mode(WIFI_AP_STA);
-    WiFi.hostname(ssidAccessPoint);
-    WiFi.softAP(ssidAccessPoint, passAccessPoint);
+    WiFi.hostname(ssidApStation);
+    WiFi.softAPConfig(apStationIp, apStationGateway, apStationSubnet);
+    WiFi.softAP(ssidApStation, passApStation);
 
     stationConnectedHanlder      = WiFi.onStationModeConnected(&onStationConnected);
     stationDisconnectedHandler   = WiFi.onStationModeDisconnected(&onStationDisconnected);
@@ -32,15 +52,22 @@ void NetworkClass::wifiBegin() {
     apStationDisconnectedHandler = WiFi.onSoftAPModeStationDisconnected(&onAPStationDisconnected);
 }
 
-void NetworkClass::wifiConnect() {
+void NetworkClass::serverBegin() {
+    apStationServer.on("/", [&] { onServerHandleRoot(); });
+    apStationServer.on("/wifi", [&] { onServerHandleWifi(); });
 
+    apStationServer.begin();
 }
 
-String NetworkClass::ssidAccessPointMake() {
+void NetworkClass::loop() {
+    apStationServer.handleClient();
+}
+
+String NetworkClass::ssidApStationMake() {
     return Profile.getSn() + Profile.getSc();
 }
 
-String NetworkClass::passAccessPointMake() {
+String NetworkClass::passApStationMake() {
     return Profile.getSc();
 }
 
