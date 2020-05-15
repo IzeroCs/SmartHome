@@ -19,6 +19,7 @@ import java.io.FileNotFoundException
 import java.net.ConnectException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLEncoder
 
 /**
  * Created by IzeroCs on 2020-05-14
@@ -30,10 +31,21 @@ class EspConnectivity(private val context : Context) {
     private val connectivityManager = context.applicationContext
         .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+    private var currentSetupSsid: String = ""
+    private var currentSetupPsk:  String = ""
+
     private var networkCallback : NetworkCallback? = null
     private var scanerListener : OnScanerListener? = null
+    private var addListener : OnAddWifiToModuleListener? = null
     private var isNetworkChanged = false
     private var isScan = false
+
+    init {
+        Regex("^\"(.*?)\"$").find(wifiManager.connectionInfo.ssid)?.run {
+            val (ssid) = this.destructured
+            currentSetupSsid = ssid
+        }
+    }
 
     private val wifiScanReceiver = object : BroadcastReceiver() {
         override fun onReceive(context : Context, intent : Intent) {
@@ -110,6 +122,11 @@ class EspConnectivity(private val context : Context) {
         fun onScanEnd() {}
         fun onScanSuccess(wifiManager : WifiManager) {}
         fun onScanFailed(wifiManager : WifiManager) {}
+    }
+    
+    interface OnAddWifiToModuleListener {
+        fun onAddWifiToModuleSuccess()
+        fun onAddWifiToModuleFailed(message : String)
     }
 
     fun addWifiToModule(item : EspItem) {
@@ -195,14 +212,16 @@ class EspConnectivity(private val context : Context) {
 
             println("Send wifi to module: $ipAddress")
 
-            val url = URL("${SCHEME_SERVER}${IP_ADDRESS}:${PORT_SERVER}${PATH_WIFI_SERVER}")
             val builder = StringBuilder()
+            val url = URL("${SCHEME_SERVER}${IP_ADDRESS}:${PORT_SERVER}${PATH_WIFI_SERVER}" +
+                "?ssid=${URLEncoder.encode(currentSetupSsid, "UTF-8")}" +
+                "&psk=${URLEncoder.encode(currentSetupPsk, "UTF-8")}")
 
             println("Connection to: ${url.toURI()}")
 
             try {
                 with(url.openConnection() as HttpURLConnection) {
-                    requestMethod = "GET"
+                    requestMethod = "POST"
 
                     try {
                         inputStream.bufferedReader(Charsets.UTF_8).use {
@@ -211,12 +230,12 @@ class EspConnectivity(private val context : Context) {
                             println("Builder: ${builder.toString()}")
                         }
                     } catch (e : FileNotFoundException) {
-                        println("Response Code: $responseCode")
-                        println("Response Message: $responseMessage")
+                        addListener?.onAddWifiToModuleFailed("HTTP/1.0 $responseCode $responseMessage")
                         e.printStackTrace()
                     }
                 }
             } catch (e : ConnectException) {
+                addListener?.onAddWifiToModuleFailed(e.message.toString())
                 e.printStackTrace()
             }
         }
@@ -227,7 +246,8 @@ class EspConnectivity(private val context : Context) {
     }
 
     private fun unregisterNetworkCallback() {
-        connectivityManager.unregisterNetworkCallback(networkCallback!!)
+        if (networkCallback != null)
+            connectivityManager.unregisterNetworkCallback(networkCallback as NetworkCallback)
     }
 
     fun startScanModule() {
@@ -255,12 +275,33 @@ class EspConnectivity(private val context : Context) {
             startScanModule()
     }
 
+    fun setCurrentSetupSsid(ssid : String) {
+        currentSetupSsid = ssid
+    }
+
+    fun getCurrentSetupSsid() : String {
+        return currentSetupSsid
+    }
+
+    fun setCurrentSetupPsk(psk : String) {
+        currentSetupPsk = psk
+    }
+
+    fun getCurrentSetupPsk() : String {
+        return currentSetupPsk
+    }
+
     fun setOnScannerListener(listener : OnScanerListener) {
         scanerListener = listener
     }
 
+    fun setOnAddWifiToModuleListener(listener : OnAddWifiToModuleListener) {
+        addListener = listener
+    }
+
     fun destroy() {
-        connectivityManager.unregisterNetworkCallback(networkCallback)
+        if (networkCallback != null)
+            connectivityManager.unregisterNetworkCallback(networkCallback as NetworkCallback)
     }
 
     fun isScanRunning() : Boolean {
@@ -268,7 +309,8 @@ class EspConnectivity(private val context : Context) {
     }
 
     fun isScanThrottleEnabled() : Boolean {
-        return Settings.Global.getInt(context.contentResolver, "wifi_scan_throttle_enabled") == 1
+        return Settings.Global
+            .getInt(context.contentResolver, "wifi_scan_throttle_enabled") == 1
     }
 
 }

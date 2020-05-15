@@ -4,22 +4,34 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.network.EspConnectivity
 import com.izerocs.smarthome.preferences.EspPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
+import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_esp.*
+import kotlinx.android.synthetic.main.dialog_esp_wifi.*
 
 /**
  * Created by IzeroCs on 2020-04-30
  */
-class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemClickListener,
-    EspConnectivity.OnScanerListener
+class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickListener,
+    ListEspAdapter.OnItemClickListener, EspConnectivity.OnScanerListener,
+    EspConnectivity.OnAddWifiToModuleListener
 {
+    private var currentItemScan : EspItem? = null
+    private var currentItemConnected : EspItem? = null
+    private var currentItemScanPosition : Int = 0
+    private var currentItemConnectedPosition : Int = 0
+
+
     private var espConnectivity : EspConnectivity? = null
     private var refreshAnimator : ObjectAnimator?  = null
 
@@ -44,6 +56,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_esp)
         wavesView.setTitle(R.string.listEspTitle)
+        wavesView.setOnBackClickListener(this)
         floatButton.setOnClickListener(this)
         listEspScan.setOnItemClickListener(this)
         listEspConnected.setOnItemClickListener(this)
@@ -72,6 +85,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
 
         espConnectivity?.run {
             setOnScannerListener(this@EspActivity)
+            setOnAddWifiToModuleListener(this@EspActivity)
             startScanModule()
         }
     }
@@ -89,6 +103,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         if (v == floatButton) {
             espConnectivity?.toggleScanModule()
         }
+    }
+
+    override fun onBack(backView : View, isLongClick : Boolean) {
+        finish()
     }
 
     override fun onScanBegin() {
@@ -138,6 +156,15 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
         }
     }
 
+    override fun onAddWifiToModuleSuccess() {
+    }
+
+    override fun onAddWifiToModuleFailed(message : String) {
+        runOnUiThread {
+            Toasty.error(applicationContext, message, Toasty.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
         v?.parent.run {
             if (this == listEspScan)
@@ -148,10 +175,48 @@ class EspActivity : BaseActivity(), View.OnClickListener, ListEspAdapter.OnItemC
     }
 
     private fun onItemScanClick(v : View, position : Int) {
-        espConnectivity?.addWifiToModule(listEspScan.get(position))
+        currentItemScan = listEspScan.get(position)
+        currentItemScanPosition = position
+
+        MaterialDialog(this).show {
+            title(R.string.dialogEspWiFi)
+            customView(R.layout.dialog_esp_wifi)
+            negativeButton(R.string.dialogEspWiFiDisagree) { it.dismiss() }
+            positiveButton(R.string.dialogEspWiFiAgree) {
+                espConnectivity?.run {
+                    setCurrentSetupSsid(dialogEspWiFiSsid.text.toString())
+                    setCurrentSetupPsk(dialogEspWiFiPassword.text.toString())
+
+                    currentItemScan?.let { addWifiToModule(it) }
+                }
+            }
+
+            dialogEspWiFiSsid.setText(espConnectivity?.getCurrentSetupSsid())
+            dialogEspWiFiPassword.run {
+                inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
+                setText(espConnectivity?.getCurrentSetupPsk())
+            }
+
+            dialogEspWiFiShowPassword.run {
+                isChecked = false
+                setOnClickListener {
+                    dialogEspWiFiPassword.run {
+                        val cursor = selectionStart
+
+                        if (isChecked)
+                            inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        else
+                            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
+
+                        setSelection(cursor)
+                    }
+                }
+            }
+        }
     }
 
     private fun onItemConnectedClick(v : View, position : Int) {
-
+        currentItemConnected = listEspConnected.get(position)
+        currentItemConnectedPosition = position
     }
 }

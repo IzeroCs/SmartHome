@@ -23,17 +23,69 @@ void NetworkClass::onServerHandleRoot() {
 }
 
 void NetworkClass::onServerHandleWifi() {
-    if (apStationServer.method() == HTTP_POST) {
-        Serial.println("onSeverHandleWifi");
-        apStationServer.send(200, "text/html", "ESP8266 Wifi Receive");
-    } else {
-        serverSendHttpCode(405);
+    if (apStationServer.method() != HTTP_POST)
+        return serverSendHttpCode(405);
+
+    if (!apStationServer.hasArg("ssid") || !apStationServer.hasArg("psk"))
+        return serverSendHttpCode(400);
+
+    String ssid = apStationServer.arg("ssid");
+    String psk  = apStationServer.arg("psk");
+
+    if (ssid.isEmpty())
+        return serverSendHttpCode(406);
+
+    Serial.println("onSeverHandleWifi");
+    Serial.println("Station ssid: " + ssid);
+    Serial.println("Station psk: " + psk);
+
+    String json = "{ ssid: \"" + ssid + "\", psk: \"" + psk + "\", ";
+
+    stationConnectCount = 1;
+
+    switch (stationConnect(ssid, psk)) {
+        case STATION_CONNECT_NOT_CHANGED:
+            json += "message: \"Not Changed\", ";
+            json += "state: \"NOT_CHANGED\"";
+            break;
+
+        case STATION_CONNECT_CONNECT_FAILED:
+            json += "message: \"Connect failed\", ";
+            json += "state: \"CONNECT_FAILED\"";
+            break;
+
+        case STATION_CONNECT_CHANGE_SUCCESS:
+            json += "message: \"Change success\", ";
+            json += "state: \"CHANGE_SUCCESS\"";
+            break;
+
+        default:
+            json += "message: \"Change failed\", ";
+            json += "state: \"CHANGE_FAILED\"";
+    }
+
+    apStationServer.send(200, "text/html", json + " }");
+}
+
+void NetworkClass::onSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+    if (type == WStype_DISCONNECTED) {
+        Serial.printf("[%u] Disconnected!\n", num);
+    } else if (type == WStype_CONNECTED) {
+        IPAddress remoteIP = apStationSocket.remoteIP(num);
+
+        Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, remoteIP[0], remoteIP[1], remoteIP[2], remoteIP[3], payload);
+        apStationSocket.sendTXT(num, "Connected");
+    } else if (type == WStype_TEXT) {
+        Serial.printf("[%u] get Text: %s\n", num, payload);
+    } else if (type == WStype_BIN) {
+        Serial.printf("[%u] get binary length: %u\n", num, length);
+        hexdump(payload, length);
     }
 }
 
 void NetworkClass::begin() {
     ssidApStation = ssidApStationMake();
-    passApStation = passApStationMake();
+    pskApStation  = pskApStationMake();
 
     apStationIp      = IPAddress(192, 168, 31, 15);
     apStationGateway = IPAddress(192, 168, 31, 15);
@@ -48,7 +100,7 @@ void NetworkClass::wifiBegin() {
     WiFi.mode(WIFI_AP_STA);
     WiFi.hostname(ssidApStation);
     WiFi.softAPConfig(apStationIp, apStationGateway, apStationSubnet);
-    WiFi.softAP(ssidApStation, passApStation);
+    WiFi.softAP(ssidApStation, pskApStation);
 
     stationConnectedHanlder      = WiFi.onStationModeConnected(&onStationConnected);
     stationDisconnectedHandler   = WiFi.onStationModeDisconnected(&onStationDisconnected);
@@ -61,6 +113,52 @@ void NetworkClass::serverBegin() {
     apStationServer.on("/wifi", [&] { onServerHandleWifi(); });
 
     apStationServer.begin();
+    apStationSocket.begin();
+    apStationSocket.onEvent([&] (uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+        onSocketEvent(num, type, payload, length);
+    });
+}
+
+int NetworkClass::stationConnect(String ssid, String psk) {
+    return stationConnect(ssid, psk, false);
+}
+
+int NetworkClass::stationConnect(String ssid, String psk, bool igoneChanged) {
+    if (!igoneChanged && ssid.isEmpty())
+        return STATION_CONNECT_NOT_CHANGED;
+
+    if (!igoneChanged && ssid.equals(ssid) && pskStation.equals(psk))
+        return STATION_CONNECT_NOT_CHANGED;
+
+    WiFi.setAutoReconnect(true);
+    WiFi.begin(ssid, psk);
+    WiFi.reconnect();
+    Serial.println("Change staion: { SSID => " + ssid + ", PSK => " + psk + " }");
+    Serial.println("Connecting");
+
+    for (int i = 0; i < 20; ++i) {
+        if (WiFi.status() != WL_CONNECTED) {
+            Serial.print(".");
+            delay(500);
+        } else {
+            break;
+        }
+    }
+
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("Connect failed");
+
+        if (!ssidStation.isEmpty() && stationConnectCount++ > 1)
+            stationConnect(ssidStation, pskStation, true);
+
+        return STATION_CONNECT_CONNECT_FAILED;
+    }
+
+    Serial.println("Connected");
+    ssidStation = ssid;
+    pskStation  = psk;
+
+    return STATION_CONNECT_CHANGE_SUCCESS;
 }
 
 void NetworkClass::serverSendHttpCode(uint16_t code) {
@@ -70,13 +168,14 @@ void NetworkClass::serverSendHttpCode(uint16_t code) {
 
 void NetworkClass::loop() {
     apStationServer.handleClient();
+    apStationSocket.loop();
 }
 
 String NetworkClass::ssidApStationMake() {
     return Profile.getSn() + Profile.getSc();
 }
 
-String NetworkClass::passApStationMake() {
+String NetworkClass::pskApStationMake() {
     return Profile.getSc();
 }
 

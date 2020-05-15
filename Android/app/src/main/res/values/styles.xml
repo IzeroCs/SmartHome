@@ -7,6 +7,15 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="android:fontFamily">@font/ubuntu</item>
+        
+        <item name="md_corner_radius">@dimen/mdCornerRadius</item>
+        <item name="md_button_casing">literal</item>
+        <item name="md_color_title">@color/mdColorTitle</item>
+        <item name="md_color_content">@color/mdColorContent</item>
+        <item name="md_color_button_text">@color/mdColorButton</item>
+        <item name="md_font_title">@font/ubuntu</item>
+        <item name="md_font_body">@font/ubuntu</item>
+        <item name="md_font_button">@font/ubuntu</item>
     </style>
 
 </resources>

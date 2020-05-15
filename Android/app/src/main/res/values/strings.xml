@@ -1,5 +1,5 @@
 <resources>
-    <string name="appName">SmartHome</string>
+    <string name="appName" translatable="false">SmartHome</string>
     <string name="addRoomTitle">Add room</string>
     <string name="addDeviceTitle">Add device for room</string>
     <string name="listEspTitle">List module</string>
@@ -48,4 +48,11 @@
     <string name="listEspConnectedTitle">Module connected</string>
     <string name="listEspScanEmpty">No scanning module found</string>
     <string name="listEspConnectedEmpty">No modules connected</string>
+
+    <string name="dialogEspWiFi">Setup WiFi for the module</string>
+    <string name="dialogEspWiFiDisagree">Cancel</string>
+    <string name="dialogEspWiFiAgree">Continue</string>
+    <string name="dialogEspWiFiSsid" translatable="false">SSID</string>
+    <string name="dialogEspWiFiPassword">Password</string>
+    <string name="dialogEspWiFiShowPassword">Show password</string>
 </resources>

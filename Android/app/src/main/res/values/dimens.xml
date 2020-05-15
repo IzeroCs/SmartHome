@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="mdCornerRadius">16dp</dimen>
+
     <dimen name="toastyTextSize">20sp</dimen>
     <dimen name="floatActionBarMargin">30dp</dimen>
 
@@ -55,7 +57,7 @@
     <dimen name="listDeviceStatusIconSize">17dp</dimen>
 
     <dimen name="listEspSpacing">25dp</dimen>
-    <dimen name="listEspSpacingVertialcal">10dp</dimen>
+    <dimen name="listEspSpacingVertical">10dp</dimen>
     <dimen name="listEspSpacingHorizontal">10dp</dimen>
     <dimen name="listEspWrapperBorderRadius">20dp</dimen>
     <dimen name="listEspIconSize">36dp</dimen>
@@ -63,4 +65,11 @@
     <dimen name="listEspSsidTextSize">20sp</dimen>
     <dimen name="listEspTitleTextSize">22sp</dimen>
     <dimen name="listEspEmptyTextSize">20sp</dimen>
+
+    <dimen name="dialogEspWiFiSpacing">25dp</dimen>
+    <dimen name="dialogEspWiFiLabelTextSize">18sp</dimen>
+    <dimen name="dialogEspWiFiInputTextSize">20sp</dimen>
+    <dimen name="dialogEspWiFiLabelMarginBottom">5dp</dimen>
+    <dimen name="dialogEspWiFiInputMarginTop">4dp</dimen>
+    <dimen name="dialogEspWiFiInputMarginBottom">20dp</dimen>
 </resources>

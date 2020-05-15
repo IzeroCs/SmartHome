@@ -5,6 +5,10 @@
     <color name="accent">#00a895</color>
     <color name="background">#fafafa</color>
 
+    <color name="mdColorTitle">#666</color>
+    <color name="mdColorContent">#444</color>
+    <color name="mdColorButton">#018071</color>
+
     <color name="deviceLight">#ffa426</color>
     <color name="deviceFan">#0795fe</color>
     <color name="deviceHeater">#e9573f</color>
@@ -66,4 +70,7 @@
     <color name="listEspIconSignalTint">#ccc</color>
     <color name="listEspTitleText">#888</color>
     <color name="listEspEmptyText">#ccc</color>
+
+    <color name="dialogEspWiFiLabelText">#888</color>
+    <color name="dialogEspWiFiInputText">#555</color>
 </resources>

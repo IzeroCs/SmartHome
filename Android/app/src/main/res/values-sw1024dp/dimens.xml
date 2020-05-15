@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="dialogEspWiFiInputMarginBottom">42.67dp</dimen>
+	<dimen name="dialogEspWiFiInputMarginTop">8.53dp</dimen>
+	<dimen name="dialogEspWiFiLabelMarginBottom">10.67dp</dimen>
+	<dimen name="dialogEspWiFiSpacing">53.33dp</dimen>
 	<dimen name="floatActionBarMargin">64.00dp</dimen>
 	<dimen name="formButtonPaddingVertical">106.67dp</dimen>
 	<dimen name="formElementBorderRadius">32.00dp</dimen>
@@ -23,7 +27,7 @@
 	<dimen name="listEspIconSize">76.80dp</dimen>
 	<dimen name="listEspSpacing">53.33dp</dimen>
 	<dimen name="listEspSpacingHorizontal">21.33dp</dimen>
-	<dimen name="listEspSpacingVertialcal">21.33dp</dimen>
+	<dimen name="listEspSpacingVertical">21.33dp</dimen>
 	<dimen name="listEspWrapperBorderRadius">42.67dp</dimen>
 	<dimen name="listRoomDeviceCountMaginTop">14.93dp</dimen>
 	<dimen name="listRoomIconSize">170.67dp</dimen>
@@ -31,10 +35,13 @@
 	<dimen name="listRoomSpacing">64.00dp</dimen>
 	<dimen name="listRoomWrapperBorderRadius">42.67dp</dimen>
 	<dimen name="listRoomWrapperPadding">64.00dp</dimen>
+	<dimen name="mdCornerRadius">34.13dp</dimen>
 	<dimen name="waveHeight">469.33dp</dimen>
 	<dimen name="waveIconMargin">21.33dp</dimen>
 	<dimen name="waveIconPadding">42.67dp</dimen>
 	<dimen name="waveTopForChild">234.67dp</dimen>
+	<dimen name="dialogEspWiFiInputTextSize">42.67sp</dimen>
+	<dimen name="dialogEspWiFiLabelTextSize">38.40sp</dimen>
 	<dimen name="formButtonTextSize">46.93sp</dimen>
 	<dimen name="formEditTextSize">42.67sp</dimen>
 	<dimen name="formLabelTextSize">46.93sp</dimen>
