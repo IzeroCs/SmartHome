@@ -15,6 +15,7 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.utils.Util
+import java.io.FileNotFoundException
 import java.net.ConnectException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -203,10 +204,16 @@ class EspConnectivity(private val context : Context) {
                 with(url.openConnection() as HttpURLConnection) {
                     requestMethod = "GET"
 
-                    inputStream.bufferedReader(Charsets.UTF_8).use {
-                        it.forEachLine { builder.append(it) }
+                    try {
+                        inputStream.bufferedReader(Charsets.UTF_8).use {
+                            it.forEachLine { builder.append(it) }
 
-                        println("Builder: ${builder.toString()}")
+                            println("Builder: ${builder.toString()}")
+                        }
+                    } catch (e : FileNotFoundException) {
+                        println("Response Code: $responseCode")
+                        println("Response Message: $responseMessage")
+                        e.printStackTrace()
                     }
                 }
             } catch (e : ConnectException) {

@@ -27,6 +27,7 @@ public:
     void loop();
     void wifiBegin();
     void serverBegin();
+    void serverSendHttpCode(uint16_t code);
 
     void onServerHandleRoot();
     void onServerHandleWifi();
@@ -37,6 +38,7 @@ public:
     static void onAPStationDisconnected(const WiFiEventSoftAPModeStationDisconnected & evt);
 
     static String macToString(const unsigned char* mac);
+    static String httpCodeToString(uint16_t code);
 
 protected:
     String ssidApStationMake();
