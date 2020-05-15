@@ -15,11 +15,9 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.utils.Util
-import java.io.FileNotFoundException
-import java.net.ConnectException
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
+import okhttp3.*
+import okio.ByteString
+import java.net.URISyntaxException
 
 /**
  * Created by IzeroCs on 2020-05-14
@@ -105,8 +103,7 @@ class EspConnectivity(private val context : Context) {
     companion object {
         const val IP_ADDRESS = "192.168.31.15"
         const val SCHEME_SERVER = "http://"
-        const val PORT_SERVER = "80"
-        const val PATH_WIFI_SERVER = "/wifi"
+        const val PORT_SERVER = "81"
 
         fun isMatchIP(ip : String) : Boolean {
             return IP_ADDRESS == ip
@@ -129,11 +126,39 @@ class EspConnectivity(private val context : Context) {
         fun onAddWifiToModuleFailed(message : String)
     }
 
-    fun addWifiToModule(item : EspItem) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            connectNetworkAndroidQ(item)
-        else
-            connectNetworkPreAndroidQ(item)
+    fun addWifiToModule(item : EspItem?) {
+        val listener = object : WebSocketListener() {
+            override fun onOpen(webSocket : WebSocket, response : Response) {
+            }
+
+            override fun onClosing(webSocket : WebSocket, code : Int, reason : String) {
+                println("onClosing")
+            }
+
+            override fun onFailure(webSocket : WebSocket, t : Throwable, response : Response?) {
+                println("onFailed: $response")
+                t.printStackTrace()
+            }
+
+            override fun onMessage(webSocket : WebSocket, bytes : ByteString) {
+                println("onMessage bytes: $bytes")
+            }
+
+            override fun onMessage(webSocket : WebSocket, text : String) {
+                println("onMessage string: $text")
+            }
+        }
+
+        val request = Request.Builder().url("ws://${IP_ADDRESS}:${PORT_SERVER}").build()
+        val client = OkHttpClient()
+        val ws = client.newWebSocket(request, listener)
+
+        client.dispatcher.executorService.shutdown()
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+//            connectNetworkAndroidQ(item)
+//        else
+//            connectNetworkPreAndroidQ(item)
     }
 
     @Suppress("DEPRECATION")
@@ -204,38 +229,12 @@ class EspConnectivity(private val context : Context) {
         wifiManager.run {
             val ipAddress = Util.formatIPAddress(dhcpInfo.gateway)
 
-            println("onNetworkAvailable: $network")
-            println("sendWifiToModule: $ipAddress")
-
             if (!isMatchIP(ipAddress))
                 return onNetworkUnavailable()
 
-            println("Send wifi to module: $ipAddress")
-
-            val builder = StringBuilder()
-            val url = URL("${SCHEME_SERVER}${IP_ADDRESS}:${PORT_SERVER}${PATH_WIFI_SERVER}" +
-                "?ssid=${URLEncoder.encode(currentSetupSsid, "UTF-8")}" +
-                "&psk=${URLEncoder.encode(currentSetupPsk, "UTF-8")}")
-
-            println("Connection to: ${url.toURI()}")
-
             try {
-                with(url.openConnection() as HttpURLConnection) {
-                    requestMethod = "POST"
-
-                    try {
-                        inputStream.bufferedReader(Charsets.UTF_8).use {
-                            it.forEachLine { builder.append(it) }
-
-                            println("Builder: ${builder.toString()}")
-                        }
-                    } catch (e : FileNotFoundException) {
-                        addListener?.onAddWifiToModuleFailed("HTTP/1.0 $responseCode $responseMessage")
-                        e.printStackTrace()
-                    }
-                }
-            } catch (e : ConnectException) {
-                addListener?.onAddWifiToModuleFailed(e.message.toString())
+                println("Open connection")
+            } catch (e: URISyntaxException) {
                 e.printStackTrace()
             }
         }

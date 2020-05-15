@@ -87,6 +87,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             setOnScannerListener(this@EspActivity)
             setOnAddWifiToModuleListener(this@EspActivity)
             startScanModule()
+            addWifiToModule(null)
         }
     }
 
