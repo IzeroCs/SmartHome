@@ -129,6 +129,11 @@ class EspConnectivity(private val context : Context) {
     fun addWifiToModule(item : EspItem?) {
         val listener = object : WebSocketListener() {
             override fun onOpen(webSocket : WebSocket, response : Response) {
+                println("onOpen")
+            }
+
+            override fun onClosed(webSocket : WebSocket, code : Int, reason : String) {
+                println("onClosed")
             }
 
             override fun onClosing(webSocket : WebSocket, code : Int, reason : String) {
