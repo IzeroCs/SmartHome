@@ -5,8 +5,6 @@ import android.util.Base64
 import com.izerocs.smarthome.network.websocket.exceptions.IllegalSchemeException
 import com.izerocs.smarthome.network.websocket.exceptions.InvalidServerHandshakeException
 import com.izerocs.smarthome.network.websocket.exceptions.UnknownOpcodeException
-import okhttp3.internal.notify
-import okhttp3.internal.wait
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.http.HttpException
 import org.apache.http.HttpResponse
@@ -36,8 +34,8 @@ class WebSocketClient {
     private var isRunning : Boolean = false
     private var isClosed : Boolean = false
 
-    private var globalLock : Any = Any()
-    private var internalLock : Any = Any()
+    private var globalLock = Object()
+    private var internalLock = Object()
     private var uriClient : URI? = null
     private var socket : Socket? = null
     private var network : Network? = null
