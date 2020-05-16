@@ -1,0 +1,14 @@
+#ifndef UTIL_H
+#define UTIL_H
+
+#include <Arduino.h>
+
+class UtilClass {
+public:
+    static String macToString(const unsigned char* mac);
+    static String httpCodeToString(uint16_t code);
+};
+
+extern UtilClass Util;
+
+#endif
