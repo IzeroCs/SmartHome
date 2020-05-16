@@ -74,12 +74,24 @@ void NetworkClass::onSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, 
         IPAddress remoteIP = apStationSocket.remoteIP(num);
 
         Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, remoteIP[0], remoteIP[1], remoteIP[2], remoteIP[3], payload);
-        apStationSocket.sendTXT(num, "Connected");
+        apStationSocket.sendTXT(num, "connected");
     } else if (type == WStype_TEXT) {
+        String command = String((char *)payload);
+
+        if (command.startsWith("station_ssid")) {
+            apStationSocket.sendTXT(num, "station_ssid");
+        } else if (command.startsWith("station_psk")) {
+            apStationSocket.sendTXT(num, "station_psk");
+        } else if (command == "completed") {
+            apStationSocket.sendTXT(num, "close");
+        }
+
         Serial.printf("[%u] get Text: %s\n", num, payload);
     } else if (type == WStype_BIN) {
         Serial.printf("[%u] get binary length: %u\n", num, length);
         hexdump(payload, length);
+    } else if (type == WStype_PONG) {
+        socketPingStatus[num] = true;
     }
 }
 
@@ -169,6 +181,15 @@ void NetworkClass::serverSendHttpCode(uint16_t code) {
 void NetworkClass::loop() {
     apStationServer.handleClient();
     apStationSocket.loop();
+}
+
+void NetworkClass::loopPing() {
+    for (int i = 0; i < WEBSOCKETS_SERVER_CLIENT_MAX; ++i) {
+        if (socketPingStatus[i]) {
+            socketPingStatus[i] = false;
+            apStationSocket.sendPing(i, 0, 0);
+        }
+    }
 }
 
 String NetworkClass::ssidApStationMake() {

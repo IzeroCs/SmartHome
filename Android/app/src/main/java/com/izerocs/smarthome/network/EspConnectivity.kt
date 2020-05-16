@@ -12,12 +12,15 @@ import android.net.wifi.WifiManager
 import android.net.wifi.WifiNetworkSpecifier
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.network.websocket.WebSocketClient
+import com.izerocs.smarthome.network.websocket.WebSocketEvent
 import com.izerocs.smarthome.utils.Util
-import okhttp3.*
-import okio.ByteString
+import java.net.URI
 import java.net.URISyntaxException
+import java.net.URLEncoder
 
 /**
  * Created by IzeroCs on 2020-05-14
@@ -35,6 +38,7 @@ class EspConnectivity(private val context : Context) {
     private var networkCallback : NetworkCallback? = null
     private var scanerListener : OnScanerListener? = null
     private var addListener : OnAddWifiToModuleListener? = null
+    private var webSocketClient : WebSocketClient? = null
     private var isNetworkChanged = false
     private var isScan = false
 
@@ -75,7 +79,6 @@ class EspConnectivity(private val context : Context) {
                     networkCallback = object : ConnectivityManager.NetworkCallback() {
                         override fun onAvailable(network : Network) {
                             onNetworkAvailable(network)
-                            unregisterNetworkCallback()
                         }
 
                         override fun onUnavailable() {
@@ -126,44 +129,11 @@ class EspConnectivity(private val context : Context) {
         fun onAddWifiToModuleFailed(message : String)
     }
 
-    fun addWifiToModule(item : EspItem?) {
-        val listener = object : WebSocketListener() {
-            override fun onOpen(webSocket : WebSocket, response : Response) {
-                println("onOpen")
-            }
-
-            override fun onClosed(webSocket : WebSocket, code : Int, reason : String) {
-                println("onClosed")
-            }
-
-            override fun onClosing(webSocket : WebSocket, code : Int, reason : String) {
-                println("onClosing")
-            }
-
-            override fun onFailure(webSocket : WebSocket, t : Throwable, response : Response?) {
-                println("onFailed: $response")
-                t.printStackTrace()
-            }
-
-            override fun onMessage(webSocket : WebSocket, bytes : ByteString) {
-                println("onMessage bytes: $bytes")
-            }
-
-            override fun onMessage(webSocket : WebSocket, text : String) {
-                println("onMessage string: $text")
-            }
-        }
-
-        val request = Request.Builder().url("ws://${IP_ADDRESS}:${PORT_SERVER}").build()
-        val client = OkHttpClient()
-        val ws = client.newWebSocket(request, listener)
-
-        client.dispatcher.executorService.shutdown()
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-//            connectNetworkAndroidQ(item)
-//        else
-//            connectNetworkPreAndroidQ(item)
+    fun addWifiToModule(item : EspItem) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            connectNetworkAndroidQ(item)
+        else
+            connectNetworkPreAndroidQ(item)
     }
 
     @Suppress("DEPRECATION")
@@ -215,7 +185,6 @@ class EspConnectivity(private val context : Context) {
         networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network : Network) {
                 onNetworkAvailable(network)
-                unregisterNetworkCallback()
             }
 
             override fun onUnavailable() {
@@ -238,9 +207,42 @@ class EspConnectivity(private val context : Context) {
                 return onNetworkUnavailable()
 
             try {
-                println("Open connection")
-            } catch (e: URISyntaxException) {
+                webSocketClient?.close()
+                webSocketClient = WebSocketClient(URI("ws://${IP_ADDRESS}:${PORT_SERVER}"))
+            } catch (e : URISyntaxException) {
                 e.printStackTrace()
+                addListener?.onAddWifiToModuleFailed(e.message.toString())
+            } finally {
+                webSocketClient?.run {
+                    setOnWebSocketEvent(object : WebSocketEvent {
+                        override fun onTextReceived(client : WebSocketClient, message : String) {
+                            Log.d("EspConnectivity", message)
+
+                            when (message) {
+                                "connected" -> client
+                                    .send("station_ssid|${URLEncoder
+                                        .encode(currentSetupSsid, "UTF-8")}")
+
+                                "station_ssid" -> client
+                                    .send("station_psk|${URLEncoder
+                                        .encode(currentSetupPsk, "UTF-8")}")
+
+                                "station_psk" -> client.send("completed")
+
+                                "close" -> {
+                                    client.close()
+                                    unregisterNetworkCallback()
+                                }
+                            }
+                        }
+                    })
+
+                    setNetwork(network)
+                    setSocketFactory(network.socketFactory)
+                    setConnectTimeout(60000)
+                    setReadTimeout(30000)
+                    connect()
+                }
             }
         }
     }

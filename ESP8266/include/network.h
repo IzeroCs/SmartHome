@@ -15,6 +15,7 @@ private:
     String pskStation  = "";
 
     int stationConnectCount;
+    bool socketPingStatus[WEBSOCKETS_SERVER_CLIENT_MAX];
 
     WiFiEventHandler stationConnectedHanlder;
     WiFiEventHandler stationDisconnectedHandler;
@@ -37,6 +38,7 @@ public:
 
     void begin();
     void loop();
+    void loopPing();
     void wifiBegin();
     void serverBegin();
     int stationConnect(String ssid, String psk);
