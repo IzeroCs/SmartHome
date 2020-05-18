@@ -37,6 +37,7 @@ private:
 
     String ssidWaitConnect = "";
     String pskWaitConnect  = "";
+    StationStatus_t statusWaitConnect;
 
     vector<StationEvent> events;
 
@@ -60,6 +61,10 @@ private:
             events.at(i)(StationAction_WAIT, status);
     }
 
+    void setStatusWait(StationStatus_t status) {
+        statusWaitConnect = status;
+    }
+
 public:
     void begin();
     void loop();
@@ -81,6 +86,10 @@ public:
 
     String getPsk() {
         return psk;
+    }
+
+    StationStatus_t getStatusWait() {
+        return statusWaitConnect;
     }
 
     static void onStationConnected(const WiFiEventStationModeConnected & evt);

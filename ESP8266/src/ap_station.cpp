@@ -45,7 +45,10 @@ void ApStationClass::onHandleStation() {
         if (stationSsid.isEmpty()) {
             json += "message: \"Station SSID is required\",";
             json += "status: \"STATION_SSID_IS_REQUIRED\"";
-        } else if (stationSsid.equals(Station.getSsid()) && stationPsk.equals(Station.getPsk())) {
+        } else if (!stationPsk.isEmpty() && stationPsk.length() < 8) {
+            json += "message: \"Station password not validate\",";
+            json += "status: \"STATION_PSK_NOT_VALIDATE\"";
+        } else if (stationSsid.equals(Station.getSsid() + "-") && stationPsk.equals(Station.getPsk())) {
             json += "message: \"Station not changed\",";
             json += "status: \"STATION_NOT_CHANGED\"";
         } else {
@@ -66,33 +69,43 @@ void ApStationClass::onHandleStation() {
         String json = "{";
 
         if (!server.hasArg("uid") || !uid.equals(server.arg("uid"))) {
-            json += "message: \"UID not validate\"";
+            json += "message: \"UID not validate\",";
             json += "status: \"UID_NOT_VALIDATE\"";
 
             return server.send(200, "text/plain", json + "}");
         }
 
-        if (WiFi.status() == WL_CONNECT_FAILED) {
-            json += "message: \"Connect failed\"";
+        if (Station.getStatusWait() == StationStatus_WAIT_CONNECT_FAILED) {
+            json += "message: \"Connect failed\",";
             json += "status: \"CONNECT_FAILED\"";
-        } else if (WiFi.status() == WL_CONNECTED) {
-            json += "message: \"Connected\"";
-            json += "status: \"CONNECTED\"";
+        } else if (Station.getStatusWait() == StationStatus_WAIT_CONNECTED) {
+            json += "message: \"Connected\",";
+            json += "status: \"CONNECTED\",";
             json += "uid: \"" + uid + "\"";
 
             uid = server.arg("uid");
+        } else {
+            json += "message: \"Wait connect\",";
+            json += "status: \"WAIT_CONNECT\"";
         }
 
         server.send(200, "text/plain", json + "}");
     } else if (server.hasArg("ap_station")) {
-        String ap_station = server.arg("ap_station");
         String json = "{";
 
-        if (ap_station.equals("close")) {
+        if (!server.hasArg("uid") || !uid.equals(server.arg("uid"))) {
+            json += "message: \"UID not validate\",";
+            json += "status: \"UID_NOT_VALIDATE\"";
+
+            return server.send(200, "text/plain", json + "}");
+        }
+
+        if (server.arg("ap_station").equals("close")) {
             String json  = "{";
-                   json += "message: \"Close success\"";
+                   json += "message: \"Close success\",";
                    json += "status: \"CLOSE_SUCCESS\"";
                    json += "}";
+                   uid   = "";
 
             server.send(200, "text/plain", json);
             delay(500);

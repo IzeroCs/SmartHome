@@ -15,11 +15,13 @@ void StationClass::loop() {
             isWaitConnect = false;
             countWaitConnect = 0;
 
+            setStatusWait(StationStatus_WAIT_CONNECT_FAILED);
             triggerWaitStatusEvent(StationStatus_WAIT_LIMIT_CONNECT);
             triggerWaitStatusEvent(StationStatus_WAIT_END_CONNECT);
 
-            if (!ApStation.isEnabled())
-                ApStation.setEnabled(true);
+            ApStation.setEnabled(true);
+            WiFi.setAutoReconnect(false);
+            WiFi.enableSTA(false);
         }
 
         switch (WiFi.status()) {
@@ -28,6 +30,7 @@ void StationClass::loop() {
                 psk  = pskWaitConnect;
 
                 resetWaitConnect();
+                setStatusWait(StationStatus_WAIT_CONNECTED);
                 triggerWaitStatusEvent(StationStatus_WAIT_CONNECTED);
                 triggerWaitStatusEvent(StationStatus_WAIT_END_CONNECT);
                 break;
@@ -37,6 +40,7 @@ void StationClass::loop() {
                 break;
 
             case WL_CONNECT_FAILED:
+                setStatusWait(StationStatus_WAIT_CONNECT_FAILED);
                 triggerWaitStatusEvent(StationStatus_WAIT_CONNECT_FAILED);
                 break;
 
@@ -67,6 +71,7 @@ void StationClass::connect(String ssidNew, String pskNew, bool igoneChanged) {
         triggerWaitStatusEvent(StationStatus_WAIT_NOT_CHANGED);
 
     triggerWaitStatusEvent(StationStatus_WAIT_BEGIN_CONNECT);
+    WiFi.enableSTA(true);
     WiFi.begin(ssidNew, pskNew);
     triggerWaitStatusEvent(StationStatus_WAIT_START_CONNECT);
 

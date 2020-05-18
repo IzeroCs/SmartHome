@@ -13,6 +13,9 @@ import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.network.EspConnectivity
+import com.izerocs.smarthome.network.EspConnectivity.OnScanerListener
+import com.izerocs.smarthome.network.EspConnectivity.OnStationListener
+import com.izerocs.smarthome.network.EspConnectivity.Companion.StationStatus
 import com.izerocs.smarthome.preferences.EspPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -24,8 +27,7 @@ import kotlinx.android.synthetic.main.dialog_esp_wifi.*
  * Created by IzeroCs on 2020-04-30
  */
 class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickListener,
-    ListEspAdapter.OnItemClickListener, EspConnectivity.OnScanerListener,
-    EspConnectivity.OnAddWifiToModuleListener
+    ListEspAdapter.OnItemClickListener, OnScanerListener, OnStationListener
 {
     private var currentItemScan : EspItem? = null
     private var currentItemConnected : EspItem? = null
@@ -86,7 +88,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
         espConnectivity?.run {
             setOnScannerListener(this@EspActivity)
-            setOnAddWifiToModuleListener(this@EspActivity)
+            setOnStationListener(this@EspActivity)
             startScanModule()
         }
     }
@@ -157,15 +159,11 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         }
     }
 
-    override fun onAddWifiToModuleSuccess() {
-        Log.d("EspActivity", "Success add")
-    }
-
-    override fun onAddWiFiToModuleStatus(status : EspConnectivity.Companion.AddStatus) {
+    override fun onStationStatus(status : StationStatus) {
         Log.d("EspActivity", "Status: $status")
     }
 
-    override fun onAddWifiToModuleFailed(message : String) {
+    override fun onStationFailed(message : String) {
         Log.d("EspActivity", "Failed add")
 
         runOnUiThread {
@@ -173,7 +171,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         }
     }
 
-    override fun onAddWifiToModuleFailed(e : Exception) {
+    override fun onStationFailed(e : Exception) {
         e.printStackTrace()
     }
 
@@ -199,7 +197,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
                     setCurrentSetupSsid(dialogEspWiFiSsid.text.toString())
                     setCurrentSetupPsk(dialogEspWiFiPassword.text.toString())
 
-                    currentItemScan?.let { addWifiToModule(it) }
+                    currentItemScan?.let { stationConnect(it) }
                 }
             }
 
