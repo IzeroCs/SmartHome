@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -157,12 +158,23 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     }
 
     override fun onAddWifiToModuleSuccess() {
+        Log.d("EspActivity", "Success add")
+    }
+
+    override fun onAddWiFiToModuleStatus(status : EspConnectivity.Companion.AddStatus) {
+        Log.d("EspActivity", "Status: $status")
     }
 
     override fun onAddWifiToModuleFailed(message : String) {
+        Log.d("EspActivity", "Failed add")
+
         runOnUiThread {
             Toasty.error(applicationContext, message, Toasty.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onAddWifiToModuleFailed(e : Exception) {
+        e.printStackTrace()
     }
 
     override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {

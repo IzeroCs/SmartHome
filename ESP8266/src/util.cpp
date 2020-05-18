@@ -1,5 +1,20 @@
 #include "util.h"
 
+String UtilClass::generatorText(uint16_t length) {
+    String chars = "$#@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    String buffer = "";
+    uint16_t i = 0;
+    uint8_t charLength = chars.length();
+
+    if (length <= 0)
+        length = 1;
+
+    for (i = 0; i < length; ++i)
+        buffer += chars.charAt(random(charLength));
+
+    return buffer;
+}
+
 String UtilClass::macToString(const unsigned char * mac) {
     char buf[20];
     snprintf(buf, sizeof(buf), "%02x:%02x:%02x:%02x:%02x:%02x",

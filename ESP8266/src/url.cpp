@@ -4,7 +4,7 @@ String URLClass::encode(String uri) {
     String buffer = "";
     char code[3];
 
-    for (int i = 0; i < uri.length(); ++i) {
+    for (uint8_t i = 0; i < uri.length(); ++i) {
         code[0] = uri.charAt(i);
 
         if (code[0] == ' ') {
@@ -38,7 +38,7 @@ String URLClass::decode(String data) {
     String buffer = "";
     char code[3];
 
-    for (int i = 0; i < data.length(); ++i) {
+    for (uint8_t i = 0; i < data.length(); ++i) {
         code[0] = data.charAt(i);
 
         if (code[0] == '+') {

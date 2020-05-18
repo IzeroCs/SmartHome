@@ -15,12 +15,12 @@ import android.provider.Settings
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.izerocs.smarthome.model.EspItem
-import com.izerocs.smarthome.network.websocket.WebSocketClient
-import com.izerocs.smarthome.network.websocket.WebSocketEvent
 import com.izerocs.smarthome.utils.Util
-import java.net.URI
-import java.net.URISyntaxException
-import java.net.URLEncoder
+import org.json.JSONObject
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 
 /**
  * Created by IzeroCs on 2020-05-14
@@ -38,7 +38,6 @@ class EspConnectivity(private val context : Context) {
     private var networkCallback : NetworkCallback? = null
     private var scanerListener : OnScanerListener? = null
     private var addListener : OnAddWifiToModuleListener? = null
-    private var webSocketClient : WebSocketClient? = null
     private var isNetworkChanged = false
     private var isScan = false
 
@@ -104,9 +103,18 @@ class EspConnectivity(private val context : Context) {
     }
 
     companion object {
-        const val IP_ADDRESS = "192.168.31.15"
+        const val IP_ADDRESS = "192.168.231.125"
         const val SCHEME_SERVER = "http://"
-        const val PORT_SERVER = "81"
+        const val PORT_SERVER = "8080"
+
+        enum class AddStatus {
+            NOT_CHANGED,
+            UID_NOT_VALIDATE,
+            SSID_IS_REQUIRED,
+            WAIT_CONNECT,
+            FAILED_CONNECT,
+            SUCCESS_CONNECT
+        }
 
         fun isMatchIP(ip : String) : Boolean {
             return IP_ADDRESS == ip
@@ -114,6 +122,10 @@ class EspConnectivity(private val context : Context) {
 
         fun isMatchIP(ip : Int) : Boolean {
             return isMatchIP(Util.formatIPAddress(ip))
+        }
+
+        fun getURL() : String {
+            return SCHEME_SERVER + IP_ADDRESS + ":" + PORT_SERVER;
         }
     }
 
@@ -125,8 +137,10 @@ class EspConnectivity(private val context : Context) {
     }
     
     interface OnAddWifiToModuleListener {
-        fun onAddWifiToModuleSuccess()
-        fun onAddWifiToModuleFailed(message : String)
+        fun onAddWifiToModuleSuccess() {}
+        fun onAddWiFiToModuleStatus(status : AddStatus) {}
+        fun onAddWifiToModuleFailed(message : String) {}
+        fun onAddWifiToModuleFailed(e : Exception) {}
     }
 
     fun addWifiToModule(item : EspItem) {
@@ -200,50 +214,101 @@ class EspConnectivity(private val context : Context) {
 
     private fun onNetworkAvailable(network : Network) {
         connectivityManager.bindProcessToNetwork(network)
-        wifiManager.run {
-            val ipAddress = Util.formatIPAddress(dhcpInfo.gateway)
+        val ipAddress = Util.formatIPAddress(wifiManager.dhcpInfo.gateway)
 
-            if (!isMatchIP(ipAddress))
-                return onNetworkUnavailable()
+        if (!isMatchIP(ipAddress))
+            return onNetworkUnavailable()
+
+        try {
+            var url = URL("${getURL()}/station?changed&ssid=$currentSetupSsid&psk=$currentSetupPsk")
+            var uid = String()
+            val builder = StringBuilder()
+            var isConnect = false;
+            var isConnected = false;
 
             try {
-                webSocketClient?.close()
-                webSocketClient = WebSocketClient(URI("ws://${IP_ADDRESS}:${PORT_SERVER}"))
-            } catch (e : URISyntaxException) {
-                e.printStackTrace()
-                addListener?.onAddWifiToModuleFailed(e.message.toString())
-            } finally {
-                webSocketClient?.run {
-                    setOnWebSocketEvent(object : WebSocketEvent {
-                        override fun onTextReceived(client : WebSocketClient, message : String) {
-                            Log.d("EspConnectivity", message)
+                with(network.openConnection(url) as HttpURLConnection) {
+                    requestMethod = "POST"
 
-                            when (message) {
-                                "connected" -> client
-                                    .send("station_ssid|${URLEncoder
-                                        .encode(currentSetupSsid, "UTF-8")}")
+                    inputStream.bufferedReader().use { reader ->
+                        builder.clear();
+                        reader.forEachLine { builder.append(it) }
+                        Log.d("EspConnectivity", builder.toString())
+                        JSONObject(builder.toString()).let { jsonObject ->  
+                            if (!jsonObject.has("message") || !jsonObject.has("status"))
+                                return addListener?.onAddWifiToModuleFailed("")!!
 
-                                "station_ssid" -> client
-                                    .send("station_psk|${URLEncoder
-                                        .encode(currentSetupPsk, "UTF-8")}")
+                            when (jsonObject["status"].toString()) {
+                                "STATION_NOT_CHANGED" -> addListener
+                                    ?.onAddWiFiToModuleStatus(AddStatus.NOT_CHANGED)
 
-                                "station_psk" -> client.send("completed")
+                                "STATION_SSID_IS_REQUIRED" -> addListener
+                                    ?.onAddWiFiToModuleStatus(AddStatus.SSID_IS_REQUIRED)
 
-                                "close" -> {
-                                    client.close()
-                                    unregisterNetworkCallback()
+                                "STATION_CONNECT" -> {
+                                    uid = jsonObject["uid"].toString()
+                                    isConnect = true
+                                    addListener
+                                        ?.onAddWiFiToModuleStatus(AddStatus.WAIT_CONNECT)
                                 }
+
+                                else -> null
                             }
                         }
-                    })
-
-                    setNetwork(network)
-                    setSocketFactory(network.socketFactory)
-                    setConnectTimeout(60000)
-                    setReadTimeout(30000)
-                    connect()
+                    }
                 }
+
+                Log.d("EspConnectivity", "with")
+
+//                if (isConnect) {
+//                    url = URL("${getURL()}/station?status&uid=$uid")
+//
+//                    while (true) {
+//                        var isBreak = false;
+//
+//                        with(network.openConnection(url) as HttpURLConnection) {
+//                            requestMethod = "POST"
+//
+//                            inputStream.bufferedReader().use { reader ->
+//                                builder.clear();
+//                                reader.forEachLine { builder.append(it) }
+//                                Log.d("EspConnectivity", builder.toString())
+//                                JSONObject(builder.toString()).let { jsonObject ->
+//                                    if (!jsonObject.has("message") || !jsonObject.has("status")
+//                                        || !jsonObject.has("uid")
+//                                    )
+//                                        return addListener?.onAddWifiToModuleFailed("")!!
+//
+//                                    when (jsonObject["status"].toString()) {
+//                                        "UID_NOT_VALIDATE" -> {
+//                                            addListener
+//                                                ?.onAddWiFiToModuleStatus(AddStatus.UID_NOT_VALIDATE)
+//                                        }
+//
+//                                        "CONNECT_FAILED" -> {
+//                                            addListener
+//                                                ?.onAddWiFiToModuleStatus(AddStatus.FAILED_CONNECT)
+//                                        }
+//
+//                                        "CONNECTED" -> {
+//                                            isConnected = true
+//                                            addListener
+//                                                ?.onAddWiFiToModuleStatus(AddStatus.SUCCESS_CONNECT)
+//                                        }
+//
+//                                        else -> null
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+            } catch (e : IOException) {
+                addListener?.onAddWifiToModuleFailed(e);
+                e.printStackTrace()
             }
+        } catch (e : MalformedURLException) {
+            e.printStackTrace()
         }
     }
 

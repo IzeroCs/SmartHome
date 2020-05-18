@@ -7,8 +7,8 @@
 #define TIMER_COUNT 2
 
 unsigned long timers[TIMER_COUNT][2] = {
-    { millis(), 10  },
-    { millis(), 500 }
+    { millis(), 10   },
+    { millis(), 1000 }
 };
 
 void setup() {
@@ -26,7 +26,6 @@ void timer(int position) {
             break;
 
         case 1:
-            Network.loopSocketPing();
             Network.loopStationReconnect();
             break;
     }
