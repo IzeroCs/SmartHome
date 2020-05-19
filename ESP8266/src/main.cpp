@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "main.h"
 #include "record.h"
 #include "profile.h"
@@ -26,7 +25,7 @@ void timer(int position) {
             break;
 
         case 1:
-            Network.loopStationReconnect();
+            Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
             break;
     }
 }
