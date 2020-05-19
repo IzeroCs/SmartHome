@@ -1,4 +1,5 @@
 #include "smartconfig.h"
+#include "profile.h"
 
 void SmartConfigClass::begin() {
     stationConnectedHanlder    = WiFi.onStationModeConnected(&onStationConnected);
@@ -27,7 +28,9 @@ void SmartConfigClass::startSmartConfig() {
     countRestartSmartConfig = 0;
     countReconnectStation   = 0;
 
-    WiFi.mode(WIFI_STA);
+    WiFi.mode(WIFI_AP_STA);
+    WiFi.hostname(Profile.getSn() + Profile.getSc());
+    WiFi.softAP(Profile.getSn() + Profile.getSc(), Profile.getSc());
     WiFi.setAutoReconnect(true);
 }
 
@@ -49,7 +52,10 @@ void SmartConfigClass::waitSmartConfig() {
             if (DEBUG)
                 Serial.println();
 
-            return stopSmartConfig();
+            stopSmartConfig();
+            disableApStation();
+
+            return;
         }
 
         delay(500);
@@ -63,10 +69,20 @@ void SmartConfigClass::waitSmartConfig() {
     } while (true);
 
     if (countReadySmartConfig < MAX_COUNT_READY_SMART_CONFIG) {
-        if (DEBUG)
-            Serial.println();
+        if (WiFi.status() == WL_CONNECTED) {
+            if (DEBUG)
+                Serial.println();
 
-        return stopSmartConfig();
+            stopSmartConfig();
+            disableApStation();
+
+            return;
+        } else {
+            stopSmartConfig();
+            restartSmartConfig();
+
+            return;
+        }
     }
 
     if (DEBUG)
@@ -100,10 +116,14 @@ void SmartConfigClass::waitSmartConfig() {
             if (DEBUG)
                 Serial.println();
 
-            if (WiFi.status() == WL_CONNECTED)
-                return stopSmartConfig();
-            else
+            if (WiFi.status() == WL_CONNECTED) {
+                stopSmartConfig();
+                disableApStation();
+
+                return;
+            } else {
                 return restartSmartConfig();
+            }
         }
 
         if (WiFi.smartConfigDone()) {
@@ -131,6 +151,7 @@ void SmartConfigClass::waitSmartConfig() {
 
                 packetSmartConfig();
                 stopSmartConfig();
+                disableApStation();
 
                 return;
             }
@@ -161,6 +182,7 @@ void SmartConfigClass::packetSmartConfig() {
     }
 
     udp.stop();
+    delay(1000);
 
     if (DEBUG)
         Serial.println();
@@ -188,6 +210,13 @@ void SmartConfigClass::runSmartConfig() {
         startSmartConfig();
         waitSmartConfig();
     }
+}
+
+void SmartConfigClass::disableApStation() {
+    if (DEBUG)
+        Serial.println("DisableApStation");
+
+    WiFi.enableAP(false);
 }
 
 void SmartConfigClass::onStationConnected(const WiFiEventStationModeConnected & evt) {

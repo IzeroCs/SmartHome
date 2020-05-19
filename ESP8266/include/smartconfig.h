@@ -31,6 +31,7 @@ private:
     void waitSmartConfig();
     void packetSmartConfig();
     void stopSmartConfig();
+    void disableApStation();
 
 public:
     void begin();
