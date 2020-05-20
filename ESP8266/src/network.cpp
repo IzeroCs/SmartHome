@@ -13,4 +13,8 @@ void NetworkClass::loop() {
     SmartConfig.loop();
 }
 
+void NetworkClass::loopWait() {
+    SmartConfig.loopWait();
+}
+
 NetworkClass Network;

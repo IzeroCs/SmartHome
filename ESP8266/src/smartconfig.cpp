@@ -14,15 +14,24 @@ void SmartConfigClass::loop() {
         return runSmartConfig();
 }
 
+void SmartConfigClass::loopWait() {
+    if (isSmartConfig)
+        waitSmartConfig();
+}
+
 void SmartConfigClass::startSmartConfig() {
     if (isSmartConfig)
         return;
 
     if (DEBUG)
-        Serial.println("StartSmartConfig");
+        Serial.println("[SmartConfig]:Start");
 
-    isSmartConfig           = true;
-    isRestartSmartConfig    = false;
+    isSmartConfig             = true;
+    isRestartSmartConfig      = false;
+    isLoopBeginSmartConfig    = true;
+    isLoopWaitSmartConfigDone = false;
+    isLoopReconnectStation    = false;
+
     countReadySmartConfig   = 0;
     countSmartDoneFailed    = 0;
     countRestartSmartConfig = 0;
@@ -38,137 +47,102 @@ void SmartConfigClass::restartSmartConfig() {
     isRestartSmartConfig = true;
 
     if (DEBUG)
-        Serial.println("RestartSmartConfig");
+        Serial.println("[SmartConfig]:Restart");
 
     stopSmartConfig();
 }
 
 void SmartConfigClass::waitSmartConfig() {
-    if (DEBUG)
-        Serial.print("BeginSmartConfig");
+    if (isLoopBeginSmartConfig) {
+        if (DEBUG && countReadySmartConfig == 0)
+            Serial.println("[SmartConfig]:Begin");
 
-    do {
         if (WiFi.status() == WL_CONNECTED) {
-            if (DEBUG)
-                Serial.println();
-
             stopSmartConfig();
             disableApStation();
 
             return;
         }
-
-        delay(500);
-        if (DEBUG) Serial.print(".");
 
         if (countReadySmartConfig++ >= MAX_COUNT_READY_SMART_CONFIG) {
             WiFi.beginSmartConfig();
-            if (DEBUG) Serial.println();
-            break;
+            Serial.println("[SmartConfig]:End");
+
+            isLoopBeginSmartConfig    = false;
+            isLoopWaitSmartConfigDone = true;
+
+            return;
         }
-    } while (true);
+    } else if (isLoopWaitSmartConfigDone) {
+        if (DEBUG && countRestartSmartConfig == 0)
+            Serial.println("[SmartConfig]:WaitDone");
 
-    if (countReadySmartConfig < MAX_COUNT_READY_SMART_CONFIG) {
-        if (WiFi.status() == WL_CONNECTED) {
+        if (countRestartSmartConfig++ >= MAX_COUNT_RESTART_SMART_CONFIG) {
+            isLoopWaitSmartConfigDone = false;
+            isLoopReconnectStation    = true;
+
+            return;
+        }
+
+        while (true) {
+            delay(1000);
+
             if (DEBUG)
-                Serial.println();
+                    Serial.println("[SmartConfig]:While");
 
+            if (WiFi.smartConfigDone()) {
+                if (DEBUG)
+                    Serial.println("[SmartConfig]:Done");
+
+                if (countSmartDoneFailed++ >= MAX_COUNT_SMART_DONE_FAILED) {
+                    if (DEBUG)
+                        Serial.println("[SmartConfig]:Done Failed connect station");
+
+                    return restartSmartConfig();
+                } else if (WiFi.status() == WL_CONNECTED) {
+                    if (DEBUG) {
+                        Serial.println();
+                        WiFi.printDiag(Serial);
+                    }
+
+                    packetSmartConfig();
+                    stopSmartConfig();
+                    disableApStation();
+
+                    return;
+                }
+            }
+        }
+    } else if (isLoopReconnectStation) {
+        stopSmartConfig();
+
+        if (WiFi.SSID().length() <= 0) {
+            if (DEBUG)
+                Serial.println("[SmartConfig]:IgnoreReconnect");
+
+            return restartSmartConfig();
+        }
+
+        WiFi.reconnect();
+
+        if (DEBUG)
+            Serial.println("[SmartConfig]:ReconnectStation");
+
+        if (WiFi.status() == WL_CONNECTED) {
             stopSmartConfig();
             disableApStation();
 
             return;
-        } else {
-            stopSmartConfig();
-            restartSmartConfig();
-
-            return;
         }
+
+        if (countReconnectStation++ >= MAX_COUNT_RECONNECT_STATION)
+            return restartSmartConfig();
     }
-
-    if (DEBUG)
-        Serial.print("WaitSmartConfigDone");
-
-    while (countSmartDoneFailed < MAX_COUNT_SMART_DONE_FAILED) {
-        delay(1000);
-        if (DEBUG) Serial.print(".");
-
-        if (countRestartSmartConfig++ >= MAX_COUNT_RESTART_SMART_CONFIG) {
-            if (DEBUG)
-                Serial.println();
-
-            stopSmartConfig();
-            WiFi.reconnect();
-
-            if (DEBUG)
-                Serial.print("ReconnectStation");
-
-            while (WiFi.status() != WL_CONNECTED) {
-                if (countReconnectStation++ <= MAX_COUNT_RECONNECT_STATION) {
-                    delay(500);
-
-                    if (DEBUG)
-                        Serial.print(".");
-                } else {
-                    break;
-                }
-            }
-
-            if (DEBUG)
-                Serial.println();
-
-            if (WiFi.status() == WL_CONNECTED) {
-                stopSmartConfig();
-                disableApStation();
-
-                return;
-            } else {
-                return restartSmartConfig();
-            }
-        }
-
-        if (WiFi.smartConfigDone()) {
-            if (DEBUG) {
-                Serial.println();
-
-                if (countSmartDoneFailed == 0)
-                    Serial.print("SmartConfigDone");
-                else
-                    Serial.print(".");
-            }
-
-            if (countSmartDoneFailed++ >= MAX_COUNT_SMART_DONE_FAILED) {
-                if (DEBUG) {
-                    Serial.println();
-                    Serial.println("SmartConfigDone: Failed connect station");
-                }
-
-                return restartSmartConfig();
-            } else if (WiFi.status() == WL_CONNECTED) {
-                if (DEBUG) {
-                    Serial.println();
-                    WiFi.printDiag(Serial);
-                }
-
-                packetSmartConfig();
-                stopSmartConfig();
-                disableApStation();
-
-                return;
-            }
-        } else {
-            countSmartDoneFailed = 0;
-        }
-    }
-
-    if (DEBUG)
-        Serial.println();
-
-    stopSmartConfig();
 }
 
 void SmartConfigClass::packetSmartConfig() {
     if (DEBUG)
-        Serial.print("PacketSmartConfig");
+        Serial.print("[SmartConfig]:Packet");
 
     udp.begin(49999);
     udp.parsePacket();
@@ -189,14 +163,18 @@ void SmartConfigClass::packetSmartConfig() {
 }
 
 void SmartConfigClass::stopSmartConfig() {
-    isSmartConfig           = false;
+    isSmartConfig             = false;
+    isLoopBeginSmartConfig    = false;
+    isLoopWaitSmartConfigDone = false;
+    isLoopReconnectStation    = false;
+
     countReadySmartConfig   = 0;
     countSmartDoneFailed    = 0;
     countRestartSmartConfig = 0;
     countReconnectStation   = 0;
 
     if (DEBUG)
-        Serial.println("StopSmartConfig");
+        Serial.println("[SmartConfig]:Stop");
 
     WiFi.stopSmartConfig();
     delay(1000);
@@ -204,17 +182,15 @@ void SmartConfigClass::stopSmartConfig() {
 
 void SmartConfigClass::runSmartConfig() {
     if (DEBUG)
-        Serial.println("RunSmartConfig");
+        Serial.println("[SmartConfig]:Run");
 
-    if (!isSmartConfig) {
+    if (!isSmartConfig)
         startSmartConfig();
-        waitSmartConfig();
-    }
 }
 
 void SmartConfigClass::disableApStation() {
     if (DEBUG)
-        Serial.println("DisableApStation");
+        Serial.println("[SmartConfig]:DisableApStation");
 
     WiFi.enableAP(false);
 }

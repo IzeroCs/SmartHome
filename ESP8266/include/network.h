@@ -12,8 +12,7 @@ private:
 public:
     void begin();
     void loop();
-    void loopSocketPing();
-    void loopStationReconnect();
+    void loopWait();
 };
 
 extern NetworkClass Network;

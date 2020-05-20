@@ -11,11 +11,14 @@ private:
 
     const int MAX_COUNT_READY_SMART_CONFIG   = 10;
     const int MAX_COUNT_SMART_DONE_FAILED    = 20;
-    const int MAX_COUNT_RESTART_SMART_CONFIG = 20;
+    const int MAX_COUNT_RESTART_SMART_CONFIG = 40;
     const int MAX_COUNT_RECONNECT_STATION    = 10;
 
     bool isSmartConfig;
     bool isRestartSmartConfig;
+    bool isLoopBeginSmartConfig;
+    bool isLoopWaitSmartConfigDone;
+    bool isLoopReconnectStation;
 
     uint8_t countReadySmartConfig;
     uint8_t countSmartDoneFailed;
@@ -36,6 +39,7 @@ private:
 public:
     void begin();
     void loop();
+    void loopWait();
 
     bool isSmartConfigRun() {
         return isSmartConfig;

@@ -3,10 +3,11 @@
 #include "profile.h"
 #include "network.h"
 
-#define TIMER_COUNT 2
+#define TIMER_COUNT 3
 
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10   },
+    { millis(), 500  },
     { millis(), 1000 }
 };
 
@@ -25,7 +26,12 @@ void timer(int position) {
             break;
 
         case 1:
-            Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
+            Network.loopWait();
+            break;
+
+        case 2:
+            if (WiFi.status() == WL_CONNECTED)
+                Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
             break;
     }
 }
