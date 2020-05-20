@@ -7,7 +7,7 @@
 
 class SmartConfigClass {
 private:
-    const bool DEBUG = true;
+    const bool DEBUG = false;
 
     const int MAX_COUNT_READY_SMART_CONFIG   = 10;
     const int MAX_COUNT_SMART_DONE_FAILED    = 20;
@@ -15,6 +15,7 @@ private:
     const int MAX_COUNT_RECONNECT_STATION    = 10;
 
     bool isSmartConfig;
+    bool isDoneSmartConfig;
     bool isRestartSmartConfig;
     bool isLoopBeginSmartConfig;
     bool isLoopWaitSmartConfigDone;
@@ -34,6 +35,7 @@ private:
     void waitSmartConfig();
     void packetSmartConfig();
     void stopSmartConfig();
+    void stopSmartConfig(bool reset);
     void disableApStation();
 
 public:

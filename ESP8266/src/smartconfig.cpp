@@ -10,6 +10,9 @@ void SmartConfigClass::loop() {
     if (isRestartSmartConfig)
         return runSmartConfig();
 
+    if (isSmartConfig && WiFi.status() == WL_CONNECTED)
+        return stopSmartConfig();
+
     if (!isSmartConfig && WiFi.status() != WL_CONNECTED)
         return runSmartConfig();
 }
@@ -27,6 +30,7 @@ void SmartConfigClass::startSmartConfig() {
         Serial.println("[SmartConfig]:Start");
 
     isSmartConfig             = true;
+    isDoneSmartConfig         = false;
     isRestartSmartConfig      = false;
     isLoopBeginSmartConfig    = true;
     isLoopWaitSmartConfigDone = false;
@@ -37,10 +41,9 @@ void SmartConfigClass::startSmartConfig() {
     countRestartSmartConfig = 0;
     countReconnectStation   = 0;
 
-    WiFi.mode(WIFI_AP_STA);
-    WiFi.hostname(Profile.getSn() + Profile.getSc());
-    WiFi.softAP(Profile.getSn() + Profile.getSc(), Profile.getSc());
+    WiFi.mode(WIFI_STA);
     WiFi.setAutoReconnect(true);
+    WiFi.reconnect();
 }
 
 void SmartConfigClass::restartSmartConfig() {
@@ -77,44 +80,44 @@ void SmartConfigClass::waitSmartConfig() {
         if (DEBUG && countRestartSmartConfig == 0)
             Serial.println("[SmartConfig]:WaitDone");
 
-        if (countRestartSmartConfig++ >= MAX_COUNT_RESTART_SMART_CONFIG) {
+        if (!isDoneSmartConfig && countRestartSmartConfig++ >= MAX_COUNT_RESTART_SMART_CONFIG) {
             isLoopWaitSmartConfigDone = false;
             isLoopReconnectStation    = true;
 
             return;
         }
 
-        while (true) {
-            delay(1000);
+        if (WiFi.smartConfigDone()) {
+            isDoneSmartConfig = true;
 
-            if (DEBUG)
-                    Serial.println("[SmartConfig]:While");
+            if (DEBUG && countSmartDoneFailed == 0)
+                Serial.println("[SmartConfig]:Done");
 
-            if (WiFi.smartConfigDone()) {
+            if (countSmartDoneFailed++ >= MAX_COUNT_SMART_DONE_FAILED) {
                 if (DEBUG)
-                    Serial.println("[SmartConfig]:Done");
+                    Serial.println("[SmartConfig]:Done Failed connect station");
 
-                if (countSmartDoneFailed++ >= MAX_COUNT_SMART_DONE_FAILED) {
-                    if (DEBUG)
-                        Serial.println("[SmartConfig]:Done Failed connect station");
-
-                    return restartSmartConfig();
-                } else if (WiFi.status() == WL_CONNECTED) {
-                    if (DEBUG) {
-                        Serial.println();
-                        WiFi.printDiag(Serial);
-                    }
-
-                    packetSmartConfig();
-                    stopSmartConfig();
-                    disableApStation();
-
-                    return;
+                return restartSmartConfig();
+            } else if (WiFi.status() == WL_CONNECTED) {
+                if (DEBUG) {
+                    Serial.println();
+                    WiFi.printDiag(Serial);
                 }
+
+                packetSmartConfig();
+                stopSmartConfig();
+                disableApStation();
+
+                return;
             }
         }
     } else if (isLoopReconnectStation) {
-        stopSmartConfig();
+        if (countReconnectStation == 0) {
+            stopSmartConfig(false);
+
+            if (DEBUG)
+                Serial.println("[SmartConfig]:ReconnectStation");
+        }
 
         if (WiFi.SSID().length() <= 0) {
             if (DEBUG)
@@ -124,9 +127,6 @@ void SmartConfigClass::waitSmartConfig() {
         }
 
         WiFi.reconnect();
-
-        if (DEBUG)
-            Serial.println("[SmartConfig]:ReconnectStation");
 
         if (WiFi.status() == WL_CONNECTED) {
             stopSmartConfig();
@@ -163,15 +163,22 @@ void SmartConfigClass::packetSmartConfig() {
 }
 
 void SmartConfigClass::stopSmartConfig() {
-    isSmartConfig             = false;
-    isLoopBeginSmartConfig    = false;
-    isLoopWaitSmartConfigDone = false;
-    isLoopReconnectStation    = false;
+    stopSmartConfig(true);
+}
 
-    countReadySmartConfig   = 0;
-    countSmartDoneFailed    = 0;
-    countRestartSmartConfig = 0;
-    countReconnectStation   = 0;
+void SmartConfigClass::stopSmartConfig(bool reset) {
+    if (reset) {
+        isSmartConfig             = false;
+        isDoneSmartConfig         = false;
+        isLoopBeginSmartConfig    = false;
+        isLoopWaitSmartConfigDone = false;
+        isLoopReconnectStation    = false;
+
+        countReadySmartConfig   = 0;
+        countSmartDoneFailed    = 0;
+        countRestartSmartConfig = 0;
+        countReconnectStation   = 0;
+    }
 
     if (DEBUG)
         Serial.println("[SmartConfig]:Stop");
