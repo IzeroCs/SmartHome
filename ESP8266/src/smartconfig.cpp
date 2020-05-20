@@ -10,6 +10,9 @@ void SmartConfigClass::loop() {
     if (isRestartSmartConfig)
         return runSmartConfig();
 
+    if (isLoopBeginSmartConfig || isLoopWaitSmartConfigDone || isLoopReconnectStation)
+        return;
+
     if (isSmartConfig && WiFi.status() == WL_CONNECTED)
         return stopSmartConfig();
 
@@ -69,7 +72,9 @@ void SmartConfigClass::waitSmartConfig() {
 
         if (countReadySmartConfig++ >= MAX_COUNT_READY_SMART_CONFIG) {
             WiFi.beginSmartConfig();
-            Serial.println("[SmartConfig]:End");
+
+            if (DEBUG)
+                Serial.println("[SmartConfig]:End");
 
             isLoopBeginSmartConfig    = false;
             isLoopWaitSmartConfigDone = true;
@@ -99,10 +104,7 @@ void SmartConfigClass::waitSmartConfig() {
 
                 return restartSmartConfig();
             } else if (WiFi.status() == WL_CONNECTED) {
-                if (DEBUG) {
-                    Serial.println();
-                    WiFi.printDiag(Serial);
-                }
+                WiFi.printDiag(Serial);
 
                 packetSmartConfig();
                 stopSmartConfig();
