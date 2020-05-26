@@ -2,11 +2,13 @@
 #include "record.h"
 #include "profile.h"
 #include "network.h"
+#include "input.h"
+#include "output.h"
 
 #define TIMER_COUNT 3
 
 unsigned long timers[TIMER_COUNT][2] = {
-    { millis(), 10   },
+    { millis(), 5000   },
     { millis(), 500  },
     { millis(), 1000 }
 };
@@ -14,25 +16,33 @@ unsigned long timers[TIMER_COUNT][2] = {
 void setup() {
     Serial.begin(115200);
     Serial.println("Smart Home ESP8266");
-    Record.begin();
-    Profile.begin();
-    Network.begin();
+    // Record.begin();
+    // Profile.begin();
+    // Network.begin();
+
+    Input.begin();
+    Output.begin();
 }
 
 void timer(int position) {
     switch (position) {
         case 0:
-            Network.loop();
+            Input.loop();
+            Output.loop();
             break;
 
-        case 1:
-            Network.loopWait();
-            break;
+        // case 0:
+        //     Network.loop();
+        //     break;
 
-        case 2:
-            if (WiFi.status() == WL_CONNECTED)
-                Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
-            break;
+        // case 1:
+        //     Network.loopWait();
+        //     break;
+
+        // case 2:
+        //     if (WiFi.status() == WL_CONNECTED)
+        //         Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
+        //     break;
     }
 }
 

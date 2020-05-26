@@ -7,7 +7,7 @@
 
 class SmartConfigClass {
 private:
-    const bool DEBUG = false;
+    const bool DEBUG = true;
 
     const int MAX_COUNT_READY_SMART_CONFIG   = 10;
     const int MAX_COUNT_SMART_DONE_FAILED    = 20;
