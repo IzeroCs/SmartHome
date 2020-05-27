@@ -41,6 +41,10 @@
     <string name="addDeviceType">Device type</string>
     <string name="addDeviceButton">Create</string>
 
+    <string name="listEspSsid" translatable="false">SSID</string>
+    <string name="listEspPassword">Password</string>
+    <string name="listEspShowPassword">Show password</string>
+
     <string name="listEspScanSuccess">Scan success</string>
     <string name="listEspScanFailed">Scan failed</string>
     <string name="listEspSsidDefault">SSID</string>

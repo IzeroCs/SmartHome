@@ -65,6 +65,9 @@
     <color name="listDeviceLabelText">#888</color>
     <color name="listDeviceSubLabelText">#ccc</color>
 
+    <color name="listEspLabelText">#888</color>
+    <color name="listEspInputText">#555</color>
+
     <color name="listEspText">#888</color>
     <color name="listEspIconTint">@color/primaryDark</color>
     <color name="listEspIconSignalTint">#ccc</color>

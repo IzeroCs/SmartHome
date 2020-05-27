@@ -27,6 +27,64 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/listEspSpacing">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/listEspLabelMarginBottom"
+                        android:textSize="@dimen/listEspLabelTextSize"
+                        android:textColor="@color/listEspLabelText"
+                        android:text="@string/listEspSsid"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/listEspSsid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/listEspInputMarginTop"
+                        android:layout_marginBottom="@dimen/listEspInputMarginBottom"
+                        android:textSize="@dimen/listEspInputTextSize"
+                        android:textColor="@color/listEspInputText"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/listEspLabelMarginBottom"
+                        android:textSize="@dimen/listEspLabelTextSize"
+                        android:textColor="@color/listEspLabelText"
+                        android:text="@string/listEspPassword"/>
+                
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/listEspPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/listEspInputMarginTop"
+                        android:layout_marginBottom="@dimen/listEspInputMarginBottom"
+                        android:textSize="@dimen/listEspInputTextSize"
+                        android:textColor="@color/listEspInputText"
+                        android:inputType="textPassword|textNoSuggestions"
+                        android:importantForAutofill="no"
+                        tools:ignore="Autofill,HardcodedText,LabelFor"/>
+                    
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/listEspShowPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/listEspInputMarginTop"
+                        android:layout_marginBottom="@dimen/listEspInputMarginBottom"
+                        android:textSize="@dimen/listEspInputTextSize"
+                        android:textColor="@color/listEspInputText"
+                        android:text="@string/listEspShowPassword"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/listEspScanWrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

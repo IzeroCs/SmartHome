@@ -48,5 +48,7 @@
     <string name="dialogEspWiFiDisagree">Hủy bỏ</string>
     <string name="dialogEspWiFiPassword">Mật khẩu</string>
     <string name="dialogEspWiFiShowPassword">Hiện mật khẩu</string>
+    <string name="listEspShowPassword">Hiện mật khẩu</string>
+    <string name="listEspPassword">Mật khẩu</string>
 
 </resources>

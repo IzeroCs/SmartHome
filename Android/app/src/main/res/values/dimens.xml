@@ -56,6 +56,12 @@
     <dimen name="listDeviceSubLabelMarginTop">6dp</dimen>
     <dimen name="listDeviceStatusIconSize">17dp</dimen>
 
+    <dimen name="listEspLabelTextSize">18sp</dimen>
+    <dimen name="listEspInputTextSize">20sp</dimen>
+    <dimen name="listEspInputMarginTop">4dp</dimen>
+    <dimen name="listEspLabelMarginBottom">5dp</dimen>
+    <dimen name="listEspInputMarginBottom">20dp</dimen>
+
     <dimen name="listEspSpacing">25dp</dimen>
     <dimen name="listEspSpacingVertical">10dp</dimen>
     <dimen name="listEspSpacingHorizontal">10dp</dimen>
