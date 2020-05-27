@@ -8,7 +8,7 @@
 #define TIMER_COUNT 3
 
 unsigned long timers[TIMER_COUNT][2] = {
-    { millis(), 5000   },
+    { millis(), 1000   },
     { millis(), 500  },
     { millis(), 1000 }
 };

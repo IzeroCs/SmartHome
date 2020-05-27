@@ -22,7 +22,6 @@ void OutputClass::loop() {
         s2 = false;
     }
 
-    Serial.println("Push");
     digitalWrite(SDA_PIN, LOW);
     shiftOut(DATA_PIN, SCK_PIN, MSBFIRST, data);
     digitalWrite(SDA_PIN, HIGH);

@@ -2,18 +2,20 @@
 #define INPUT_H
 
 #include <Arduino.h>
-#include <SlowSoftWire.h>
+#include <PCF8574.h>
 
 class InputClass {
 private:
-    const int INT_PIN = 13;
-    const int SCL_PIN = 12;
-    const int SDA_PIN = 14;
+    const byte ADDRESS = 0x38;
 
-    SlowSoftWire wire;
+    const int INT_PIN = D7;
+    const int SCL_PIN = D6;
+    const int SDA_PIN = D5;
+
+    PCF8574 pcf;
 
 public:
-    InputClass() : wire(SDA_PIN, SCL_PIN, false) {}
+    InputClass() : pcf(ADDRESS, SDA_PIN, SCL_PIN) {}
 
     void begin();
     void loop();
