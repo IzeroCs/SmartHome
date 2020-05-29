@@ -5,8 +5,8 @@
 void RecordClass::begin() {
     EEPROM.begin(RECORD_SIZE);
 
-    push(RECORD_ADDRESS_SN, PROFILE_SN_LENGTH);
-    push(RECORD_ADDRESS_SC, PROFILE_SC_LENGTH);
+    bind(RECORD_ID_SN, PROFILE_SN_LENGTH);
+    bind(RECORD_ID_SC, PROFILE_SC_LENGTH);
 }
 
 void RecordClass::reset() {
@@ -16,21 +16,33 @@ void RecordClass::reset() {
     EEPROM.commit();
 }
 
-void RecordClass::push(uint8_t address, uint16_t size) {
-    if (address > RECORD_ROW)
+void RecordClass::bind(uint8_t id, uint16_t size) {
+    if (id > datas.size())
         return;
 
-    addressBegin[address] = addressCurrent;
-    addressEnd[address]   = address + size;
-    addressCurrent        = address + size;
+    RecordData data;
+
+    data.id        = id;
+    data.size      = size;
+    data.address   = addressCurrent;
+    addressCurrent = addressCurrent + size;
+
+    datas.push_back(data);
 }
 
-void RecordClass::clear(uint8_t address) {
-    if (address > RECORD_ROW)
+void RecordClass::clear(uint8_t id) {
+    if (id > datas.size())
         return;
 
-    uint16_t begin = addressBegin[address];
-    uint16_t end   = addressEnd[address] + begin;
+    clear(findId(id));
+}
+
+void RecordClass::clear(RecordData data) {
+    if (data.address == 0 && data.size == 0)
+        return;
+
+    uint16_t begin = data.address;
+    uint16_t end   = begin + data.size;
 
     for (uint16_t i = begin; i < end; ++i)
         EEPROM.write(i, 0);
@@ -38,35 +50,45 @@ void RecordClass::clear(uint8_t address) {
     EEPROM.commit();
 }
 
-void RecordClass::write(uint8_t address, String data) {
-    if (address > RECORD_ROW)
+void RecordClass::write(uint8_t id, String str) {
+    if (id > datas.size())
         return;
 
-    clear(address);
+    RecordData data = findId(id);
 
-    uint16_t begin = addressBegin[address];
-    uint16_t end   = addressEnd[address] + begin;
+    if (data.address == 0 && data.size == 0)
+        return;
+
+    clear(data);
+
+    uint16_t begin = data.address;
+    uint16_t end   = begin + data.size;
 
     for (uint16_t i = begin; i < end; ++i)
-        EEPROM.write(i, data.charAt(i - begin));
+        EEPROM.write(i, str.charAt(i - begin));
 
     EEPROM.commit();
 }
 
-void RecordClass::write(uint8_t address, char * data) {
-    write(address, String(data));
+void RecordClass::write(uint8_t id, char * data) {
+    write(id, String(data));
 }
 
-void RecordClass::write(uint8_t address, int data) {
-    write(address, String(data));
+void RecordClass::write(uint8_t id, int data) {
+    write(id, String(data));
 }
 
-String RecordClass::readString(uint8_t address) {
-    if (address > RECORD_ROW)
+String RecordClass::readString(uint8_t id) {
+    if (id > datas.size())
         return "";
 
-    uint16_t begin  = addressBegin[address];
-    uint16_t end    = addressEnd[address] + begin;
+    RecordData data = findId(id);
+
+    if (data.address == 0 && data.size == 0)
+        return "";
+
+    uint16_t begin  = data.address;
+    uint16_t end    = begin + data.size;
     uint8_t decimal = 0;
     String result   = "";
 
@@ -82,8 +104,8 @@ String RecordClass::readString(uint8_t address) {
     return result;
 }
 
-int RecordClass::readInt(uint8_t address) {
-    String str = readString(address);
+int RecordClass::readInt(uint8_t id) {
+    String str = readString(id);
 
     if (str.length() > 0)
         return str.toInt();

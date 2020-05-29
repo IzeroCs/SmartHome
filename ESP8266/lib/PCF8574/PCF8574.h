@@ -47,7 +47,7 @@
 #define DEFAULT_SCL SCL;
 
 // Uncomment to enable printing out nice debug messages.
-#define PCF8574_DEBUG
+// #define PCF8574_DEBUG
 
 // Uncomment for low memory usage this prevent use of complex DigitalInput structure and free 7byte of memory
 #define PCF8574_LOW_MEMORY

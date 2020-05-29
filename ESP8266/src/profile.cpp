@@ -4,8 +4,8 @@
 #include "record.h"
 
 void ProfileClass::begin() {
-    sn = Record.readString(RECORD_ADDRESS_SN);
-    sc = Record.readString(RECORD_ADDRESS_SC);
+    sn = Record.readString(RECORD_ID_SN);
+    sc = Record.readString(RECORD_ID_SC);
 
     make();
 }
@@ -19,8 +19,9 @@ String ProfileClass::getSc() {
 }
 
 void ProfileClass::make() {
-    if (sn.length() > 0 && sc.length() > 0)
+    if (sn.length() > 0 && sc.length() > 0) {
         return;
+    }
 
     char buffSn[20];
     char buffSc[20];
@@ -64,8 +65,8 @@ void ProfileClass::make() {
         scCreate += charRand.charAt(random(charRandSize));
     }
 
-    Record.write(RECORD_ADDRESS_SN, snCreate);
-    Record.write(RECORD_ADDRESS_SC, scCreate);
+    Record.write(RECORD_ID_SN, snCreate);
+    Record.write(RECORD_ID_SC, scCreate);
 
     sn = snCreate;
     sc = scCreate;

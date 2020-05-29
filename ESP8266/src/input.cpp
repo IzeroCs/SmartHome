@@ -10,10 +10,10 @@ void InputClass::begin() {
 }
 
 void InputClass::loop() {
-    byte digital = pcf.digitalReadAll();
+    // byte digital = pcf.digitalReadAll();
 
-    Serial.print("Read pcf: ");
-    Serial.println(digital, BIN);
+    // Serial.print("Read pcf: ");
+    // Serial.println(digital, BIN);
 }
 
 InputClass Input;
