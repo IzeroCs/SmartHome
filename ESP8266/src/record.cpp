@@ -2,8 +2,11 @@
 #include "profile.h"
 #include "record.h"
 
-void RecordClass::begin() {
+void RecordClass::begin(bool erase) {
     EEPROM.begin(RECORD_SIZE);
+
+    if (erase)
+        reset();
 
     bind(RECORD_ID_SN, PROFILE_SN_LENGTH);
     bind(RECORD_ID_SC, PROFILE_SC_LENGTH);

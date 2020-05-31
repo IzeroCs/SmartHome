@@ -41,8 +41,8 @@ private:
     }
 
 public:
-    void begin();
     void reset();
+    void begin(bool reset = false);
     void bind(uint8_t id, uint16 size);
     void write(uint8_t id, String data);
     void write(uint8_t id, char * data);

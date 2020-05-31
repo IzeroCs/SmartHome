@@ -1,4 +1,9 @@
 Server/logs
 Server/node_modules/*
 Server/package-lock.json
-Server_Backup/package-lock.json
+
+ServerOld/logs
+ServerOld/node_modules/*
+ServerOld/package-lock.json
+
+ServerBackup/package-lock.json

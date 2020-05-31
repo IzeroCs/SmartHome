@@ -13,10 +13,10 @@ void IOClass::begin() {
         Record.bind(i, 15);
         record = Record.readString(i);
 
-        if (!record.isEmpty() && record.indexOf(split) != -1) {
+        if (!record.isEmpty() && record.indexOf(SPLIT) != -1) {
             data = parseData(record);
         } else {
-            data = initData(pinMask, pinMask, false);
+            data = initData(pinMask, Input_SINGLE, pinMask, pinMask, false);
             storeData(i, data);
         }
 

@@ -1,31 +1,32 @@
 {
-  "name": "smart-home",
-  "version": "1.0.0",
-  "description": "Smart Home Server",
+  "name": "izerocs-smarthome-server",
+  "version": "0.0.1",
+  "description": "SmartHome Server",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch index.js --watch ./device.json --watch ./api",
-    "run": "forever stopall && forever start --minUptime 9999999999999999999999999999999 --spinSleepTime 9999999999999999999999999999999 ./index.js"
+    "start": "node index.js",
+    "lint": "eslint **.js",
+    "fix": "eslint --fix *.js",
+    "test": "mocha test/*.test.js --check-leaks --timeout 5000"
   },
-  "author": "IzeroCs",
-  "license": "ISC",
+  "author": "Google LLC",
+  "license": "0BSD",
+  "engines": {
+    "node": ">=11.14"
+  },
   "dependencies": {
-    "promise": "^8.1.0",
-    "body-parser": "^1.19.0",
-    "concurrently": "^5.1.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.0",
-    "express-validator": "^6.4.0",
-    "firebase": "^7.11.0",
-    "firebase-admin": "^8.9.2",
-    "firebase-functions": "^3.3.0",
-    "fs": "0.0.1-security",
-    "mime-types": "^2.1.26",
-    "socket.io": "^2.3.0",
-    "sync-request": "^6.1.0"
+    "gcp-metadata": "^4.0.0",
+    "handlebars": "^4.7.4"
   },
   "devDependencies": {
-    "node-watch": "^0.6.3",
-    "nodemon": "^2.0.2"
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "gaxios": "^2.3.1",
+    "mocha": "^7.1.1",
+    "prettier": "^1.19.1"
   }
 }
