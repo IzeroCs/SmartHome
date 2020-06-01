@@ -1,6 +1,8 @@
-const jwt = require("jsonwebtoken")
-const fs  = require("fs")
+const jwt   = require("jsonwebtoken")
+const fs    = require("fs")
+const query = require("querystring")
 
+let espModules = {}
 let payload = {
     name: "IzeroCs",
     sub: "ESP8266",
@@ -30,6 +32,7 @@ function tokenVerify(token, callback) {
 function notifyUnauthorized(socket) {
     if (!socket.auth) {
         console.log("[esp] Disconnect socket ", socket.id)
+        socket.emit("authenticate", "unauthorized")
         socket.disconnect("unauthorized")
     }
 }
@@ -42,22 +45,47 @@ module.exports = ({ server, io, host, port }) => {
         console.log("[esp] Connect: " + useragent)
         socket.on("disconnect", () => console.log("[esp] Disconnect: " + useragent))
         socket.on("authenticate", data => {
-            if (typeof data.token == "undefined")
+            if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
                 return
 
+            if (!data.id.startsWith("ESP"))
+                return
+
+            espModules[data.id] = {}
+            socket.id = data.id
             tokenVerify(data.token, (err, authorized) => {
                 if (!err && authorized) {
                     console.log("[esp] Authenticated socket ", socket.id)
                     socket.auth = true
+                    socket.emit("authenticate", "authorized")
                 } else {
                     notifyUnauthorized(socket)
                 }
             })
         })
 
-        // setTimeout(() => {
-            // notifyUnauthorized(socket)
-        // }, 3000);
+        socket.on("sync-io", data => {
+            if (!socket.auth || typeof data == "undefined" || typeof data.io != "object")
+                return
+
+            let pinData;
+            let pinObj;
+
+            for (let i = 0; i < data.io.length; ++i) {
+                pinData = data.io[i].replace(/\=/g, ":")
+                pinData = pinData.replace(/([a-z0-9]+):([0-9]+)/ig, "\"\$1\":\$2")
+                pinData = "{" + pinData + "}"
+
+                try {
+                    pinObj = JSON.parse(pinData)
+                    espModules[socket.id] = pinObj
+                } catch (e) {}
+            }
+        })
+
+        setTimeout(() => {
+            notifyUnauthorized(socket)
+        }, 1000);
     })
 
     server.listen(port, host, () => console.log("[esp] Listen server: " + host + ":" + port))

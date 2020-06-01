@@ -20,7 +20,15 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 
 	if (type == WStype_DISCONNECTED) {
 		SOCKETIOCLIENT_DEBUG("[SIoC] Disconnected!\n");
+
+		if (!isDisconnected) {
+			isDisconnected = true;
+			trigger("disconnect", NULL, 0);
+		}
+
+		isConnected = false;
 	} else if (type == WStype_CONNECTED) {
+		isDisconnected = false;
 		SOCKETIOCLIENT_DEBUG("[SIoC] Connected to url: %s\n",  payload);
 	} else if (type == WStype_TEXT) {
 		msg = String((char*)payload);
@@ -29,8 +37,10 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 		} else if(msg.startsWith("2")) {
 			_webSocket.sendTXT("3");
 		} else if(msg.startsWith("40")) {
+			isConnected = true;
 			trigger("connect", NULL, 0);
 		} else if(msg.startsWith("41")) {
+			isConnected = false;
 			trigger("disconnect", NULL, 0);
 		}
 	} else if (type == WStype_BIN) {
@@ -75,17 +85,65 @@ void SocketIoClient::on(const char* event, std::function<void (const char * payl
 	_events[event] = func;
 }
 
+void SocketIoClient::onBroadcast(SocketIoClientBroadcast broadcast) {
+	_broadcast = broadcast;
+}
+
 void SocketIoClient::emit(const char* event, const char * payload) {
+	emit(event, String(payload));
+}
+
+void SocketIoClient::emit(const char* event, const String payload) {
 	String msg = String("42[\"");
 	msg += event;
 	msg += "\"";
-	if(payload) {
+	if(!payload.isEmpty()) {
 		msg += ",";
-		msg += payload;
+
+		if (!payload.startsWith("{") && !payload.startsWith("\""))
+			msg += "\"" + payload + "\"";
+		else
+			msg += payload;
 	}
 	msg += "]";
 	SOCKETIOCLIENT_DEBUG("[SIoC] add packet %s\n", msg.c_str());
 	_packets.push_back(msg);
+}
+
+void SocketIoClient::emit(const char* event, std::map<String, String> payload) {
+	String payloadStr   = "";
+	String payloadKey   = "";
+	String payloadValue = "";
+
+	if (payload.size() > 0) {
+		std::map<String, String>::iterator iterator = payload.begin();
+
+		while (iterator != payload.end()) {
+			payloadKey   = iterator->first;
+			payloadValue = iterator->second;
+
+			if (payloadStr.length() > 0)
+				payloadStr += ",";
+			else
+				payloadStr += "{";
+
+			if (!payloadKey.startsWith("\""))
+				payloadStr += "\"" + payloadKey   + "\":";
+			else
+				payloadStr += payloadKey + ":";
+
+			if (!payloadValue.startsWith("{") && !payloadValue.startsWith("[") && !payloadValue.startsWith("\""))
+				payloadStr += "\"" + payloadValue + "\"";
+			else
+				payloadStr += payloadValue;
+
+			iterator++;
+		}
+
+		payloadStr += "}";
+	}
+
+	emit(event, payloadStr);
 }
 
 void SocketIoClient::trigger(const char* event, const char * payload, size_t length) {
@@ -96,6 +154,9 @@ void SocketIoClient::trigger(const char* event, const char * payload, size_t len
 	} else {
 		SOCKETIOCLIENT_DEBUG("[SIoC] event %s not found. %d events available\n", event, _events.size());
 	}
+
+	if (_broadcast != nullptr)
+		_broadcast(event, payload, length);
 }
 
 void SocketIoClient::disconnect()

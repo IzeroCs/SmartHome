@@ -12,6 +12,7 @@
         "unordered_map": "cpp",
         "memory": "cpp",
         "random": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "typeinfo": "cpp"
     }
 }

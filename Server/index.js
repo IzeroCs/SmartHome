@@ -22,7 +22,6 @@ const port = {
 
 let host = null
 let database  = null
-let idClients = []
 let networks  = os.networkInterfaces()
 
 Object.keys(networks).forEach(key => {

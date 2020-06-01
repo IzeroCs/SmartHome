@@ -3,7 +3,8 @@
 #include "io.h"
 
 void IOClass::begin() {
-    Serial.println("IO begin");
+    if (DEBUG)
+        Serial.println("[IO] Begin");
 
     IOData data;
     String record;

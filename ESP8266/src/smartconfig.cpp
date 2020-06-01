@@ -2,11 +2,17 @@
 #include "profile.h"
 
 void SmartConfigClass::begin() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     stationConnectedHanlder    = WiFi.onStationModeConnected(&onStationConnected);
     stationDisconnectedHandler = WiFi.onStationModeDisconnected(&onStationDisconnected);
 }
 
 void SmartConfigClass::loop() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (isRestartSmartConfig)
         return runSmartConfig();
 
@@ -21,12 +27,15 @@ void SmartConfigClass::loop() {
 }
 
 void SmartConfigClass::loopWait() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (isSmartConfig)
         waitSmartConfig();
 }
 
 void SmartConfigClass::startSmartConfig() {
-    if (isSmartConfig)
+    if (!SMARTCONFIG_USE || isSmartConfig)
         return;
 
     if (DEBUG)
@@ -50,6 +59,9 @@ void SmartConfigClass::startSmartConfig() {
 }
 
 void SmartConfigClass::restartSmartConfig() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     isRestartSmartConfig = true;
 
     if (DEBUG)
@@ -59,6 +71,9 @@ void SmartConfigClass::restartSmartConfig() {
 }
 
 void SmartConfigClass::waitSmartConfig() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (isLoopBeginSmartConfig) {
         if (DEBUG && countReadySmartConfig == 0)
             Serial.println("[SmartConfig]:Begin");
@@ -143,6 +158,9 @@ void SmartConfigClass::waitSmartConfig() {
 }
 
 void SmartConfigClass::packetSmartConfig() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (DEBUG)
         Serial.print("[SmartConfig]:Packet");
 
@@ -165,10 +183,16 @@ void SmartConfigClass::packetSmartConfig() {
 }
 
 void SmartConfigClass::stopSmartConfig() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     stopSmartConfig(true);
 }
 
 void SmartConfigClass::stopSmartConfig(bool reset) {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (reset) {
         isSmartConfig             = false;
         isDoneSmartConfig         = false;
@@ -190,6 +214,9 @@ void SmartConfigClass::stopSmartConfig(bool reset) {
 }
 
 void SmartConfigClass::runSmartConfig() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (DEBUG)
         Serial.println("[SmartConfig]:Run");
 
@@ -198,6 +225,9 @@ void SmartConfigClass::runSmartConfig() {
 }
 
 void SmartConfigClass::disableApStation() {
+    if (!SMARTCONFIG_USE)
+        return;
+
     if (DEBUG)
         Serial.println("[SmartConfig]:DisableApStation");
 

@@ -23,6 +23,14 @@ String UtilClass::macToString(const unsigned char * mac) {
     return String(buf);
 }
 
+char * UtilClass::toCharArray(String str) {
+    int length = str.length() + 1;
+    char * buffer = (char *)malloc(length);
+
+    str.toCharArray(buffer, length);
+    return buffer;
+}
+
 String UtilClass::httpCodeToString(uint16_t code) {
     String response = "";
 

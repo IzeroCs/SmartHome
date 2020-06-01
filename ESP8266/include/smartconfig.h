@@ -1,5 +1,6 @@
 #ifndef SMARTCONFIG_H
 #define SMARTCONFIG_H
+#define SMARTCONFIG_USE 0
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>

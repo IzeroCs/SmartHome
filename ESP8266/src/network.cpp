@@ -6,6 +6,10 @@
 void NetworkClass::begin() {
     WiFi.persistent(false);
     WiFi.mode(WIFI_STA);
+    WiFi.begin("IzeroCs Guest", "nhutheday");
+    WiFi.setAutoConnect(true);
+    WiFi.setAutoReconnect(true);
+
     Socket.begin();
     SmartConfig.begin();
     SmartConfig.runSmartConfig();
@@ -17,6 +21,7 @@ void NetworkClass::loop() {
 }
 
 void NetworkClass::loopWait() {
+    Socket.loopSyncIO();
     SmartConfig.loopWait();
 }
 

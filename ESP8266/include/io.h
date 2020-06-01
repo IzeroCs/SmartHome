@@ -6,6 +6,7 @@ using namespace std;
 #include <Arduino.h>
 #include <vector>
 
+#include "record.h"
 #include "output.h"
 #include "input.h"
 
@@ -24,10 +25,20 @@ struct IOData {
     uint8_t outputSecondary;
 
     bool status;
+
+    String toString() {
+        return "input=" + String(input) + "," +
+               "inputType=" + String(inputType) +  "," +
+               "outputPrimary=" + String(outputPrimary) + "," +
+               "outputSecondary=" + String(outputSecondary) + "," +
+               "status=" + String(status);
+    }
 };
 
 class IOClass {
 private:
+    const bool DEBUG = true;
+
     const uint8_t IO_PIN_0 = 1;
     const uint8_t IO_PIN_1 = 2;
     const uint8_t IO_PIN_2 = 4;
@@ -58,7 +69,8 @@ private:
     IOData parseData(String record) {
         IOData data;
 
-        Serial.println("Record: " + record);
+        if (DEBUG)
+            Serial.println("[IO] Record: " + record);
 
         if (!record.isEmpty() && record.indexOf(SPLIT) != -1) {
             bool run           = true;
@@ -69,8 +81,7 @@ private:
             int endSubstring   = 0;
 
             do {
-                indexOf = record.indexOf(SPLIT);
-                caseIndex++;
+                indexOf = record.indexOf(SPLIT, prevIndexOf);
 
                 if (indexOf == -1) {
                     if (prevIndexOf == 0)
@@ -86,7 +97,7 @@ private:
 
                 uint8_t res = record.substring(startSubstring, endSubstring).toInt();
 
-                switch (caseIndex) {
+                switch (caseIndex++) {
                     case 0:
                         data.input = res;
                         break;
@@ -105,6 +116,7 @@ private:
 
                     case 4:
                         data.status = res == 1;
+                        run = false;
                         break;
 
                     default:
@@ -142,6 +154,10 @@ private:
 public:
     void begin();
     void loop();
+
+    vector<IOData> getIODatas() {
+        return datas;
+    }
 };
 
 extern IOClass IO;

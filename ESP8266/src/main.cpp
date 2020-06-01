@@ -7,9 +7,10 @@
 
 #define TIMER_COUNT 3
 
+bool isPrintConnect;
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10   },
-    { millis(), 500  },
+    { millis(), 1000  },
     { millis(), 5000 }
 };
 
@@ -35,8 +36,14 @@ void timer(int position) {
             break;
 
         case 2:
-            if (WiFi.status() == WL_CONNECTED)
-                Serial.println("SSID [" + String(millis()) + "]: " + WiFi.SSID());
+            if (WiFi.status() == WL_CONNECTED) {
+                if (!isPrintConnect) {
+                    isPrintConnect = true;
+                    Serial.println("[Main] SSID: " + WiFi.SSID());
+                }
+            } else {
+                isPrintConnect = false;
+            }
             break;
     }
 }
