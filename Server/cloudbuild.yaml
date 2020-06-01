@@ -7,7 +7,6 @@ steps:
   - '-c'
   - |
     npm install
-    npm run lint
 
 - id: 'Build Container Image'
   name: 'gcr.io/cloud-builders/docker:latest'

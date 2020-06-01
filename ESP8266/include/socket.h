@@ -1,0 +1,24 @@
+#ifndef SOCKET_H
+#define SOCKET_H
+
+#include <Arduino.h>
+#include <SocketIOClient.h>
+
+class SocketClass {
+private:
+    const char * host  = "izerocs.com";
+    const int    port  = 3190;
+
+    String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXplcm9DcyIsInN1YiI6IkVTUDgyNjYiLCJpYXQiOjQxMDI0NDQ4MDB9.HAU4zKdQnfHqj0kfLYoLH5blr3BUSgQo-DgxT0JvIjd9t6b0AloTjA1mUfbk9LRipe-OMC58LYIHG2kbpYAyCg";
+    SocketIoClient io;
+
+    void onEvent(const char * payload, size_t length);
+
+public:
+    void begin();
+    void loop();
+};
+
+extern SocketClass Socket;
+
+#endif

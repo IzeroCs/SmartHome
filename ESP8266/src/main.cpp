@@ -1,4 +1,5 @@
 #include "main.h"
+#include "ffs.h"
 #include "record.h"
 #include "profile.h"
 #include "network.h"
@@ -15,6 +16,7 @@ unsigned long timers[TIMER_COUNT][2] = {
 void setup() {
     Serial.begin(115200);
     Serial.println("Smart Home ESP8266");
+    FFS.begin();
     Record.begin();
     Profile.begin();
     Network.begin();
