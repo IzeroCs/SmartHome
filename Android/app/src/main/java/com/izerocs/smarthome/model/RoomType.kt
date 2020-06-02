@@ -32,8 +32,7 @@ class RoomType {
                 return
 
             socket.on("room/types", Emitter.Listener {
-                println("Array types fetch")
-                println(it[0])
+                println("onFetch")
                 (it[0] as JSONArray).run {
                     for (i in 0 until length())
                         types.add(stringToType(getString(i)))

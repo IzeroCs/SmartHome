@@ -11,6 +11,7 @@ import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
+import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.SharedPreferences
@@ -35,7 +36,7 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        onSocketReconnect()
+        onSocketConnect(getSocket())
         Toasty.Config.getInstance()
             .allowQueue(false)
             .setTextSize(resources.getDimensionPixelSize(R.dimen.toastyTextSize))
@@ -61,8 +62,8 @@ abstract class BaseActivity : AppCompatActivity(),
         Log.d(BaseActivity::class.java.toString(), "onFetch: $type")
     }
 
-    open fun onSocketReconnect() {
-        RoomType.fetchTypes(this, getRootApplication().getSocket(), ::onFetched)
+    open fun onSocketConnect(socket : Socket) {
+        RoomType.fetchTypes(this, socket, ::onFetched)
     }
 
     @MenuRes
@@ -141,4 +142,7 @@ abstract class BaseActivity : AppCompatActivity(),
         return application as SmartApplication
     }
 
+    fun getSocket() : Socket {
+        return getRootApplication().getSocket()
+    }
 }

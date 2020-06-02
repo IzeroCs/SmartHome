@@ -49,7 +49,9 @@ class SmartActivity : BaseActivity(),
 
     override fun onFetched(type : Int) {
         super.onFetched(type)
-        updateListAdapter()
+
+        if (type == FETCH_ROOM_TYPE)
+            updateListAdapter()
     }
 
     override fun onResume() {

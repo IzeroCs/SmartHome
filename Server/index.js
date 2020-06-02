@@ -47,16 +47,19 @@ app.use(body.json())
 
 require("./src/api/routes")(app, database)
 
-require("./src/io/app")({
+const espIns = require("./src/io/esp")({
+  server: server.esp,
+  io: io.esp,
+  host: host,
+  port: port.esp
+})
+
+const appIns = require("./src/io/app")({
   server: server.app,
   io: io.app,
   host: host,
   port: port.app
 })
 
-require("./src/io/esp")({
-  server: server.esp,
-  io: io.esp,
-  host: host,
-  port: port.esp
-})
+appIns.listen(espIns)
+espIns.listen(appIns)

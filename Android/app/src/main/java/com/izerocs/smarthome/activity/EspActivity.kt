@@ -9,13 +9,14 @@ import android.util.Log
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.network.EspConnectivity
+import com.izerocs.smarthome.network.EspConnectivity.Companion.StationStatus
 import com.izerocs.smarthome.network.EspConnectivity.OnScanerListener
 import com.izerocs.smarthome.network.EspConnectivity.OnStationListener
-import com.izerocs.smarthome.network.EspConnectivity.Companion.StationStatus
 import com.izerocs.smarthome.preferences.EspPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -100,6 +101,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onCreatePreferences() : SharedPreferences? {
         return EspPreferences(this)
+    }
+
+    override fun onSocketConnect(socket : Socket) {
+        println("onSocket EspActivity")
     }
 
     override fun onClick(v : View?) {

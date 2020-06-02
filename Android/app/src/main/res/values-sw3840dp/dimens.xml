@@ -25,6 +25,9 @@
 	<dimen name="listDeviceWrapperBorderRadius">160.00dp</dimen>
 	<dimen name="listEspIconPadding">80.00dp</dimen>
 	<dimen name="listEspIconSize">288.00dp</dimen>
+	<dimen name="listEspInputMarginBottom">160.00dp</dimen>
+	<dimen name="listEspInputMarginTop">32.00dp</dimen>
+	<dimen name="listEspLabelMarginBottom">40.00dp</dimen>
 	<dimen name="listEspSpacing">200.00dp</dimen>
 	<dimen name="listEspSpacingHorizontal">80.00dp</dimen>
 	<dimen name="listEspSpacingVertical">80.00dp</dimen>
@@ -50,6 +53,8 @@
 	<dimen name="listDeviceLabelTextSize">160.00sp</dimen>
 	<dimen name="listDeviceSubLabelTextSize">144.00sp</dimen>
 	<dimen name="listEspEmptyTextSize">160.00sp</dimen>
+	<dimen name="listEspInputTextSize">160.00sp</dimen>
+	<dimen name="listEspLabelTextSize">144.00sp</dimen>
 	<dimen name="listEspSsidTextSize">160.00sp</dimen>
 	<dimen name="listEspTitleTextSize">176.00sp</dimen>
 	<dimen name="listRoomDeviceCountTextSize">160.00sp</dimen>
