@@ -3,7 +3,8 @@ const jwt      = require("jsonwebtoken")
 const fs       = require("fs")
 const payload  = require(realpath + "assets/app/payload.json")
 
-let espInstance;
+let espInstance
+let devices = {}
 let certPrivate = fs.readFileSync(realpath + "assets/app/private.key")
 let certPublic  = fs.readFileSync(realpath + "assets/app/public.key")
 let token = jwt.sign(payload, certPrivate, { algorithm: "RS256" })
@@ -36,21 +37,17 @@ module.exports = ({ server, io, host, port }) => {
     function listen(espIns) {
         espInstance = espIns
         io.on("connection", socket => {
-            let useragent = socket.handshake.headers["user-agent"]
             socket.auth   = false
 
-            console.log("[app] Connect: " + useragent)
-            socket.on("disconnect", () => console.log("[app] Disconnect: " + useragent))
+            console.log("[app] Connect: " + socket.id)
+            socket.on("disconnect", () => console.log("[app] Disconnect: " + socket.id))
             socket.on("authenticate", data => {
-                console.log("authenticate")
-
                 if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
                     return
 
                 if (!data.id.startsWith("APP"))
                     return
 
-                socket.id = data.id
                 tokenVerify(data.token, (err, authorized) => {
                     if (!err && authorized) {
                         console.log("[app] Authenticated socket ", socket.id)
@@ -61,6 +58,10 @@ module.exports = ({ server, io, host, port }) => {
                     }
                 })
             })
+
+            setTimeout(() => {
+                notifyUnauthorized(socket)
+            }, 1000);
 
             socket.on("esp.list", () => {
 

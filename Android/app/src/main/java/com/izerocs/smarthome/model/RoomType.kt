@@ -31,15 +31,14 @@ class RoomType {
             if (types.isNotEmpty())
                 return
 
-            socket.on("room/types", Emitter.Listener {
-                println("onFetch")
+            socket.on("room.types", Emitter.Listener {
                 (it[0] as JSONArray).run {
                     for (i in 0 until length())
                         types.add(stringToType(getString(i)))
 
                     callback(BaseActivity.FETCH_ROOM_TYPE)
                 }
-            }).emit("room/types")
+            }).emit("room.types")
         }
 
         fun getTypes() : MutableList<Int> {

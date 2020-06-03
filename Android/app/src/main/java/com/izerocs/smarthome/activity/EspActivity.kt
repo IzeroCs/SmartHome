@@ -36,8 +36,8 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     private var currentItemConnectedPosition : Int = 0
 
 
-    private var espConnectivity : EspConnectivity? = null
-    private var refreshAnimator : ObjectAnimator?  = null
+    private var espConnectivity : EspConnectivity = TODO()
+    private var refreshAnimator : ObjectAnimator  = TODO()
 
     private val onAnimatorListener = object : Animator.AnimatorListener {
         override fun onAnimationRepeat(animation : Animator?) { }
@@ -74,7 +74,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
                 addListener(onAnimatorListener)
             }
 
-        preferences?.run {
+        preferences.run {
             getAll()?.forEach {
                 val data = getObject(it.key, EspItem.EspDataItem::class.java)
 
@@ -87,7 +87,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             }
         }
 
-        espConnectivity?.run {
+        espConnectivity.run {
             setOnScannerListener(this@EspActivity)
             setOnStationListener(this@EspActivity)
             startScanModule()
@@ -96,10 +96,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onDestroy() {
         super.onDestroy()
-        espConnectivity?.destroy()
+        espConnectivity.destroy()
     }
 
-    override fun onCreatePreferences() : SharedPreferences? {
+    override fun onCreatePreferences() : SharedPreferences {
         return EspPreferences(this)
     }
 
@@ -109,7 +109,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onClick(v : View?) {
         if (v == floatButton) {
-            espConnectivity?.toggleScanModule()
+            espConnectivity.toggleScanModule()
         }
     }
 
@@ -119,7 +119,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onScanBegin() {
         runOnUiThread {
-            if (!refreshAnimator!!.isRunning) refreshAnimator?.run {
+            if (!refreshAnimator.isRunning) refreshAnimator.run {
                 repeatCount = ObjectAnimator.INFINITE
                 start()
             }
@@ -128,23 +128,23 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onScanEnd() {
         runOnUiThread {
-            if (refreshAnimator!!.isRunning)
-                refreshAnimator?.repeatCount = 1
+            if (refreshAnimator.isRunning)
+                refreshAnimator.repeatCount = 1
         }
     }
 
     override fun onScanSuccess(wifiManager : WifiManager) {
         wifiManager.scanResults?.run {
             listEspScan.clear()
-            preferences?.clear()
+            preferences.clear()
 
             forEach {
                 if (EspItem.isMatchEsp(it.SSID)) {
                     val item = EspItem(it)
 
                     listEspScan.add(item)
-                    preferences?.put((preferences?.size()
-                        ?.plus(1)).toString(), item.toData())
+                    preferences.put((preferences.size()
+                        .plus(1)).toString(), item.toData())
                 }
             }
 
@@ -183,13 +183,13 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
         v?.parent.run {
             if (this == listEspScan)
-                onItemScanClick(v as View, position)
+                onItemScanClick(position)
             else if (this == listEspConnected)
-                onItemConnectedClick(v as View, position)
+                onItemConnectedClick(position)
         }
     }
 
-    private fun onItemScanClick(v : View, position : Int) {
+    private fun onItemScanClick(position : Int) {
         currentItemScan = listEspScan.get(position)
         currentItemScanPosition = position
 
@@ -198,7 +198,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             customView(R.layout.dialog_esp_wifi)
             negativeButton(R.string.dialogEspWiFiDisagree) { it.dismiss() }
             positiveButton(R.string.dialogEspWiFiAgree) {
-                espConnectivity?.run {
+                espConnectivity.run {
                     setCurrentSetupSsid(dialogEspWiFiSsid.text.toString())
                     setCurrentSetupPsk(dialogEspWiFiPassword.text.toString())
 
@@ -206,10 +206,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
                 }
             }
 
-            dialogEspWiFiSsid.setText(espConnectivity?.getCurrentSetupSsid())
+            dialogEspWiFiSsid.setText(espConnectivity.getCurrentSetupSsid())
             dialogEspWiFiPassword.run {
                 inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
-                setText(espConnectivity?.getCurrentSetupPsk())
+                setText(espConnectivity.getCurrentSetupPsk())
             }
 
             dialogEspWiFiShowPassword.run {
@@ -218,10 +218,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
                     dialogEspWiFiPassword.run {
                         val cursor = selectionStart
 
-                        if (isChecked)
-                            inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        inputType = if (isChecked)
+                            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                         else
-                            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
 
                         setSelection(cursor)
                     }
@@ -230,7 +230,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         }
     }
 
-    private fun onItemConnectedClick(v : View, position : Int) {
+    private fun onItemConnectedClick(position : Int) {
         currentItemConnected = listEspConnected.get(position)
         currentItemConnectedPosition = position
     }

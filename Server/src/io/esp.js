@@ -38,11 +38,10 @@ module.exports = ({ server, io, host, port }) => {
     function listen(appIns) {
         appInstance = appIns
         io.on("connection", socket => {
-            let useragent = socket.handshake.headers["user-agent"]
             socket.auth   = false
 
-            console.log("[esp] Connect: " + useragent)
-            socket.on("disconnect", () => console.log("[esp] Disconnect: " + useragent))
+            console.log("[esp] Connect: " + socket.id)
+            socket.on("disconnect", () => console.log("[esp] Disconnect: " + socket.id))
             socket.on("authenticate", data => {
                 if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
                     return
@@ -63,7 +62,7 @@ module.exports = ({ server, io, host, port }) => {
                 })
             })
 
-            socket.on("sync-io", data => {
+            socket.on("sync.io", data => {
                 if (!socket.auth || typeof data == "undefined" || typeof data.io != "object")
                     return
 

@@ -31,9 +31,9 @@ class SmartActivity : BaseActivity(),
         listRoom.setOnItemClickListener(this)
         floatButton.setOnClickListener(this)
 
-        if (preferences?.empty()!!) {
+        if (preferences.empty()) {
             RoomType.getTypes().forEach {
-                preferences?.run {
+                preferences.run {
                     put(size().plus(1).toString(), RoomItem(this@SmartActivity, it).toData())
                 }
             }
@@ -43,7 +43,7 @@ class SmartActivity : BaseActivity(),
         startActivity(Intent(applicationContext, EspActivity::class.java))
     }
 
-    override fun onCreatePreferences() : SharedPreferences? {
+    override fun onCreatePreferences() : SharedPreferences {
         return RoomPreferences(this)
     }
 
@@ -76,9 +76,9 @@ class SmartActivity : BaseActivity(),
 
     private fun updateListAdapter() {
         runOnUiThread {
-            preferences?.run {
+            preferences.run {
                 val list = getAll()
-                    ?.toSortedMap(Comparator<String> { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
+                    ?.toSortedMap(Comparator { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
 
                 listRoom.clear()
                 list?.forEach {

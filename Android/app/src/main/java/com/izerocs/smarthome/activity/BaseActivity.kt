@@ -25,8 +25,8 @@ import kotlinx.android.synthetic.main.activity_room.*
 abstract class BaseActivity : AppCompatActivity(),
     WavesView.OnBackClickListener, WavesView.OnMenuItemClickListener
 {
-    private   var rootView         : View? = null
-    protected var preferences      : SharedPreferences? = null
+    private   var rootView    : View? = null
+    protected var preferences : SharedPreferences = TODO()
 
     companion object {
         const val FETCH_ROOM_TYPE = 1
@@ -36,7 +36,6 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        onSocketConnect(getSocket())
         Toasty.Config.getInstance()
             .allowQueue(false)
             .setTextSize(resources.getDimensionPixelSize(R.dimen.toastyTextSize))
@@ -54,8 +53,8 @@ abstract class BaseActivity : AppCompatActivity(),
         printResulotion()
     }
 
-    open fun onCreatePreferences() : SharedPreferences? {
-        return null
+    open fun onCreatePreferences() : SharedPreferences {
+        TODO()
     }
 
     open fun onFetched(type : Int) {
