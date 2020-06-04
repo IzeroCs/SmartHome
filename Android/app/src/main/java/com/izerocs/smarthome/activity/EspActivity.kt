@@ -36,8 +36,8 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     private var currentItemConnectedPosition : Int = 0
 
 
-    private var espConnectivity : EspConnectivity = TODO()
-    private var refreshAnimator : ObjectAnimator  = TODO()
+    private var espConnectivity : EspConnectivity? = null
+    private var refreshAnimator : ObjectAnimator?  = null
 
     private val onAnimatorListener = object : Animator.AnimatorListener {
         override fun onAnimationRepeat(animation : Animator?) { }
@@ -55,6 +55,9 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     }
 
+    companion object {
+        const val TAG = "EspActivity"
+    }
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +90,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             }
         }
 
-        espConnectivity.run {
+        espConnectivity?.run {
             setOnScannerListener(this@EspActivity)
             setOnStationListener(this@EspActivity)
             startScanModule()
@@ -96,7 +99,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onDestroy() {
         super.onDestroy()
-        espConnectivity.destroy()
+        espConnectivity?.destroy()
     }
 
     override fun onCreatePreferences() : SharedPreferences {
@@ -104,12 +107,17 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     }
 
     override fun onSocketConnect(socket : Socket) {
-        println("onSocket EspActivity")
+        socket.on("esp.list") {
+            Log.d(TAG, "Esp list: " + it.toList().toString())
+
+            it.forEach { esp -> listEspConnected.add(EspItem(esp.toString())) }
+            runOnUiThread { listEspConnected.notifyDataSetChanged() }
+        }
     }
 
     override fun onClick(v : View?) {
         if (v == floatButton) {
-            espConnectivity.toggleScanModule()
+            espConnectivity?.toggleScanModule()
         }
     }
 
@@ -119,17 +127,21 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onScanBegin() {
         runOnUiThread {
-            if (!refreshAnimator.isRunning) refreshAnimator.run {
-                repeatCount = ObjectAnimator.INFINITE
-                start()
+            refreshAnimator?.run {
+                if (!isRunning) {
+                    repeatCount = ObjectAnimator.INFINITE
+                    start()
+                }
             }
         }
     }
 
     override fun onScanEnd() {
         runOnUiThread {
-            if (refreshAnimator.isRunning)
-                refreshAnimator.repeatCount = 1
+            refreshAnimator?.run {
+                if (isRunning)
+                    repeatCount = 1
+            }
         }
     }
 
@@ -198,7 +210,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             customView(R.layout.dialog_esp_wifi)
             negativeButton(R.string.dialogEspWiFiDisagree) { it.dismiss() }
             positiveButton(R.string.dialogEspWiFiAgree) {
-                espConnectivity.run {
+                espConnectivity?.run {
                     setCurrentSetupSsid(dialogEspWiFiSsid.text.toString())
                     setCurrentSetupPsk(dialogEspWiFiPassword.text.toString())
 
@@ -206,10 +218,10 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
                 }
             }
 
-            dialogEspWiFiSsid.setText(espConnectivity.getCurrentSetupSsid())
+            dialogEspWiFiSsid.setText(espConnectivity?.getCurrentSetupSsid())
             dialogEspWiFiPassword.run {
                 inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD.or(InputType.TYPE_CLASS_TEXT)
-                setText(espConnectivity.getCurrentSetupPsk())
+                setText(espConnectivity?.getCurrentSetupPsk())
             }
 
             dialogEspWiFiShowPassword.run {

@@ -1,3 +1,4 @@
+const _        = require("underscore")
 const realpath = __dirname + "/../../"
 const jwt      = require("jsonwebtoken")
 const fs       = require("fs")
@@ -34,15 +35,38 @@ function notifyUnauthorized(socket) {
     }
 }
 
+function removeSocketModules(socket) {
+    if (typeof espModules[socket.id] != "undefined")
+        delete espModules[socket.id]
+}
+
 module.exports = ({ server, io, host, port }) => {
-    function listen(appIns) {
+    function socketOnEvent(appIns) {
         appInstance = appIns
+
+        _.each(io.nsps, nsp => {
+            nsp.on("connect", socket => {
+                if (!socket.auth) {
+                    console.log("Removing socket from ", nsp.name)
+                    delete nsp.connected[socket.id]
+                }
+            })
+        })
+
         io.on("connection", socket => {
             socket.auth   = false
-
             console.log("[esp] Connect: " + socket.id)
-            socket.on("disconnect", () => console.log("[esp] Disconnect: " + socket.id))
+
+            socket.on("disconnect", () => {
+                console.log("[esp] Disconnect: " + socket.id)
+                removeSocketModules(socket)
+                appInstance.notify.modules()
+            })
+
             socket.on("authenticate", data => {
+                if (socket.auth)
+                    return
+
                 if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
                     return
 
@@ -56,6 +80,15 @@ module.exports = ({ server, io, host, port }) => {
                         console.log("[esp] Authenticated socket ", socket.id)
                         socket.auth = true
                         socket.emit("authenticate", "authorized")
+
+                        _.each(io.nsps, nsp => {
+                            if (_.findWhere(nsp.sockets, { id: socket.id })) {
+                                console.log("[esp] Restoring socket to: ", nsp.name)
+                                nsp.connected[socket.id] = socket
+                            }
+                        })
+
+                        appInstance.notify.modules()
                     } else {
                         notifyUnauthorized(socket)
                     }
@@ -85,8 +118,11 @@ module.exports = ({ server, io, host, port }) => {
                 notifyUnauthorized(socket)
             }, 1000);
         })
+    }
 
+    function listen(appIns) {
         server.listen(port, host, () => console.log("[esp] Listen server: " + host + ":" + port))
+        socketOnEvent(appIns)
     }
 
     return {

@@ -26,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity(),
     WavesView.OnBackClickListener, WavesView.OnMenuItemClickListener
 {
     private   var rootView    : View? = null
-    protected var preferences : SharedPreferences = TODO()
+    protected var preferences : SharedPreferences = SharedPreferences()
 
     companion object {
         const val FETCH_ROOM_TYPE = 1

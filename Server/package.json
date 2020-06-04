@@ -26,7 +26,8 @@
     "mime-types": "^2.1.26",
     "socket.io": "^2.3.0",
     "sync-request": "^6.1.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "underscore": "^1.10.2"
   },
   "devDependencies": {
     "node-watch": "^0.6.3",

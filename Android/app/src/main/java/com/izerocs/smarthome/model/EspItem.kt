@@ -33,7 +33,8 @@ class EspItem {
 
     constructor(scan : ScanResult) : this(scan.SSID, scan.level, scan.capabilities)
 
-    constructor(ssid : String, level : Int, capabilities : String) {
+    constructor(ssid : String, level : Int = SIGNAL_MAX, capabilities : String = "") {
+        this.sn     = ssid
         this.ssid   = ssid
         this.level  = level
         this.signal = calculateSignalLevel(level)
