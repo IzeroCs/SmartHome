@@ -34,6 +34,10 @@ class ListEspView(context : Context, attributeSet: AttributeSet) : RecyclerView(
         return (adapter as ListEspAdapter).get(position)
     }
 
+    fun size() : Int {
+        return (adapter as ListEspAdapter).itemCount
+    }
+
     fun setOnItemClickListener(listener : ListEspAdapter.OnItemClickListener) :
             Unit = (adapter as ListEspAdapter).setOnItemClickListener(listener)
 

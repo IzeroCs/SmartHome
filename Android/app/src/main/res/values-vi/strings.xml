@@ -40,7 +40,7 @@
     <string name="listEspScanFailed">Quét thất bại</string>
     <string name="listEspSsidDefault">SSID</string>
     <string name="listEspScanTitle">Mô-đun đã quét</string>
-    <string name="listEspConnectedTitle">Mô-đun đã kết nối</string>
+    <string name="listEspConnectedTitle">Mô-đun đã kết nối (${count})</string>
     <string name="listEspScanEmpty">Không quét thấy mô-đun</string>
     <string name="listEspConnectedEmpty">Không có mô-đun kết nối</string>
     <string name="dialogEspWiFi">Thiết lập WiFi cho mô-đun</string>

@@ -13,7 +13,7 @@ private:
     const int MAX_COUNT_READY_SMART_CONFIG   = 10;
     const int MAX_COUNT_SMART_DONE_FAILED    = 20;
     const int MAX_COUNT_RESTART_SMART_CONFIG = 40;
-    const int MAX_COUNT_RECONNECT_STATION    = 10;
+    const int MAX_COUNT_RECONNECT_STATION    = 20;
 
     bool isSmartConfig;
     bool isDoneSmartConfig;

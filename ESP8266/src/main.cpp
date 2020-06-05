@@ -10,7 +10,7 @@
 bool isPrintConnect;
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10   },
-    { millis(), 1000  },
+    { millis(), 1000 },
     { millis(), 5000 }
 };
 

@@ -77,7 +77,16 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         return esps.size
     }
 
-    fun add(item : EspItem) : Boolean = esps.add(item)
+    fun add(item : EspItem) : Boolean {
+        esps.forEachIndexed { index, esp ->
+            if (esp.getSsid() == item.getSsid()) {
+                esps[index] = item
+                return@add false
+            }
+        }
+
+        return esps.add(item)
+    }
 
     fun clear() : Unit = esps.clear()
 

@@ -23,6 +23,7 @@ import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_esp.*
 import kotlinx.android.synthetic.main.dialog_esp_wifi.*
+import org.json.JSONObject
 
 /**
  * Created by IzeroCs on 2020-04-30
@@ -107,12 +108,31 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     }
 
     override fun onSocketConnect(socket : Socket) {
-        socket.on("esp.list") {
-            Log.d(TAG, "Esp list: " + it.toList().toString())
+        Log.d(TAG, "onSocketConnect")
 
-            it.forEach { esp -> listEspConnected.add(EspItem(esp.toString())) }
-            runOnUiThread { listEspConnected.notifyDataSetChanged() }
-        }
+        socket.on("esp.list") {
+            if (it.isEmpty() || it[0] !is JSONObject)
+                return@on
+
+            (it[0] as JSONObject).let { lists ->
+                listEspConnected.clear()
+
+                lists.keys().forEach { espName ->
+                    val esp : JSONObject = lists[espName.toString()] as JSONObject
+
+                    Log.d(TAG, "ESP: $espName")
+                    Log.d(TAG, esp.toString())
+
+                    listEspConnected.add(EspItem(espName.toString()))
+                }
+            }
+
+            runOnUiThread {
+                listEspConnected.notifyDataSetChanged()
+                listEspConnectedTitle.text = getString(R.string.listEspConnectedTitle)
+                    .replace("\${count}", listEspConnected.size().toString())
+            }
+        }.emit("esp.list")
     }
 
     override fun onClick(v : View?) {

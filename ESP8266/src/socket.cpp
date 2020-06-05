@@ -1,3 +1,4 @@
+#include "network.h"
 #include "socket.h"
 #include "io.h"
 
@@ -31,7 +32,10 @@ void SocketClass::loopSyncIO() {
         array += "\"" + datas.at(i).toString() + "\"";
     }
 
-    io.emit("sync-io", {{ "io", "[" + array + "]" }});
+    io.emit("sync.io", {{ "io", "[" + array + "]" }});
+    io.emit("sync.detail", {
+        { "signal", Network.getRSSI() }
+    });
 }
 
 void SocketClass::onEvent(const char * event, const char * payload, size_t length) {
@@ -43,7 +47,7 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
             Serial.println("[Socket] Connect");
 
         io.emit("authenticate", {
-            { "id", Profile.getSn() },
+            { "id", Profile.getSn() + Profile.getSc() },
             { "token", token }
         });
     } else if (evt == "disconnect") {

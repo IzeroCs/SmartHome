@@ -73,7 +73,7 @@ module.exports = ({ server, io, host, port }) => {
                 if (!data.id.startsWith("ESP"))
                     return
 
-                espModules[data.id] = {}
+                espModules[data.id] = { pins: {}, detail: {} }
                 socket.id = data.id
                 tokenVerify(data.token, (err, authorized) => {
                     if (!err && authorized) {
@@ -109,9 +109,19 @@ module.exports = ({ server, io, host, port }) => {
 
                     try {
                         pinObj = JSON.parse(pinData)
-                        espModules[socket.id] = pinObj
+                        espModules[socket.id].pins = pinObj
                     } catch (e) {}
                 }
+            })
+
+            socket.on("sync.detail", data => {
+                if (!socket.auth || typeof data == "undefined")
+                    return
+
+                if (typeof data.signal == "undefined")
+                    return
+
+                espModules[socket.id].detail = data
             })
 
             setTimeout(() => {
