@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
+import com.izerocs.smarthome.model.EspItem
 import org.json.JSONObject
 
 /**
@@ -25,6 +26,8 @@ class SmartApplication : Application() {
 
     private var currentActivity : BaseActivity? = null
     private var currentSocket   : Socket        = initSocket()
+    private val espModules      : MutableMap <String,
+            EspItem> = mutableMapOf()
 
     companion object {
         const val TAG = "SmartApplication"
@@ -106,12 +109,74 @@ class SmartApplication : Application() {
                     currentSocket.connect()
                 }.run()
             }
+
+            on("esp.list") { array ->
+                if (array.isEmpty() || array[0] !is JSONObject)
+                    return@on
+
+                (array[0] as JSONObject).let { lists ->
+                    lists.keys().forEach { key ->
+                        val espName = key.toString()
+                        val esp     = lists.getJSONObject(espName)
+                        val pins    = esp.getJSONArray("pins")
+                        val detail  = esp.getJSONObject("detail")
+                        val item    = if (espModules.containsKey(espName))
+                            espModules[espName]
+                        else
+                            EspItem(espName)
+
+                        item?.run {
+                            espModules[espName] = this
+
+                            if (detail.has("signal"))
+                                setSignal(detail.getInt("signal"))
+
+                            setFilter(true)
+                            getListPins().let { listPins ->
+                                listPins.clear()
+
+                                for (i in 0 until pins.length()) {
+                                    val pin = pins.getJSONObject(i)
+
+                                    var input           : Int     = 0
+                                    var outputType      : Int     = 0
+                                    var outputPrimary   : Int     = 0
+                                    var outputSecondary : Int     = 0
+                                    var status          : Boolean = false
+
+                                    if (pin.has("input"))
+                                        input = pin.getInt("input")
+
+                                    if (pin.has("outputType"))
+                                        outputType = pin.getInt("outputType")
+
+                                    if (pin.has("outputPrimary"))
+                                        outputPrimary = pin.getInt("outputPrimary")
+
+                                    if (pin.has("outputSecondary"))
+                                        outputSecondary = pin.getInt("outputSecondary")
+
+                                    if (pin.has("status"))
+                                        status = pin.getInt("status") == 1
+
+                                    listPins.add(EspItem.EspDataPin(input, outputType,
+                                        outputPrimary, outputSecondary, status))
+                                }
+                            }
+                        }
+                    }
+                }
+
+                espModules.entries.retainAll { entry -> entry.value.isFilterSet() }
+                currentActivity?.onEspModules(this, espModules)
+            }.emit("esp.list")
         }
     }
 
     fun setCurrentActivity(activity : BaseActivity?) {
         currentActivity = activity
         currentActivity?.onSocketConnect(currentSocket)
+        currentActivity?.onEspModules(currentSocket, espModules)
     }
 
     fun getCurrentActivity() : BaseActivity? {

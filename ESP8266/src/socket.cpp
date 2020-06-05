@@ -18,23 +18,20 @@ void SocketClass::loopSyncIO() {
     if (!io.isConnect())
         return;
 
-    std::vector<IOData> datas = IO.getIODatas();
-    IOData data;
+    std::map<IOPin_t, IOData> datas = IO.getIODatas();
+    std::map<IOPin_t, IOData>::iterator it;
     String array = "";
-    uint8_t size = datas.size();
-    uint8_t i    = 0;
 
-    for (i = 0; i < size; ++i) {
-        data = datas.at(i);
-        if (i > 0)
+    for (it = datas.begin(); it != datas.end(); ++it) {
+        if (it->first != IOPin_0)
             array += ",";
 
-        array += "\"" + datas.at(i).toString() + "\"";
+        array += "\"" + it->second.toString() + "\"";
     }
 
     io.emit("sync.io", {{ "io", "[" + array + "]" }});
     io.emit("sync.detail", {
-        { "signal", Network.getRSSI() }
+        { "rssi", Network.getRSSI() }
     });
 }
 

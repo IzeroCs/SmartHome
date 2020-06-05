@@ -1,7 +1,6 @@
 package com.izerocs.smarthome.model
 
 import android.net.wifi.ScanResult
-import android.net.wifi.WifiManager
 
 /**
  * Created by IzeroCs on 2020-05-03
@@ -10,15 +9,24 @@ class EspItem {
     private var ssid   : String = ""
     private var sn     : String = ""
     private var sc     : String = ""
-    private var level  : Int    = 0
+
+    private var rssi   : Int    = 0
     private var signal : Int    = 0
+
+    private var isFilter     : Boolean = false
     private var capabilities : String = ""
 
+    private var listPins     : MutableList<EspDataPin> = mutableListOf()
+
     data class EspDataItem(val ssid : String, val level : Int, val capabilities : String)
+    data class EspDataPin(var input : Int, var outputType : Int, var outputPrimary : Int,
+                          var outputSecondary : Int, var status : Boolean)
 
     companion object {
         const val SIGNAL_MIN = 0
-        const val SIGNAL_MAX = 4
+        const val SIGNAL_MAX = 5
+        const val RSSI_MIN   = -100
+        const val RSSI_MAX   = -55
 
         private val patternSsid = "^(ESP[a-z0-9]+)(SC[a-z0-9]+)$".toRegex(RegexOption.IGNORE_CASE)
 
@@ -26,18 +34,28 @@ class EspItem {
             return patternSsid.matches(ssid)
         }
 
-        fun calculateSignalLevel(level : Int) : Int {
-            return WifiManager.calculateSignalLevel(level, SIGNAL_MAX)
+        fun calculateSignalLevel(rssi : Int, numLevels : Int = SIGNAL_MAX) : Int {
+            return when {
+                rssi <= RSSI_MIN -> SIGNAL_MIN
+                rssi >= RSSI_MAX -> numLevels - 1
+
+                else -> {
+                    val inputRange  : Float = (RSSI_MAX - RSSI_MIN).toFloat()
+                    val outputRange : Float = (numLevels - 1).toFloat()
+
+                    ((rssi - RSSI_MIN).toFloat() * outputRange / inputRange).toInt()
+                }
+            }
         }
     }
 
     constructor(scan : ScanResult) : this(scan.SSID, scan.level, scan.capabilities)
 
-    constructor(ssid : String, level : Int = SIGNAL_MAX, capabilities : String = "") {
+    constructor(ssid : String, rssi : Int = RSSI_MAX, capabilities : String = "") {
         this.sn     = ssid
         this.ssid   = ssid
-        this.level  = level
-        this.signal = calculateSignalLevel(level)
+        this.rssi   = rssi
+        this.signal = calculateSignalLevel(this.rssi)
         this.capabilities = capabilities
 
         patternSsid.find(ssid)?.run {
@@ -48,27 +66,32 @@ class EspItem {
         }
     }
 
-    fun getSsid() : String {
-        return ssid
+    fun getSsid() : String = this.ssid
+    fun getSignal() : Int = this.signal
+    fun getSn() : String = this.sn
+    fun getSc() : String = this.sc
+    fun isFilter() : Boolean = this.isFilter
+    fun getListPins() : MutableList<EspDataPin> = this.listPins
+    fun toData() : EspDataItem = EspDataItem(ssid, rssi, capabilities)
+
+    fun isFilterSet() : Boolean {
+        val isFilter = this.isFilter
+
+        if (isFilter)
+            this.isFilter = false
+
+        return isFilter
     }
 
-    fun getSignal() : Int {
-        return signal
-    }
-
-    fun getSn() : String {
-        return sn
-    }
-
-    fun getSc() : String {
-        return sc
-    }
-
-    fun toData() : EspDataItem {
-        return EspDataItem(ssid, level, capabilities)
+    fun setSsid(ssid : String) { this.ssid = ssid }
+    fun setFilter(isFilter : Boolean) { this.isFilter = isFilter }
+    fun setSignal(rssi : Int) {
+        this.rssi   = rssi
+        this.signal = calculateSignalLevel(rssi)
     }
 
     override fun toString() : String {
-        return "${super.toString()} { ssid: $ssid, sn: $sn, sc: $sc, level: $level, signal: $signal, capabilities: $capabilities }"
+        return "${super.toString()} " +
+               "{ ssid: $ssid, sn: $sn, sc: $sc, rssi: $rssi, signal: $signal, capabilities: $capabilities }"
     }
 }

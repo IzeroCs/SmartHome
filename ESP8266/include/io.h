@@ -4,6 +4,7 @@
 using namespace std;
 
 #include <Arduino.h>
+#include <map>
 #include <vector>
 
 #include "record.h"
@@ -11,24 +12,37 @@ using namespace std;
 #include "input.h"
 
 typedef enum {
-    Input_ALL,
-    Input_SINGLE,
-    Input_DOUBLE,
-    Input_ALTERNATE
-} Input_t;
+    IOType_DOUBLE,
+    IOType_SINGLE,
+    IOType_ALTERNATE,
+    IOType_DISABLE,
+    IOType_NULL
+} IOType_t;
+
+typedef enum {
+    IOPin_0    = 0,
+    IOPin_1    = 1,
+    IOPin_2    = 2,
+    IOPin_3    = 3,
+    IOPin_4    = 4,
+    IOPin_5    = 5,
+    IOPin_6    = 6,
+    IOPin_7    = 7,
+    IOPin_NULL = 8
+} IOPin_t;
 
 struct IOData {
-    uint8_t input;
-    Input_t inputType;
-
-    uint8_t outputPrimary;
-    uint8_t outputSecondary;
+    IOPin_t input;
+    IOType_t outputType;
+    IOPin_t outputPrimary;
+    IOPin_t outputSecondary;
 
     bool status;
+    bool statusPrev;
 
     String toString() {
         return "input=" + String(input) + "," +
-               "inputType=" + String(inputType) +  "," +
+               "outputType=" + String(outputType) +  "," +
                "outputPrimary=" + String(outputPrimary) + "," +
                "outputSecondary=" + String(outputSecondary) + "," +
                "status=" + String(status);
@@ -38,32 +52,23 @@ struct IOData {
 class IOClass {
 private:
     const bool DEBUG = true;
+    const String  SPLIT = "|";
 
-    const uint8_t IO_PIN_0 = 1;
-    const uint8_t IO_PIN_1 = 2;
-    const uint8_t IO_PIN_2 = 4;
-    const uint8_t IO_PIN_3 = 8;
-    const uint8_t IO_PIN_4 = 16;
-    const uint8_t IO_PIN_5 = 32;
-    const uint8_t IO_PIN_6 = 64;
-    const uint8_t IO_PIN_7 = 128;
-    const String  SPLIT    = "|";
+    std::map<IOPin_t, IOData> datas;
 
-    vector<IOData> datas;
-
-    Input_t parseInputType(uint8_t type) {
+    IOType_t parseOutputType(uint8_t type) {
         switch (type) {
-            case (uint8_t)Input_ALL:
-                return Input_ALL;
+            case (uint8_t)IOType_DOUBLE:
+                return IOType_DOUBLE;
 
-            case (uint8_t)Input_DOUBLE:
-                return Input_DOUBLE;
+            case (uint8_t)IOType_ALTERNATE:
+                return IOType_ALTERNATE;
 
-            case (uint8_t)Input_ALTERNATE:
-                return Input_ALTERNATE;
+            case (uint8_t)IOType_DISABLE:
+                return IOType_DISABLE;
         }
 
-        return Input_SINGLE;
+        return IOType_SINGLE;
     }
 
     IOData parseData(String record) {
@@ -99,19 +104,19 @@ private:
 
                 switch (caseIndex++) {
                     case 0:
-                        data.input = res;
+                        data.input = (IOPin_t)res;
                         break;
 
                     case 1:
-                        data.inputType = parseInputType(res);
+                        data.outputType = parseOutputType(res);
                         break;
 
                     case 2:
-                        data.outputPrimary = res;
+                        data.outputPrimary = (IOPin_t)res;
                         break;
 
                     case 3:
-                        data.outputSecondary = res;
+                        data.outputSecondary = (IOPin_t)res;
                         break;
 
                     case 4:
@@ -129,11 +134,15 @@ private:
         return data;
     }
 
-    IOData initData(uint8_t input, Input_t inputType, uint8_t outputPrimary, uint8_t outputSecondary, bool status) {
+    IOData initData(uint8_t input, IOType_t outputType, uint8_t outputPrimary, uint8_t outputSecondary, bool status) {
+        return initData((IOPin_t)input, outputType, (IOPin_t)outputPrimary, (IOPin_t)outputSecondary, status);
+    }
+
+    IOData initData(IOPin_t input, IOType_t outputType, IOPin_t outputPrimary, IOPin_t outputSecondary, bool status) {
         IOData data;
 
         data.input           = input;
-        data.inputType       = inputType;
+        data.outputType      = outputType;
         data.outputPrimary   = outputPrimary;
         data.outputSecondary = outputSecondary;
         data.status          = status;
@@ -143,7 +152,7 @@ private:
 
     void storeData(uint8_t id, IOData data) {
         String buffer  = String(data.input)  + SPLIT;
-               buffer += String(data.inputType) + SPLIT;
+               buffer += String(data.outputType) + SPLIT;
                buffer += String(data.outputPrimary) + SPLIT;
                buffer += String(data.outputSecondary) + SPLIT;
                buffer += String(data.status);
@@ -155,7 +164,12 @@ public:
     void begin();
     void loop();
 
-    vector<IOData> getIODatas() {
+    void setIOData(IOPin_t pin, IOType_t outputType = IOType_NULL,
+        IOPin_t outputSecondary = IOPin_NULL);
+
+    void setIOPinStatus(IOPin_t pin, bool status);
+
+    std::map<IOPin_t, IOData> getIODatas() {
         return datas;
     }
 };

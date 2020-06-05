@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
+import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -29,6 +30,7 @@ abstract class BaseActivity : AppCompatActivity(),
     protected var preferences : SharedPreferences = SharedPreferences()
 
     companion object {
+        const val TAG = "BaseActivity"
         const val FETCH_ROOM_TYPE = 1
     }
 
@@ -63,6 +65,10 @@ abstract class BaseActivity : AppCompatActivity(),
 
     open fun onSocketConnect(socket : Socket) {
         RoomType.fetchTypes(this, socket, ::onFetched)
+    }
+
+    open fun onEspModules(socket : Socket, espModules : MutableMap<String, EspItem>) {
+        TODO()
     }
 
     @MenuRes

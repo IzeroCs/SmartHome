@@ -1,3 +1,8 @@
+const MIN_RSSI = -100
+const MAX_RSSI = -55
+const MIN_SIGNAL = 0
+const MAX_SIGNAL = 5
+
 const _        = require("underscore")
 const realpath = __dirname + "/../../"
 const jwt      = require("jsonwebtoken")
@@ -25,6 +30,47 @@ function tokenVerify(token, callback) {
 
         callback(err, false)
     })
+}
+
+function validateDetail(data) {
+    if (typeof data === "undefined") {
+        data = {
+            detail: {
+                signal: -100
+            }
+        }
+    }
+
+    if (typeof data.signal === "undefined")
+        data["signal"] = -100
+
+    return data
+}
+
+function calculateSignalLevel(rssi, numLevels) {
+    if (!numLevels)
+        numLevels = MAX_SIGNAL
+
+    if (rssi <= MIN_RSSI)
+        return MIN_RSSI
+
+    if (rssi >= MAX_RSSI)
+        return numLevels -1
+
+    let inputRange  = (MAX_RSSI - MIN_RSSI)
+    let outputRange = (numLevels - 1)
+
+    return Math.ceil((rssi - MIN_RSSI) * outputRange / inputRange)
+}
+
+function detailHasChanged(oldDetail, newDetail) {
+    let oldSignal = calculateSignalLevel(oldDetail.signal)
+    let newSignal = calculateSignalLevel(newDetail.signal)
+
+    if (oldSignal != newSignal)
+        return true
+
+    return false
 }
 
 function notifyUnauthorized(socket) {
@@ -73,7 +119,11 @@ module.exports = ({ server, io, host, port }) => {
                 if (!data.id.startsWith("ESP"))
                     return
 
-                espModules[data.id] = { pins: {}, detail: {} }
+                espModules[data.id] = {
+                    pins   : [],
+                    detail : {}
+                }
+
                 socket.id = data.id
                 tokenVerify(data.token, (err, authorized) => {
                     if (!err && authorized) {
@@ -99,8 +149,10 @@ module.exports = ({ server, io, host, port }) => {
                 if (!socket.auth || typeof data == "undefined" || typeof data.io != "object")
                     return
 
-                let pinData;
-                let pinObj;
+                let pinData  = null
+                let pinObj   = null
+                let pinLists = []
+                let status   = "";
 
                 for (let i = 0; i < data.io.length; ++i) {
                     pinData = data.io[i].replace(/\=/g, ":")
@@ -109,19 +161,29 @@ module.exports = ({ server, io, host, port }) => {
 
                     try {
                         pinObj = JSON.parse(pinData)
-                        espModules[socket.id].pins = pinObj
+                        pinLists.push(pinObj)
+
+                        status += "Pin[" + pinObj.input + "]: " + pinObj.status + ", "
                     } catch (e) {}
                 }
+
+                console.log(status)
+
+                if (typeof espModules[socket.id] == "object")
+                    espModules[socket.id]["pins"] = pinLists
             })
 
             socket.on("sync.detail", data => {
-                if (!socket.auth || typeof data == "undefined")
+                if (!socket.auth)
                     return
 
-                if (typeof data.signal == "undefined")
-                    return
+                var oldDetail = validateDetail(espModules[socket.id].detail)
+                var newDetail = validateDetail(data)
 
-                espModules[socket.id].detail = data
+                espModules[socket.id].detail = newDetail
+
+                if (detailHasChanged(oldDetail, newDetail))
+                    appInstance.notify.modules()
             })
 
             setTimeout(() => {

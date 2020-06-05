@@ -27,11 +27,11 @@ void setup() {
 void timer(int position) {
     switch (position) {
         case 0:
-            IO.loop();
             Network.loop();
             break;
 
         case 1:
+            IO.loop();
             Network.loopWait();
             break;
 
@@ -44,6 +44,8 @@ void timer(int position) {
             } else {
                 isPrintConnect = false;
             }
+
+            Serial.println("[Main] Heap: " + String(ESP.getFreeHeap()));
             break;
     }
 }

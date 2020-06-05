@@ -14,7 +14,7 @@ const io = {
     app: require("socket.io")(server.app),
     esp: require("socket.io")(server.esp, {
         pingTimeout: 12000,
-        pingInterval: 1000
+        pingInterval: 100
     })
 }
 
