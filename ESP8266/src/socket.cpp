@@ -29,10 +29,16 @@ void SocketClass::loopSyncIO() {
         array += "\"" + it->second.toString() + "\"";
     }
 
-    io.emit("sync.io", {{ "io", "[" + array + "]" }});
+    io.emit("sync.io", {
+        { "io", "[" + array + "]" },
+        { "io_changed", String(IO.isIoStatusChanged()) }
+    });
+
     io.emit("sync.detail", {
         { "rssi", Network.getRSSI() }
     });
+
+    IO.setIoStatusChanged(false);
 }
 
 void SocketClass::onEvent(const char * event, const char * payload, size_t length) {

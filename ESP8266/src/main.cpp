@@ -10,7 +10,7 @@
 bool isPrintConnect;
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10   },
-    { millis(), 1000 },
+    { millis(), 200 },
     { millis(), 5000 }
 };
 
@@ -27,11 +27,11 @@ void setup() {
 void timer(int position) {
     switch (position) {
         case 0:
+            IO.loop();
             Network.loop();
             break;
 
         case 1:
-            IO.loop();
             Network.loopWait();
             break;
 

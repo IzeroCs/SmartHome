@@ -8,6 +8,7 @@ const realpath = __dirname + "/../../"
 const jwt      = require("jsonwebtoken")
 const fs       = require("fs")
 const query    = require("querystring")
+const clc      = require("cli-color")
 const payload  = require(realpath + "assets/esp8266/payload.json")
 
 let appInstance;
@@ -121,7 +122,9 @@ module.exports = ({ server, io, host, port }) => {
 
                 espModules[data.id] = {
                     pins   : [],
-                    detail : {}
+                    detail : {},
+
+                    io_changed: false
                 }
 
                 socket.id = data.id
@@ -146,13 +149,17 @@ module.exports = ({ server, io, host, port }) => {
             })
 
             socket.on("sync.io", data => {
-                if (!socket.auth || typeof data == "undefined" || typeof data.io != "object")
+                if (!socket.auth || typeof data === "undefined")
                     return
 
-                let pinData  = null
-                let pinObj   = null
-                let pinLists = []
-                let status   = "";
+                if (typeof data.io === "undefined" || typeof data.io_changed === "undefined")
+                    return
+
+                let pinData    = null
+                let pinObj     = null
+                let pinLists   = []
+                let status     = "";
+                let ioChanged  = parseInt(data.io_changed) === 1
 
                 for (let i = 0; i < data.io.length; ++i) {
                     pinData = data.io[i].replace(/\=/g, ":")
@@ -163,14 +170,26 @@ module.exports = ({ server, io, host, port }) => {
                         pinObj = JSON.parse(pinData)
                         pinLists.push(pinObj)
 
-                        status += "Pin[" + pinObj.input + "]: " + pinObj.status + ", "
+                        if (i != 0)
+                            status += " - "
+
+                        status += "[" + pinObj.input + ":" + (pinObj.status == 1 ? clc.green("high") : clc.red("low")) + "]"
                     } catch (e) {}
                 }
 
-                console.log(status)
+                status += " - [io:" + (ioChanged ? clc.green("changed") : clc.red("idle")) + "]"
 
-                if (typeof espModules[socket.id] == "object")
-                    espModules[socket.id]["pins"] = pinLists
+                process.stdout.clearLine()
+                process.stdout.cursorTo(0)
+                process.stdout.write(status)
+
+                if (typeof espModules[socket.id] === "object") {
+                    espModules[socket.id]["pins"]       = pinLists
+                    espModules[socket.id]["io_changed"] = ioChanged
+
+                    if (ioChanged)
+                        appInstance.notify.modules()
+                }
             })
 
             socket.on("sync.detail", data => {

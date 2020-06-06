@@ -1,3 +1,4 @@
+#include "io.h"
 #include "output.h"
 
 void OutputClass::begin() {
@@ -6,20 +7,14 @@ void OutputClass::begin() {
     pinMode(DATA_PIN, OUTPUT);
 }
 
-bool s1 = false;
-bool s2 = true;
-
 void OutputClass::loop() {
     byte data = B00000000;
 
-    if (s1 && !s2) {
-        data = B00000001;
-        s1 = false;
-        s2 = true;
-    } else if (!s1 && s2) {
-        data = B00000010;
-        s1 = true;
-        s2 = false;
+    for (uint8_t pin = 0; pin < 8; ++pin) {
+        if (IO.getIOPinStatus((IOPin_t)pin))
+            bitWrite(data, pin, 1);
+        else
+            bitWrite(data, pin, 0);
     }
 
     digitalWrite(SDA_PIN, LOW);

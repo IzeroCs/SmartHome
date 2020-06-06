@@ -27,7 +27,8 @@
     "socket.io": "^2.3.0",
     "sync-request": "^6.1.0",
     "jsonwebtoken": "^8.5.1",
-    "underscore": "^1.10.2"
+    "underscore": "^1.10.2",
+    "cli-color": "^2.0.0"
   },
   "devDependencies": {
     "node-watch": "^0.6.3",
