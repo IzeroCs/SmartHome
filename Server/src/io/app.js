@@ -1,14 +1,14 @@
 const socket = require("../socket")
 const cert   = require("../security/cert")("app")
-const esp    = require("./esp")
 const tag    = "[app]"
+let esp      = require("./esp")
 let server   = null
 let io       = null
 let host     = null
 let port     = null
 
 let ons = {
-    "disconnect": socketio => console.log("[app] Disconnect: " + socketio.id),
+    "disconnect": socketio => console.log(tag, "Disconnect: " + socketio.id),
     "authenticate": (socketio, data) => {
         if (socketio.auth)
             return
@@ -21,7 +21,7 @@ let ons = {
 
         cert.verify(data.token, (err, authorized) => {
             if (!err && authorized) {
-                console.log(tag + " Authenticated socket ", socketio.id)
+                console.log(tag, "Authenticated socket ", socketio.id)
                 socketio.auth = true
                 socketio.emit("authenticate", "authorized")
 
@@ -58,6 +58,7 @@ let ons = {
 }
 
 module.exports = (_server, _io, _host, _port) => {
+    esp    = require("./esp")
     server = _server
     io     = _io
     host   = _host
@@ -71,7 +72,7 @@ module.exports.socketOn = () => {
         let size = keys.length
 
         socketio.auth = false
-        console.log(tag + " Connect: " + socketio.id)
+        console.log(tag, "Connect: " + socketio.id)
 
         for (let i = 0; i < size; ++i)
             socketio.on(keys[i], data => ons[keys[i]](socketio, data))
@@ -85,21 +86,24 @@ module.exports.socketOn = () => {
 module.exports.listen = () => {
     module.exports.socketOn()
     server.listen(port, host,
-        () => console.log(tag + " Listen server: " + host + ":" + port))
+        () => console.log(tag, "Listen server: " + host + ":" + port))
 }
 
 module.exports.notify = {
     unauthorized: (socketio) => {
         if (!socketio.auth) {
-            console.log(tag + " Disconnect socket ", socketio.id)
+            console.log(tag, "Disconnect socket: ", socketio.id)
             socketio.emit("authenticate", "unauthorized")
             socketio.disconnect("unauthorized")
         }
     },
 
     espModules: (socketio) => {
-        if (socketio.auth) {
-            console.log(tag + " Notify esp modules")
+        if (socketio) {
+            if (socketio.auth)
+                socketio.emit("esp.list", esp.modules)
+        } else {
+            io.sockets.emit("esp.list", esp.modules)
         }
     }
 }
