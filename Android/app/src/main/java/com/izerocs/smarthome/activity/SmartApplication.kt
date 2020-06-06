@@ -65,7 +65,7 @@ class SmartApplication : Application() {
     }
 
     private fun initSocket() : Socket {
-        return IO.socket("http://192.168.31.104:3180", socketOptions)
+        return IO.socket("http://192.168.42.193:3180", socketOptions)
             .apply { onSocketEvent(this) }
     }
 

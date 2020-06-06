@@ -28,7 +28,8 @@
     "sync-request": "^6.1.0",
     "jsonwebtoken": "^8.5.1",
     "underscore": "^1.10.2",
-    "cli-color": "^2.0.0"
+    "cli-color": "^2.0.0",
+    "mongodb": "^3.5.8"
   },
   "devDependencies": {
     "node-watch": "^0.6.3",

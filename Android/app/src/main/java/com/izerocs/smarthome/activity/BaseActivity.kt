@@ -68,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     open fun onEspModules(socket : Socket, espModules : MutableMap<String, EspItem>) {
-        TODO()
+
     }
 
     @MenuRes

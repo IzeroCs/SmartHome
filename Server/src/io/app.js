@@ -1,128 +1,112 @@
-const _        = require("underscore")
-const realpath = __dirname + "/../../"
-const jwt      = require("jsonwebtoken")
-const fs       = require("fs")
-const payload  = require(realpath + "assets/app/payload.json")
+const socket = require("../socket")
+const cert   = require("../security/cert")("app")
+const esp    = require("./esp")
+const tag    = "[app]"
+let server   = null
+let io       = null
+let host     = null
+let port     = null
 
-let espInstance
-let devices = {}
-let certPrivate = fs.readFileSync(realpath + "assets/app/private.key")
-let certPublic  = fs.readFileSync(realpath + "assets/app/public.key")
-let token = jwt.sign(payload, certPrivate, { algorithm: "RS256" })
+let ons = {
+    "disconnect": socketio => console.log("[app] Disconnect: " + socketio.id),
+    "authenticate": (socketio, data) => {
+        if (socketio.auth)
+            return
 
-function tokenVerify(token, callback) {
-    jwt.verify(token, certPublic, (err, decoded) => {
-        if (!err) {
-            if (typeof decoded.name != "string" || decoded.name != payload.name)
-                return
+        if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
+            return
 
-            if (typeof decoded.sub != "string" || decoded.sub != payload.sub)
-                return
+        if (!data.id.startsWith("APP"))
+            return
 
-            return callback(err, true)
-        }
+        cert.verify(data.token, (err, authorized) => {
+            if (!err && authorized) {
+                console.log(tag + " Authenticated socket ", socketio.id)
+                socketio.auth = true
+                socketio.emit("authenticate", "authorized")
 
-        callback(err, false)
+                module.exports.notify.espModules(socketio)
+            } else {
+                module.exports.notify.unauthorized(socketio)
+            }
+        })
+    },
+
+    "esp.list": (socketio) => {
+        if (!socket.auth)
+            return module.exports.notify.unauthorized(socketio)
+
+        module.exports.notify.espModules(socketio)
+    },
+
+    "room.types": (socketio) => {
+        if (!socketio.auth)
+            return module.exports.notify.unauthorized(socketio)
+
+        socketio.emit("room.types", [
+            "living_room",
+            "bed_room",
+            "kitchen_room",
+            "bath_room",
+            "balcony_room",
+            "stairs_room",
+            "fence_room",
+            "mezzanine_room",
+            "roof_room"
+        ])
+    }
+}
+
+module.exports = (_server, _io, _host, _port) => {
+    server = _server
+    io     = _io
+    host   = _host
+    port   = _port
+}
+
+module.exports.socketOn = () => {
+    socket.removingSocket(io, tag)
+    io.on("connection", socketio => {
+        let keys = Object.keys(ons)
+        let size = keys.length
+
+        socketio.auth = false
+        console.log(tag + " Connect: " + socketio.id)
+
+        for (let i = 0; i < size; ++i)
+            socketio.on(keys[i], data => ons[keys[i]](socketio, data))
+
+        setTimeout(() => {
+            module.exports.notify.unauthorized(socketio)
+        }, 1000);
     })
 }
 
-function notifyUnauthorized(socket) {
-    if (!socket.auth) {
-        console.log("[app] Disconnect socket ", socket.id)
-        socket.emit("authenticate", "unauthorized")
-        socket.disconnect("unauthorized")
-    }
+module.exports.listen = () => {
+    module.exports.socketOn()
+    server.listen(port, host,
+        () => console.log(tag + " Listen server: " + host + ":" + port))
 }
 
-module.exports = ({ server, io, host, port }) => {
-    function listen(espIns) {
-        espInstance = espIns
+module.exports.notify = {
+    unauthorized: (socketio) => {
+        if (!socketio.auth) {
+            console.log(tag + " Disconnect socket ", socketio.id)
+            socketio.emit("authenticate", "unauthorized")
+            socketio.disconnect("unauthorized")
+        }
+    },
 
-        _.each(io.nsps, nsp => {
-            nsp.on("connect", socket => {
-                if (!socket.auth) {
-                    console.log("Removing socket from ", nsp.name)
-                    delete nsp.connected[socket.id]
-                }
-            })
-        })
-
-        io.on("connection", socket => {
-            socket.auth   = false
-
-            console.log("[app] Connect: " + socket.id)
-            socket.on("disconnect", () => console.log("[app] Disconnect: " + socket.id))
-            socket.on("authenticate", data => {
-                if (socket.auth)
-                    return
-
-                if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
-                    return
-
-                if (!data.id.startsWith("APP"))
-                    return
-
-                tokenVerify(data.token, (err, authorized) => {
-                    if (!err && authorized) {
-                        console.log("[app] Authenticated socket ", socket.id)
-                        socket.auth = true
-                        socket.emit("authenticate", "authorized")
-
-                        _.each(io.nsps, nsp => {
-                            if (_.findWhere(nsp.sockets, { id: socket.id })) {
-                                console.log("[app] Restoring socket to: ", nsp.name)
-                                nsp.connected[socket.id] = socket
-                            }
-                        })
-
-                       this.notify.modules(socket)
-                    } else {
-                        notifyUnauthorized(socket)
-                    }
-                })
-            })
-
-            setTimeout(() => {
-                notifyUnauthorized(socket)
-            }, 1000);
-
-            socket.on("esp.list", () => {
-                if (!socket.auth)
-                    return notifyUnauthorized(socket)
-
-                this.notify.modules(socket)
-            })
-
-            socket.on("room.types", () => {
-                if (!socket.auth)
-                    return notifyUnauthorized(socket)
-
-                socket.emit("room.types", [
-                    "living_room",
-                    "bed_room",
-                    "kitchen_room",
-                    "bath_room",
-                    "balcony_room",
-                    "stairs_room",
-                    "fence_room",
-                    "mezzanine_room",
-                    "roof_room"
-                ])
-            })
-        })
-
-        server.listen(port, host, () => console.log("[app] Listen server: " + host + ":" + port))
-    }
-
-    return {
-        listen: listen,
-        notify: {
-            modules: (socket) => {
-                if (socket)
-                    socket.emit("esp.list", espInstance.modules)
-                else
-                    io.sockets.emit("esp.list", espInstance.modules)
-            }
+    espModules: (socketio) => {
+        if (socketio.auth) {
+            console.log(tag + " Notify esp modules")
         }
     }
 }
+
+// modules: (socket) => {
+//     if (socket)
+//         socket.emit("esp.list", espInstance.modules)
+//     else
+//         io.sockets.emit("esp.list", espInstance.modules)
+// }
