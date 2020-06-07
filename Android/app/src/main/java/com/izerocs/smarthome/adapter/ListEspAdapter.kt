@@ -67,6 +67,9 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
     }
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int) {
+        if (position > esps.size - 1)
+            return
+
         val esp = esps[position]
 
         holder.setSsid(esp.getSn())
@@ -88,6 +91,7 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         return esps.add(item)
     }
 
+    fun addAll(lists : List<EspItem>) : Boolean = esps.addAll(lists)
     fun clear() : Unit = esps.clear()
 
     fun get(position : Int) : EspItem {

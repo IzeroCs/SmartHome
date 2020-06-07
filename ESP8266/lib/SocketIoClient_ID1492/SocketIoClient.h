@@ -10,7 +10,7 @@
 // #define SOCKETIOCLIENT_DEBUG(...) Serial.printf(__VA_ARGS__);
 #define SOCKETIOCLIENT_DEBUG(...)
 
-#define PING_INTERVAL 10000 //TODO: use socket.io server response
+#define PING_INTERVAL 100 //TODO: use socket.io server response
 
 //#define SOCKETIOCLIENT_USE_SSL
 #ifdef SOCKETIOCLIENT_USE_SSL

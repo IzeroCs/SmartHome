@@ -8,20 +8,11 @@
 
 class NetworkClass {
 private:
-    String rssi;
-
-    void updateRSSI() {
-        rssi = String(WiFi.RSSI());
-    }
 
 public:
     void begin();
     void loop();
     void loopWait();
-
-    String getRSSI() {
-        return rssi;
-    }
 };
 
 extern NetworkClass Network;

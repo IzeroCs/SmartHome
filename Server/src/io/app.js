@@ -1,6 +1,6 @@
+const tag    = "[app]"
 const socket = require("../socket")
 const cert   = require("../security/cert")("app")
-const tag    = "[app]"
 let esp      = require("./esp")
 let server   = null
 let io       = null
@@ -39,6 +39,16 @@ let ons = {
         module.exports.notify.espModules(socketio)
     },
 
+    "esp.detail": (socketio, data) => {
+        if (!socket.auth)
+            return module.exports.notify.unauthorized(socketio)
+
+        if (typeof data === "undefined")
+            return
+
+        Object.keys(data).forEach((espID, status) => esp.notify.detail(espID, status))
+    },
+
     "room.types": (socketio) => {
         if (!socketio.auth)
             return module.exports.notify.unauthorized(socketio)
@@ -73,6 +83,7 @@ module.exports.socketOn = () => {
 
         socketio.auth = false
         console.log(tag, "Connect: " + socketio.id)
+        socket.restoringSocket(io, socketio, tag)
 
         for (let i = 0; i < size; ++i)
             socketio.on(keys[i], data => ons[keys[i]](socketio, data))
@@ -85,8 +96,12 @@ module.exports.socketOn = () => {
 
 module.exports.listen = () => {
     module.exports.socketOn()
-    server.listen(port, host,
-        () => console.log(tag, "Listen server: " + host + ":" + port))
+
+    if (process.env.ENVIRONMENT === "production")
+        server.listen(port, "0.0.0.0", () => console.log(tag, "Listen server port: " + port))
+    else
+        server.listen(port, host,
+            () => console.log(tag, "Listen server: " + host + ":" + port))
 }
 
 module.exports.notify = {
@@ -107,10 +122,3 @@ module.exports.notify = {
         }
     }
 }
-
-// modules: (socket) => {
-//     if (socket)
-//         socket.emit("esp.list", espInstance.modules)
-//     else
-//         io.sockets.emit("esp.list", espInstance.modules)
-// }

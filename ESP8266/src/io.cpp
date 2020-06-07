@@ -27,6 +27,8 @@ void IOClass::begin() {
 
     setIOData(IOPin_0, IOType_DOUBLE, IOPin_1);
     setIOData(IOPin_2, IOType_DUAL_TOGGLE, IOPin_3);
+    setIoStatusChanged(true);
+
     Output.begin();
     Input.begin();
 }

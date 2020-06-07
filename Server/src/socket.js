@@ -36,14 +36,10 @@ module.exports = (appExpress) => {
     server.app   = http.createServer(appExpress)
     server.esp   = http.createServer(appExpress)
 
-    socketio.app = require("socket.io")(server.app, {
-        pingTimeout:  1000,
-        pingInterval: 1000
-    })
-
+    socketio.app = require("socket.io")(server.app)
     socketio.esp = require("socket.io")(server.esp, {
         pingTimeout:  1000,
-        pingInterval: 1000
+        pingInterval: 500
     })
 
     instance.esp = ioESP(server.esp, socketio.esp, host.esp, port.esp)

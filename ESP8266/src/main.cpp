@@ -3,6 +3,7 @@
 #include "record.h"
 #include "profile.h"
 #include "network.h"
+#include "socket.h"
 #include "io.h"
 
 #define TIMER_COUNT 3
@@ -10,7 +11,7 @@
 bool isPrintConnect;
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10   },
-    { millis(), 200 },
+    { millis(), 1000 },
     { millis(), 5000 }
 };
 
@@ -18,7 +19,7 @@ void setup() {
     Serial.begin(115200);
     Serial.println("Smart Home ESP8266");
     FFS.begin();
-    Record.begin();
+    Record.begin(false);
     Profile.begin();
     Network.begin();
     IO.begin();
@@ -59,4 +60,6 @@ void loop() {
             timers[i][0] = currentMillis;
         }
     }
+
+    Socket.loopMain();
 }

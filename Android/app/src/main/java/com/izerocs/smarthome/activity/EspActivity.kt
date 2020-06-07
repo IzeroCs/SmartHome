@@ -107,8 +107,11 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
     }
 
     override fun onEspModules(socket : Socket, espModules : MutableMap<String, EspItem>) {
-        listEspConnected.clear()
-        espModules.forEach { entry -> listEspConnected.add(entry.value) }
+        mutableListOf<EspItem>().let { lists ->
+            espModules.forEach { entry -> lists.add(entry.value) }
+            listEspConnected.clear()
+            listEspConnected.addAll(lists)
+        }
 
         runOnUiThread {
             listEspConnected.notifyDataSetChanged()

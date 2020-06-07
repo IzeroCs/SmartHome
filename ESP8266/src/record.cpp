@@ -5,6 +5,9 @@
 void RecordClass::begin(bool erase) {
     EEPROM.begin(RECORD_SIZE);
 
+    if (DEBUG)
+        Serial.println("[Record] Begin");
+
     if (erase)
         reset();
 

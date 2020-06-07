@@ -1,5 +1,1 @@
-class DB {
-    connect() {
-
-    }
-}
+const mongodb = require("mongodb")

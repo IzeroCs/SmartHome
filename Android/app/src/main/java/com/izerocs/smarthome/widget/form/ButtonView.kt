@@ -54,7 +54,7 @@ class ButtonView(context : Context, attributeSet : AttributeSet) : AppCompatButt
     override fun onClick(v : View?) {
         formLayout?.clearStatusElement()
         Util.hideSoftInput(v).run {
-            (context.applicationContext as SmartApplication).getCurrentActivity()?.
+            (context.applicationContext as SmartApplication).getActivityCurrent()?.
                     currentFocus?.clearFocus()
         }
 

@@ -148,6 +148,6 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     fun getSocket() : Socket {
-        return getRootApplication().getSocket()
+        return getRootApplication().getSocketClient()
     }
 }

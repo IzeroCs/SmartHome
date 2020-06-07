@@ -1,7 +1,9 @@
-const clc    = require("cli-color")
-const socket = require("../socket")
-const cert   = require("../security/cert")("esp")
-const tag    = "[esp]"
+const tag     = "[esp]"
+const clc     = require("cli-color")
+const network = require("../network")
+const socket  = require("../socket")
+const cert    = require("../security/cert")("esp")
+
 let app      = require("./app")
 let server   = null
 let io       = null
@@ -16,6 +18,10 @@ let ons = {
         app.notify.espModules()
     },
 
+    "error": (socketio, data) => {
+        console.log("Error: ", data)
+    },
+
     "authenticate": (socketio, data) => {
         if (socketio.auth)
             return
@@ -28,9 +34,8 @@ let ons = {
 
         socketio.id = data.id
         modules[data.id] = {
-            pins   : [],
-            detail : {},
-            io_changed: false
+            pins   : { data: [], changed: false },
+            detail : { data: {} }
         }
 
         cert.verify(data.token, (err, authorized) => {
@@ -47,43 +52,31 @@ let ons = {
     },
 
     "sync.io": (socketio, data) => {
-        if (!socketio.auth || typeof data === "undefined")
+        if (!socketio.auth)
             return
 
-        if (typeof data.io === "undefined" || typeof data.io_changed === "undefined")
-            return
+        espIO     = module.exports.validate.io(data).io
+        ioData    = espIO.data
+        ioChanged = espIO.changed === 1
 
-        let pinData    = null
-        let pinObj     = null
-        let pinLists   = []
-        let status     = "";
-        let ioChanged  = parseInt(data.io_changed) === 1
+        let pinData  = null
+        let pinObj   = null
+        let pinLists = []
 
-        for (let i = 0; i < data.io.length; ++i) {
-            pinData = data.io[i].replace(/\=/g, ":")
+        for (let i = 0; i < ioData.length; ++i) {
+            pinData = ioData[i].replace(/\=/g, ":")
             pinData = pinData.replace(/([a-z0-9]+):([0-9]+)/ig, "\"\$1\":\$2")
             pinData = "{" + pinData + "}"
 
             try {
                 pinObj = JSON.parse(pinData)
                 pinLists.push(pinObj)
-
-                if (i != 0)
-                    status += " - "
-
-                status += "[" + pinObj.input + ":" + (pinObj.status == 1 ? clc.green("high") : clc.red("low")) + "]"
             } catch (e) {}
         }
 
-        status += " - [io:" + (ioChanged ? clc.green("changed") : clc.red("idle")) + "]"
-
-        process.stdout.clearLine()
-        process.stdout.cursorTo(0)
-        process.stdout.write(status)
-
         if (typeof modules[socketio.id] === "object") {
-            modules[socketio.id]["pins"]       = pinLists
-            modules[socketio.id]["io_changed"] = ioChanged
+            modules[socketio.id].pins.data    = pinLists
+            modules[socketio.id].pins.changed = ioChanged
 
             if (ioChanged)
                 app.notify.espModules()
@@ -94,13 +87,16 @@ let ons = {
         if (!socketio.auth)
             return
 
-        // var oldDetail = validateDetail(modules[socket.id].detail)
-        // var newDetail = validateDetail(data)
+        const oldDetail = module.exports.validate.detail(modules[socketio.id])
+        const newDetail = module.exports.validate.detail(data)
 
-        // modules[socket.id].detail = newDetail
+        const oldSignal = network.calculateSignalLevel(oldDetail.detail.data.rssi)
+        const newSignal = network.calculateSignalLevel(newDetail.detail.data.rssi)
 
-        // if (detailHasChanged(oldDetail, newDetail))
-        //     app.notify.espModules()
+        if (oldSignal != newSignal) {
+            modules[socketio.id].detail = newDetail.detail
+            app.notify.espModules()
+        }
     }
 }
 
@@ -113,11 +109,11 @@ module.exports = (_server, _io, _host, _port) => {
 }
 
 module.exports.removeSocketModules = (socketio) => {
-    if (typeof socket === "undefined")
+    if (typeof socketio === "undefined")
         return
 
-    if (typeof modules[socket.id] != "undefined")
-        delete modules[socket.id]
+    if (typeof modules[socketio.id] !== "undefined")
+        delete modules[socketio.id]
 }
 
 module.exports.socketOn = () => {
@@ -128,10 +124,12 @@ module.exports.socketOn = () => {
 
         socketio.auth = false
         console.log(tag, "Connect: " + socketio.id)
+        socket.restoringSocket(io, socketio, tag)
 
         for (let i = 0; i < size; ++i)
             socketio.on(keys[i], data => ons[keys[i]](socketio, data))
 
+        app.notify.espModules()
         setTimeout(() => {
             module.exports.notify.unauthorized(socketio)
         }, 1000);
@@ -140,8 +138,12 @@ module.exports.socketOn = () => {
 
 module.exports.listen = () => {
     module.exports.socketOn()
-    server.listen(port, host,
-        () => console.log(tag, "Listen server: " + host + ":" + port))
+
+    if (process.env.ENVIRONMENT === "production")
+        server.listen(port, "0.0.0.0", () => console.log(tag, "Listen server port: " + port))
+    else
+        server.listen(port, host,
+            () => console.log(tag, "Listen server: " + host + ":" + port))
 }
 
 module.exports.notify = {
@@ -151,53 +153,42 @@ module.exports.notify = {
             socketio.emit("authenticate", "unauthorized")
             socketio.disconnect("unauthorized")
         }
+    },
+
+    detail: (espID, status) => {
+        if (typeof modules[espID] === "undefined" || status != "updated")
+            return
+
+        modules[espID]["updated"] = true
     }
 }
 
+module.exports.validate = {
+    def: (objSrc, objDest) => {
+        if (typeof objSrc === "undefined")
+            return {}
+
+        if (typeof objDest === "undefined" || objDest === null)
+            objDest = {}
+
+        Object.keys(objSrc).forEach((key) => {
+            if (typeof objDest[key] === "undefined")
+                objDest[key] = objSrc[key]
+            else
+                objDest[key] = module.exports.validate.def(objSrc[key], objDest[key])
+        })
+
+        return objDest
+    },
+
+    io: array => module.exports.validate.def({ io: {
+        data: [],
+        changed: false
+    }}, array),
+
+    detail: array => module.exports.validate.def({ detail: {
+        data: { rssi: network.MIN_RSSI }
+    }}, array)
+}
+
 module.exports.modules = modules
-
-// const MIN_RSSI = -100
-// const MAX_RSSI = -55
-// const MIN_SIGNAL = 0
-// const MAX_SIGNAL = 5
-
-// function validateDetail(data) {
-//     if (typeof data === "undefined") {
-//         data = {
-//             detail: {
-//                 signal: -100
-//             }
-//         }
-//     }
-
-//     if (typeof data.signal === "undefined")
-//         data["signal"] = -100
-
-//     return data
-// }
-
-// function calculateSignalLevel(rssi, numLevels) {
-//     if (!numLevels)
-//         numLevels = MAX_SIGNAL
-
-//     if (rssi <= MIN_RSSI)
-//         return MIN_RSSI
-
-//     if (rssi >= MAX_RSSI)
-//         return numLevels -1
-
-//     let inputRange  = (MAX_RSSI - MIN_RSSI)
-//     let outputRange = (numLevels - 1)
-
-//     return Math.ceil((rssi - MIN_RSSI) * outputRange / inputRange)
-// }
-
-// function detailHasChanged(oldDetail, newDetail) {
-//     let oldSignal = calculateSignalLevel(oldDetail.signal)
-//     let newSignal = calculateSignalLevel(newDetail.signal)
-
-//     if (oldSignal != newSignal)
-//         return true
-
-//     return false
-// }

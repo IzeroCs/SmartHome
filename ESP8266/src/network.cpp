@@ -31,8 +31,7 @@ void NetworkClass::loop() {
 }
 
 void NetworkClass::loopWait() {
-    updateRSSI();
-    Socket.loopSyncIO();
+    Socket.loopSyncIO(true);
     SmartConfig.loopWait();
 }
 

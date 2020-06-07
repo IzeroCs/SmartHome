@@ -1,6 +1,7 @@
 package com.izerocs.smarthome.model
 
 import android.net.wifi.ScanResult
+import android.util.Log
 
 /**
  * Created by IzeroCs on 2020-05-03
@@ -23,6 +24,7 @@ class EspItem {
                           var outputSecondary : Int, var status : Boolean)
 
     companion object {
+        const val TAG = "EspItem"
         const val SIGNAL_MIN = 0
         const val SIGNAL_MAX = 5
         const val RSSI_MIN   = -100
@@ -88,6 +90,8 @@ class EspItem {
     fun setSignal(rssi : Int) {
         this.rssi   = rssi
         this.signal = calculateSignalLevel(rssi)
+
+        Log.d(TAG, "Signal: " + this.signal)
     }
 
     override fun toString() : String {

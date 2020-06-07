@@ -18,6 +18,8 @@ struct RecordData {
 
 class RecordClass {
 private:
+    const bool DEBUG = true;
+
     uint16_t addressCurrent = 0;
     vector<RecordData> datas;
 

@@ -27,6 +27,7 @@ class ListEspView(context : Context, attributeSet: AttributeSet) : RecyclerView(
     }
 
     fun add(item : EspItem) : Boolean = (adapter as ListEspAdapter).add(item)
+    fun addAll(lists : List<EspItem>) : Boolean = (adapter as ListEspAdapter).addAll(lists)
 
     fun clear() : Unit = (adapter as ListEspAdapter).clear()
 

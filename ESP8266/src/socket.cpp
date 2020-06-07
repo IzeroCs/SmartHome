@@ -11,11 +11,18 @@ void SocketClass::begin() {
 }
 
 void SocketClass::loop() {
+    loopSyncIO();
+}
+
+void SocketClass::loopMain() {
     io.loop();
 }
 
-void SocketClass::loopSyncIO() {
+void SocketClass::loopSyncIO(bool forceChanged) {
     if (!io.isConnect())
+        return;
+
+    if (!forceChanged && !IO.isIoStatusChanged())
         return;
 
     std::map<IOPin_t, IOData> datas = IO.getIODatas();
@@ -29,16 +36,18 @@ void SocketClass::loopSyncIO() {
         array += "\"" + it->second.toString() + "\"";
     }
 
-    io.emit("sync.io", {
-        { "io", "[" + array + "]" },
-        { "io_changed", String(IO.isIoStatusChanged()) }
-    });
+    io.emit("sync.io", {{ "io", "{\"data\":[" + array + "]," +
+        "\"changed\":" + String(IO.isIoStatusChanged()) + "}"}});
 
-    io.emit("sync.detail", {
-        { "rssi", Network.getRSSI() }
-    });
-
+    loopSyncDetail();
     IO.setIoStatusChanged(false);
+}
+
+void SocketClass::loopSyncDetail() {
+    if (!io.isConnect())
+        return;
+
+    io.emit("sync.detail", {{"detail", "{\"data\":{\"rssi\":\"" + String(WiFi.RSSI()) + "\"}}"}});
 }
 
 void SocketClass::onEvent(const char * event, const char * payload, size_t length) {
@@ -55,6 +64,8 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
         });
     } else if (evt == "disconnect") {
         Serial.println("[Socket] Disconnect");
+    } else if (evt == "authenticate" || evt == "sync.io" || evt == "sync.detail") {
+        IO.setIoStatusChanged(true);
     }
 
     if (DEBUG)
