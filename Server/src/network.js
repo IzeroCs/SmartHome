@@ -13,7 +13,7 @@ module.exports = () => {
     let networks = os.networkInterfaces()
 
     Object.keys(networks).forEach(key => {
-        if (key.startsWith("VirtualBox"))
+        if (key.startsWith("VirtualBox") || key.startsWith("eth1"))
             return
 
         networks[key].forEach(interface => {
@@ -25,7 +25,7 @@ module.exports = () => {
     })
 
     return {
-        getHost : () => host
+        getHost: () => host
     }
 }
 

@@ -2,6 +2,7 @@ const dotenv     = require("dotenv").config()
 const express    = require("express")
 const bodyParser = require("body-parser")
 const appExpress = express()
+const mongo      = require("./src/mongo")
 const socket     = require("./src/socket")(appExpress)
 const port       = process.env.PORT || 8080
 
