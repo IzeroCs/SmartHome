@@ -7,7 +7,7 @@ const port       = process.env.PORT || 8080
 appExpress.use(bodyParser.urlencoded({ extended: true }))
 appExpress.use(bodyParser.json())
 
-appExpress.get("/", (req, res) => res.send("Smart Home Server 6"))
+appExpress.get("/", (req, res) => res.send("Smart Home Server"))
 appExpress.listen(port, () => console.log("Listen port: ", port))
 // require("./src/api/routes")(app, database)
 
