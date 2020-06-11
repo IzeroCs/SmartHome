@@ -10,9 +10,6 @@ void RecordClass::begin(bool erase) {
 
     if (erase)
         reset();
-
-    bind(RECORD_ID_SN, PROFILE_SN_LENGTH);
-    bind(RECORD_ID_SC, PROFILE_SC_LENGTH);
 }
 
 void RecordClass::reset() {

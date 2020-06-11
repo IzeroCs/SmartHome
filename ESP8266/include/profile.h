@@ -14,8 +14,8 @@
 
 class ProfileClass {
 private:
-    String sn;
-    String sc;
+    String sn = "ESP1N403E91636R";
+    String sc = "SC185G2K";
 
 public:
     void begin();

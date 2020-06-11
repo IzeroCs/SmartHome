@@ -14,12 +14,8 @@ let modules  = {}
 let ons = {
     "disconnect": socketio => {
         console.log(tag, "Disconnect: " + socketio.id)
-        module.exports.removeSocketModules(socketio)
+        module.exports.updateModules(socketio, false)
         app.notify.espModules()
-    },
-
-    "error": (socketio, data) => {
-        console.log("Error: ", data)
     },
 
     "authenticate": (socketio, data) => {
@@ -33,10 +29,7 @@ let ons = {
             return
 
         socketio.id = data.id
-        modules[data.id] = {
-            pins   : { data: [], changed: false },
-            detail : { data: {} }
-        }
+        module.exports.updateModules(socketio, true)
 
         cert.verify(data.token, (err, authorized) => {
             if (!err && authorized) {
@@ -108,23 +101,23 @@ module.exports = (_server, _io, _host, _port) => {
     port   = _port
 }
 
-module.exports.removeSocketModules = (socketio) => {
+module.exports.updateModules = (socketio, online) => {
     if (typeof socketio === "undefined")
         return
 
-    if (typeof modules[socketio.id] !== "undefined")
-        delete modules[socketio.id]
+    modules[socketio.id] = module.exports.validate.module(modules[socketio.id])
+    modules[socketio.id].online = online
 }
 
 module.exports.socketOn = () => {
-    socket.removingSocket(io, tag)
+    socket.removingSocket(io)
     io.on("connection", socketio => {
         let keys = Object.keys(ons)
         let size = keys.length
 
         socketio.auth = false
         console.log(tag, "Connect: " + socketio.id)
-        socket.restoringSocket(io, socketio, tag)
+        socket.restoringSocket(io, socketio)
 
         for (let i = 0; i < size; ++i)
             socketio.on(keys[i], data => ons[keys[i]](socketio, data))
@@ -180,6 +173,12 @@ module.exports.validate = {
 
         return objDest
     },
+
+    module: array => modules.exports.validate.def({
+        online : true,
+        pins   : { data: [], changed: false },
+        detail : { data: {} }
+    }, array),
 
     io: array => module.exports.validate.def({ io: {
         data: [],

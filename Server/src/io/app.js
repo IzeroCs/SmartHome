@@ -2,22 +2,30 @@ const tag    = "[app]"
 const socket = require("../socket")
 const cert   = require("../security/cert")("app")
 let esp      = require("./esp")
+
 let server   = null
 let io       = null
 let host     = null
 let port     = null
+let devices  = {}
 
 let ons = {
-    "disconnect": socketio => console.log(tag, "Disconnect: " + socketio.id),
+    "disconnect": socketio => {
+        console.log(tag, "Disconnect: " + socketio.id)
+        module.exports.removeSocketDevices(socketio)
+    },
+
     "authenticate": (socketio, data) => {
         if (socketio.auth)
             return
 
-        if (typeof data == "undefined" || typeof data.id == "undefined" || typeof data.token == "undefined")
-            return
+        data = module.exports.validate.authenticate(data)
 
         if (!data.id.startsWith("APP"))
             return
+
+        socketio.id = data.id
+        devices[data.id] = {}
 
         cert.verify(data.token, (err, authorized) => {
             if (!err && authorized) {
@@ -75,15 +83,23 @@ module.exports = (_server, _io, _host, _port) => {
     port   = _port
 }
 
+module.exports.removeSocketDevices = (socketio) => {
+    if (typeof socketio === "undefined")
+        return
+
+    if (typeof devices[socketio.id] !== "undefined")
+        delete devices[socketio.id]
+}
+
 module.exports.socketOn = () => {
-    socket.removingSocket(io, tag)
+    socket.removingSocket(io)
     io.on("connection", socketio => {
         let keys = Object.keys(ons)
         let size = keys.length
 
         socketio.auth = false
         console.log(tag, "Connect: " + socketio.id)
-        socket.restoringSocket(io, socketio, tag)
+        socket.restoringSocket(io, socketio)
 
         for (let i = 0; i < size; ++i)
             socketio.on(keys[i], data => ons[keys[i]](socketio, data))
@@ -121,4 +137,28 @@ module.exports.notify = {
             io.sockets.emit("esp.list", esp.modules)
         }
     }
+}
+
+module.exports.validate = {
+    def: (objSrc, objDest) => {
+        if (typeof objSrc === "undefined")
+            return {}
+
+        if (typeof objDest === "undefined" || objDest === null)
+            objDest = {}
+
+        Object.keys(objSrc).forEach((key) => {
+            if (typeof objDest[key] === "undefined")
+                objDest[key] = objSrc[key]
+            else
+                objDest[key] = module.exports.validate.def(objSrc[key], objDest[key])
+        })
+
+        return objDest
+    },
+
+    authenticate: array => module.exports.validate.def({
+        id: "",
+        token: ""
+    }, array)
 }

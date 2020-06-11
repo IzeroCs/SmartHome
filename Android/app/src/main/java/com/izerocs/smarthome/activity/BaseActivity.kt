@@ -15,6 +15,7 @@ import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.model.RoomType
+import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
@@ -63,11 +64,11 @@ abstract class BaseActivity : AppCompatActivity(),
         Log.d(BaseActivity::class.java.toString(), "onFetch: $type")
     }
 
-    open fun onSocketConnect(socket : Socket) {
-        RoomType.fetchTypes(this, socket, ::onFetched)
+    open fun onSocketConnect(client : SocketClient) {
+        RoomType.fetchTypes(this, client, ::onFetched)
     }
 
-    open fun onEspModules(socket : Socket, espModules : MutableMap<String, EspItem>) {
+    open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>) {
 
     }
 
@@ -148,6 +149,6 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     fun getSocket() : Socket {
-        return getRootApplication().getSocketClient()
+        return getRootApplication().getSocketClient().getSocket()
     }
 }

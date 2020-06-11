@@ -4,9 +4,6 @@
 #include "record.h"
 
 void ProfileClass::begin() {
-    sn = Record.readString(RECORD_ID_SN);
-    sc = Record.readString(RECORD_ID_SC);
-
     make();
 }
 
@@ -65,11 +62,10 @@ void ProfileClass::make() {
         scCreate += charRand.charAt(random(charRandSize));
     }
 
-    Record.write(RECORD_ID_SN, snCreate);
-    Record.write(RECORD_ID_SC, scCreate);
-
     sn = snCreate;
     sc = scCreate;
+
+    Serial.println("[Profile] Make: SN[" + sn + "], SC[" + sc + "]");
 }
 
 ProfileClass Profile;

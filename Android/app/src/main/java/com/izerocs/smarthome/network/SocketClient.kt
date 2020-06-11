@@ -1,18 +1,19 @@
 package com.izerocs.smarthome.network
 
+import android.content.Context
 import android.util.Log
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.preferences.AppPreferences
+import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.reflect.KFunction1
 
-class SocketClient {
+class SocketClient(val context : Context) {
     private val scheme : String = "http://"
     private val host   : String = "192.168.31.104"
     private val port   : String = "3180"
-    private val token  : String = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9." +
-            "eyJuYW1lIjoiSXplcm9DcyIsInN1YiI6IkFQUCIsImlhdCI6NDEwMjQ0NDgwMH0." +
-            "W6z51k56Q374LIpEWoaHJkWErMEeMht8J1clLTc9-JewEgsEbNa-rCcoHUr_NKuNzu6H9CQqqAe_j5EEAfayl8nECVMuTJxlc4e0vPqehVQGORicfvF9KUyw8xvzKLQlAu-uzynu3AnCYvJhSICT_kyIXtEoSZdj70mb5e5AGL9NvO27mfCamItF-q8nlsQEPquBf3jPRxjdVog8_t4Sa1hznrhJsgGeJjXAEXK5AqM_7ahCRLbKdG4azENRxrSuN8BBoxO_UdBKvlyL931Zq8Zs1pQAFdebdODk2FNnkzVTRowEn1zfOq0K4Tj06hDXawrO7qdaK-fYsCWJCa7hwg"
 
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
@@ -57,13 +58,28 @@ class SocketClient {
         this.eventListener = eventListener
     }
 
+    fun getSocket() : Socket = this.socket
+
+    fun emitRoomTypes(callback : KFunction1<Int, Unit>) {
+        socket.on("room.types") { array ->
+            if (array.isEmpty() || array[0] !is JSONArray)
+                return@on
+
+
+        }
+    }
+
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
 
     private fun onConnect(data : Array<Any>) {
         if (DEBUG) Log.d(TAG, "onConnect")
 
+        val appPreferences = AppPreferences(context)
+        val appID          = appPreferences.getAppID()
+        val appToken       = appPreferences.getAppToken()
+
         eventListener?.onConnect(this)
-        socket.emit("authenticate", JSONObject(mapOf("id" to "APP", "token" to token)))
+        socket.emit("authenticate", JSONObject(mapOf("id" to appID, "token" to appToken)))
     }
 
     private fun onDisconnect(data : Array<Any>) {

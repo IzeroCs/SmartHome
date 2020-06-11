@@ -3,32 +3,42 @@ package com.izerocs.smarthome.activity
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.network.SocketClient.OnEventListener
+import com.izerocs.smarthome.preferences.AppPreferences
 
 /**
  * Created by IzeroCs on 2020-04-01
  */
 class SmartApplication : Application() {
-    private var activityCurrent : BaseActivity? = null
-    private val socketClient    : SocketClient  = SocketClient()
+    private var activityCurrent : BaseActivity?   = null
+    private var appPreferences  : AppPreferences? = null
+    private val socketClient    : SocketClient    = SocketClient(this)
     private val socketEvent     : OnEventListener = object : OnEventListener {
-        
+        override fun onConnect(client : SocketClient) {
+            activityCurrent?.onSocketConnect(client)
+        }
+
+        override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>) {
+            activityCurrent?.onEspModules(client, espModules)
+        }
     }
 
     companion object {
         const val TAG = "SmartApplication"
         const val DEBUG = true
 
-        private var self : SmartApplication? = null
+        private var selfInstance : SmartApplication? = null
 
-        fun getInstance() : SmartApplication? = self
+        fun getInstance() : SmartApplication? = selfInstance
     }
 
     override fun onCreate() {
         super.onCreate()
         lifecycle()
-        self = this
+        selfInstance = this
+        appPreferences = AppPreferences(this)
         socketClient.setOnEventListener(socketEvent)
         socketClient.connect()
     }

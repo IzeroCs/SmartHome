@@ -5,6 +5,7 @@ import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.activity.BaseActivity
+import com.izerocs.smarthome.network.SocketClient
 import org.json.JSONArray
 import java.util.*
 import kotlin.collections.ArrayList
@@ -27,7 +28,7 @@ class RoomType {
 
         private var types = mutableListOf<Int>()
 
-        fun fetchTypes(context : Context, socket : Socket, callback : KFunction1<Int, Unit>) {
+        fun fetchTypes(context : Context, client : SocketClient, callback : KFunction1<Int, Unit>) {
             if (types.isNotEmpty())
                 return
 

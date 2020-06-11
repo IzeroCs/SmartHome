@@ -10,9 +10,9 @@ import com.google.gson.Gson
  */
 open class SharedPreferences {
     private var context : Context? = null
-    private var sharedName : String = ""
-    private val prefix : String = "_preferences"
-    private val gson   : Gson   = Gson()
+    private var name    : String = ""
+    private val prefix  : String = "_preferences"
+    private val gson    : Gson   = Gson()
 
     private var preferences : SharedPreferences? = null
 
@@ -20,7 +20,7 @@ open class SharedPreferences {
 
     constructor(context : Context, sharedName : String) {
         this.context = context
-        this.sharedName = sharedName
+        this.name = sharedName
         this.preferences = context.getSharedPreferences(sharedName + prefix,
             Context.MODE_PRIVATE)
     }
@@ -34,7 +34,7 @@ open class SharedPreferences {
     fun <T : Any> getObject(key : String, anonymousClass : Class<T>) : T = gson
         .fromJson(preferences?.getString(key, ""), anonymousClass)
 
-    fun getString(key : String, defVal : String) : String?   = preferences?.getString(key, defVal)
+    fun getString(key : String, defVal : String) : String    = preferences?.getString(key, defVal)!!
     fun getBoolean(key : String, defVal : Boolean) : Boolean = preferences?.getBoolean(key, defVal)!!
     fun getFloat(key : String, defVal : Float) : Float       = preferences?.getFloat(key, defVal)!!
     fun getInt(key : String, defVal : Int) : Int             = preferences?.getInt(key, defVal)!!
@@ -74,5 +74,6 @@ open class SharedPreferences {
     fun clear()  : Unit = preferences?.edit()?.clear()?.apply()!!
     fun size()   : Int  = preferences?.all?.size!!
     fun empty()  : Boolean = size() <= 0
+    fun contains(key : String) : Boolean = preferences?.contains(key)!!
 
 }
