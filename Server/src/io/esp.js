@@ -2,9 +2,11 @@ const tag     = "[esp]"
 const clc     = require("cli-color")
 const network = require("../network")
 const socket  = require("../socket")
+const mongo   = require("../mongo")
 const cert    = require("../security/cert")("esp")
 
 let app      = require("./app")
+let dbEsp    = mongo.include("esp")
 let server   = null
 let io       = null
 let host     = null
@@ -29,6 +31,7 @@ let ons = {
             return
 
         socketio.id = data.id
+        dbEsp.addModule(socketio.id)
         module.exports.updateModules(socketio, true)
 
         cert.verify(data.token, (err, authorized) => {
@@ -174,7 +177,7 @@ module.exports.validate = {
         return objDest
     },
 
-    module: array => modules.exports.validate.def({
+    module: array => module.exports.validate.def({
         online : true,
         pins   : { data: [], changed: false },
         detail : { data: {} }

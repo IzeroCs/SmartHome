@@ -31,15 +31,6 @@ module.exports = (() => {
 
         console.log(tag, "Connection established to ", url)
         module.exports.include("setting")
-
-        let esp = module.exports.include("esp")
-        let nEsp = new esp({
-            name: "Test"
-        })
-
-        nEsp.save()
-            .then(doc => console.log(doc))
-            .catch(err => console.log(err))
     })
 
     return {}

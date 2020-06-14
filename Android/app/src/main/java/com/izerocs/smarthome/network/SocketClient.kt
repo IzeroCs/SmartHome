@@ -129,15 +129,21 @@ class SocketClient(val context : Context) {
                     listPins.clear()
 
                     for (i in 0 until espPins.getJSONArray("data").length()) {
-                        val pin             = espPins.getJSONObject(i.toString())
-                        val status          = pin.getInt("status") == 1
-                        val input           = pin.getInt("input")
-                        val outputType      = pin.getInt("outputType")
-                        val outputPrimary   = pin.getInt("outputPrimary")
-                        val outputSecondary = pin.getInt("outputSecondary")
+                        if (espPins.has(i.toString())) {
+                            val pin = espPins.getJSONObject(i.toString())
+                            val status = pin.getInt("status") == 1
+                            val input = pin.getInt("input")
+                            val outputType = pin.getInt("outputType")
+                            val outputPrimary = pin.getInt("outputPrimary")
+                            val outputSecondary = pin.getInt("outputSecondary")
 
-                        listPins.add(EspItem.EspDataPin(input, outputType,
-                            outputPrimary, outputSecondary, status))
+                            listPins.add(
+                                EspItem.EspDataPin(
+                                    input, outputType,
+                                    outputPrimary, outputSecondary, status
+                                )
+                            )
+                        }
                     }
                 }
             }
