@@ -5,18 +5,20 @@ const socket  = require("../socket")
 const mongo   = require("../mongo")
 const cert    = require("../security/cert")("esp")
 
-let app      = require("./app")
-let dbEsp    = mongo.include("esp")
-let server   = null
-let io       = null
-let host     = null
-let port     = null
-let modules  = {}
+let app     = require("./app")
+const model = require("../../mongo/esp")
+let db      = mongo.include("esp")
+let server  = null
+let io      = null
+let host    = null
+let port    = null
+let modules = {}
 
 let ons = {
     "disconnect": socketio => {
         console.log(tag, "Disconnect: " + socketio.id)
         module.exports.updateModules(socketio, false)
+        db.updateModule(socketio.id, { online: false })
         app.notify.espModules()
     },
 
@@ -31,7 +33,7 @@ let ons = {
             return
 
         socketio.id = data.id
-        dbEsp.addModule(socketio.id)
+        db.addModule(socketio.id)
         module.exports.updateModules(socketio, true)
 
         cert.verify(data.token, (err, authorized) => {
@@ -39,6 +41,10 @@ let ons = {
                 console.log(tag, "Authenticated socket ", socketio.id)
                 socketio.auth = true
                 socketio.emit("authenticate", "authorized")
+                db.updateModule(socketio.id, {
+                    online: true,
+                    authenticate: true
+                })
 
                 app.notify.espModules()
             } else {
@@ -74,8 +80,10 @@ let ons = {
             modules[socketio.id].pins.data    = pinLists
             modules[socketio.id].pins.changed = ioChanged
 
-            if (ioChanged)
+            if (ioChanged) {
+                db.updateModule(socketio.id, { pins: pinLists })
                 app.notify.espModules()
+            }
         }
     },
 
@@ -134,6 +142,21 @@ module.exports.socketOn = () => {
 
 module.exports.listen = () => {
     module.exports.socketOn()
+    db.queryModule().then(data => {
+        if (data.length <= 0)
+            return
+
+        data.forEach(esp => {
+            modules[esp.name] = {
+                online: esp.online,
+                pins: {
+                    data: esp.pins,
+                    changed: false
+                },
+                detail: {}
+            }
+        })
+    })
 
     if (process.env.ENVIRONMENT === "production")
         server.listen(port, () => console.log(tag, "Listen server port: " + port))

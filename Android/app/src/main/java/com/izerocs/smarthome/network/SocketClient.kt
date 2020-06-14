@@ -137,18 +137,17 @@ class SocketClient(val context : Context) {
                             val outputPrimary = pin.getInt("outputPrimary")
                             val outputSecondary = pin.getInt("outputSecondary")
 
-                            listPins.add(
-                                EspItem.EspDataPin(
-                                    input, outputType,
-                                    outputPrimary, outputSecondary, status
-                                )
-                            )
+                            listPins.add(EspItem.EspDataPin(input, outputType,
+                                outputPrimary, outputSecondary, status))
                         }
                     }
                 }
             }
 
             espDetail.run {
+                if (!has("data"))
+                    return
+
                 val detail = getJSONObject("data")
 
                 if (detail.has("rssi"))
@@ -161,7 +160,8 @@ class SocketClient(val context : Context) {
     }
 
     private fun onRoomTypes(data : Array<Any>) {
-        if (DEBUG) Log.d(TAG, "onRoomTypes")
+        if (DEBUG)
+            Log.d(TAG, "onRoomTypes")
 
         if (data.isEmpty() || data[0] !is JSONArray)
             return
