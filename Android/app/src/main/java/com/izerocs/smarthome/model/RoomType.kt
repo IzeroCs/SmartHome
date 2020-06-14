@@ -1,45 +1,33 @@
 package com.izerocs.smarthome.model
 
 import android.content.Context
-import com.github.nkzawa.emitter.Emitter
-import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.activity.BaseActivity
-import com.izerocs.smarthome.network.SocketClient
-import org.json.JSONArray
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.reflect.KFunction1
 
 /**
  * Created by IzeroCs on 2020-04-17
  */
 class RoomType {
     companion object {
-        const val TYPE_LIVING_ROOM    : Int = 1 // Phong khach
-        const val TYPE_BED_ROOM       : Int = 2 // Phong ngu
-        const val TYPE_KITCHEN_ROOM   : Int = 3 // Phong an
-        const val TYPE_BATH_ROOM      : Int = 4 // Phong tam
-        const val TYPE_BALCONY_ROOM   : Int = 5 // Ban cong
-        const val TYPE_FENCE_ROOM     : Int = 6 // San nha
-        const val TYPE_MEZZANINE_ROOM : Int = 7 // Gac lung
-        const val TYPE_ROOF_ROOM      : Int = 8 // Gac mai
-        const val TYPE_STAIRS_ROOM    : Int = 9 // Cau thang - Hanh lang
+        private const val TYPE_LIVING_ROOM    : Int = 1 // Phong khach
+        private const val TYPE_BED_ROOM       : Int = 2 // Phong ngu
+        private const val TYPE_KITCHEN_ROOM   : Int = 3 // Phong an
+        private const val TYPE_BATH_ROOM      : Int = 4 // Phong tam
+        private const val TYPE_BALCONY_ROOM   : Int = 5 // Ban cong
+        private const val TYPE_FENCE_ROOM     : Int = 6 // San nha
+        private const val TYPE_MEZZANINE_ROOM : Int = 7 // Gac lung
+        private const val TYPE_ROOF_ROOM      : Int = 8 // Gac mai
+        private const val TYPE_STAIRS_ROOM    : Int = 9 // Cau thang - Hanh lang
 
         private var types = mutableListOf<Int>()
 
-        fun fetchTypes(context : Context, client : SocketClient, callback : KFunction1<Int, Unit>) {
+        fun addTypes(baseActivity : BaseActivity, roomTypes : MutableList<String>) {
             if (types.isNotEmpty())
                 return
-
-            socket.on("room.types", Emitter.Listener {
-                (it[0] as JSONArray).run {
-                    for (i in 0 until length())
-                        types.add(stringToType(getString(i)))
-
-                    callback(BaseActivity.FETCH_ROOM_TYPE)
-                }
-            }).emit("room.types")
+            roomTypes.forEach { types.add(stringToType(it)) }
+            baseActivity.onFetched(BaseActivity.FETCH_ROOM_TYPE)
         }
 
         fun getTypes() : MutableList<Int> {

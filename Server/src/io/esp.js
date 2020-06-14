@@ -142,7 +142,7 @@ module.exports.listen = () => {
 module.exports.notify = {
     unauthorized: (socketio) => {
         if (!socketio.auth) {
-            console.log(tag, "Disconnect socket: ", socketio.id)
+            console.log(tag, "Disconnect socket unauthorized: ", socketio.id)
             socketio.emit("authenticate", "unauthorized")
             socketio.disconnect("unauthorized")
         }

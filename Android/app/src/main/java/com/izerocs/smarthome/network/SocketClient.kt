@@ -8,7 +8,6 @@ import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.preferences.AppPreferences
 import org.json.JSONArray
 import org.json.JSONObject
-import kotlin.reflect.KFunction1
 
 class SocketClient(val context : Context) {
     private val scheme : String = "http://"
@@ -18,6 +17,7 @@ class SocketClient(val context : Context) {
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
     private val espModules : MutableMap <String, EspItem> = mutableMapOf()
+    private val roomTypes : MutableList<String> = mutableListOf()
     private var eventListener : OnEventListener? = null
     private var authFailedCount : Int = 0
 
@@ -26,6 +26,7 @@ class SocketClient(val context : Context) {
         fun onAuthorized(client : SocketClient) {}
         fun onDisconnect(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspItem>) {}
+        fun onRoomTypes(client : SocketClient, roomTypes : MutableList<String>) {}
     }
 
     companion object {
@@ -34,6 +35,7 @@ class SocketClient(val context : Context) {
         const val AUTH_FAILED_DELAY = 5
 
         const val EVENT_AUTHENTICATE = "authenticate"
+        const val EVENT_ROOM_TYPES   = "room.types"
         const val EVENT_ESP_LIST     = "esp.list"
     }
 
@@ -47,6 +49,7 @@ class SocketClient(val context : Context) {
             on(Socket.EVENT_DISCONNECT) { onDisconnect(it) }
             on(EVENT_AUTHENTICATE)      { onAuthenticate(it) }
             on(EVENT_ESP_LIST)          { onEspList(it) }
+            on(EVENT_ROOM_TYPES)        { onRoomTypes(it) }
         }
     }
 
@@ -59,15 +62,8 @@ class SocketClient(val context : Context) {
     }
 
     fun getSocket() : Socket = this.socket
-
-    fun emitRoomTypes(callback : KFunction1<Int, Unit>) {
-        socket.on("room.types") { array ->
-            if (array.isEmpty() || array[0] !is JSONArray)
-                return@on
-
-
-        }
-    }
+    fun getEspModules() : MutableMap<String, EspItem> = this.espModules
+    fun getRoomTypes() : MutableList<String> = this.roomTypes
 
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
 
@@ -78,8 +74,8 @@ class SocketClient(val context : Context) {
         val appID          = appPreferences.getAppID()
         val appToken       = appPreferences.getAppToken()
 
-        eventListener?.onConnect(this)
         socket.emit("authenticate", JSONObject(mapOf("id" to appID, "token" to appToken)))
+        eventListener?.onConnect(this)
     }
 
     private fun onDisconnect(data : Array<Any>) {
@@ -91,6 +87,7 @@ class SocketClient(val context : Context) {
         if (DEBUG) Log.d(TAG, "onAuthenticate")
 
         if (data.isNotEmpty() && data[0] == "authorized") {
+            socket.emit(EVENT_ROOM_TYPES)
             eventListener?.onAuthorized(this)
             return
         }
@@ -110,6 +107,8 @@ class SocketClient(val context : Context) {
     }
 
     private fun onEspList(data : Array<Any>) {
+        if (DEBUG) Log.d(TAG, "onEspList")
+
         if (data.isEmpty() || data[0] !is JSONObject)
             return
 
@@ -153,6 +152,22 @@ class SocketClient(val context : Context) {
 
         espModules.entries.retainAll { entry -> entry.value.isFilterSet() }
         eventListener?.onEspModules(this, espModules)
+    }
+
+    private fun onRoomTypes(data : Array<Any>) {
+        if (DEBUG) Log.d(TAG, "onRoomTypes")
+
+        if (data.isEmpty() || data[0] !is JSONArray)
+            return
+
+        (data[0] as JSONArray).let { roomList ->
+            roomTypes.clear()
+
+            for (i in 0 until roomList.length())
+                roomTypes.add(roomList.getString(i))
+
+            eventListener?.onRoomTypes(this, roomTypes)
+        }
     }
 
     private fun getCreateEspItem(espID : String) : EspItem {

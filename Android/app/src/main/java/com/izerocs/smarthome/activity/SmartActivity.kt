@@ -31,15 +31,6 @@ class SmartActivity : BaseActivity(),
         listRoom.setOnItemClickListener(this)
         floatButton.setOnClickListener(this)
 
-        if (preferences.empty()) {
-            RoomType.getTypes().forEach {
-                preferences.run {
-                    put(size().plus(1).toString(), RoomItem(this@SmartActivity, it).toData())
-                }
-            }
-        }
-
-        updateListAdapter()
         startActivity(Intent(applicationContext, EspActivity::class.java))
     }
 
@@ -50,8 +41,17 @@ class SmartActivity : BaseActivity(),
     override fun onFetched(type : Int) {
         super.onFetched(type)
 
-        if (type == FETCH_ROOM_TYPE)
+        if (type == FETCH_ROOM_TYPE) {
+            if (preferences.empty()) {
+                RoomType.getTypes().forEach {
+                    preferences.run {
+                        put(size().plus(1).toString(), RoomItem(this@SmartActivity, it).toData())
+                    }
+                }
+            }
+
             updateListAdapter()
+        }
     }
 
     override fun onResume() {

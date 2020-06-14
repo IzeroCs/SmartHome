@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
 import com.izerocs.smarthome.model.EspItem
@@ -17,6 +16,7 @@ import com.izerocs.smarthome.network.EspConnectivity
 import com.izerocs.smarthome.network.EspConnectivity.Companion.StationStatus
 import com.izerocs.smarthome.network.EspConnectivity.OnScanerListener
 import com.izerocs.smarthome.network.EspConnectivity.OnStationListener
+import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.EspPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -106,9 +106,9 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         return EspPreferences(this)
     }
 
-    override fun onEspModules(socket : Socket, espModules : MutableMap<String, EspItem>) {
+    override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {
         mutableListOf<EspItem>().let { lists ->
-            espModules.forEach { entry -> lists.add(entry.value) }
+            espModules?.forEach { entry -> lists.add(entry.value) }
             listEspConnected.clear()
             listEspConnected.addAll(lists)
         }
@@ -116,7 +116,7 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         runOnUiThread {
             listEspConnected.notifyDataSetChanged()
             listEspConnectedTitle.text = getString(R.string.listEspConnectedTitle)
-                .replace("\${count}", espModules.size.toString())
+                .replace("\${count}", espModules?.size.toString())
         }
     }
 

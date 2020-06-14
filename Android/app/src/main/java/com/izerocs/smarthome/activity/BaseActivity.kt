@@ -56,27 +56,17 @@ abstract class BaseActivity : AppCompatActivity(),
         printResulotion()
     }
 
-    open fun onCreatePreferences() : SharedPreferences {
-        TODO()
-    }
+    open fun onFetched(type : Int) { Log.d(TAG, "onFetch: $type") }
+    open fun onCreatePreferences() : SharedPreferences = SharedPreferences()
+    open fun onSocketConnect(client : SocketClient) {}
+    open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {}
 
-    open fun onFetched(type : Int) {
-        Log.d(BaseActivity::class.java.toString(), "onFetch: $type")
-    }
-
-    open fun onSocketConnect(client : SocketClient) {
-        RoomType.fetchTypes(this, client, ::onFetched)
-    }
-
-    open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>) {
-
+    open fun onRoomTypes(client : SocketClient, roomTypes : MutableList<String>) {
+        RoomType.addTypes(this, roomTypes)
     }
 
     @MenuRes
-    open fun onCreateMenu() : Int? {
-        return null
-    }
-
+    open fun onCreateMenu() : Int? = null
     open fun onMenuItemClick(itemId : Int, groupId : Int, item : MenuItem?) { }
 
     override fun onResume() {
@@ -89,14 +79,10 @@ abstract class BaseActivity : AppCompatActivity(),
         super.onDestroy()
     }
 
-    override fun onBack(backView : View, isLongClick : Boolean) {
-        finish()
-    }
+    override fun onBack(backView : View, isLongClick : Boolean) : Unit = finish()
 
     final override fun onMenuItem(menuView : View, item : MenuItem?) {
-        item?.run {
-            onMenuItemClick(itemId, groupId, this)
-        }
+        item?.run { onMenuItemClick(itemId, groupId, this) }
     }
 
     override fun setContentView(layoutResID : Int) {
@@ -140,15 +126,8 @@ abstract class BaseActivity : AppCompatActivity(),
         println("Width: ${display.widthPixels}, Height: ${display.heightPixels}, DensityDpi: ${display.densityDpi}, Density: ${display.density}, ScaledDensity: ${display.scaledDensity}")
     }
 
-    fun getRootView() : View? {
-        return rootView
-    }
+    fun getRootApplication() : SmartApplication = application as SmartApplication
+    fun getSocket() : Socket = getRootApplication().getSocketClient().getSocket()
+    fun getRootView() : View? = rootView
 
-    fun getRootApplication() : SmartApplication {
-        return application as SmartApplication
-    }
-
-    fun getSocket() : Socket {
-        return getRootApplication().getSocketClient().getSocket()
-    }
 }
