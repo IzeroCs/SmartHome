@@ -6,7 +6,7 @@ const os = require("os")
 
 let host = null
 
-module.exports = () => {
+module.exports = (() => {
     if (host != null)
         return
 
@@ -27,7 +27,7 @@ module.exports = () => {
     return {
         getHost: () => host
     }
-}
+})()
 
 module.exports.calculateSignalLevel = (rssi, numLevels)  => {
     if (!numLevels)

@@ -14,11 +14,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import androidx.annotation.DrawableRes
 import androidx.annotation.MenuRes
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.appcompat.view.menu.MenuBuilder
-import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -26,6 +26,7 @@ import androidx.core.view.setPadding
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.utils.Util
 import kotlin.math.sin
+import androidx.appcompat.view.menu.MenuPopupHelper as PopupHelper
 
 /**
  * Created by IzeroCs on 2020-03-24
@@ -47,10 +48,7 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
     }
 
     private var backView : ImageView = ImageView(context).apply {
-        val params = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        ).apply {
+        val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
             addRule(ALIGN_PARENT_LEFT)
             addRule(ALIGN_PARENT_TOP)
 
@@ -69,15 +67,12 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
     }
 
     private val menuView : ImageView = ImageView(context).apply {
-        val params = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        ).apply {
+        val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
             addRule(ALIGN_PARENT_RIGHT)
             addRule(ALIGN_PARENT_TOP)
 
             rightMargin = resources.getDimensionPixelSize(R.dimen.waveIconMargin)
-            topMargin  = Util.getStatusBarHeight(resources) + rightMargin
+            topMargin   = Util.getStatusBarHeight(resources) + rightMargin
         }
 
         visibility    = GONE
@@ -100,7 +95,7 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
     private var activeBack      : Boolean          = false
     private val wavesPath       : Path             = Path()
     private var popupMenu       : PopupMenu?       = null
-    private var menuHelper : MenuPopupHelper?      = null
+    private var menuHelper      : PopupHelper?     = null
 
     private var onBackClickListener     : OnBackClickListener?     = null
     private var onMenuClickListener     : OnMenuClickListener?     = null
@@ -149,6 +144,7 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
 
         if (activeBack)
             addView(backView)
+
         addView(menuView)
     }
 
@@ -198,8 +194,10 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
                 textPaint.run {
                     val textHeight : Float = descent() - ascent()
                     val textOffset : Float = (textHeight / 2) - descent()
+                    val xOffset    : Float = (width / 2).toFloat()
+                    val yOffset    : Float = (titleY / 2).toFloat() + textOffset
 
-                    drawText(title.toString(),(width / 2).toFloat(), (titleY / 2).toFloat() + textOffset, textPaint)
+                    drawText(title.toString(), xOffset, yOffset, textPaint)
                 }
             }
         }
@@ -277,8 +275,8 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
     @SuppressLint("RestrictedApi")
     fun setMenu(@MenuRes resMenuId : Int) {
         if (popupMenu == null) {
-            popupMenu = PopupMenu(context, menuView, Gravity.END)
-            menuHelper = MenuPopupHelper(context, popupMenu?.menu as MenuBuilder, menuView)
+            popupMenu  = PopupMenu(context, menuView, Gravity.END)
+            menuHelper = PopupHelper(context, popupMenu?.menu as MenuBuilder, menuView)
             popupMenu?.setOnMenuItemClickListener(this)
 
             menuHelper?.gravity = Gravity.END
@@ -287,6 +285,18 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
         }
 
         popupMenu?.inflate(resMenuId)
+    }
+
+    fun setShowMenuEmpty(isShow : Boolean) {
+        if (isShow)
+            menuView.visibility = View.VISIBLE
+        else
+            menuView.visibility = View.GONE
+    }
+
+    fun setMenuIcon(@DrawableRes resMenuId : Int, isShow : Boolean = false) {
+        menuView.setImageResource(resMenuId)
+        setShowMenuEmpty(isShow)
     }
 
     fun setOnBackClickListener(listener : OnBackClickListener) {

@@ -6,7 +6,6 @@ const mongo   = require("../mongo")
 const cert    = require("../security/cert")("esp")
 
 let app     = require("./app")
-const model = require("../../mongo/esp")
 let db      = mongo.include("esp")
 let server  = null
 let io      = null
@@ -99,6 +98,7 @@ let ons = {
 
         if (oldSignal != newSignal) {
             modules[socketio.id].detail = newDetail.detail
+            db.updateModule(socketio.id, { detail: modules[socketio.id].detail.data })
             app.notify.espModules()
         }
     }
@@ -153,8 +153,13 @@ module.exports.listen = () => {
                     data: esp.pins,
                     changed: false
                 },
-                detail: {}
+
+                detail: {
+                    data: esp.detail
+                }
             }
+
+            modules[esp.name] = module.exports.validate.detail(modules[esp.name])
         })
     })
 

@@ -1,6 +1,6 @@
 const underscore = require("underscore")
 const http       = require("http")
-const network    = require("./network")()
+const network    = require("./network")
 const ioAPP      = require("./io/app")
 const ioESP      = require("./io/esp")
 const host       = { app: network.getHost(), esp: network.getHost() }

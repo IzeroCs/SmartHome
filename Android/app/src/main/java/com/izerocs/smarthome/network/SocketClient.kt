@@ -117,6 +117,10 @@ class SocketClient(val context : Context) {
         lists.keys().forEach { id ->
             val espID     = id.toString()
             val espObj    = lists.getJSONObject(espID)
+
+            if (!espObj.has("pins") || !espObj.has("detail"))
+                return
+
             val espItem   = getCreateEspItem(espID)
             val espPins   = espObj.getJSONObject("pins")
             val espDetail = espObj.getJSONObject("detail")
@@ -153,6 +157,11 @@ class SocketClient(val context : Context) {
                 if (detail.has("rssi"))
                     espItem.setSignal(detail.getInt("rssi"))
             }
+
+            if (espObj.has("online"))
+                espItem.setOnline(espObj.getBoolean("online"))
+            else
+                espItem.setOnline(false)
         }
 
         espModules.entries.retainAll { entry -> entry.value.isFilterSet() }

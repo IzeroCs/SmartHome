@@ -1,7 +1,6 @@
 package com.izerocs.smarthome.model
 
 import android.net.wifi.ScanResult
-import android.util.Log
 
 /**
  * Created by IzeroCs on 2020-05-03
@@ -14,6 +13,7 @@ class EspItem {
     private var rssi   : Int    = 0
     private var signal : Int    = 0
 
+    private var isOnline     : Boolean = false
     private var isFilter     : Boolean = false
     private var capabilities : String = ""
 
@@ -72,6 +72,7 @@ class EspItem {
     fun getSignal() : Int = this.signal
     fun getSn() : String = this.sn
     fun getSc() : String = this.sc
+    fun isOnline() : Boolean = this.isOnline
     fun isFilter() : Boolean = this.isFilter
     fun getListPins() : MutableList<EspDataPin> = this.listPins
     fun toData() : EspDataItem = EspDataItem(ssid, rssi, capabilities)
@@ -86,12 +87,11 @@ class EspItem {
     }
 
     fun setSsid(ssid : String) { this.ssid = ssid }
+    fun setOnline(isOnline : Boolean) { this.isOnline = isOnline }
     fun setFilter(isFilter : Boolean) { this.isFilter = isFilter }
     fun setSignal(rssi : Int) {
         this.rssi   = rssi
         this.signal = calculateSignalLevel(rssi)
-
-        Log.d(TAG, "Signal: " + this.signal)
     }
 
     override fun toString() : String {

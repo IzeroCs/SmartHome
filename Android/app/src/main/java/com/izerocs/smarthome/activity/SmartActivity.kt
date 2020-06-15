@@ -9,6 +9,7 @@ import com.izerocs.smarthome.model.RoomItem
 import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
+import com.izerocs.smarthome.widget.WavesView
 import kotlinx.android.synthetic.main.activity_smart.*
 
 /**
@@ -16,8 +17,7 @@ import kotlinx.android.synthetic.main.activity_smart.*
  */
 
 class SmartActivity : BaseActivity(),
-    View.OnClickListener,
-    ListRoomAdapter.OnItemClickListener
+    View.OnClickListener, WavesView.OnMenuClickListener, ListRoomAdapter.OnItemClickListener
 {
 
     companion object {
@@ -29,9 +29,9 @@ class SmartActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_smart)
         listRoom.setOnItemClickListener(this)
+        wavesView.setMenuIcon(R.drawable.ic_chipset, true)
+        wavesView.setOnMenuClickListener(this)
         floatButton.setOnClickListener(this)
-
-        startActivity(Intent(applicationContext, EspActivity::class.java))
     }
 
     override fun onCreatePreferences() : SharedPreferences {
@@ -63,6 +63,10 @@ class SmartActivity : BaseActivity(),
     override fun onClick(v: View?) {
         if (v == floatButton)
             startActivity(Intent(applicationContext, AddRoomActivity::class.java))
+    }
+
+    override fun onMenu(menuView : View, isLongClick : Boolean) {
+        startActivity(Intent(applicationContext, EspActivity::class.java))
     }
 
     override fun onItemClick(view: View?, position: Int, isLongClick: Boolean) {

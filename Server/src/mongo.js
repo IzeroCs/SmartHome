@@ -39,4 +39,4 @@ module.exports = (() => {
 module.exports.types = types
 module.exports.schema = schema => mongoose.Schema(schema)
 module.exports.model = (name, schema) => mongoose.model(name, mongoose.Schema(schema))
-module.exports.include = (name) => require("../mongo/" + name)
+module.exports.include = (name) => require("./model/" + name)

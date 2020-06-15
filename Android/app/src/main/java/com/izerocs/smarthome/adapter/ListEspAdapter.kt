@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.EspItem
 import com.izerocs.smarthome.widget.list.RecyclerView
@@ -46,6 +47,16 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
             itemView.listEspSignal.setImageResource(resIcon)
         }
 
+        fun setOnline(online : Boolean) {
+            var colorRes = R.color.listEspIconTintOffline
+
+            if (online)
+                colorRes = R.color.listEspIconTint
+
+            itemView.listEspIcon.imageTintList = ContextCompat
+                .getColorStateList(context, colorRes)
+        }
+
         override fun onClick(v : View?) {
             onItemClickListener?.onItemClick(v, adapterPosition, false)
         }
@@ -74,6 +85,7 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
 
         holder.setSsid(esp.getSn())
         holder.setSignal(esp.getSignal())
+        holder.setOnline(esp.isOnline())
     }
 
     override fun getItemCount() : Int {

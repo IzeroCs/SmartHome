@@ -1,8 +1,8 @@
-const mongo = require("../src/mongo")
+const mongo = require("../mongo")
 const model = mongo.model("setting", {
     version: String,
-    created_at: mongo.types.date,
-    updated_at: mongo.types.date
+    created_at: Date,
+    updated_at: Date
 })
 
 module.exports = (() => {
@@ -20,8 +20,10 @@ module.exports = (() => {
         record.save()
               .then(doc => console.log("[mongo:setting] Created setting first"))
               .catch(err => {
-                  console.log("[mongo:setting] Failed create setting first")
-                  console.log(err)
+                  console.error("[mongo:setting] Failed create setting first")
+                  console.error(err)
               })
-    })
+    }).catch(err => console.error(err))
+
+    return {}
 })()

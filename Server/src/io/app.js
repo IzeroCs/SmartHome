@@ -1,6 +1,7 @@
-const tag    = "[app]"
 const socket = require("../socket")
+const mongo  = require("../mongo")
 const cert   = require("../security/cert")("app")
+const tag    = "[app]"
 let esp      = require("./esp")
 
 let server   = null
@@ -8,6 +9,11 @@ let io       = null
 let host     = null
 let port     = null
 let devices  = {}
+let db       = {
+    room: {
+        types: mongo.include("room/types")
+    }
+}
 
 let ons = {
     "disconnect": socketio => {
@@ -61,6 +67,7 @@ let ons = {
         if (!socketio.auth)
             return module.exports.notify.unauthorized(socketio)
 
+        console.log(tag, "Room types")
         socketio.emit("room.types", [
             "living_room",
             "bed_room",

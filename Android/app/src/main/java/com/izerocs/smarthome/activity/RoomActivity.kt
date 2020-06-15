@@ -2,7 +2,6 @@ package com.izerocs.smarthome.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
@@ -67,10 +66,6 @@ class RoomActivity : BaseActivity(),
 
     override fun onCreateMenu() : Int? {
         return R.menu.room_menu
-    }
-
-    override fun onMenuItemClick(itemId : Int, groupId : Int, item : MenuItem?) {
-        super.onMenuItemClick(itemId, groupId, item)
     }
 
     override fun onClick(v : View?) {
