@@ -11,7 +11,8 @@ let port     = null
 let devices  = {}
 let db       = {
     room: {
-        types: mongo.include("room/types")
+        types: mongo.include("room/types"),
+        list : mongo.include("room/list")
     }
 }
 
@@ -67,18 +68,22 @@ let ons = {
         if (!socketio.auth)
             return module.exports.notify.unauthorized(socketio)
 
-        console.log(tag, "Room types")
-        socketio.emit("room.types", [
-            "living_room",
-            "bed_room",
-            "kitchen_room",
-            "bath_room",
-            "balcony_room",
-            "stairs_room",
-            "fence_room",
-            "mezzanine_room",
-            "roof_room"
-        ])
+        const list = db.room.types.getList()
+        const arr  = []
+
+        if (typeof list === "undefined" || typeof list.forEach === "undefined")
+            return socketio.emit("room.types", arr)
+
+        list.forEach((entry, index) => {
+            if (entry.enable) {
+                arr.push({
+                    name: entry.name,
+                    type: entry.type
+                })
+            }
+        })
+
+        socketio.emit("room.types", arr)
     }
 }
 

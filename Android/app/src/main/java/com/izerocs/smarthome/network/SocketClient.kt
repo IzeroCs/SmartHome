@@ -16,8 +16,8 @@ class SocketClient(val context : Context) {
 
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
-    private val espModules : MutableMap <String, EspItem> = mutableMapOf()
-    private val roomTypes : MutableList<String> = mutableListOf()
+    private val espModules : MutableMap<String, EspItem> = mutableMapOf()
+    private val roomTypes  : MutableMap<String, Int>     = mutableMapOf()
     private var eventListener : OnEventListener? = null
     private var authFailedCount : Int = 0
 
@@ -26,7 +26,7 @@ class SocketClient(val context : Context) {
         fun onAuthorized(client : SocketClient) {}
         fun onDisconnect(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspItem>) {}
-        fun onRoomTypes(client : SocketClient, roomTypes : MutableList<String>) {}
+        fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {}
     }
 
     companion object {
@@ -63,12 +63,13 @@ class SocketClient(val context : Context) {
 
     fun getSocket() : Socket = this.socket
     fun getEspModules() : MutableMap<String, EspItem> = this.espModules
-    fun getRoomTypes() : MutableList<String> = this.roomTypes
+    fun getRoomTypes()  : MutableMap<String, Int>     = this.roomTypes
 
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
 
     private fun onConnect(data : Array<Any>) {
-        if (DEBUG) Log.d(TAG, "onConnect")
+        if (DEBUG)
+            Log.d(TAG, "onConnect")
 
         val appPreferences = AppPreferences(context)
         val appID          = appPreferences.getAppID()
@@ -79,12 +80,15 @@ class SocketClient(val context : Context) {
     }
 
     private fun onDisconnect(data : Array<Any>) {
-        if (DEBUG) Log.d(TAG, "onDisconnect")
+        if (DEBUG)
+            Log.d(TAG, "onDisconnect")
+
         eventListener?.onDisconnect(this)
     }
 
     private fun onAuthenticate(data : Array<Any>) {
-        if (DEBUG) Log.d(TAG, "onAuthenticate")
+        if (DEBUG)
+            Log.d(TAG, "onAuthenticate")
 
         if (data.isNotEmpty() && data[0] == "authorized") {
             socket.emit(EVENT_ROOM_TYPES)
@@ -107,7 +111,8 @@ class SocketClient(val context : Context) {
     }
 
     private fun onEspList(data : Array<Any>) {
-        if (DEBUG) Log.d(TAG, "onEspList")
+        if (DEBUG)
+            Log.d(TAG, "onEspList")
 
         if (data.isEmpty() || data[0] !is JSONObject)
             return
@@ -178,8 +183,14 @@ class SocketClient(val context : Context) {
         (data[0] as JSONArray).let { roomList ->
             roomTypes.clear()
 
-            for (i in 0 until roomList.length())
-                roomTypes.add(roomList.getString(i))
+            for (i in 0 until roomList.length()) {
+                if (roomList[i] is JSONObject) {
+                    val room = roomList.getJSONObject(i)
+
+                    if (room.has("name") && room.has("type"))
+                        roomTypes.put(room.getString("name"), room.getInt("type"))
+                }
+            }
 
             eventListener?.onRoomTypes(this, roomTypes)
         }

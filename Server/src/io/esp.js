@@ -148,7 +148,7 @@ module.exports.listen = () => {
 
         data.forEach(esp => {
             modules[esp.name] = {
-                online: esp.online,
+                online: false,
                 pins: {
                     data: esp.pins,
                     changed: false

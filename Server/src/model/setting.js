@@ -1,8 +1,6 @@
 const mongo = require("../mongo")
 const model = mongo.model("setting", {
-    version: String,
-    created_at: Date,
-    updated_at: Date
+    version: String
 })
 
 module.exports = (() => {
@@ -10,11 +8,8 @@ module.exports = (() => {
         if (count > 0)
             return
 
-        const date = new Date()
         const record = new model({
-            version: "1.0",
-            created_at: date,
-            updated_at: date
+            version: "1.0"
         })
 
         record.save()

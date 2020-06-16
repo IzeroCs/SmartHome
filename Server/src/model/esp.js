@@ -6,9 +6,7 @@ const model   = mongo.model("esp", {
     online: Boolean,
     pins: Array,
     detail: Map,
-    authenticate: Boolean,
-    created_at: Date,
-    updated_at: Date
+    authenticate: Boolean
 })
 
 module.exports = model
@@ -25,15 +23,12 @@ module.exports.addModule = espID => {
 
     model.find({ name: espID }).then(docs => {
         if (docs.length <= 0) {
-            const date = new Date()
             const esp = new model({
                 name: espID,
                 online: false,
                 pins: [],
                 detail: {},
-                authenticate: false,
-                created_at: date,
-                updated_at: date
+                authenticate: false
             })
 
             esp.save().catch(err => console.error(tag, err))
@@ -63,7 +58,6 @@ module.exports.updateModule = (espID, data) => {
         if (typeof data.authenticate !== "undefined")
             doc.authenticate = data.authenticate
 
-        doc.updated_at = new Date()
         doc.save().catch(err => console.error(tag, err))
     }).catch(err => console.error(tag, err))
 }

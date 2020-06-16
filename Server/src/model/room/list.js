@@ -1,40 +1,40 @@
 const mongo = require("../../mongo")
-const tag   = "[mongo:room.types]"
-const model = mongo.model("room.types", {
+const tag   = "[mongo:room.list]"
+const model = mongo.model("room.list", {
     name: String,
     type: Number,
     enable: Boolean
 })
 
-let types = []
+let lists = []
 const def = {
-    living_room   : 1,
-    bed_room      : 2,
-    kitchen_room  : 3,
-    bath_room     : 4,
-    balcony_room  : 5,
-    stairs_room   : 6,
-    fence_room    : 7,
-    mezzanine_room: 8,
-    roof_room     : 9
+    1: "Phòng khách",
+    2: "Phòng ngủ",
+    3: "Phòng bếp",
+    4: "Phòng tắm",
+    5: "Ban công",
+    6: "Cầu thang",
+    7: "Sân nhà",
+    8: "Gác lửng",
+    9: "Gác mái"
 }
 
 module.exports = (() => {
     model.find({}).then(docs => {
-        if (types.length > 0)
+        if (lists.length > 0)
             return
 
         if (docs.length > 0) {
-            types = docs
+            lists = docs
             return
         }
 
         const keys = Object.keys(def)
 
-        keys.forEach(name => {
+        keys.forEach(type => {
             const record = new model({
-                name: name,
-                type: def[name],
+                name: def[type],
+                type: type,
                 enable: true
             })
 
@@ -43,6 +43,6 @@ module.exports = (() => {
     }).catch(err => console.error(err))
 
     return {
-        getList: () => types
+        getList: () => lists
     }
 })()

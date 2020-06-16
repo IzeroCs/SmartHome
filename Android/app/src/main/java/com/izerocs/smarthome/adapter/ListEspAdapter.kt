@@ -34,17 +34,22 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
             itemView.listEspSsid.text = ssid
         }
 
-        fun setSignal(signal : Int) {
-            var resIcon = R.drawable.ic_signal_wifi_0
+        fun setSignal(signal : Int, online : Boolean) {
+            if (!online) {
+                itemView.listEspSignal.visibility = View.GONE
+            } else {
+                var resIcon = R.drawable.ic_signal_wifi_0
 
-            when (signal) {
-                1 -> resIcon = R.drawable.ic_signal_wifi_1
-                2 -> resIcon = R.drawable.ic_signal_wifi_2
-                3 -> resIcon = R.drawable.ic_signal_wifi_3
-                4 -> resIcon = R.drawable.ic_signal_wifi_4
+                when (signal) {
+                    1 -> resIcon = R.drawable.ic_signal_wifi_1
+                    2 -> resIcon = R.drawable.ic_signal_wifi_2
+                    3 -> resIcon = R.drawable.ic_signal_wifi_3
+                    4 -> resIcon = R.drawable.ic_signal_wifi_4
+                }
+
+                itemView.listEspSignal.setImageResource(resIcon)
+                itemView.listEspSignal.visibility = View.VISIBLE
             }
-
-            itemView.listEspSignal.setImageResource(resIcon)
         }
 
         fun setOnline(online : Boolean) {
@@ -84,7 +89,7 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         val esp = esps[position]
 
         holder.setSsid(esp.getSn())
-        holder.setSignal(esp.getSignal())
+        holder.setSignal(esp.getSignal(), esp.isOnline())
         holder.setOnline(esp.isOnline())
     }
 

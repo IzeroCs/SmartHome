@@ -23,10 +23,11 @@ class RoomType {
 
         private var types = mutableListOf<Int>()
 
-        fun addTypes(baseActivity : BaseActivity, roomTypes : MutableList<String>) {
+        fun addTypes(baseActivity : BaseActivity, roomTypes : MutableMap<String, Int>) {
             if (types.isNotEmpty())
                 return
-            roomTypes.forEach { types.add(stringToType(it)) }
+
+            roomTypes.forEach { types.add(it.value) }
             baseActivity.onFetched(BaseActivity.FETCH_ROOM_TYPE)
         }
 

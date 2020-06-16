@@ -5,7 +5,7 @@ void InputClass::begin() {
     pcf.begin();
 
     for (int i = 0; i < 8; ++i) {
-        pcf.pinMode(i, INPUT);
+        pcf.pinMode(i, INPUT_PULLUP);
         pcf.digitalWrite(i, LOW);
     }
 }
@@ -13,6 +13,9 @@ void InputClass::begin() {
 void InputClass::loop() {
     byte digital = pcf.digitalReadAll();
     uint8_t bit  = 0;
+
+    Serial.print("Read: ");
+    Serial.println(digital, BIN);
 
     for (uint8_t pin = 0; pin < 8; ++pin) {
         bit = bitRead(digital, pin);

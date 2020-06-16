@@ -24,7 +24,7 @@ class SmartApplication : Application() {
             activityCurrent?.onEspModules(client, espModules)
         }
 
-        override fun onRoomTypes(client : SocketClient, roomTypes : MutableList<String>) {
+        override fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {
             activityCurrent?.onRoomTypes(client, roomTypes)
         }
     }

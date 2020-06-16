@@ -38,5 +38,11 @@ module.exports = (() => {
 
 module.exports.types = types
 module.exports.schema = schema => mongoose.Schema(schema)
-module.exports.model = (name, schema) => mongoose.model(name, mongoose.Schema(schema))
 module.exports.include = (name) => require("./model/" + name)
+module.exports.model = (name, schema) => mongoose.model(name, mongoose.Schema(schema, {
+    versionKey: false,
+    timestamps: {
+        createdAt: "created_at",
+        updatedAt: "updated_at"
+    }
+}))

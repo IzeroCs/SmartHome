@@ -61,7 +61,7 @@ abstract class BaseActivity : AppCompatActivity(),
     open fun onSocketConnect(client : SocketClient) {}
     open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {}
 
-    open fun onRoomTypes(client : SocketClient, roomTypes : MutableList<String>) {
+    open fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {
         RoomType.addTypes(this, roomTypes)
     }
 

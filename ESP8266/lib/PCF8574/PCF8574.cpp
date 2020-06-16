@@ -254,7 +254,7 @@ void PCF8574::pinMode(uint8_t pin, uint8_t mode, uint8_t output_start){
 			writeModeUp = writeModeUp | bit(pin);
 		}
 
-		readMode =  readMode & ~bit(pin);
+		readMode            =   readMode & ~bit(pin);
 		readModePullDown 	=	readModePullDown 	& 	~bit(pin);
 		readModePullUp 		=	readModePullUp 		& 	~bit(pin);
 
@@ -673,5 +673,3 @@ void PCF8574::digitalWrite(uint8_t pin, uint8_t value){
 
 	_wire->endTransmission();
 };
-
-
