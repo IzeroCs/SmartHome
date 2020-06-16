@@ -3,18 +3,14 @@ const mongo  = require("../mongo")
 const cert   = require("../security/cert")("app")
 const tag    = "[app]"
 let esp      = require("./esp")
+const room = require("../model/room")
 
 let server   = null
 let io       = null
 let host     = null
 let port     = null
 let devices  = {}
-let db       = {
-    room: {
-        types: mongo.include("room/types"),
-        list : mongo.include("room/list")
-    }
-}
+let dbRoom   = mongo.include("room")
 
 let ons = {
     "disconnect": socketio => {
@@ -41,6 +37,8 @@ let ons = {
                 socketio.emit("authenticate", "authorized")
 
                 module.exports.notify.espModules(socketio)
+                module.exports.notify.roomTypes(socketio)
+                module.exports.notify.roomList(socketio)
             } else {
                 module.exports.notify.unauthorized(socketio)
             }
@@ -68,22 +66,14 @@ let ons = {
         if (!socketio.auth)
             return module.exports.notify.unauthorized(socketio)
 
-        const list = db.room.types.getList()
-        const arr  = []
+        module.exports.notify.roomTypes(socketio)
+    },
 
-        if (typeof list === "undefined" || typeof list.forEach === "undefined")
-            return socketio.emit("room.types", arr)
+    "room.list": (socketio) => {
+        if (!socketio.auth)
+            return module.exports.notify.unauthorized(socketio)
 
-        list.forEach((entry, index) => {
-            if (entry.enable) {
-                arr.push({
-                    name: entry.name,
-                    type: entry.type
-                })
-            }
-        })
-
-        socketio.emit("room.types", arr)
+        module.exports.notify.roomList(socketio)
     }
 }
 
@@ -147,6 +137,48 @@ module.exports.notify = {
                 socketio.emit("esp.list", esp.modules)
         } else {
             io.sockets.emit("esp.list", esp.modules)
+        }
+    },
+
+    roomTypes: (socketio) => {
+        if (socketio && socketio.auth) {
+            const types = dbRoom.datas.types
+            const arr  = []
+
+            if (typeof types === "undefined" || typeof types.forEach === "undefined")
+                return socketio.emit("room.types", arr)
+
+            types.forEach(entry => {
+                if (entry.enable) {
+                    arr.push({
+                        name: entry.name,
+                        type: entry.type
+                    })
+                }
+            })
+
+            socketio.emit("room.types", arr)
+        }
+    },
+
+    roomList: (socketio) => {
+        if (socketio && socketio.auth) {
+            const list = dbRoom.datas.list
+            const arr  = []
+
+            if (typeof list === "undefined" || typeof list.forEach === "undefined")
+                return socketio.emit("room.list", arr)
+
+            list.forEach(entry => {
+                if (entry.enable) {
+                    arr.push({
+                        name: entry.name,
+                        type: entry.type.type
+                    })
+                }
+            })
+
+            socketio.emit("room.list", arr)
         }
     }
 }

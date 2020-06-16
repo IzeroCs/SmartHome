@@ -35,13 +35,14 @@ class ListRoomView(context: Context, attributeSet: AttributeSet) : RecyclerView(
         setItemViewCacheSize(20)
     }
 
-    fun add(room : RoomItem) : Unit = (adapter as ListRoomAdapter).add(room)
-    fun clear() : Unit = (adapter as ListRoomAdapter).clear()
-
-    fun get(position : Int) : RoomItem {
-        return (adapter as ListRoomAdapter).get(position)
-    }
+    fun clear() : Unit = getCatchAdapter().clear()
+    fun add(room : RoomItem) : Boolean = getCatchAdapter().add(room)
+    fun addAll(rooms : MutableList<RoomItem>) : Boolean = getCatchAdapter().addAll(rooms)
+    fun get(position : Int) : RoomItem = getCatchAdapter().get(position)
+    fun notifyDataSetChanged() : Unit = getCatchAdapter().notifyDataSetChanged()
 
     fun setOnItemClickListener(listener: ListRoomAdapter.OnItemClickListener?) : Unit =
-        (adapter as ListRoomAdapter).setOnItemClickListener(listener)
+        getCatchAdapter().setOnItemClickListener(listener)
+
+    private fun getCatchAdapter() : ListRoomAdapter = adapter as ListRoomAdapter
 }

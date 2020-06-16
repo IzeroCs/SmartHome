@@ -7,6 +7,7 @@ import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
 import com.izerocs.smarthome.model.RoomType
+import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -21,6 +22,7 @@ class SmartActivity : BaseActivity(),
 {
 
     companion object {
+        const val TAG = "SmartActivity"
         const val EXTRA_ROOM_NAME = "com.izerocs.smarthome.ROOM_NAME"
         const val EXTRA_ROOM_TYPE = "com.izerocs.smarthome.ROOM_TYPE"
     }
@@ -34,8 +36,19 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
     }
 
-    override fun onCreatePreferences() : SharedPreferences {
-        return RoomPreferences(this)
+    override fun onCreatePreferences() : SharedPreferences = RoomPreferences(this)
+
+    override fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
+        if (roomList.isEmpty())
+            return
+
+        val rooms = mutableListOf<RoomItem>()
+
+        roomList.forEach { room -> rooms.add(RoomItem(applicationContext, room.key, room.value)) }
+        listRoom.clear()
+        listRoom.addAll(rooms)
+
+        runOnUiThread { listRoom.notifyDataSetChanged() }
     }
 
     override fun onFetched(type : Int) {
@@ -45,7 +58,8 @@ class SmartActivity : BaseActivity(),
             if (preferences.empty()) {
                 RoomType.getTypes().forEach {
                     preferences.run {
-                        put(size().plus(1).toString(), RoomItem(this@SmartActivity, it).toData())
+                        put(size().plus(1)
+                            .toString(), RoomItem(this@SmartActivity, it).toData())
                     }
                 }
             }
@@ -79,19 +93,19 @@ class SmartActivity : BaseActivity(),
     }
 
     private fun updateListAdapter() {
-        runOnUiThread {
-            preferences.run {
-                val list = getAll()
-                    ?.toSortedMap(Comparator { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
-
-                listRoom.clear()
-                list?.forEach {
-                    val item = getObject(it.key, RoomItem.RoomItemData::class.java)
-
-                    if (RoomType.isTypeValid(item.type))
-                        listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
-                }
-            }
-        }
+//        runOnUiThread {
+//            preferences.run {
+//                val list = getAll()
+//                    ?.toSortedMap(Comparator { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
+//
+//                listRoom.clear()
+//                list?.forEach {
+//                    val item = getObject(it.key, RoomItem.RoomItemData::class.java)
+//
+//                    if (RoomType.isTypeValid(item.type))
+//                        listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
+//                }
+//            }
+//        }
     }
 }

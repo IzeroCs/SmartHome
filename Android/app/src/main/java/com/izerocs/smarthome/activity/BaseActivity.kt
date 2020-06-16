@@ -65,6 +65,9 @@ abstract class BaseActivity : AppCompatActivity(),
         RoomType.addTypes(this, roomTypes)
     }
 
+    open fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
+    }
+
     @MenuRes
     open fun onCreateMenu() : Int? = null
     open fun onMenuItemClick(itemId : Int, groupId : Int, item : MenuItem?) { }

@@ -27,6 +27,10 @@ class SmartApplication : Application() {
         override fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {
             activityCurrent?.onRoomTypes(client, roomTypes)
         }
+
+        override fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
+            activityCurrent?.onRoomList(client, roomList)
+        }
     }
 
     companion object {
@@ -70,6 +74,7 @@ class SmartApplication : Application() {
         activity?.run {
             activityCurrent = this
             onRoomTypes(socketClient, socketClient.getRoomTypes())
+            onRoomList(socketClient, socketClient.getRoomList())
             onEspModules(socketClient, socketClient.getEspModules())
         }
     }

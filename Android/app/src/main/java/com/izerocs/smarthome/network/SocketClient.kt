@@ -11,13 +11,14 @@ import org.json.JSONObject
 
 class SocketClient(val context : Context) {
     private val scheme : String = "http://"
-    private val host   : String = "izerocs.com"
+    private val host   : String = "192.168.31.104"
     private val port   : String = "3180"
 
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
     private val espModules : MutableMap<String, EspItem> = mutableMapOf()
     private val roomTypes  : MutableMap<String, Int>     = mutableMapOf()
+    private val roomList   : MutableMap<String, Int>     = mutableMapOf()
     private var eventListener : OnEventListener? = null
     private var authFailedCount : Int = 0
 
@@ -27,6 +28,7 @@ class SocketClient(val context : Context) {
         fun onDisconnect(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspItem>) {}
         fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {}
+        fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {}
     }
 
     companion object {
@@ -36,6 +38,7 @@ class SocketClient(val context : Context) {
 
         const val EVENT_AUTHENTICATE = "authenticate"
         const val EVENT_ROOM_TYPES   = "room.types"
+        const val EVENT_ROOM_LIST    = "room.list"
         const val EVENT_ESP_LIST     = "esp.list"
     }
 
@@ -45,11 +48,12 @@ class SocketClient(val context : Context) {
 
         socket.connect()
         socket.run {
-            on(Socket.EVENT_CONNECT)    { onConnect(it) }
-            on(Socket.EVENT_DISCONNECT) { onDisconnect(it) }
+            on(Socket.EVENT_CONNECT)    { onConnect(it)      }
+            on(Socket.EVENT_DISCONNECT) { onDisconnect(it)   }
             on(EVENT_AUTHENTICATE)      { onAuthenticate(it) }
-            on(EVENT_ESP_LIST)          { onEspList(it) }
-            on(EVENT_ROOM_TYPES)        { onRoomTypes(it) }
+            on(EVENT_ESP_LIST)          { onEspList(it)      }
+            on(EVENT_ROOM_TYPES)        { onRoomTypes(it)    }
+            on(EVENT_ROOM_LIST)         { onRoomList(it)     }
         }
     }
 
@@ -64,6 +68,7 @@ class SocketClient(val context : Context) {
     fun getSocket() : Socket = this.socket
     fun getEspModules() : MutableMap<String, EspItem> = this.espModules
     fun getRoomTypes()  : MutableMap<String, Int>     = this.roomTypes
+    fun getRoomList()   : MutableMap<String, Int>     = this.roomList
 
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
 
@@ -92,7 +97,9 @@ class SocketClient(val context : Context) {
 
         if (data.isNotEmpty() && data[0] == "authorized") {
             socket.emit(EVENT_ROOM_TYPES)
+            socket.emit(EVENT_ROOM_LIST)
             eventListener?.onAuthorized(this)
+
             return
         }
 
@@ -180,19 +187,42 @@ class SocketClient(val context : Context) {
         if (data.isEmpty() || data[0] !is JSONArray)
             return
 
-        (data[0] as JSONArray).let { roomList ->
+        (data[0] as JSONArray).let { types ->
             roomTypes.clear()
 
-            for (i in 0 until roomList.length()) {
-                if (roomList[i] is JSONObject) {
-                    val room = roomList.getJSONObject(i)
+            for (i in 0 until types.length()) {
+                if (types[i] is JSONObject) {
+                    val room = types.getJSONObject(i)
 
                     if (room.has("name") && room.has("type"))
-                        roomTypes.put(room.getString("name"), room.getInt("type"))
+                        roomTypes[room.getString("name")] = room.getInt("type")
                 }
             }
 
             eventListener?.onRoomTypes(this, roomTypes)
+        }
+    }
+
+    private fun onRoomList(data : Array<Any>) {
+        if (DEBUG)
+            Log.d(TAG, "onRoomList")
+
+        if (data.isEmpty() || data[0] !is JSONArray)
+            return
+
+        (data[0] as JSONArray).let { list ->
+            roomList.clear()
+
+            for (i in 0 until list.length()) {
+                if (list[i] is JSONObject) {
+                    val room = list.getJSONObject(i)
+
+                    if (room.has("name") && room.has("type"))
+                        roomList[room.getString("name")] = room.getInt("type")
+                }
+            }
+
+            eventListener?.onRoomList(this, roomList)
         }
     }
 

@@ -66,4 +66,9 @@ class RoomItem {
         return RoomItemData(name, type)
     }
 
+    override fun toString() : String {
+        return "${super.toString()} " +
+                "{ name: $name, type: $type }"
+    }
+
 }

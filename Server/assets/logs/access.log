@@ -1412,3 +1412,667 @@
 12:07:03, 16/6/2020: [app] Connect: d8u36pKHfNEfb_tMAAAA
 12:07:03, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
 12:07:52, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+=======================================[17:33:51, 16/6/2020]=======================================
+17:33:56, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:33:56, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:33:56, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:33:56, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[17:44:28, 16/6/2020]=======================================
+17:44:29, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:44:29, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:44:29, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:44:29, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:44:29, 16/6/2020: [app] Connect: BtQNy_uXENsMh3chAAAA
+17:44:29, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:44:49, 16/6/2020]=======================================
+17:44:51, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:44:51, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:44:51, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:44:51, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:44:53, 16/6/2020: [app] Connect: PDu6CmbavIC2EIOYAAAA
+17:44:53, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:47:52, 16/6/2020]=======================================
+17:47:54, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:47:54, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:47:54, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:47:54, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:47:57, 16/6/2020: [app] Connect: 5_qD9Gtl3WyV8f5PAAAA
+17:47:57, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:52:56, 16/6/2020]=======================================
+17:52:57, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:52:57, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:52:57, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:52:57, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:53:03, 16/6/2020: [app] Connect: yzja9-qCfh_fiSHcAAAA
+17:53:03, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:54:43, 16/6/2020]=======================================
+17:54:44, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:54:44, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:54:44, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:54:44, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:54:44, 16/6/2020: [mongo:setting] Created setting first 
+17:54:47, 16/6/2020: [app] Connect: ofMb823RZAfDvHayAAAA
+17:54:47, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:59:19, 16/6/2020]=======================================
+17:59:21, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+17:59:21, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:59:21, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+17:59:21, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:59:21, 16/6/2020: [app] Connect: NTvOI_qNEycF-bTyAAAA
+17:59:21, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:01:45, 16/6/2020]=======================================
+18:01:47, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:01:47, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:01:47, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:01:47, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:01:50, 16/6/2020: [app] Connect: 0_BBxAU2TcNyWVjBAAAA
+18:01:50, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:02:15, 16/6/2020]=======================================
+18:02:16, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:02:16, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:02:16, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:02:16, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:02:17, 16/6/2020: [app] Connect: FnHysqKDC33w_LpPAAAA
+18:02:17, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:04:27, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+=======================================[18:10:12, 16/6/2020]=======================================
+18:10:14, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:10:14, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:10:14, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:10:14, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[18:10:43, 16/6/2020]=======================================
+18:10:45, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:10:45, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:10:45, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:10:45, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:10:45, 16/6/2020: [mongo:room] 2{
+  _id: 5ee8a6b8f32f220193ceaae2,
+  name: 'bed_room',
+  type: 2,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 3{
+  _id: 5ee8a6b8f32f220193ceaae3,
+  name: 'kitchen_room',
+  type: 3,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 1{
+  _id: 5ee8a6b8f32f220193ceaae1,
+  name: 'living_room',
+  type: 1,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.952Z,
+  updated_at: 2020-06-16T11:02:16.952Z
+}
+18:10:45, 16/6/2020: [mongo:room] 5{
+  _id: 5ee8a6b8f32f220193ceaae5,
+  name: 'balcony_room',
+  type: 5,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 6{
+  _id: 5ee8a6b8f32f220193ceaae6,
+  name: 'stairs_room',
+  type: 6,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 7{
+  _id: 5ee8a6b8f32f220193ceaae7,
+  name: 'fence_room',
+  type: 7,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 4{
+  _id: 5ee8a6b8f32f220193ceaae4,
+  name: 'bath_room',
+  type: 4,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 8{
+  _id: 5ee8a6b8f32f220193ceaae8,
+  name: 'mezzanine_room',
+  type: 8,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+18:10:45, 16/6/2020: [mongo:room] 9{
+  _id: 5ee8a6b8f32f220193ceaae9,
+  name: 'roof_room',
+  type: 9,
+  enable: true,
+  created_at: 2020-06-16T11:02:16.953Z,
+  updated_at: 2020-06-16T11:02:16.953Z
+}
+=======================================[18:10:58, 16/6/2020]=======================================
+18:11:00, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:11:00, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:11:00, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:11:00, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:11:00, 16/6/2020: [mongo:room] 25ee8a6b8f32f220193ceaae2
+18:11:00, 16/6/2020: [mongo:room] 35ee8a6b8f32f220193ceaae3
+18:11:00, 16/6/2020: [mongo:room] 15ee8a6b8f32f220193ceaae1
+18:11:00, 16/6/2020: [mongo:room] 55ee8a6b8f32f220193ceaae5
+18:11:00, 16/6/2020: [mongo:room] 65ee8a6b8f32f220193ceaae6
+18:11:00, 16/6/2020: [mongo:room] 75ee8a6b8f32f220193ceaae7
+18:11:00, 16/6/2020: [mongo:room] 45ee8a6b8f32f220193ceaae4
+18:11:00, 16/6/2020: [mongo:room] 85ee8a6b8f32f220193ceaae8
+18:11:00, 16/6/2020: [mongo:room] 95ee8a6b8f32f220193ceaae9
+=======================================[18:12:25, 16/6/2020]=======================================
+18:12:27, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:12:27, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:12:27, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:12:27, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[18:12:54, 16/6/2020]=======================================
+18:12:56, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:12:56, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:12:56, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:12:56, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[18:13:32, 16/6/2020]=======================================
+18:13:34, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:13:34, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:13:34, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:13:34, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[18:14:11, 16/6/2020]=======================================
+18:14:13, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:14:13, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:14:13, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:14:13, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+=======================================[18:14:18, 16/6/2020]=======================================
+18:14:19, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:14:19, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:14:19, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:14:19, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:14:19, 16/6/2020: [mongo:room] Create first data room types
+18:14:19, 16/6/2020: [mongo:room] Create first data room list
+18:14:19, 16/6/2020: [mongo:setting] Created setting first 
+18:14:47, 16/6/2020: [app] Connect: 5FjmICges63EA_NfAAAA
+18:14:47, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:16:34, 16/6/2020]=======================================
+18:16:35, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:16:35, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:16:35, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:16:35, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:16:35, 16/6/2020: [app] Connect: X7048WhZHbpRppf1AAAA
+18:16:35, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:19:59, 16/6/2020]=======================================
+18:20:01, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:20:01, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:20:01, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:20:01, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:20:01, 16/6/2020: [mongo:room] {
+  _id: 5ee8a98bd8fd34026510e8a7,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89d,
+  created_at: 2020-06-16T11:14:19.782Z,
+  updated_at: 2020-06-16T11:14:19.782Z
+},{
+  _id: 5ee8a98bd8fd34026510e8aa,
+  name: 'Phòng tắm',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a0,
+  created_at: 2020-06-16T11:14:19.785Z,
+  updated_at: 2020-06-16T11:14:19.785Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a9,
+  name: 'Phòng bếp',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89f,
+  created_at: 2020-06-16T11:14:19.784Z,
+  updated_at: 2020-06-16T11:14:19.784Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ab,
+  name: 'Ban công',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a1,
+  created_at: 2020-06-16T11:14:19.790Z,
+  updated_at: 2020-06-16T11:14:19.790Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a8,
+  name: 'Phòng ngủ',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89e,
+  created_at: 2020-06-16T11:14:19.783Z,
+  updated_at: 2020-06-16T11:14:19.783Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ac,
+  name: 'Cầu thang',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a2,
+  created_at: 2020-06-16T11:14:19.794Z,
+  updated_at: 2020-06-16T11:14:19.794Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ad,
+  name: 'Sân nhà',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a3,
+  created_at: 2020-06-16T11:14:19.797Z,
+  updated_at: 2020-06-16T11:14:19.797Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ae,
+  name: 'Gác lửng',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a4,
+  created_at: 2020-06-16T11:14:19.799Z,
+  updated_at: 2020-06-16T11:14:19.799Z
+},{
+  _id: 5ee8a98bd8fd34026510e8af,
+  name: 'Gác mái',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a5,
+  created_at: 2020-06-16T11:14:19.800Z,
+  updated_at: 2020-06-16T11:14:19.800Z
+}
+18:20:01, 16/6/2020: [app] Connect: d7Aa2b5xcuPa6xi9AAAA
+18:20:02, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:28:50, 16/6/2020]=======================================
+18:28:51, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:28:51, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:28:51, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:28:51, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:28:54, 16/6/2020: [app] Connect: ynYH8HlQWLSNhKR3AAAA
+18:28:55, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:36:34, 16/6/2020]=======================================
+18:36:35, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:36:35, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:36:35, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:36:36, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:36:36, 16/6/2020: [mongo:room] {
+  _id: 5ee8a98bd8fd34026510e8a7,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89d,
+  created_at: 2020-06-16T11:14:19.782Z,
+  updated_at: 2020-06-16T11:14:19.782Z
+},{
+  _id: 5ee8a98bd8fd34026510e8aa,
+  name: 'Phòng tắm',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a0,
+  created_at: 2020-06-16T11:14:19.785Z,
+  updated_at: 2020-06-16T11:14:19.785Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a9,
+  name: 'Phòng bếp',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89f,
+  created_at: 2020-06-16T11:14:19.784Z,
+  updated_at: 2020-06-16T11:14:19.784Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ab,
+  name: 'Ban công',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a1,
+  created_at: 2020-06-16T11:14:19.790Z,
+  updated_at: 2020-06-16T11:14:19.790Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a8,
+  name: 'Phòng ngủ',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e89e,
+  created_at: 2020-06-16T11:14:19.783Z,
+  updated_at: 2020-06-16T11:14:19.783Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ac,
+  name: 'Cầu thang',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a2,
+  created_at: 2020-06-16T11:14:19.794Z,
+  updated_at: 2020-06-16T11:14:19.794Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ad,
+  name: 'Sân nhà',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a3,
+  created_at: 2020-06-16T11:14:19.797Z,
+  updated_at: 2020-06-16T11:14:19.797Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ae,
+  name: 'Gác lửng',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a4,
+  created_at: 2020-06-16T11:14:19.799Z,
+  updated_at: 2020-06-16T11:14:19.799Z
+},{
+  _id: 5ee8a98bd8fd34026510e8af,
+  name: 'Gác mái',
+  enable: true,
+  type: 5ee8a98bd8fd34026510e8a5,
+  created_at: 2020-06-16T11:14:19.800Z,
+  updated_at: 2020-06-16T11:14:19.800Z
+}
+18:36:38, 16/6/2020: [app] Connect: FM9R-VOkaTjmCZgAAAAA
+18:36:39, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:36:48, 16/6/2020]=======================================
+18:36:49, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:36:49, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:36:49, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:36:49, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:36:49, 16/6/2020: [mongo:room] {
+  _id: 5ee8a98bd8fd34026510e8a7,
+  name: 'Phòng khách',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e89d,
+    name: 'living_room',
+    type: 1,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.710Z,
+    updated_at: 2020-06-16T11:14:19.710Z
+  },
+  created_at: 2020-06-16T11:14:19.782Z,
+  updated_at: 2020-06-16T11:14:19.782Z
+},{
+  _id: 5ee8a98bd8fd34026510e8aa,
+  name: 'Phòng tắm',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a0,
+    name: 'bath_room',
+    type: 4,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.785Z,
+  updated_at: 2020-06-16T11:14:19.785Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a9,
+  name: 'Phòng bếp',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e89f,
+    name: 'kitchen_room',
+    type: 3,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.784Z,
+  updated_at: 2020-06-16T11:14:19.784Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ab,
+  name: 'Ban công',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a1,
+    name: 'balcony_room',
+    type: 5,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.790Z,
+  updated_at: 2020-06-16T11:14:19.790Z
+},{
+  _id: 5ee8a98bd8fd34026510e8a8,
+  name: 'Phòng ngủ',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e89e,
+    name: 'bed_room',
+    type: 2,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.783Z,
+  updated_at: 2020-06-16T11:14:19.783Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ac,
+  name: 'Cầu thang',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a2,
+    name: 'stairs_room',
+    type: 6,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.794Z,
+  updated_at: 2020-06-16T11:14:19.794Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ad,
+  name: 'Sân nhà',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a3,
+    name: 'fence_room',
+    type: 7,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.797Z,
+  updated_at: 2020-06-16T11:14:19.797Z
+},{
+  _id: 5ee8a98bd8fd34026510e8ae,
+  name: 'Gác lửng',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a4,
+    name: 'mezzanine_room',
+    type: 8,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.711Z,
+    updated_at: 2020-06-16T11:14:19.711Z
+  },
+  created_at: 2020-06-16T11:14:19.799Z,
+  updated_at: 2020-06-16T11:14:19.799Z
+},{
+  _id: 5ee8a98bd8fd34026510e8af,
+  name: 'Gác mái',
+  enable: true,
+  type: {
+    _id: 5ee8a98bd8fd34026510e8a5,
+    name: 'roof_room',
+    type: 9,
+    enable: true,
+    created_at: 2020-06-16T11:14:19.712Z,
+    updated_at: 2020-06-16T11:14:19.712Z
+  },
+  created_at: 2020-06-16T11:14:19.800Z,
+  updated_at: 2020-06-16T11:14:19.800Z
+}
+18:36:53, 16/6/2020: [app] Connect: woONDnmlYb-hNVXpAAAA
+18:36:53, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:40:29, 16/6/2020]=======================================
+18:40:31, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:40:31, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:40:31, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:40:31, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:40:33, 16/6/2020: [app] Connect: JIMRRnn8ZBRAyUctAAAA
+18:40:33, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:40:43, 16/6/2020]=======================================
+18:40:44, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:40:44, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:40:44, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:40:44, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:40:44, 16/6/2020: [mongo:room] Create first data room types
+18:40:44, 16/6/2020: [mongo:room] Create first data room list
+18:40:45, 16/6/2020: [mongo:setting] Created setting first 
+18:40:45, 16/6/2020: [app] Connect: KWKurNq9muT09cjnAAAA
+18:40:45, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:41:05, 16/6/2020]=======================================
+18:41:07, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:41:07, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:41:07, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:41:07, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:41:07, 16/6/2020: [mongo:room] [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+18:41:10, 16/6/2020: [app] Connect: n0lo-DVtx0h_PWo9AAAA
+18:41:10, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:41:11, 16/6/2020]=======================================
+18:41:13, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:41:13, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:41:13, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:41:13, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:41:13, 16/6/2020: [mongo:room] [object Object]
+18:41:13, 16/6/2020: [app] Connect: MTHgxGJmx1e8W8ONAAAA
+18:41:13, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:41:17, 16/6/2020]=======================================
+18:41:18, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:41:18, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:41:18, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:41:18, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:41:18, 16/6/2020: [mongo:room] 2
+18:41:34, 16/6/2020: [app] Connect: SUA7_9VbJEE38d8sAAAA
+18:41:34, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:41:39, 16/6/2020]=======================================
+18:41:41, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:41:41, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:41:41, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:41:41, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:41:44, 16/6/2020: [app] Connect: L7dDzgkuG3eAvHEIAAAA
+18:41:44, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:42:17, 16/6/2020]=======================================
+18:42:19, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:42:19, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:42:19, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:42:19, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:42:19, 16/6/2020: [app] Connect: WcfrICSXEXuH2hghAAAA
+18:42:19, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:42:47, 16/6/2020]=======================================
+18:42:48, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:42:48, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:42:48, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:42:48, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:42:49, 16/6/2020: [app] Connect: cIpKILUeCK3OX1Q4AAAA
+18:42:49, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:52:45, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:52:48, 16/6/2020: [app] Connect: 88HuaMKsunNbNnYdAAAB
+18:52:48, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:53:42, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:53:44, 16/6/2020: [app] Connect: 9YG2PnOn_DgWsZT7AAAC
+18:53:44, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:54:42, 16/6/2020]=======================================
+18:54:43, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:54:43, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:54:43, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:54:44, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:54:47, 16/6/2020: [app] Connect: U3liqykNkvmBJh2qAAAA
+18:54:47, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:56:59, 16/6/2020]=======================================
+18:57:00, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+18:57:00, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:57:00, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+18:57:00, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:57:03, 16/6/2020: [app] Connect: k-aXr0O0mfMlbSj_AAAA
+18:57:03, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:58:58, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:59:00, 16/6/2020: [app] Connect: h7E8sQC1SRIldrKWAAAB
+18:59:01, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:02:17, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:02:20, 16/6/2020: [app] Connect: Ibe1ObyW8zejV4p0AAAC
+19:02:20, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:11:49, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:11:51, 16/6/2020: [app] Connect: aVPueQ0n8Mn8tmmlAAAD
+19:11:51, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:12:33, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:12:35, 16/6/2020: [app] Connect: rOoKmL8Qrm8Q5b5GAAAE
+19:12:35, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:13:21, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:13:23, 16/6/2020: [app] Connect: AfCbzQ5VzM94XFprAAAF
+19:13:23, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:13:23, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:13:51, 16/6/2020: [app] Connect: rVyCEukzmiwNEWIsAAAG
+19:13:51, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:14:16, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:14:18, 16/6/2020: [app] Connect: 7IiVpnB6MeeKSyTCAAAH
+19:14:18, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:15:48, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:15:50, 16/6/2020: [app] Connect: 1DH2_jT2TB_RN7JAAAAI
+19:15:50, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:17:29, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:17:31, 16/6/2020: [app] Connect: KSfjf31o7prCgzv6AAAJ
+19:17:31, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:17:31, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:18:16, 16/6/2020: [app] Connect: 5kPD6BaPD629c7U9AAAK
+19:18:17, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:22:08, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:22:10, 16/6/2020: [app] Connect: T7_tw6m1e_3kXS6aAAAL
+19:22:10, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:22:55, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:22:57, 16/6/2020: [app] Connect: epPca0yfjKqOYp2XAAAM
+19:22:57, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:23:24, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:23:25, 16/6/2020: [app] Connect: 0hfl3iuoNHcD6h3pAAAN
+19:23:25, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:24:00, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:24:02, 16/6/2020: [app] Connect: zs-i8ir7Q1ut7plMAAAO
+19:24:02, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:24:50, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:24:52, 16/6/2020: [app] Connect: SHG152iWuTp-Ff4oAAAP
+19:24:52, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:24:52, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:25:13, 16/6/2020: [app] Connect: Ni63zGxJySIDIUhWAAAQ
+19:25:13, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:27:29, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:27:31, 16/6/2020: [app] Connect: QXjIG49rEy0KIv2yAAAR
+19:27:31, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:28:13, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:28:15, 16/6/2020: [app] Connect: FuLZhNlnyCVlIDSBAAAS
+19:28:15, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:29:02, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:29:04, 16/6/2020: [app] Connect: 5Kogq0dfh4-HF_sAAAAT
+19:29:04, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:29:56, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:29:58, 16/6/2020: [app] Connect: 2zx7DRObocIY7JIKAAAU
+19:29:58, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:31:09, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:31:11, 16/6/2020: [app] Connect: WE2bZ4P0UccLuaxaAAAV
+19:31:11, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:34:38, 16/6/2020]=======================================
+19:34:39, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+19:34:40, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:34:40, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+19:34:40, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:34:43, 16/6/2020: [app] Connect: 1Ypo90D7u9ONCRhQAAAA
+19:34:43, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:34:43, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:35:32, 16/6/2020: [app] Connect: 9Zj3Xd7smRnlQM2VAAAB
+19:35:32, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:35:38, 16/6/2020]=======================================
+19:35:39, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+19:35:39, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:35:39, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+19:35:39, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:35:42, 16/6/2020: [app] Connect: WxQPQcLjE_g6wXqfAAAA
+19:35:42, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:35:48, 16/6/2020]=======================================
+19:35:50, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+19:35:50, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:35:50, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+19:35:50, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:35:53, 16/6/2020: [app] Connect: HJCNZJRR9Nmo6nfZAAAA
+19:35:53, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:36:43, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:36:45, 16/6/2020: [app] Connect: EGnC2nPxf-mq8lhXAAAB
+19:36:45, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:37:21, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:37:23, 16/6/2020: [app] Connect: OUH5Ec0Fty9inGK0AAAC
+19:37:23, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:37:41, 16/6/2020]=======================================
+19:37:42, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+19:37:42, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:37:42, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+19:37:42, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:37:44, 16/6/2020: [app] Connect: 4RIhozkwno5fHeunAAAA
+19:37:44, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:56:37, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:58:30, 16/6/2020: [app] Connect: DUlIpr_XPJVoFqIRAAAB
+19:58:30, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10

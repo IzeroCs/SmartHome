@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.list_room_item.view.*
  * Created by IzeroCs on 2020-04-01
  */
 class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListRoomAdapter.ViewHolder>() {
-    private val rooms : ArrayList<RoomItem> = ArrayList()
+    private val rooms : MutableList<RoomItem> = mutableListOf()
     private val inflate : LayoutInflater = LayoutInflater.from(context)
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -51,7 +51,6 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
 
         override fun onLongClick(v: View?) : Boolean {
             onItemClickListener?.onItemClick(v, adapterPosition, true)
-
             return true
         }
     }
@@ -61,11 +60,8 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
     }
 
     @SuppressLint("InflateParams")
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-        val view = inflate.inflate(R.layout.list_room_item, null)
-
-        return ViewHolder(context, view, onItemClickListener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder = ViewHolder(
+        context, inflate.inflate(R.layout.list_room_item, null), onItemClickListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val room = rooms[position]
@@ -75,23 +71,12 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
         holder.setCount(room.getDeviceCount())
     }
 
-    override fun getItemCount(): Int {
-        return rooms.size
-    }
+    override fun getItemCount(): Int = rooms.size
+    fun add(room : RoomItem) : Boolean = rooms.add(room)
+    fun addAll(list : MutableList<RoomItem>) : Boolean = rooms.addAll(list)
 
-    fun add(room : RoomItem) {
-        rooms.add(room)
-        notifyDataSetChanged()
-    }
-
-    fun get(position: Int) : RoomItem {
-        return rooms[position]
-    }
-
-    fun clear() {
-        rooms.clear()
-        notifyDataSetChanged()
-    }
+    fun clear() : Unit = rooms.clear()
+    fun get(position: Int) : RoomItem = rooms[position]
 
     fun setOnItemClickListener(listener: OnItemClickListener?) {
         onItemClickListener = listener
