@@ -1404,3 +1404,11 @@
 23:07:59, 15/6/2020: [esp] Connect: 1V-NO-xBD9jIzqGyAAA6
 23:07:59, 15/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
 23:08:20, 15/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+=======================================[12:06:00, 16/6/2020]=======================================
+12:06:06, 16/6/2020: [index] Listen server: 192.168.31.104:8080
+12:06:06, 16/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:06:06, 16/6/2020: [app] Listen server: 192.168.31.104:3180
+12:06:07, 16/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+12:07:03, 16/6/2020: [app] Connect: d8u36pKHfNEfb_tMAAAA
+12:07:03, 16/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:07:52, 16/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10

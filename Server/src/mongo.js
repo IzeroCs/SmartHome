@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
-const url      = "mongodb://localhost:27017/smarthome"
 const tag      = "[mongo]"
+let   url      = "mongodb://localhost:27017/smarthome"
+
+if (process.env.ENVIRONMENT === "production")
+    url = "mongodb://izerocs:khongbiet@izerocs.com/smarthome"
 
 const types = {
     id: mongoose.Schema.Types.ObjectId,
