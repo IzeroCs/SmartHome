@@ -164,7 +164,7 @@ module.exports.listen = () => {
     })
 
     if (process.env.ENVIRONMENT === "production")
-        server.listen(port, () => console.log(tag, "Listen server port: " + port))
+        server.listen(port, "0.0.0.0", () => console.log(tag, "Listen server port: " + port))
     else
         server.listen(port, host,
             () => console.log(tag, "Listen server: " + host + ":" + port))
