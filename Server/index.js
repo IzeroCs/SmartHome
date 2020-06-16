@@ -15,7 +15,7 @@ appExpress.use(bodyParser.json())
 appExpress.get("/", (req, res) => res.send("Smart Home Server"))
 
 if (process.env.ENVIRONMENT === "production")
-    appExpress.listen(port, () => console.log("[index]", "Listen server port: ", port))
+    appExpress.listen(port, "0.0.0.0", () => console.log("[index]", "Listen server port: ", port))
 else
     appExpress.listen(port, host, () => console.log("[index]", "Listen server: " + host + ":" + port))
 
