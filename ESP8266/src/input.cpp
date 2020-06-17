@@ -14,9 +14,6 @@ void InputClass::loop() {
     byte digital = pcf.digitalReadAll();
     uint8_t bit  = 0;
 
-    Serial.print("Read: ");
-    Serial.println(digital, BIN);
-
     for (uint8_t pin = 0; pin < 8; ++pin) {
         bit = bitRead(digital, pin);
         IO.setIOPinStatus((IOPin_t)pin, bit == 1);
