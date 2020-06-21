@@ -12,13 +12,13 @@ bool isPrintConnect;
 bool isPrintDisconnect;
 
 unsigned long timers[TIMER_COUNT][2] = {
-    { millis(), 100  },
+    { millis(), 10  },
     { millis(), 1000 },
     { millis(), 5000 }
 };
 
 void setup() {
-    // Serial.begin(115200);
+    Serial.begin(115200);
     Serial.println("Smart Home ESP8266");
     FFS.begin();
     Record.begin(false);

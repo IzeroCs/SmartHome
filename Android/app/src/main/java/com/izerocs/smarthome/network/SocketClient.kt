@@ -11,7 +11,7 @@ import org.json.JSONObject
 
 class SocketClient(val context : Context) {
     private val scheme : String = "http://"
-    private val host   : String = "192.168.31.104"
+    private val host   : String = "izerocs.com"
     private val port   : String = "3180"
 
     private var socket = initSocket()
@@ -206,6 +206,8 @@ class SocketClient(val context : Context) {
     private fun onRoomList(data : Array<Any>) {
         if (DEBUG)
             Log.d(TAG, "onRoomList")
+
+        Log.d(TAG, data.toList().toString())
 
         if (data.isEmpty() || data[0] !is JSONArray)
             return

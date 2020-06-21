@@ -2,6 +2,7 @@ package com.izerocs.smarthome.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter

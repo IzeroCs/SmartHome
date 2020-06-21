@@ -3,7 +3,7 @@ const tag      = "[mongo]"
 let   url      = "mongodb://localhost:27017/smarthome"
 
 if (process.env.ENVIRONMENT === "production")
-    url = "mongodb://izerocs:khongbiet@izerocs.com/smarthome"
+    url = "mongodb://localhost/smarthome"
 
 const types = {
     id: mongoose.Schema.Types.ObjectId,
