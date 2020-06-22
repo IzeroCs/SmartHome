@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.SmartActivity"
@@ -19,7 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/waveTopForChild"
-            android:paddingTop="@dimen/waveTopForChild" />
+            android:paddingTop="@dimen/waveTopForChild"/>
+
+        <com.izerocs.smarthome.widget.view.CloudErrorView
+            android:id="@+id/cloudError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/waveTopForChild"
+            android:paddingTop="@dimen/waveTopForChild"
+            app:list="@id/listRoom"/>
 
         <com.izerocs.smarthome.widget.WavesView
             android:id="@+id/wavesView"

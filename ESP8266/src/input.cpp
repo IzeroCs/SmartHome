@@ -5,7 +5,7 @@ void InputClass::begin() {
     pcf.begin();
 
     for (int i = 0; i < 8; ++i) {
-        pcf.pinMode(i, INPUT_PULLUP);
+        pcf.pinMode(i, INPUT);
         pcf.digitalWrite(i, LOW);
     }
 }

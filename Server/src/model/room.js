@@ -114,3 +114,10 @@ module.exports = (() => {
         datas: datas
     }
 })()
+
+module.exports.findOne = {
+    list: {
+        byId: (id) => model.list.findById(id),
+        byName: (name) => model.list.findOne({ name: name })
+    }
+}

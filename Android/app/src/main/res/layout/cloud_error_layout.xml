@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/cloudErrorIconSize"
+        android:layout_height="@dimen/cloudErrorIconSize"
+        android:padding="@dimen/cloudErrorIconPadding"
+        android:tint="@color/cloudIconColor"
+        app:srcCompat="@drawable/ic_cloud_error"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cloudErrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/cloudTextColor"
+        android:textSize="@dimen/cloudErrorTextSize"
+        android:text="@string/cloudErrorServerConnect"/>
+
+</LinearLayout>

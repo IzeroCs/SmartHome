@@ -11,7 +11,7 @@ import org.json.JSONObject
 
 class SocketClient(val context : Context) {
     private val scheme : String = "http://"
-    private val host   : String = "izerocs.com"
+    private val host   : String = "192.168.31.104"
     private val port   : String = "3180"
 
     private var socket = initSocket()
@@ -24,15 +24,16 @@ class SocketClient(val context : Context) {
 
     interface OnEventListener {
         fun onConnect(client : SocketClient) {}
-        fun onAuthorized(client : SocketClient) {}
+        fun onConnectError(client : SocketClient) {}
         fun onDisconnect(client : SocketClient) {}
+        fun onAuthorized(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspItem>) {}
         fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {}
         fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {}
     }
 
     companion object {
-        const val TAG = "SocketConnectivity"
+        const val TAG = "SocketClient"
         const val DEBUG = true
         const val AUTH_FAILED_DELAY = 5
 
@@ -48,12 +49,13 @@ class SocketClient(val context : Context) {
 
         socket.connect()
         socket.run {
-            on(Socket.EVENT_CONNECT)    { onConnect(it)      }
-            on(Socket.EVENT_DISCONNECT) { onDisconnect(it)   }
-            on(EVENT_AUTHENTICATE)      { onAuthenticate(it) }
-            on(EVENT_ESP_LIST)          { onEspList(it)      }
-            on(EVENT_ROOM_TYPES)        { onRoomTypes(it)    }
-            on(EVENT_ROOM_LIST)         { onRoomList(it)     }
+            on(Socket.EVENT_CONNECT)       { onConnect(it)      }
+            on(Socket.EVENT_CONNECT_ERROR) { onConnectError(it) }
+            on(Socket.EVENT_DISCONNECT)    { onDisconnect(it)   }
+            on(EVENT_AUTHENTICATE)         { onAuthenticate(it) }
+            on(EVENT_ESP_LIST)             { onEspList(it)      }
+            on(EVENT_ROOM_TYPES)           { onRoomTypes(it)    }
+            on(EVENT_ROOM_LIST)            { onRoomList(it)     }
         }
     }
 
@@ -82,6 +84,13 @@ class SocketClient(val context : Context) {
 
         socket.emit("authenticate", JSONObject(mapOf("id" to appID, "token" to appToken)))
         eventListener?.onConnect(this)
+    }
+
+    private fun onConnectError(data : Array<Any>) {
+        if (DEBUG)
+            Log.d(TAG, "onConnectError")
+
+        eventListener?.onConnectError(this)
     }
 
     private fun onDisconnect(data : Array<Any>) {
@@ -206,8 +215,6 @@ class SocketClient(val context : Context) {
     private fun onRoomList(data : Array<Any>) {
         if (DEBUG)
             Log.d(TAG, "onRoomList")
-
-        Log.d(TAG, data.toList().toString())
 
         if (data.isEmpty() || data[0] !is JSONArray)
             return

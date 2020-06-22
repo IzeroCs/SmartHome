@@ -50,5 +50,7 @@
     <string name="dialogEspWiFiShowPassword">Hiện mật khẩu</string>
     <string name="listEspShowPassword">Hiện mật khẩu</string>
     <string name="listEspPassword">Mật khẩu</string>
+    <string name="cloudErrorServerConnect">Kết nối thất bại</string>
+    <string name="cloudErrorServerDisconnect">Mất kết nối</string>
 
 </resources>

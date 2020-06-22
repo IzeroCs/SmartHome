@@ -97,3 +97,174 @@
 =======================================[21:26:29, 17/6/2020]=======================================
 =======================================[18:40:37, 19/6/2020]=======================================
 =======================================[21:30:14, 21/6/2020]=======================================
+=======================================[15:47:18, 22/6/2020]=======================================
+=======================================[15:53:01, 22/6/2020]=======================================
+=======================================[15:56:35, 22/6/2020]=======================================
+=======================================[15:59:34, 22/6/2020]=======================================
+=======================================[16:00:20, 22/6/2020]=======================================
+=======================================[16:00:55, 22/6/2020]=======================================
+=======================================[16:01:22, 22/6/2020]=======================================
+=======================================[16:03:37, 22/6/2020]=======================================
+=======================================[16:23:59, 22/6/2020]=======================================
+=======================================[16:36:57, 22/6/2020]=======================================
+=======================================[16:37:58, 22/6/2020]=======================================
+=======================================[16:38:28, 22/6/2020]=======================================
+=======================================[16:38:33, 22/6/2020]=======================================
+=======================================[16:38:38, 22/6/2020]=======================================
+=======================================[17:42:03, 22/6/2020]=======================================
+=======================================[17:43:37, 22/6/2020]=======================================
+=======================================[18:33:20, 22/6/2020]=======================================
+=======================================[18:46:20, 22/6/2020]=======================================
+=======================================[18:46:41, 22/6/2020]=======================================
+=======================================[18:48:36, 22/6/2020]=======================================
+18:48:37, 22/6/2020: (node:411) UnhandledPromiseRejectionWarning: ObjectParameterError: Parameter "filter" to find() must be an object, got 5ef07c160fce5f0109dd8d4a
+    at model.Query.Query.find (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/query.js:1988:16)
+    at Function.find (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/model.js:2045:13)
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:140:41
+    at tryCallTwo (/mnt/d/PlatformIO/SmartHome/Server/node_modules/promise/lib/core.js:45:5)
+    at doResolve (/mnt/d/PlatformIO/SmartHome/Server/node_modules/promise/lib/core.js:200:13)
+    at new Promise (/mnt/d/PlatformIO/SmartHome/Server/node_modules/promise/lib/core.js:66:3)
+    at Object.module.exports.addDevice (/mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:139:12)
+    at Object.<anonymous> (/mnt/d/PlatformIO/SmartHome/Server/src/io/esp.js:16:4)
+    at Module._compile (internal/modules/cjs/loader.js:1200:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1220:10)
+    at Module.load (internal/modules/cjs/loader.js:1049:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:937:14)
+    at Module.require (internal/modules/cjs/loader.js:1089:19)
+    at require (internal/modules/cjs/helpers.js:73:18)
+    at Object.<anonymous> (/mnt/d/PlatformIO/SmartHome/Server/src/io/app.js:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:1200:30)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+18:48:37, 22/6/2020: (node:411) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+18:48:37, 22/6/2020: (node:411) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[18:49:04, 22/6/2020]=======================================
+=======================================[18:49:16, 22/6/2020]=======================================
+=======================================[18:49:39, 22/6/2020]=======================================
+=======================================[18:49:55, 22/6/2020]=======================================
+=======================================[18:50:22, 22/6/2020]=======================================
+18:50:23, 22/6/2020: (node:480) UnhandledPromiseRejectionWarning: CastError: Cast to ObjectId failed for value "5ef07c160fce5f0109dd8d4aa" at path "_id" for model "esp"
+    at model.Query.exec (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/query.js:4351:21)
+    at model.Query.Query.then (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/query.js:4443:15)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+18:50:23, 22/6/2020: (node:480) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+18:50:23, 22/6/2020: (node:480) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[18:51:51, 22/6/2020]=======================================
+18:51:52, 22/6/2020: (node:494) UnhandledPromiseRejectionWarning: CastError: Cast to ObjectId failed for value "5ef07c160fce5f0109dd8d4aa" at path "_id" for model "esp"
+    at model.Query.exec (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/query.js:4351:21)
+    at model.Query.Query.then (/mnt/d/PlatformIO/SmartHome/Server/node_modules/mongoose/lib/query.js:4443:15)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+18:51:52, 22/6/2020: (node:494) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+18:51:52, 22/6/2020: (node:494) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[18:54:57, 22/6/2020]=======================================
+=======================================[18:56:21, 22/6/2020]=======================================
+=======================================[18:56:45, 22/6/2020]=======================================
+=======================================[18:58:11, 22/6/2020]=======================================
+=======================================[18:58:52, 22/6/2020]=======================================
+=======================================[18:59:00, 22/6/2020]=======================================
+=======================================[19:00:43, 22/6/2020]=======================================
+=======================================[19:02:04, 22/6/2020]=======================================
+=======================================[19:02:23, 22/6/2020]=======================================
+=======================================[19:03:30, 22/6/2020]=======================================
+=======================================[19:03:58, 22/6/2020]=======================================
+=======================================[19:06:20, 22/6/2020]=======================================
+19:06:21, 22/6/2020: (node:684) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of null
+    at Object.module.exports.isDeviceNameExists (/mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:154:99)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:06:21, 22/6/2020: (node:684) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:06:21, 22/6/2020: (node:684) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:06:26, 22/6/2020]=======================================
+19:06:27, 22/6/2020: (node:698) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of null
+    at Object.module.exports.isDeviceNameExists (/mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:153:99)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:06:27, 22/6/2020: (node:698) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:06:27, 22/6/2020: (node:698) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:07:25, 22/6/2020]=======================================
+19:07:26, 22/6/2020: (node:712) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of null
+    at Object.module.exports.isDeviceNameExists (/mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:156:14)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:07:26, 22/6/2020: (node:712) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:07:26, 22/6/2020: (node:712) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:07:48, 22/6/2020]=======================================
+=======================================[19:08:10, 22/6/2020]=======================================
+=======================================[19:08:27, 22/6/2020]=======================================
+=======================================[19:08:42, 22/6/2020]=======================================
+=======================================[19:08:54, 22/6/2020]=======================================
+=======================================[19:09:10, 22/6/2020]=======================================
+=======================================[19:09:15, 22/6/2020]=======================================
+=======================================[19:09:37, 22/6/2020]=======================================
+=======================================[19:09:42, 22/6/2020]=======================================
+=======================================[19:09:49, 22/6/2020]=======================================
+=======================================[19:10:18, 22/6/2020]=======================================
+19:10:19, 22/6/2020: (node:866) UnhandledPromiseRejectionWarning: ReferenceError: modeule is not defined
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:151:26
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:10:19, 22/6/2020: (node:866) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:10:19, 22/6/2020: (node:866) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:10:26, 22/6/2020]=======================================
+19:10:28, 22/6/2020: (node:880) UnhandledPromiseRejectionWarning: ReferenceError: modeule is not defined
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:151:32
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:10:28, 22/6/2020: (node:880) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:10:28, 22/6/2020: (node:880) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:10:38, 22/6/2020]=======================================
+=======================================[19:10:44, 22/6/2020]=======================================
+=======================================[19:11:16, 22/6/2020]=======================================
+=======================================[19:21:29, 22/6/2020]=======================================
+=======================================[19:21:46, 22/6/2020]=======================================
+=======================================[19:21:54, 22/6/2020]=======================================
+=======================================[19:24:06, 22/6/2020]=======================================
+19:24:08, 22/6/2020: (node:978) UnhandledPromiseRejectionWarning: ReferenceError: pins is not defined
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:156:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:24:08, 22/6/2020: (node:978) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:24:08, 22/6/2020: (node:978) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+=======================================[19:24:56, 22/6/2020]=======================================
+=======================================[19:25:13, 22/6/2020]=======================================
+=======================================[19:25:40, 22/6/2020]=======================================
+=======================================[19:25:56, 22/6/2020]=======================================
+=======================================[19:28:51, 22/6/2020]=======================================
+=======================================[19:30:31, 22/6/2020]=======================================
+=======================================[19:32:39, 22/6/2020]=======================================
+=======================================[19:33:21, 22/6/2020]=======================================
+=======================================[19:33:38, 22/6/2020]=======================================
+19:33:40, 22/6/2020: (node:1164) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'list' of undefined
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:157:36
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at runNextTicks (internal/process/task_queues.js:66:3)
+    at processImmediate (internal/timers.js:429:9)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:33:40, 22/6/2020: (node:1164) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:33:40, 22/6/2020: (node:1164) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+19:33:40, 22/6/2020: (node:1164) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'list' of undefined
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:157:36
+    at processTicksAndRejections (internal/process/task_queues.js:97:5) 
+19:33:40, 22/6/2020: (node:1164) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2) 
+=======================================[19:34:01, 22/6/2020]=======================================
+=======================================[19:34:14, 22/6/2020]=======================================
+=======================================[19:34:27, 22/6/2020]=======================================
+19:34:29, 22/6/2020: (node:1206) UnhandledPromiseRejectionWarning: TypeError: room.findRoomListByIdAsync is not a function
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:159:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+(Use `node --trace-warnings ...` to show where the warning was created) 
+19:34:29, 22/6/2020: (node:1206) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1) 
+19:34:29, 22/6/2020: (node:1206) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code. 
+19:34:29, 22/6/2020: (node:1206) UnhandledPromiseRejectionWarning: TypeError: room.findRoomListByIdAsync is not a function
+    at /mnt/d/PlatformIO/SmartHome/Server/src/model/esp.js:159:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5) 
+19:34:29, 22/6/2020: (node:1206) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2) 
+=======================================[19:35:15, 22/6/2020]=======================================
+=======================================[19:35:30, 22/6/2020]=======================================
+=======================================[19:36:26, 22/6/2020]=======================================
+=======================================[19:39:15, 22/6/2020]=======================================
+=======================================[19:42:10, 22/6/2020]=======================================
+=======================================[19:42:22, 22/6/2020]=======================================
+=======================================[19:43:05, 22/6/2020]=======================================
+=======================================[19:43:29, 22/6/2020]=======================================

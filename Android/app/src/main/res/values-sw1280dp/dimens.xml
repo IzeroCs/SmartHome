@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="cloudErrorIconPadding">40.00dp</dimen>
+	<dimen name="cloudErrorIconSize">266.67dp</dimen>
 	<dimen name="dialogEspWiFiInputMarginBottom">53.33dp</dimen>
 	<dimen name="dialogEspWiFiInputMarginTop">10.67dp</dimen>
 	<dimen name="dialogEspWiFiLabelMarginBottom">13.33dp</dimen>
@@ -43,6 +45,7 @@
 	<dimen name="waveIconMargin">26.67dp</dimen>
 	<dimen name="waveIconPadding">53.33dp</dimen>
 	<dimen name="waveTopForChild">293.33dp</dimen>
+	<dimen name="cloudErrorTextSize">53.33sp</dimen>
 	<dimen name="dialogEspWiFiInputTextSize">53.33sp</dimen>
 	<dimen name="dialogEspWiFiLabelTextSize">48.00sp</dimen>
 	<dimen name="formButtonTextSize">58.67sp</dimen>

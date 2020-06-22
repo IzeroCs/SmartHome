@@ -17,7 +17,24 @@ class SmartApplication : Application() {
     private val socketClient    : SocketClient    = SocketClient(this)
     private val socketEvent     : OnEventListener = object : OnEventListener {
         override fun onConnect(client : SocketClient) {
-            activityCurrent?.onSocketConnect(client)
+            activityCurrent?.run {
+                onSocketConnect(client)
+                runOnUiThread { cloudError(false) }
+            }
+        }
+
+        override fun onConnectError(client : SocketClient) {
+            activityCurrent?.run {
+                onSocketConnectError(client)
+                runOnUiThread { cloudError(true, "error") }
+            }
+        }
+
+        override fun onDisconnect(client : SocketClient) {
+            activityCurrent?.run {
+                onSocketDisconnect(client)
+                runOnUiThread { cloudError(true, "disconnect") }
+            }
         }
 
         override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>) {

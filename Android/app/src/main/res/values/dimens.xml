@@ -4,6 +4,9 @@
 
     <dimen name="toastyTextSize">20sp</dimen>
     <dimen name="floatActionBarMargin">30dp</dimen>
+    <dimen name="cloudErrorTextSize">20sp</dimen>
+    <dimen name="cloudErrorIconPadding">15dp</dimen>
+    <dimen name="cloudErrorIconSize">100dp</dimen>
 
     <dimen name="waveTopForChild">110dp</dimen>
     <dimen name="waveHeight">220dp</dimen>

@@ -18,6 +18,7 @@ import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
+import com.izerocs.smarthome.widget.view.CloudErrorView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_room.*
 
@@ -28,6 +29,7 @@ abstract class BaseActivity : AppCompatActivity(),
     WavesView.OnBackClickListener, WavesView.OnMenuItemClickListener
 {
     private   var rootView    : View? = null
+    private   var cloudError  : View? = null
     protected var preferences : SharedPreferences = SharedPreferences()
 
     companion object {
@@ -59,6 +61,8 @@ abstract class BaseActivity : AppCompatActivity(),
     open fun onFetched(type : Int) { Log.d(TAG, "onFetch: $type") }
     open fun onCreatePreferences() : SharedPreferences = SharedPreferences()
     open fun onSocketConnect(client : SocketClient) {}
+    open fun onSocketConnectError(client : SocketClient) {}
+    open fun onSocketDisconnect(client : SocketClient) {}
     open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {}
 
     open fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {
@@ -88,22 +92,23 @@ abstract class BaseActivity : AppCompatActivity(),
         item?.run { onMenuItemClick(itemId, groupId, this) }
     }
 
-    override fun setContentView(layoutResID : Int) {
-        this.setContentView(LayoutInflater.from(this).inflate(layoutResID, null))
-    }
+    override fun setContentView(view : View?) : Unit = this.setContentView(view, null)
+    override fun setContentView(layoutResID : Int) : Unit = this.setContentView(LayoutInflater
+        .from(this).inflate(layoutResID, null))
 
-    override fun setContentView(view : View?) {
-        this.rootView = view
-        super.setContentView(view)
-        this.addBackListener()
-        this.addMenu()
-    }
 
     override fun setContentView(view : View?, params : ViewGroup.LayoutParams?) {
+
+        if (params == null)
+            super.setContentView(view)
+        else
+            super.setContentView(view, params)
+
         this.rootView = view
-        super.setContentView(view, params)
         this.addBackListener()
         this.addMenu()
+
+        cloudError = findViewById(R.id.cloudError)
     }
 
     private fun addBackListener() {
@@ -127,6 +132,11 @@ abstract class BaseActivity : AppCompatActivity(),
         windowManager.defaultDisplay.getMetrics(display)
 
         println("Width: ${display.widthPixels}, Height: ${display.heightPixels}, DensityDpi: ${display.densityDpi}, Density: ${display.density}, ScaledDensity: ${display.scaledDensity}")
+    }
+
+    fun cloudError(isShow : Boolean, type : String? = null) {
+        if (cloudError is CloudErrorView)
+            (cloudError as CloudErrorView).setVisibility(isShow, type)
     }
 
     fun getRootApplication() : SmartApplication = application as SmartApplication

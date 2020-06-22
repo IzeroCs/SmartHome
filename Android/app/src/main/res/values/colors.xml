@@ -9,6 +9,9 @@
     <color name="mdColorContent">#444</color>
     <color name="mdColorButton">#018071</color>
 
+    <color name="cloudTextColor">#aaa</color>
+    <color name="cloudIconColor">#aaa</color>
+
     <color name="deviceLight">#ffa426</color>
     <color name="deviceFan">#0795fe</color>
     <color name="deviceHeater">#e9573f</color>

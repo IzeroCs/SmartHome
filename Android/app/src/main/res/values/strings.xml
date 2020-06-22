@@ -3,6 +3,8 @@
     <string name="addRoomTitle">Add room</string>
     <string name="addDeviceTitle">Add device for room</string>
     <string name="listEspTitle">List module</string>
+    <string name="cloudErrorServerConnect">Connect error</string>
+    <string name="cloudErrorServerDisconnect">Server disconnect</string>
 
     <string name="livingRoomName">Living room</string>
     <string name="bedRoomName">Bed room</string>

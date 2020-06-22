@@ -2,15 +2,11 @@ package com.izerocs.smarthome.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
 import com.izerocs.smarthome.model.RoomItem
-import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.network.SocketClient
-import com.izerocs.smarthome.preferences.RoomPreferences
-import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
 import kotlinx.android.synthetic.main.activity_smart.*
 
@@ -37,8 +33,6 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
     }
 
-    override fun onCreatePreferences() : SharedPreferences = RoomPreferences(this)
-
     override fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
         if (roomList.isEmpty())
             return
@@ -52,27 +46,9 @@ class SmartActivity : BaseActivity(),
         runOnUiThread { listRoom.notifyDataSetChanged() }
     }
 
-    override fun onFetched(type : Int) {
-        super.onFetched(type)
-
-        if (type == FETCH_ROOM_TYPE) {
-            if (preferences.empty()) {
-                RoomType.getTypes().forEach {
-                    preferences.run {
-                        put(size().plus(1)
-                            .toString(), RoomItem(this@SmartActivity, it).toData())
-                    }
-                }
-            }
-
-            updateListAdapter()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         floatButton.show()
-        updateListAdapter()
     }
 
     override fun onClick(v: View?) {
@@ -91,22 +67,5 @@ class SmartActivity : BaseActivity(),
             putExtra(EXTRA_ROOM_NAME, roomItem.getName())
             putExtra(EXTRA_ROOM_TYPE, roomItem.getType())
         })
-    }
-
-    private fun updateListAdapter() {
-//        runOnUiThread {
-//            preferences.run {
-//                val list = getAll()
-//                    ?.toSortedMap(Comparator { o1, o2 -> o1.toInt().compareTo(o2.toInt()) })
-//
-//                listRoom.clear()
-//                list?.forEach {
-//                    val item = getObject(it.key, RoomItem.RoomItemData::class.java)
-//
-//                    if (RoomType.isTypeValid(item.type))
-//                        listRoom.add(RoomItem(this@SmartActivity, item.name, item.type))
-//                }
-//            }
-//        }
     }
 }

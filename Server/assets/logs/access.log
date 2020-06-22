@@ -2367,3 +2367,1355 @@
 23:15:27, 21/6/2020: [esp] Connect: AsJLp6WSRr2rjdc_AAAf
 23:15:27, 21/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
 23:15:58, 21/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+=======================================[15:47:18, 22/6/2020]=======================================
+15:47:23, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+15:47:23, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+15:47:23, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+15:47:23, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+15:47:24, 22/6/2020: [esp] Connect: d-19GCZBy7owp_rxAAAA
+15:47:24, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[15:53:01, 22/6/2020]=======================================
+15:53:02, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+15:53:02, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+15:53:02, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+15:53:02, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+15:53:03, 22/6/2020: [esp] Connect: Z76qSer-5YK_bLFgAAAA
+15:53:03, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[15:56:35, 22/6/2020]=======================================
+15:56:36, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+15:56:36, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+15:56:36, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+15:56:36, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+15:56:37, 22/6/2020: [esp] Connect: lfuU0zJnL1zUGjf4AAAA
+15:56:37, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+15:57:57, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+15:57:57, 22/6/2020: [esp] Connect: KmZBsWZiC30Qd-p0AAAB
+15:57:57, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[15:59:34, 22/6/2020]=======================================
+15:59:35, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+15:59:35, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+15:59:35, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+15:59:35, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+15:59:36, 22/6/2020: [esp] Connect: 8mcTOV97fXag_zYqAAAA
+15:59:36, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:00:20, 22/6/2020]=======================================
+16:00:21, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:00:21, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:00:21, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:00:21, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:00:21, 22/6/2020: [mongo:room] Create first data room types
+16:00:21, 22/6/2020: [mongo:room] Create first data room list
+16:00:21, 22/6/2020: [mongo:setting] Created setting first 
+16:00:26, 22/6/2020: [esp] Connect: ABGLV--mZEK3uZfjAAAA
+16:00:26, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:00:26, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+=======================================[16:00:55, 22/6/2020]=======================================
+16:00:56, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:00:56, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:00:56, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:00:56, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:00:56, 22/6/2020: [mongo:room] Create first data room types
+16:00:56, 22/6/2020: [mongo:room] Create first data room list
+16:00:56, 22/6/2020: [mongo:setting] Created setting first 
+=======================================[16:01:22, 22/6/2020]=======================================
+16:01:23, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:01:23, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:01:23, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:01:23, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:01:23, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+=======================================[16:03:37, 22/6/2020]=======================================
+16:03:38, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:03:38, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:03:38, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:03:38, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:03:38, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+16:06:36, 22/6/2020: [app] Connect: Cs6lr6jypbmSJ0yZAAAA
+16:06:36, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:06:50, 22/6/2020: [esp] Connect: Cv3tVt5w0vkYhMZcAAAB
+16:06:50, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:08:05, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:08:07, 22/6/2020: [esp] Connect: ltPMEGJxWD_ePYArAAAC
+16:08:07, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:08:16, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:08:17, 22/6/2020: [esp] Connect: _gimZBlwLfVesa5YAAAD
+16:08:17, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:08:46, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:08:48, 22/6/2020: [esp] Connect: tQZrzjox9rXkp5VoAAAE
+16:08:48, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:10:47, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:10:49, 22/6/2020: [esp] Connect: X0NOJIiEnUOCgWCHAAAF
+16:10:50, 22/6/2020: [esp] Disconnect socket unauthorized: X0NOJIiEnUOCgWCHAAAF
+16:10:50, 22/6/2020: [esp] Disconnect: X0NOJIiEnUOCgWCHAAAF
+16:10:51, 22/6/2020: [esp] Connect: YBxc5nUaSbJSoqabAAAG
+16:10:51, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:11:08, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:11:26, 22/6/2020: [esp] Connect: E0pibZ1D3Dpu8mMhAAAH
+16:11:27, 22/6/2020: [esp] Disconnect socket unauthorized: E0pibZ1D3Dpu8mMhAAAH
+16:11:27, 22/6/2020: [esp] Disconnect: E0pibZ1D3Dpu8mMhAAAH
+16:11:46, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:11:51, 22/6/2020: [esp] Connect: wKK3pNCme4PFlMC6AAAI
+16:11:52, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:23:59, 22/6/2020]=======================================
+16:24:01, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:24:01, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:24:01, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:24:01, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:24:01, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+16:24:01, 22/6/2020: [esp] Connect: fSL3DmMMxuaM5PWnAAAA
+16:24:01, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:24:04, 22/6/2020: [app] Connect: XtotXHvc-6xrR1UhAAAB
+16:24:04, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:24:24, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:24:24, 22/6/2020: [esp] Connect: 7Xtvz0lwq16QCYoQAAAC
+16:24:25, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:24:29, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:24:33, 22/6/2020: [esp] Connect: k8n6FQAh2Qn8sKLmAAAD
+16:24:33, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:24:37, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:24:39, 22/6/2020: [esp] Connect: xY-QZTsWOMOuTArbAAAE
+16:24:39, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:24:51, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:24:55, 22/6/2020: [esp] Connect: WJfNh2XsSgLRJ9lsAAAF
+16:24:55, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:27:01, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:27:02, 22/6/2020: [esp] Connect: jL139XcAViPz9ObcAAAG
+16:27:02, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:27:19, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:27:20, 22/6/2020: [esp] Connect: IrYjUtVqLPsbklimAAAH
+16:27:20, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:36:57, 22/6/2020]=======================================
+16:36:58, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:36:58, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:36:58, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:36:58, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:36:58, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+16:36:59, 22/6/2020: [app] Connect: eFiatdmEr5kXIuczAAAA
+16:36:59, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:36:59, 22/6/2020: [esp] Connect: NY3h2K5Idt4aEveUAAAB
+16:36:59, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:37:58, 22/6/2020]=======================================
+16:38:00, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:38:00, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:38:00, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:38:00, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:38:00, 22/6/2020: [mongo:esp] Length: 0
+16:38:00, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+16:38:01, 22/6/2020: [esp] Connect: rXmjX1aVTVub9vvuAAAA
+16:38:01, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:38:03, 22/6/2020: [app] Connect: gy0kcP15VCORKTgHAAAB
+16:38:03, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[16:38:28, 22/6/2020]=======================================
+16:38:29, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:38:29, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:38:29, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:38:30, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:38:30, 22/6/2020: [mongo:esp] Length: 0
+16:38:30, 22/6/2020: [mongo:room] Create first data room types
+16:38:30, 22/6/2020: [mongo:room] Create first data room list
+16:38:30, 22/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+16:38:30, 22/6/2020: [mongo:setting] Created setting first 
+16:38:30, 22/6/2020: [app] Connect: cC575n0vHYeiJD9VAAAA
+16:38:30, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:38:31, 22/6/2020: [esp] Connect: 5vmNoOHCg55sEUEyAAAB
+16:38:31, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:38:33, 22/6/2020]=======================================
+16:38:33, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:38:33, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:38:33, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:38:34, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:38:34, 22/6/2020: [app] Connect: I33T3jSnm-PG9d1AAAAA
+16:38:34, 22/6/2020: [mongo:esp] Length: 1
+16:38:34, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:38:35, 22/6/2020: [esp] Connect: o_jK_SvfgFrEG0lkAAAB
+16:38:35, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[16:38:38, 22/6/2020]=======================================
+16:38:40, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+16:38:40, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+16:38:40, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+16:38:40, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+16:38:41, 22/6/2020: [esp] Connect: _N5OQJvicGlqJpX3AAAA
+16:38:41, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:38:43, 22/6/2020: [app] Connect: OGcbqg7CMG-V9zRlAAAB
+16:38:43, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:47:15, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:47:18, 22/6/2020: [app] Connect: PC8kw6Lfv61QKuCZAAAC
+16:47:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:50:05, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:50:07, 22/6/2020: [app] Connect: mk1gCySKdNp9-_hqAAAD
+16:50:07, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:50:08, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:51:06, 22/6/2020: [app] Connect: DDN-ZxkffcbMtLl4AAAE
+16:51:06, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:57:14, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:57:16, 22/6/2020: [app] Connect: fGHm3o2mfhkh3Xi_AAAF
+16:57:16, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:58:32, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:58:34, 22/6/2020: [app] Connect: Efcj3YsBGxWac8foAAAG
+16:58:34, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:59:04, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:59:05, 22/6/2020: [app] Connect: 5gKGLqnxnBG3-7YcAAAH
+16:59:05, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+16:59:35, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+16:59:42, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+16:59:45, 22/6/2020: [esp] Connect: 1APMkDo7KIJsp-9eAAAI
+16:59:45, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+16:59:46, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+17:00:45, 22/6/2020: [app] Connect: oZ_x7kFE0owoPPBCAAAJ
+17:00:45, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:00:56, 22/6/2020: [app] Connect: xQN8p4RSAOF0Yn2JAAAK
+17:00:57, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:01:15, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:01:21, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:01:22, 22/6/2020: [app] Connect: o_UQaSH_5JMqKfkYAAAL
+17:01:22, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:01:30, 22/6/2020: [app] Connect: ieW2S0uXkn0TYc6ZAAAM
+17:01:31, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:01:53, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:06:47, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:06:49, 22/6/2020: [app] Connect: XFirfitU6mlfIZxFAAAN
+17:06:49, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:06:51, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:07:40, 22/6/2020: [app] Connect: knR1Vt1jZpNGCPdzAAAO
+17:07:40, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:07:59, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:08:01, 22/6/2020: [app] Connect: U9PIbN7Bk1CWq3zHAAAP
+17:08:01, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:08:18, 22/6/2020: [app] Connect: _lU_ujj4cVrQZa5eAAAQ
+17:08:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:08:31, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:08:34, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:08:36, 22/6/2020: [app] Connect: NFwwfrU4CfszUeO_AAAR
+17:08:36, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:08:53, 22/6/2020: [app] Connect: TtFkkyZFaqM8xyr5AAAS
+17:08:53, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:09:06, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:16:10, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:16:12, 22/6/2020: [app] Connect: L21J6USnUKBWmrPhAAAT
+17:16:13, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:16:43, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:17:14, 22/6/2020: [app] Connect: wSlj1OtjUmUK9TueAAAU
+17:17:15, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:17:45, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:19:17, 22/6/2020: [esp] Connect: jote8LzmJMltf0q8AAAV
+17:19:17, 22/6/2020: [esp] Disconnect: jote8LzmJMltf0q8AAAV
+17:19:17, 22/6/2020: [esp] Connect: aihOBtfskDxuh76aAAAW
+17:19:17, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+17:19:18, 22/6/2020: [esp] Disconnect socket unauthorized: jote8LzmJMltf0q8AAAV
+17:20:49, 22/6/2020: [app] Connect: -g2rWdupW0KWtEYlAAAX
+17:20:49, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:20:57, 22/6/2020: [app] Connect: 249qh7Bqguync-MhAAAY
+17:20:57, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:21:19, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:21:27, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:31:44, 22/6/2020: [app] Connect: ODpwUFmhiouIUeHkAAAZ
+17:31:44, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:31:52, 22/6/2020: [app] Connect: U1erZ3iZd8E5vvmSAAAa
+17:31:52, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:32:12, 22/6/2020: [app] Connect: UfKBDGw3Uy85yyw2AAAb
+17:32:13, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:32:15, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:32:22, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:33:33, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:35:07, 22/6/2020: [app] Connect: AAILN0hXXfopJo6lAAAc
+17:35:07, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:42:03, 22/6/2020]=======================================
+17:42:04, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+17:42:04, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:42:04, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+17:42:04, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:42:05, 22/6/2020: [esp] Connect: 6A0LRztPDhdVA8IzAAAA
+17:42:05, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+17:42:06, 22/6/2020: [app] Connect: jvQ5WR0t3REGKq3AAAAB
+17:42:06, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[17:43:37, 22/6/2020]=======================================
+17:43:38, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+17:43:38, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+17:43:38, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+17:43:38, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+17:43:39, 22/6/2020: [app] Connect: lqVA8X-APJgTBNHTAAAA
+17:43:39, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:43:39, 22/6/2020: [esp] Connect: reBjSS0Cbdzh6ioQAAAB
+17:43:39, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+17:58:56, 22/6/2020: [app] Connect: V9o9-6dbdyIZtUJPAAAC
+17:58:56, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+17:59:12, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+17:59:26, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:23:23, 22/6/2020: [app] Connect: NZVej1l2EuR7m7GuAAAD
+18:23:23, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:23:28, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:23:47, 22/6/2020: [app] Connect: Y_guVD04uv-vzL1PAAAE
+18:23:48, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:27:48, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:28:50, 22/6/2020: [app] Connect: RYdG8RKRW3TaAfVDAAAF
+18:28:50, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:33:20, 22/6/2020]=======================================
+18:33:21, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:33:21, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:33:21, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:33:21, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:33:22, 22/6/2020: [esp] Connect: zFAXj00PBncrUwLqAAAA
+18:33:22, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+18:33:24, 22/6/2020: [app] Connect: NCgTUrl8KzijRnmTAAAB
+18:33:24, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:42:17, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+18:42:26, 22/6/2020: [app] Connect: DceAm6rxVvcDqKtLAAAC
+18:42:26, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:46:20, 22/6/2020]=======================================
+18:46:21, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:46:21, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:46:21, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:46:21, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:46:24, 22/6/2020: [app] Connect: uYJMthZ7rJnRd8E-AAAA
+18:46:24, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:46:24, 22/6/2020: [esp] Connect: t-XhyBNb3EO3VLwjAAAB
+18:46:24, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:46:41, 22/6/2020]=======================================
+18:46:42, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:46:42, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:46:42, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:46:42, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:46:42, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:46:42, 22/6/2020: [app] Connect: M3QPSq7X03BqdwnoAAAA
+18:46:42, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:46:43, 22/6/2020: [esp] Connect: ArptbICr9Y8kFZuRAAAB
+18:46:43, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:48:36, 22/6/2020]=======================================
+18:48:37, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:48:37, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:48:37, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:48:37, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:48:37, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:48:37, 22/6/2020: [esp] Connect: TJlNI9nRFKU2zjjwAAAA
+18:48:37, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+18:48:39, 22/6/2020: [app] Connect: RmyS_90c9NFQdhzMAAAB
+18:48:39, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:49:04, 22/6/2020]=======================================
+18:49:05, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:49:05, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:49:05, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:49:05, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:49:05, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:49:05, 22/6/2020: espFind 
+18:49:06, 22/6/2020: [app] Connect: HvDxhSFJ2pMWqeXOAAAA
+18:49:06, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:49:06, 22/6/2020: [esp] Connect: MHoV92wCM-WUBgLHAAAB
+18:49:06, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:49:16, 22/6/2020]=======================================
+18:49:17, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:49:17, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:49:17, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:49:17, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:49:18, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:49:18, 22/6/2020: espFind:  {
+  pins: [
+    {
+      input: 0,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 3,
+      outputPrimary: 1,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 1,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 3,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 4,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 5,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    }
+  ],
+  _id: 5ef07c160fce5f0109dd8d4a,
+  name: 'ESP1N403E91636RSC185G2K',
+  online: true,
+  authenticate: true,
+  detail: Map(1) { 'rssi' => '-71' },
+  created_at: 2020-06-22T09:38:30.083Z,
+  updated_at: 2020-06-22T11:49:06.917Z
+}
+18:49:18, 22/6/2020: [app] Connect: i8B29OpKobbxnFGEAAAA
+18:49:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:49:19, 22/6/2020: [esp] Connect: gSQcwDY5a29VT9tdAAAB
+18:49:19, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:49:39, 22/6/2020]=======================================
+18:49:40, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:49:40, 22/6/2020: espFind:  [object Object]
+18:49:40, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:49:40, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:49:40, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:49:40, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:49:42, 22/6/2020: [esp] Connect: ujmvcoZ2LoQKhFSrAAAA
+18:49:42, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+18:49:44, 22/6/2020: [app] Connect: SYqblMKWBaWSQ9d1AAAB
+18:49:44, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:49:55, 22/6/2020]=======================================
+18:49:56, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:49:56, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:49:56, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:49:56, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:49:56, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:49:56, 22/6/2020: espFind:  {
+  pins: [
+    {
+      input: 0,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 3,
+      outputPrimary: 1,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 1,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 3,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 4,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 5,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    }
+  ],
+  _id: 5ef07c160fce5f0109dd8d4a,
+  name: 'ESP1N403E91636RSC185G2K',
+  online: true,
+  authenticate: true,
+  detail: Map(1) { 'rssi' => '-72' },
+  created_at: 2020-06-22T09:38:30.083Z,
+  updated_at: 2020-06-22T11:49:42.116Z
+}
+18:49:57, 22/6/2020: [app] Connect: XQgjRVRiXGGUPrwAAAAA
+18:49:57, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:49:57, 22/6/2020: [esp] Connect: Pb_WnUgZLuuzdw76AAAB
+18:49:57, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:50:22, 22/6/2020]=======================================
+18:50:23, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:50:23, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:50:23, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:50:23, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:50:23, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:50:23, 22/6/2020: [app] Connect: NnM5lqrN9TlxCkVWAAAA
+18:50:23, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:50:24, 22/6/2020: [esp] Connect: xah-haCG8fWNq-R6AAAB
+18:50:24, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:51:51, 22/6/2020]=======================================
+18:51:52, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:51:52, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:51:52, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:51:52, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:51:52, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:51:53, 22/6/2020: [esp] Connect: EfdwHLpMtLZQ-4VDAAAA
+18:51:53, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+18:51:56, 22/6/2020: [app] Connect: kX1BFdX9E3oj81tBAAAB
+18:51:56, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:54:57, 22/6/2020]=======================================
+18:54:58, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:54:58, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:54:58, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:54:58, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:54:58, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:54:58, 22/6/2020: espFind:  null
+18:54:59, 22/6/2020: [app] Connect: 3j1e3X9R6-E5y-stAAAA
+18:54:59, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:54:59, 22/6/2020: [esp] Connect: iQuyr7NgR5DsFuESAAAB
+18:54:59, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:56:21, 22/6/2020]=======================================
+18:56:22, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:56:22, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:56:22, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:56:22, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:56:23, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:56:23, 22/6/2020: espFind:  {
+  pins: [
+    {
+      input: 0,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 3,
+      outputPrimary: 1,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 1,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 3,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 4,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 5,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    }
+  ],
+  _id: 5ef07c160fce5f0109dd8d4a,
+  name: 'ESP1N403E91636RSC185G2K',
+  online: true,
+  authenticate: true,
+  detail: Map(1) { 'rssi' => '-69' },
+  created_at: 2020-06-22T09:38:30.083Z,
+  updated_at: 2020-06-22T11:54:59.562Z
+}
+18:56:23, 22/6/2020: [app] Connect: 9Dy2bA8KCsBSsy1-AAAA
+18:56:23, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:56:24, 22/6/2020: [esp] Connect: Pr-nSXDgZBonRadzAAAB
+18:56:24, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:56:45, 22/6/2020]=======================================
+18:56:46, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:56:46, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:56:46, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:56:46, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:56:46, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:56:46, 22/6/2020: [app] Connect: OIi9eDPFh4sI24pJAAAA
+18:56:46, 22/6/2020: espFind:  true
+18:56:46, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:56:48, 22/6/2020: [esp] Connect: DmGraMdg0V_Cz9LDAAAB
+18:56:48, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:58:11, 22/6/2020]=======================================
+18:58:12, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:58:12, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:58:12, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:58:12, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:58:12, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:58:13, 22/6/2020: espFind:  true
+18:58:13, 22/6/2020: [app] Connect: NjcRuME3O-oGSVF-AAAA
+18:58:13, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:58:13, 22/6/2020: [esp] Connect: 1Ef5o3U9DTUpEG-FAAAB
+18:58:13, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[18:58:52, 22/6/2020]=======================================
+18:58:53, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:58:53, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:58:53, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:58:53, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:58:53, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:58:53, 22/6/2020: espFind:  true
+18:58:53, 22/6/2020: roomFind:  {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+18:58:55, 22/6/2020: [esp] Connect: ZQO8GeI_13G8gMDIAAAA
+18:58:55, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+18:58:57, 22/6/2020: [app] Connect: Cl6rCVFafpOhbEMVAAAB
+18:58:57, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[18:59:00, 22/6/2020]=======================================
+18:59:01, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+18:59:02, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+18:59:02, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+18:59:02, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+18:59:02, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+18:59:02, 22/6/2020: espFind:  true
+18:59:02, 22/6/2020: roomFind:  true
+18:59:03, 22/6/2020: [app] Connect: omex9cFEVF3OkV0yAAAA
+18:59:03, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+18:59:03, 22/6/2020: [esp] Connect: _JS5fjAbOaFCYnW7AAAB
+18:59:03, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:00:08, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+19:00:16, 22/6/2020: [app] Connect: vvlfp1pJz3TYReFcAAAC
+19:00:16, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:00:18, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:00:21, 22/6/2020: [esp] Connect: AEMXN-3JvtDHEVFMAAAD
+19:00:21, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:00:43, 22/6/2020]=======================================
+19:00:44, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:00:44, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:00:44, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:00:44, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:00:44, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:00:44, 22/6/2020: [mongo:esp] Begin add
+19:00:46, 22/6/2020: [esp] Connect: KUKaX7AmuJouWcY8AAAA
+19:00:46, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:00:48, 22/6/2020: [app] Connect: 4YHX0uz1GD5oH1SGAAAB
+19:00:48, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:01:12, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+19:01:17, 22/6/2020: [esp] Connect: JaPNqzDPWy9xgZ2vAAAC
+19:01:17, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:01:18, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:01:18, 22/6/2020: [app] Connect: HDy24k2XqmK18jXRAAAD
+19:01:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:01:19, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:01:19, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+=======================================[19:02:04, 22/6/2020]=======================================
+19:02:05, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:02:05, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:02:05, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:02:05, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:02:05, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:02:05, 22/6/2020: [mongo:esp] Begin add
+=======================================[19:02:23, 22/6/2020]=======================================
+19:02:24, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:02:24, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:02:24, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:02:24, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:02:24, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:02:24, 22/6/2020: [mongo:esp] Begin add
+19:02:36, 22/6/2020: [app] Connect: 5Js-BxLolUsQToNEAAAA
+19:02:36, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:02:51, 22/6/2020: [esp] Connect: UreDr45loe0zTCTSAAAB
+19:02:51, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:03:30, 22/6/2020]=======================================
+19:03:31, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:03:32, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:03:32, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:03:32, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:03:32, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:03:32, 22/6/2020: [mongo:esp] Begin add
+19:03:32, 22/6/2020: [mongo:esp] 
+19:03:32, 22/6/2020: [esp] Connect: IsHgg5846_zeS-8bAAAA
+19:03:32, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:03:35, 22/6/2020: [app] Connect: 88z06wloY6crlp40AAAB
+19:03:35, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:03:44, 22/6/2020: [app] Connect: BWYSt76cs6ksM6o1AAAC
+19:03:45, 22/6/2020: [app] Disconnect socket unauthorized: BWYSt76cs6ksM6o1AAAC
+19:03:45, 22/6/2020: [app] Disconnect: BWYSt76cs6ksM6o1AAAC
+=======================================[19:03:58, 22/6/2020]=======================================
+19:03:59, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:03:59, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:03:59, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:03:59, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:03:59, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:03:59, 22/6/2020: [app] Connect: tymvc-CFl-JaDl7fAAAA
+19:03:59, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:03:59, 22/6/2020: [mongo:esp] Begin add
+19:03:59, 22/6/2020: [mongo:esp] Doc: 0
+19:03:59, 22/6/2020: [app] Connect: g09bw8SEij67y0LLAAAB
+19:04:00, 22/6/2020: [app] Disconnect socket unauthorized: g09bw8SEij67y0LLAAAB
+19:04:00, 22/6/2020: [app] Disconnect: g09bw8SEij67y0LLAAAB
+19:04:00, 22/6/2020: [esp] Connect: 3DvyOxWLTO-Q9-idAAAC
+19:04:00, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:06:20, 22/6/2020]=======================================
+19:06:21, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:06:21, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:06:21, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:06:21, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:06:21, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:06:21, 22/6/2020: [esp] addDevice: null
+19:06:23, 22/6/2020: [esp] Connect: NNg1m7YKqMZsUTRqAAAA
+19:06:23, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:06:25, 22/6/2020: [app] Connect: rBLnAU6an9jF3z_lAAAB
+19:06:25, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:06:26, 22/6/2020]=======================================
+19:06:27, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:06:27, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:06:27, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:06:27, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:06:27, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:06:27, 22/6/2020: [esp] addDevice: null
+19:06:29, 22/6/2020: [esp] Connect: M8mA-xn6LRqiPxuNAAAA
+19:06:29, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:06:31, 22/6/2020: [app] Connect: Q1rL02jcuGLLvEUhAAAB
+19:06:31, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:07:25, 22/6/2020]=======================================
+19:07:26, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:07:26, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:07:26, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:07:26, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:07:26, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:07:26, 22/6/2020: [esp] addDevice: null
+19:07:27, 22/6/2020: [esp] Connect: 08Y9mLrEs2xEBI5QAAAA
+19:07:27, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:07:30, 22/6/2020: [app] Connect: TxXzI7-E7hNx9k2MAAAB
+19:07:30, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:07:48, 22/6/2020]=======================================
+19:07:49, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:07:49, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:07:49, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:07:49, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:07:49, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:07:49, 22/6/2020: [esp] addDevice: null
+19:07:50, 22/6/2020: [app] Connect: 8LyaRNgQFhSmpX2GAAAA
+19:07:50, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:07:50, 22/6/2020: [esp] Connect: dbkpbzW5QeqrGQDxAAAB
+19:07:50, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:08:10, 22/6/2020]=======================================
+19:08:11, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:08:11, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:08:11, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:08:11, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:08:11, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:08:11, 22/6/2020: [esp] addDevice: null
+19:08:11, 22/6/2020: [mongo:esp] null
+19:08:12, 22/6/2020: [esp] Connect: KfxVTzASdfSdqvgCAAAA
+19:08:12, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:08:14, 22/6/2020: [app] Connect: AckNhw6qQPbjwk-vAAAB
+19:08:15, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:08:27, 22/6/2020]=======================================
+19:08:29, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:08:29, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:08:29, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:08:29, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:08:29, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:08:29, 22/6/2020: [esp] addDevice: null
+19:08:29, 22/6/2020: [app] Connect: xVsD8RqFlZ09ZylbAAAA
+19:08:29, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:08:29, 22/6/2020: [esp] Connect: DJAfpESEC8BlSr-gAAAB
+19:08:29, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:08:42, 22/6/2020]=======================================
+19:08:43, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:08:43, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:08:43, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:08:43, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:08:44, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:08:44, 22/6/2020: [esp] addDevice: null
+19:08:44, 22/6/2020: [app] Connect: 88Eccku_qBXon3EFAAAA
+19:08:44, 22/6/2020: [esp] Connect: OMJNrtU3Dzjy23HSAAAB
+19:08:44, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:08:44, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:08:54, 22/6/2020]=======================================
+19:08:55, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:08:55, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:08:55, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:08:55, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:08:55, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:08:55, 22/6/2020: [app] Connect: wFb-wKmZ_bipWZiNAAAA
+19:08:55, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:08:55, 22/6/2020: [esp] addDevice: null
+19:08:56, 22/6/2020: [esp] Connect: 040OO5yU7zYeoz-IAAAB
+19:08:56, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:09:10, 22/6/2020]=======================================
+19:09:11, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:09:11, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:09:11, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:09:11, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:09:11, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:09:11, 22/6/2020: [esp] addDevice: null
+19:09:11, 22/6/2020: [app] Connect: 7xRSSQRZyT-0KRF7AAAA
+19:09:11, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:09:12, 22/6/2020: [esp] Connect: 33rwUQtT86OiagFZAAAB
+19:09:12, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:09:15, 22/6/2020]=======================================
+19:09:16, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:09:16, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:09:16, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:09:16, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:09:16, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:09:16, 22/6/2020: [esp] addDevice: null
+19:09:16, 22/6/2020: [app] Connect: DvdiCmNai8FJH7F8AAAA
+19:09:16, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:09:18, 22/6/2020: [esp] Connect: __k2tyirrN-PdHs9AAAB
+19:09:18, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:09:37, 22/6/2020]=======================================
+19:09:38, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:09:38, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:09:38, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:09:38, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:09:38, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:09:38, 22/6/2020: [esp] addDevice: null
+19:09:39, 22/6/2020: [esp] Connect: sN1upaBpDKYWHJ_yAAAA
+19:09:39, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:09:42, 22/6/2020]=======================================
+19:09:43, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:09:43, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:09:43, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:09:43, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:09:43, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:09:43, 22/6/2020: [app] Connect: CUbl5-Le4bvuBOb3AAAA
+19:09:43, 22/6/2020: [mongo:esp] Begin add
+19:09:43, 22/6/2020: [mongo:esp] null
+19:09:43, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:09:44, 22/6/2020: [esp] Connect: 95u5OeMUDQeImRK5AAAB
+19:09:44, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:09:49, 22/6/2020]=======================================
+19:09:50, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:09:50, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:09:50, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:09:50, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:09:50, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:09:50, 22/6/2020: [mongo:esp] Begin add
+19:09:50, 22/6/2020: [mongo:esp] false
+19:09:52, 22/6/2020: [esp] Connect: ScRlj5wpa-4YnPi3AAAA
+19:09:52, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:09:54, 22/6/2020: [app] Connect: 2F3ftdQ6NegIm1ZcAAAB
+19:09:54, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:10:18, 22/6/2020]=======================================
+19:10:19, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:10:19, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:10:19, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:10:19, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:10:19, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:10:19, 22/6/2020: [mongo:esp] Begin add
+19:10:19, 22/6/2020: [mongo:esp] false
+19:10:19, 22/6/2020: [app] Connect: dh3rwOqiEHmAsJn4AAAA
+19:10:19, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:10:21, 22/6/2020: [esp] Connect: XuRSb4VRmluFdOLpAAAB
+19:10:21, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:10:26, 22/6/2020]=======================================
+19:10:27, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:10:28, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:10:28, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:10:28, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:10:28, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:10:28, 22/6/2020: [mongo:esp] Begin add
+19:10:28, 22/6/2020: [mongo:esp] false
+19:10:29, 22/6/2020: [esp] Connect: WazZjVRuMomrTdgYAAAA
+19:10:29, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:10:31, 22/6/2020: [app] Connect: Zsk8NWFNEw2euoYuAAAB
+19:10:31, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:10:38, 22/6/2020]=======================================
+19:10:39, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:10:39, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:10:39, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:10:39, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:10:39, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:10:40, 22/6/2020: [mongo:esp] Begin add
+19:10:40, 22/6/2020: [mongo:esp] false
+19:10:40, 22/6/2020: [mongo:esp] false
+19:10:40, 22/6/2020: [app] Connect: sJG73b6U4nZsVqBXAAAA
+19:10:40, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:10:41, 22/6/2020: [esp] Connect: cnWQCh3AiVqtlYC2AAAB
+19:10:41, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:10:44, 22/6/2020]=======================================
+19:10:45, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:10:45, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:10:45, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:10:45, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:10:45, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:10:45, 22/6/2020: [mongo:esp] Begin add
+19:10:45, 22/6/2020: [mongo:esp] false
+19:10:45, 22/6/2020: [mongo:esp] [object Promise]
+19:10:46, 22/6/2020: [esp] Connect: j86UJkOV5-p5I7UlAAAA
+19:10:46, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:10:49, 22/6/2020: [app] Connect: XQ9rZ5aE_v4OPIo8AAAB
+19:10:49, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:11:16, 22/6/2020]=======================================
+19:11:17, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:11:17, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:11:17, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:11:17, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:11:17, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:11:17, 22/6/2020: [mongo:esp] Begin add
+19:11:18, 22/6/2020: [app] Connect: bwp-NAopFK9eIKVKAAAA
+19:11:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:11:18, 22/6/2020: [esp] Connect: 5z9nYZa3xvBzV24xAAAB
+19:11:18, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:13:47, 22/6/2020: [app] Connect: aBuJuBIJiFjGWvGiAAAC
+19:13:47, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:13:53, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+=======================================[19:21:29, 22/6/2020]=======================================
+19:21:30, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:21:30, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:21:30, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:21:30, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:21:30, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:21:30, 22/6/2020: [mongo:esp] {
+  pins: [
+    {
+      input: 0,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 3,
+      outputPrimary: 1,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 2,
+      outputPrimary: 0,
+      outputSecondary: 5,
+      dualToggleCount: 1,
+      status: 0
+    },
+    {
+      input: 3,
+      outputType: 3,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 4,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 5,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 0,
+      dualToggleCount: 0,
+      status: 0
+    }
+  ],
+  _id: 5ef07c160fce5f0109dd8d4a,
+  name: 'ESP1N403E91636RSC185G2K',
+  online: true,
+  authenticate: true,
+  detail: Map(1) { 'rssi' => '-71' },
+  created_at: 2020-06-22T09:38:30.083Z,
+  updated_at: 2020-06-22T12:15:21.697Z
+}
+19:21:31, 22/6/2020: [esp] Connect: MhnKRYVDRF8bOnHdAAAA
+19:21:31, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:21:33, 22/6/2020: [app] Connect: kp6p3Ipj1eyz6uWRAAAB
+19:21:33, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:21:46, 22/6/2020]=======================================
+19:21:47, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:21:47, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:21:47, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:21:47, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:21:47, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:21:47, 22/6/2020: [mongo:esp] [object Object]
+19:21:48, 22/6/2020: [esp] Connect: 6yx0L8cUFH4yyX1DAAAA
+19:21:48, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:21:50, 22/6/2020: [app] Connect: niNZrbdIF11Y0c23AAAB
+19:21:50, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:21:54, 22/6/2020]=======================================
+19:21:56, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:21:56, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:21:56, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:21:56, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:21:56, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:21:56, 22/6/2020: [mongo:esp] 0
+19:21:56, 22/6/2020: [app] Connect: PViTP0knlC5DqV5AAAAA
+19:21:56, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:21:57, 22/6/2020: [esp] Connect: 8YPnlLnBDMJvOCY0AAAB
+19:21:57, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:23:17, 22/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+19:23:18, 22/6/2020: [esp] Connect: PyP1GkFIB9uLif05AAAC
+19:23:18, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:24:06, 22/6/2020]=======================================
+19:24:08, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:24:08, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:24:08, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:24:08, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:24:08, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:24:09, 22/6/2020: [esp] Connect: YQlN1Jh89YVzdu7WAAAA
+19:24:09, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:24:11, 22/6/2020: [app] Connect: JjQOz_AVOKhMunRVAAAB
+19:24:11, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:24:56, 22/6/2020]=======================================
+19:24:57, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:24:58, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:24:58, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:24:58, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:24:58, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:24:58, 22/6/2020: [esp] addDevice: 0
+19:24:58, 22/6/2020: [app] Connect: O5q_9Q82CaAoqrMiAAAA
+19:24:59, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:24:59, 22/6/2020: [esp] Connect: wI7evUtl_UbokOdzAAAB
+19:24:59, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:25:13, 22/6/2020]=======================================
+19:25:14, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:25:14, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:25:14, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:25:14, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:25:14, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:25:14, 22/6/2020: [esp] addDevice: 4
+19:25:15, 22/6/2020: [esp] Connect: NmUkB_pE585_xrjEAAAA
+19:25:15, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:25:17, 22/6/2020: [app] Connect: p0CvNYZM_wIViwx3AAAB
+19:25:18, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:25:40, 22/6/2020]=======================================
+19:25:41, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:25:41, 22/6/2020: [mongo:esp] addDevice[espID: 5ef07c160fce5f0109dd8d4a, roomID: 5ef07c160fce5f0109dd8d55]
+19:25:41, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:25:41, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:25:41, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:25:41, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:25:41, 22/6/2020: [esp] addDevice: 4
+19:25:41, 22/6/2020: [esp] addDevice: 0
+19:25:42, 22/6/2020: [app] Connect: 36pOl5BmxIK47qGXAAAA
+19:25:42, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:25:42, 22/6/2020: [esp] Connect: di8ckB8vf4Hl5csiAAAB
+19:25:42, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:25:56, 22/6/2020]=======================================
+19:25:58, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:25:58, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:25:58, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:25:58, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:25:58, 22/6/2020: [esp] addDevice: 4
+19:25:58, 22/6/2020: [esp] addDevice: 4
+19:25:59, 22/6/2020: [app] Connect: t4Crk6pApa8QlvPFAAAA
+19:25:59, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:25:59, 22/6/2020: [esp] Connect: O63V5ZrCRfZgkfZdAAAB
+19:25:59, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:28:51, 22/6/2020]=======================================
+19:28:53, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:28:53, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:28:53, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:28:53, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:28:54, 22/6/2020: [esp] Connect: ym5hxlXigUAksj2HAAAA
+19:28:54, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:28:56, 22/6/2020: [app] Connect: g-pmatjCH_Wu-zZWAAAB
+19:28:56, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:30:31, 22/6/2020]=======================================
+19:30:33, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:30:33, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:30:33, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:30:33, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:30:33, 22/6/2020: [esp] Connect: lms8pJJZq-91287XAAAA
+19:30:33, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:30:34, 22/6/2020: [app] Connect: 1dteKTvrCbiSODMsAAAB
+19:30:34, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:32:39, 22/6/2020]=======================================
+19:32:40, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:32:40, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:32:40, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:32:40, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:32:41, 22/6/2020: [esp] Connect: Kqt9qdH6BCM99WCVAAAA
+19:32:41, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:32:44, 22/6/2020: [app] Connect: Kf4KoQ37SkFcw-LiAAAB
+19:32:44, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:33:21, 22/6/2020]=======================================
+19:33:22, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:33:22, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:33:22, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:33:22, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:33:23, 22/6/2020: [app] Connect: 90rIeTojIeY8o7bVAAAA
+19:33:23, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:33:23, 22/6/2020: [esp] Connect: xUEhrz7m94_8QL80AAAB
+19:33:23, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:33:38, 22/6/2020]=======================================
+19:33:40, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:33:40, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:33:40, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:33:40, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:33:42, 22/6/2020: [app] Connect: AA30x5mCsLubd4TAAAAA
+19:33:43, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:33:43, 22/6/2020: [esp] Connect: uLJd4GUOXJBmhPmSAAAB
+19:33:43, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:34:01, 22/6/2020]=======================================
+19:34:02, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:34:02, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:34:02, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:34:02, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:34:02, 22/6/2020: [mongo:esp] [object Object]
+19:34:02, 22/6/2020: [mongo:esp] [object Object]
+19:34:02, 22/6/2020: [esp] addDevice: 4
+19:34:02, 22/6/2020: [esp] addDevice: 4
+19:34:03, 22/6/2020: [esp] Connect: pC9Bz1bHM4dx7JGOAAAA
+19:34:03, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:34:03, 22/6/2020: [app] Connect: i23HLla9NhWazT12AAAB
+19:34:03, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:34:14, 22/6/2020]=======================================
+19:34:15, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:34:15, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:34:15, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:34:15, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:34:15, 22/6/2020: [mongo:esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:34:15, 22/6/2020: [mongo:esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:34:15, 22/6/2020: [esp] addDevice: 4
+19:34:15, 22/6/2020: [esp] addDevice: 4
+19:34:16, 22/6/2020: [app] Connect: dulIzyxoyucNzOprAAAA
+19:34:16, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:34:16, 22/6/2020: [esp] Connect: EZwPzY4qT03Wqo4BAAAB
+19:34:16, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:34:27, 22/6/2020]=======================================
+19:34:29, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:34:29, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:34:29, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:34:29, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:34:29, 22/6/2020: [mongo:esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:34:29, 22/6/2020: [mongo:esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:34:29, 22/6/2020: [esp] Connect: 50b-u12MblhL2T1wAAAA
+19:34:29, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:34:31, 22/6/2020: [app] Connect: m4EwpQ1Jq0VmH4IWAAAB
+19:34:31, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:35:15, 22/6/2020]=======================================
+19:35:16, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:35:16, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:35:16, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:35:16, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:35:16, 22/6/2020: [esp] addDevice: 4
+19:35:16, 22/6/2020: [esp] addDevice: 4
+19:35:17, 22/6/2020: [app] Connect: V7C_7O5uNnuG7TpRAAAA
+19:35:17, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:35:17, 22/6/2020: [esp] Connect: S436QOprqV-1em7zAAAB
+19:35:17, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:35:30, 22/6/2020]=======================================
+19:35:32, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:35:32, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:35:32, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:35:32, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:35:33, 22/6/2020: [esp] Connect: Gq5f8KR0AYf-9OBYAAAA
+19:35:33, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:35:35, 22/6/2020: [app] Connect: -CLyJOUjHzhDikagAAAB
+19:35:35, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:36:26, 22/6/2020]=======================================
+19:36:27, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:36:27, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:36:27, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:36:27, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:36:27, 22/6/2020: [esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:36:28, 22/6/2020: [esp] Connect: YDwHAFxNPHPvIXFiAAAA
+19:36:28, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:36:30, 22/6/2020: [app] Connect: M6RZaQPqSl1iOtTkAAAB
+19:36:30, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:39:15, 22/6/2020]=======================================
+19:39:17, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:39:17, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:39:17, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:39:17, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:39:17, 22/6/2020: [esp] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:39:17, 22/6/2020: [app] Connect: kiB_ieseJIhAkeH5AAAA
+19:39:17, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:39:33, 22/6/2020: [esp] Connect: llM5OHN9tOCUkRBnAAAB
+19:39:33, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:39:34, 22/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+19:39:45, 22/6/2020: [app] Connect: kHVSmY6UO15leSyTAAAC
+19:39:45, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:42:10, 22/6/2020]=======================================
+19:42:11, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:42:11, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:42:11, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:42:11, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:42:11, 22/6/2020: [esp] Test
+19:42:12, 22/6/2020: [esp] Connect: N01Zh_ZcJqqcfCdGAAAA
+19:42:12, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:42:14, 22/6/2020: [app] Connect: O0Lc0nVjoHbHekYHAAAB
+19:42:14, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:42:22, 22/6/2020]=======================================
+19:42:23, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:42:23, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:42:23, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:42:23, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:42:23, 22/6/2020: [esp] Testundefined
+19:42:24, 22/6/2020: [app] Connect: ZElD23MykABIW1O8AAAA
+19:42:24, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+19:42:24, 22/6/2020: [esp] Connect: hMjUTvTiiDI7qYnAAAAB
+19:42:24, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[19:43:05, 22/6/2020]=======================================
+19:43:06, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:43:06, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:43:06, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:43:06, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:43:07, 22/6/2020: [esp] Test{
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:43:08, 22/6/2020: [esp] Connect: XS4BeBniks84dGTbAAAA
+19:43:08, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:43:10, 22/6/2020: [app] Connect: jfwBjV4bNho17xwLAAAB
+19:43:10, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[19:43:29, 22/6/2020]=======================================
+19:43:30, 22/6/2020: [index] Listen server: 192.168.31.104:8080
+19:43:30, 22/6/2020: [esp] Listen server: 192.168.31.104:3190
+19:43:30, 22/6/2020: [app] Listen server: 192.168.31.104:3180
+19:43:30, 22/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+19:43:30, 22/6/2020: [esp] Room{
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+19:43:30, 22/6/2020: [esp] Espundefined
+19:43:31, 22/6/2020: [esp] Connect: H9rHBGLts_7FqTK2AAAA
+19:43:31, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+19:43:34, 22/6/2020: [app] Connect: qPm-Gl8HkkpHWcWMAAAB
+19:43:34, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
