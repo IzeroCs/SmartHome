@@ -7,7 +7,7 @@ import { EspGateway } from './esp.gateway'
 
 @Module({
   imports: [TypeOrmModule.forRoot()],
-  controllers: [],
-  providers: [AppGateway, EspGateway],
+  controllers: [ AppController ],
+  providers: [AppService, AppGateway, EspGateway],
 })
 export class AppModule {}

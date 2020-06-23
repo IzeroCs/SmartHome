@@ -12,9 +12,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class SocketClient(val context : Context) {
-    private val scheme : String = "http://"
-    private val host   : String = "192.168.31.104"
-    private val port   : String = "3180"
+    private val scheme    : String = "http://"
+    private val host      : String = "192.168.31.104"
+    private val port      : String = "3000"
+    private val namesapce : String = "/platform-app"
 
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
@@ -91,7 +92,7 @@ class SocketClient(val context : Context) {
     fun getRoomTypes()  : MutableList<RoomType>       = this.roomTypes
     fun getRoomList()   : MutableList<RoomItem>       = this.roomList
 
-    private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
+    private fun initSocket() : Socket = IO.socket("$scheme$host:$port$namesapce", options)
 
     private fun onConnect(data : Array<Any>) {
         if (DEBUG)

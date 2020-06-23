@@ -531,10 +531,10 @@ void WebSocketsClient::sendHeader(WSclient_t * client) {
 
     if(client->isSocketIO) {
         if(client->cSessionId.length() == 0) {
-            url += WEBSOCKETS_STRING("&transport=polling");
+            url += WEBSOCKETS_STRING("?transport=polling");
             ws_header = false;
         } else {
-            url += WEBSOCKETS_STRING("&transport=websocket&sid=");
+            url += WEBSOCKETS_STRING("?transport=websocket&sid=");
             url += client->cSessionId;
         }
     }
