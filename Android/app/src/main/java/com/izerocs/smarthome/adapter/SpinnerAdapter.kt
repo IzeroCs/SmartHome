@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
+import com.izerocs.smarthome.model.RoomType
 import kotlinx.android.synthetic.main.spinne_single_item.view.*
 
 /**
@@ -20,33 +21,16 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
     private val inflate = LayoutInflater.from(context)
 
     class SpinnerItem {
-        private var view    : View?     = null
-        private var context : Context?  = null
-        private var image   : Drawable? = null
-        private var value   : String    = ""
-        private var obj     : Any?      = null
+        private var view     : View?     = null
+        private var context  : Context?  = null
+        private var image    : Drawable? = null
+        private var roomType : RoomType? = null
 
-        constructor(context: Context, value : String, obj : Any?) {
-            this.context = context
-            this.obj     = obj
+        constructor(context : Context, roomType : RoomType) {
+            this.context  = context
+            this.roomType = roomType
 
-            setValue(value)
-        }
-
-        constructor(context: Context, value: String, resId: Int, obj : Any?) {
-            this.context = context
-            this.obj     = obj
-
-            setValue(value)
-            setImage(resId)
-        }
-
-        constructor(context: Context, value: String, drawable: Drawable, obj : Any?) {
-            this.context = context
-            this.obj     = obj
-
-            setValue(value)
-            setImage(drawable)
+            this.setImage(roomType.getIconResource())
         }
 
         fun cacheView(view : View) {
@@ -72,28 +56,20 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
             }
         }
 
-        fun setValue(value : String) {
-            this.value = value
-        }
-
         fun getImage() : Drawable? {
             return this.image
         }
 
-        fun getValue() : String {
-            return this.value
+        fun getTitle() : String {
+            return this.roomType?.getTitle()!!
         }
 
         fun getView() : View? {
             return this.view
         }
 
-        fun getObject() : Any? {
-            return obj
-        }
-
         override fun toString() : String {
-            return this.value
+            return this.roomType?.getTitle()!!
         }
     }
 
@@ -113,17 +89,10 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
                     }
                 }
 
-                spinnerValue.text = getValue()
+                spinnerValue.text = getTitle()
             }
         }?.getView() as View
     }
 
-    fun add(value : String) : Unit                           = add(SpinnerItem(context, value, null))
-    fun add(value : String, resId : Int)                     = add(SpinnerItem(context, value, resId, null))
-    fun add(value : String, drawable : Drawable)             = add(SpinnerItem(context, value, drawable, null))
-
-    fun add(value : String, obj : Any?) : Unit               = add(SpinnerItem(context, value, obj))
-    fun add(value : String, resId : Int, obj : Any?)         = add(SpinnerItem(context, value, resId, obj))
-    fun add(value : String, drawable : Drawable, obj : Any?) = add(SpinnerItem(context, value, drawable, obj))
-
+    fun add(roomType : RoomType) : Unit = add(SpinnerItem(context, roomType))
 }

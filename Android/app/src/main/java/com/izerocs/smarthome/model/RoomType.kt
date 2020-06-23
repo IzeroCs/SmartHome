@@ -2,14 +2,19 @@ package com.izerocs.smarthome.model
 
 import android.content.Context
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.activity.BaseActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by IzeroCs on 2020-04-17
  */
 class RoomType {
+    private var context : Context? = null
+    private var id      : String   = ""
+    private var name    : String   = ""
+    private var title   : String   = ""
+    private var type    : Int      = 0
+    private var iconRes : Int      = 0
+
     companion object {
         private const val TYPE_LIVING_ROOM    : Int = 1 // Phong khach
         private const val TYPE_BED_ROOM       : Int = 2 // Phong ngu
@@ -20,26 +25,6 @@ class RoomType {
         private const val TYPE_MEZZANINE_ROOM : Int = 7 // Gac lung
         private const val TYPE_ROOF_ROOM      : Int = 8 // Gac mai
         private const val TYPE_STAIRS_ROOM    : Int = 9 // Cau thang - Hanh lang
-
-        private var types = mutableListOf<Int>()
-
-        fun addTypes(baseActivity : BaseActivity, roomTypes : MutableMap<String, Int>) {
-            if (types.isNotEmpty())
-                return
-
-            roomTypes.forEach { types.add(it.value) }
-            baseActivity.onFetched(BaseActivity.FETCH_ROOM_TYPE)
-        }
-
-        fun getTypes() : MutableList<Int> {
-            return types
-        }
-
-        fun getTypeItems(context : Context) : ArrayList<RoomItem> {
-            return ArrayList<RoomItem>().apply {
-                getTypes().forEach { add(RoomItem(context, it)) }
-            }
-        }
 
         fun typeToName(context : Context, type : Int) : String {
             var resIdName : Int = -1
@@ -84,10 +69,6 @@ class RoomType {
             return getIconResource(stringToType(type))
         }
 
-        fun isTypeValid(typeRoom : Int) : Boolean {
-            return getTypes().contains(typeRoom)
-        }
-
         fun stringToType(type : String) : Int {
             var typeInt = 0
 
@@ -105,5 +86,31 @@ class RoomType {
 
             return typeInt
         }
+    }
+
+    data class RoomTypeData(val id : String, val name : String, val type : Int)
+
+    constructor(context : Context, idRoom: String, nameRoom : String, typeRoom : Int) {
+        this.context = context
+        this.id      = idRoom
+        this.name    = nameRoom
+        this.type    = typeRoom
+        this.title   = typeToName(context, typeRoom)
+        this.iconRes = RoomType.getIconResource(typeRoom)
+    }
+
+    constructor(context : Context, roomTypeData : RoomTypeData) :
+        this(context, roomTypeData.id, roomTypeData.name, roomTypeData.type)
+
+    fun getId() : String = this.id
+    fun getName() : String = this.name
+    fun getTitle() : String = this.title
+    fun getType() : Int = this.type
+    fun getIconResource() : Int = this.iconRes
+    fun toData() : RoomTypeData = RoomTypeData(id, name, type)
+
+    override fun toString() : String {
+        return "${super.toString()} " +
+                "{ id: $id, name: $name, type: $type }"
     }
 }

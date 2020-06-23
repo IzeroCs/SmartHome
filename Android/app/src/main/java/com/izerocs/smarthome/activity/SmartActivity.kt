@@ -20,6 +20,7 @@ class SmartActivity : BaseActivity(),
 
     companion object {
         const val TAG = "SmartActivity"
+        const val EXTRA_ROOM_ID   = "com.izerocs.smarthome.ROOM_ID"
         const val EXTRA_ROOM_NAME = "com.izerocs.smarthome.ROOM_NAME"
         const val EXTRA_ROOM_TYPE = "com.izerocs.smarthome.ROOM_TYPE"
     }
@@ -33,13 +34,13 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
     }
 
-    override fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
+    override fun onRoomList(client : SocketClient, roomList : MutableList<RoomItem>) {
         if (roomList.isEmpty())
             return
 
         val rooms = mutableListOf<RoomItem>()
 
-        roomList.forEach { room -> rooms.add(RoomItem(applicationContext, room.key, room.value)) }
+        roomList.forEach { item -> rooms.add(item) }
         listRoom.clear()
         listRoom.addAll(rooms)
 
@@ -62,10 +63,7 @@ class SmartActivity : BaseActivity(),
 
     override fun onItemClick(view: View?, position: Int, isLongClick: Boolean) {
         startActivity(Intent(applicationContext, RoomActivity::class.java).apply {
-            val roomItem = listRoom.get(position)
-
-            putExtra(EXTRA_ROOM_NAME, roomItem.getName())
-            putExtra(EXTRA_ROOM_TYPE, roomItem.getType())
+            putExtra(EXTRA_ROOM_ID, listRoom.get(position).getId())
         })
     }
 }

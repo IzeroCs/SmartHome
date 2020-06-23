@@ -1,7 +1,6 @@
 package com.izerocs.smarthome.widget
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.AdapterView
@@ -12,6 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.setPadding
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.SpinnerAdapter
+import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.widget.form.InputLayout
 
 /**
@@ -37,12 +37,12 @@ class SpinnerView(context: Context, attributeSet: AttributeSet) : AppCompatSpinn
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (view is AppCompatTextView) {
             view.run {
-                text = (adapter.getItem(position) as SpinnerAdapter.SpinnerItem).getValue()
+                text = (adapter.getItem(position) as SpinnerAdapter.SpinnerItem).getTitle()
                 editTextBinder?.setText(text)
             }
         } else if (view is AppCompatCheckedTextView) {
             view.run {
-                text = (adapter.getItem(position) as SpinnerAdapter.SpinnerItem).getValue()
+                text = (adapter.getItem(position) as SpinnerAdapter.SpinnerItem).getTitle()
                 editTextBinder?.setText(text)
             }
         }
@@ -64,13 +64,7 @@ class SpinnerView(context: Context, attributeSet: AttributeSet) : AppCompatSpinn
         this.editTextBinder = editText
     }
 
-    fun add(value : String) : Unit                           = (adapter as SpinnerAdapter).add(value)
-    fun add(value : String, resId : Int)                     = (adapter as SpinnerAdapter).add(value, resId)
-    fun add(value : String, drawable : Drawable)             = (adapter as SpinnerAdapter).add(value, drawable)
-
-    fun add(value : String, obj : Any?) : Unit               = (adapter as SpinnerAdapter).add(value, obj)
-    fun add(value : String, resId : Int, obj : Any?)         = (adapter as SpinnerAdapter).add(value, resId, obj)
-    fun add(value : String, drawable : Drawable, obj : Any?) = (adapter as SpinnerAdapter).add(value, drawable, obj)
+    fun add(roomType : RoomType) : Unit = (adapter as SpinnerAdapter).add(roomType)
 
     fun setStatusError(text : String)   : Unit = (parent as InputLayout).setStatus(text, R.color.formStatusErrorText)
     fun setStatusWarning(text : String) : Unit = (parent as InputLayout).setStatus(text, R.color.formStatusWarningText)

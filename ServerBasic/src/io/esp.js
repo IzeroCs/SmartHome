@@ -6,22 +6,12 @@ const mongo   = require("../mongo")
 const cert    = require("../security/cert")("esp")
 
 let app     = require("./app")
-const { resolve } = require("promise")
 let db      = mongo.include("esp")
-let room    = mongo.include("room")
 let server  = null
 let io      = null
 let host    = null
 let port    = null
 let modules = {}
-
-// db.addDevice("5ef07c160fce5f0109dd8d4a", "5ef07c160fce5f0109dd8d55", "Đèn trái", 0)
-//     .then(res => console.log(tag, "addDevice: ", res))
-//     .catch(err => console.error(tag, err))
-
-// db.addDevice("5ef07c160fce5f0109dd8d4a", "5ef07c160fce5f0109dd8d55", "Đèn phải", 0)
-//     .then(res => console.log(tag, "addDevice: ", res))
-//     .catch(err => console.error(tag, err))
 
 let ons = {
     "disconnect": socketio => {
@@ -171,13 +161,6 @@ module.exports.listen = () => {
 
             modules[esp.name] = module.exports.validate.detail(modules[esp.name])
         })
-    })
-
-    room.findOne.list.byName("Phòng khách").then(roomDoc => {
-        return db.findOne.esp.byName("ESP1N403E91636RSC185G2K").then(espDoc => resolve(roomDoc, espDoc))
-    }).then((roomDoc, espDoc) => {
-        console.log(tag, "Room", roomDoc)
-        console.log(tag, "Esp", espDoc)
     })
 
     if (process.env.ENVIRONMENT === "production")

@@ -1,32 +1,14 @@
 const promise = require("promise")
 const mongo   = require("../mongo")
-const room    = require("./room")
 const tag     = "[mongo:esp]"
 
-const errors  = {
-    addDevice: {
-        NOT_ERROR: 0,
-        ESP_ID_NOT_EXISTS: 1,
-        ESP_PIN_NOT_EXISTS: 2,
-        ROOM_ID_NOT_EXISTS: 3,
-        NAME_DEVICE_IS_EXISTS: 4
-    }
-}
-
-const model   = {
+const model = {
     esp: mongo.model("esp", {
         name: String,
         online: Boolean,
         pins: Array,
         detail: Map,
         authenticate: Boolean
-    }),
-
-    device: mongo.model("esp.device", {
-        name: String,
-        pinIndex: Number,
-        room: { type: mongo.types.id, ref: "room.list" },
-        esp: { type: mongo.types.id, ref: "esp" }
     })
 }
 
@@ -144,37 +126,6 @@ module.exports.addModule = espID => {
     }).catch(err => console.error(tag, err))
 }
 
-module.exports.addDevice = (espID, roomID, name, pinIndex) => {
-    return new promise(async (resolve, reject) => {
-        const esp = await model.esp.findById(espID)
-
-        if (esp === null)
-            return resolve(errors.addDevice.ESP_ID_NOT_EXISTS)
-
-        if (typeof esp.pins === "undefined" || typeof esp.pins[pinIndex] === "undefined")
-            return resolve(errors.addDevice.ESP_PIN_NOT_EXISTS)
-
-        if (await room.findOne.list.byId(roomID) === null)
-            return resolve(errors.addDevice.ROOM_ID_NOT_EXISTS)
-
-        if (await module.exports.isDeviceNameExists(name))
-            return resolve(errors.addDevice.NAME_DEVICE_IS_EXISTS)
-
-        const record = new model.device({
-            name: name,
-            pinIndex: pinIndex,
-            room: roomID,
-            esp: espID
-        })
-
-        record.save()
-            .then(doc => resolve(errors.addDevice.NOT_ERROR))
-            .catch(err => reject(err))
-    })
-}
-
-module.exports.isDeviceNameExists = async (name) => (await model.device.findOne({ name: name })) !== null
-
 module.exports.updateModule = (espID, data) => {
     if (!module.exports.validateEspID(espID))
         return
@@ -201,11 +152,7 @@ module.exports.updateModule = (espID, data) => {
     }).catch(err => console.error(tag, err))
 }
 
-module.exports.findOne = {
-    esp: {
-        byId: (id) => model.esp.findById(id),
-        byName: (name) => model.esp.findOne({ name: name })
-    }
-}
-
-module.exports.errors = errors
+module.exports.findEsp = (doc) => model.esp.find(doc)
+module.exports.findOneEsp = (doc) => model.esp.findOne(doc)
+module.exports.findEspById = (id) => model.esp.findById(id)
+module.exports.findEspByName = (name) => model.esp.findOne({ name: name })

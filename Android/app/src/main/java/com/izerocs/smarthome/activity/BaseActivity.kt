@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.RoomItem
 import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.SharedPreferences
@@ -58,19 +58,17 @@ abstract class BaseActivity : AppCompatActivity(),
         printResulotion()
     }
 
-    open fun onFetched(type : Int) { Log.d(TAG, "onFetch: $type") }
     open fun onCreatePreferences() : SharedPreferences = SharedPreferences()
     open fun onSocketConnect(client : SocketClient) {}
     open fun onSocketConnectError(client : SocketClient) {}
     open fun onSocketDisconnect(client : SocketClient) {}
     open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {}
 
-    open fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {
-        RoomType.addTypes(this, roomTypes)
+    open fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomType>) {
+
     }
 
-    open fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {
-    }
+    open fun onRoomList(client : SocketClient, roomList : MutableList<RoomItem>) {}
 
     @MenuRes
     open fun onCreateMenu() : Int? = null
@@ -140,7 +138,8 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     fun getRootApplication() : SmartApplication = application as SmartApplication
-    fun getSocket() : Socket = getRootApplication().getSocketClient().getSocket()
+    fun getSocket() : Socket = getSocketClient().getSocket()
+    fun getSocketClient() : SocketClient = getRootApplication().getSocketClient()
     fun getRootView() : View? = rootView
 
 }

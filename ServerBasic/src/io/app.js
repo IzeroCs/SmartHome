@@ -3,13 +3,14 @@ const mongo  = require("../mongo")
 const cert   = require("../security/cert")("app")
 const tag    = "[app]"
 let esp      = require("./esp")
-const room = require("../model/room")
+const { emit } = require("nodemon")
 
 let server   = null
 let io       = null
 let host     = null
 let port     = null
 let devices  = {}
+let dbEsp    = mongo.include("esp")
 let dbRoom   = mongo.include("room")
 
 let ons = {
@@ -74,6 +75,13 @@ let ons = {
             return module.exports.notify.unauthorized(socketio)
 
         module.exports.notify.roomList(socketio)
+    },
+
+    "room.device": (socketio, data) => {
+        if (!socketio.auth)
+            return module.exports.notify.unauthorized(socketio)
+
+        module.exports.notify.roomDevice(socketio, data)
     }
 }
 
@@ -115,6 +123,35 @@ module.exports.socketOn = () => {
 module.exports.listen = () => {
     module.exports.socketOn()
 
+    const devices = [
+        { room: "Phòng khách", esp: "ESP1N403E91636RSC185G2K", device: [
+            { name: "Đèn trái", pin: 0 },
+            { name: "Đèn phải", pin: 1 }
+        ] },
+
+        { room: "Phòng ngủ", esp: "ESP1N403E91636RSC185G2K", device: [
+            { name: "Đèn trái", pin: 0 },
+            { name: "Đèn phải", pin: 1 }
+        ] }
+    ]
+
+    devices.forEach(arr => {
+        dbRoom.findListByName(arr.room).then(roomDoc => {
+            if (roomDoc === null)
+                return
+
+            dbEsp.findEspByName(arr.esp).then(espDoc => {
+                if (espDoc === null)
+                    return
+
+                arr.device.forEach(dev => {
+                    dbRoom.addRoomDevice(espDoc._id, roomDoc._id, dev.name, dev.pin)
+                        .then(res => console.log(tag, "Add device[", arr.esp, "]: ", arr.room, " = ", dev.name, "|", dev.pin, clc.green(" ["), clc.green(res), clc.green("]")))
+                })
+            })
+        })
+    })
+
     if (process.env.ENVIRONMENT === "production")
         server.listen(port, "0.0.0.0", () => console.log(tag, "Listen server port: " + port))
     else
@@ -141,45 +178,60 @@ module.exports.notify = {
     },
 
     roomTypes: (socketio) => {
-        if (socketio && socketio.auth) {
-            const types = dbRoom.datas.types
-            const arr  = []
+        if (!socketio || !socketio.auth)
+            return emit("room.types", [])
 
-            if (typeof types === "undefined" || typeof types.forEach === "undefined")
-                return socketio.emit("room.types", arr)
+        const types = dbRoom.datas.types
+        const arr  = []
 
-            types.forEach(entry => {
-                if (entry.enable) {
-                    arr.push({
-                        name: entry.name,
-                        type: entry.type
-                    })
-                }
-            })
+        if (typeof types === "undefined" || typeof types.forEach === "undefined")
+            return socketio.emit("room.types", arr)
 
-            socketio.emit("room.types", arr)
-        }
+        types.forEach(entry => {
+            if (entry.enable) {
+                arr.push({
+                    id: entry._id,
+                    name: entry.name,
+                    type: entry.type
+                })
+            }
+        })
+
+        socketio.emit("room.types", arr)
     },
 
     roomList: (socketio) => {
-        if (socketio && socketio.auth) {
-            const list = dbRoom.datas.list
-            const arr  = []
+        if (!socketio || !socketio.auth)
+            return emit("room.list", [])
 
-            if (typeof list === "undefined" || typeof list.forEach === "undefined")
-                return socketio.emit("room.list", arr)
+        const list = dbRoom.datas.list
+        const arr  = []
 
-            list.forEach(entry => {
-                if (entry.enable) {
-                    arr.push({
-                        name: entry.name,
-                        type: entry.type.type
-                    })
-                }
-            })
+        if (typeof list === "undefined" || typeof list.forEach === "undefined")
+            return socketio.emit("room.list", arr)
 
-            socketio.emit("room.list", arr)
-        }
+        list.forEach(entry => {
+            if (entry.enable) {
+                arr.push({
+                    id: entry._id,
+                    name: entry.name,
+                    type: entry.type.type
+                })
+            }
+        })
+
+        socketio.emit("room.list", arr)
+    },
+
+    roomDevice: (socketio, data) => {
+        if (!socketio || !socketio.auth || !data || !data.id)
+            return emit("room.device", [])
+
+        const arr = []
+        const id  = data.id
+
+
+        console.log(tag, "Room device: ", data)
     }
 }
 

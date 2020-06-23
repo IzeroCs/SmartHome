@@ -7,6 +7,7 @@ import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
 import com.izerocs.smarthome.model.DeviceItem
 import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_room.*
@@ -24,13 +25,14 @@ class RoomActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        roomItem = RoomItem(this,
-            intent.getStringExtra(SmartActivity.EXTRA_ROOM_NAME)!!,
-            intent.getIntExtra(SmartActivity.EXTRA_ROOM_TYPE, 0)
-        ).apply {
-            wavesView.setTitle(getName())
-            wavesView.setOnBackClickListener(this@RoomActivity)
-        }
+        roomItem = getSocketClient().getRoomList()
+            .first { item -> item.getId() == intent.getStringExtra(SmartActivity.EXTRA_ROOM_ID) }
+
+        if (roomItem == null)
+            finish()
+
+        wavesView.setTitle(roomItem?.getName()!!)
+        wavesView.setOnBackClickListener(this@RoomActivity)
 
         floatButton.setOnClickListener(this)
         listDevice.setOnItemClickListener(this)
@@ -61,6 +63,15 @@ class RoomActivity : BaseActivity(),
             }
 
             listDevice.add(device)
+        }
+    }
+
+    override fun onSocketConnect(client : SocketClient) {
+        if (roomItem == null)
+            return
+
+        getSocketClient().queryRoomDevice(roomItem?.getId()!!) {
+
         }
     }
 

@@ -5,6 +5,8 @@ import android.util.Log
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.AppPreferences
 import org.json.JSONArray
 import org.json.JSONObject
@@ -17,8 +19,8 @@ class SocketClient(val context : Context) {
     private var socket = initSocket()
     private val options = IO.Options().apply { forceNew = true }
     private val espModules : MutableMap<String, EspItem> = mutableMapOf()
-    private val roomTypes  : MutableMap<String, Int>     = mutableMapOf()
-    private val roomList   : MutableMap<String, Int>     = mutableMapOf()
+    private val roomTypes  : MutableList<RoomType>       = mutableListOf()
+    private val roomList   : MutableList<RoomItem>       = mutableListOf()
     private var eventListener : OnEventListener? = null
     private var authFailedCount : Int = 0
 
@@ -28,8 +30,8 @@ class SocketClient(val context : Context) {
         fun onDisconnect(client : SocketClient) {}
         fun onAuthorized(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspItem>) {}
-        fun onRoomTypes(client : SocketClient, roomTypes : MutableMap<String, Int>) {}
-        fun onRoomList(client : SocketClient, roomList : MutableMap<String, Int>) {}
+        fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomType>) {}
+        fun onRoomList(client : SocketClient, roomList : MutableList<RoomItem>) {}
     }
 
     companion object {
@@ -40,6 +42,7 @@ class SocketClient(val context : Context) {
         const val EVENT_AUTHENTICATE = "authenticate"
         const val EVENT_ROOM_TYPES   = "room.types"
         const val EVENT_ROOM_LIST    = "room.list"
+        const val EVENT_ROOM_DEVICE  = "room.device"
         const val EVENT_ESP_LIST     = "esp.list"
     }
 
@@ -63,14 +66,30 @@ class SocketClient(val context : Context) {
         socket.disconnect()
     }
 
+    fun clear() {
+        espModules.clear()
+        roomTypes.clear()
+        roomList.clear()
+    }
+
     fun setOnEventListener(eventListener : OnEventListener) {
         this.eventListener = eventListener
     }
 
+    fun queryRoomDevice(roomId : String, callback : () -> Unit) {
+        if (DEBUG)
+            Log.d(TAG, "queryRoomDevice: $roomId")
+
+        socket.on(EVENT_ROOM_DEVICE) { data ->
+            Log.d(TAG, "eventRoomDevice: " + data.toList().toString())
+            socket.off(EVENT_ROOM_DEVICE)
+        }.emit(EVENT_ROOM_DEVICE, mapOf("id" to roomId))
+    }
+
     fun getSocket() : Socket = this.socket
     fun getEspModules() : MutableMap<String, EspItem> = this.espModules
-    fun getRoomTypes()  : MutableMap<String, Int>     = this.roomTypes
-    fun getRoomList()   : MutableMap<String, Int>     = this.roomList
+    fun getRoomTypes()  : MutableList<RoomType>       = this.roomTypes
+    fun getRoomList()   : MutableList<RoomItem>       = this.roomList
 
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port", options)
 
@@ -203,8 +222,9 @@ class SocketClient(val context : Context) {
                 if (types[i] is JSONObject) {
                     val room = types.getJSONObject(i)
 
-                    if (room.has("name") && room.has("type"))
-                        roomTypes[room.getString("name")] = room.getInt("type")
+                    if (room.has("id") && room.has("name") && room.has("type"))
+                        roomTypes.add(RoomType(context, room.getString("id"),
+                            room.getString("name"), room.getInt("type")))
                 }
             }
 
@@ -226,8 +246,9 @@ class SocketClient(val context : Context) {
                 if (list[i] is JSONObject) {
                     val room = list.getJSONObject(i)
 
-                    if (room.has("name") && room.has("type"))
-                        roomList[room.getString("name")] = room.getInt("type")
+                    if (room.has("id") && room.has("name") && room.has("type"))
+                        roomList.add(RoomItem(context, room.getString("id"),
+                            room.getString("name"), room.getInt("type")))
                 }
             }
 

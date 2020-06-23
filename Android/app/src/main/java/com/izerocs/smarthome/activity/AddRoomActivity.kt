@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomItem
-import com.izerocs.smarthome.model.RoomType
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
 import com.izerocs.smarthome.widget.form.FormLayout
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_add_room.*
 import java.util.*
 
@@ -29,9 +27,7 @@ class AddRoomActivity : BaseActivity(),
         addRoomButton.setOnClickListener(this)
         addRoomType.setEditTextBinder(addRoomName)
 
-        RoomType.getTypeItems(applicationContext).forEach {
-            addRoomType.add(it.getName(), it.getIconResource(), it.getType())
-        }
+        getSocketClient().getRoomTypes().forEach { type -> addRoomType.add(type) }
     }
 
     override fun onCreatePreferences() : SharedPreferences {
@@ -41,22 +37,21 @@ class AddRoomActivity : BaseActivity(),
     override fun onClick(v : View?) {
         if (v == addRoomButton) {
             val name : String = addRoomName.text.toString()
-            val type : Int    = addRoomType.getSelectCurrent().getObject() as Int
 
             if (name.isEmpty()) {
                 addRoomName.setStatusError(R.string.addRoomErrorRequiredName)
-            } else if (!RoomType.isTypeValid(type)) {
-                addRoomType.setStatusError(R.string.addRoomErrorInvalidType)
+//            } else if (!RoomType.isTypeValid(type)) {
+//                addRoomType.setStatusError(R.string.addRoomErrorInvalidType)
             } else if (isNameExists(name)) {
                 addRoomName.setStatusError(R.string.addRoomErrorExistsName)
             } else {
                 addRoomName.setText("")
 
-                preferences.put(preferences.size()
-                    .plus(1).toString(), RoomItem(this, name, type).toData())
-
-                Toasty
-                    .success(this, R.string.addRoomSuccess, Toasty.LENGTH_LONG, true).show()
+//                preferences.put(preferences.size()
+//                    .plus(1).toString(), RoomItem(this, name, type).toData())
+//
+//                Toasty
+//                    .success(this, R.string.addRoomSuccess, Toasty.LENGTH_LONG, true).show()
             }
         }
     }

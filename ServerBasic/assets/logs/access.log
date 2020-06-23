@@ -3719,3 +3719,1698 @@
 19:43:31, 22/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
 19:43:34, 22/6/2020: [app] Connect: qPm-Gl8HkkpHWcWMAAAB
 19:43:34, 22/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:38:43, 23/6/2020]=======================================
+09:38:48, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:38:48, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:38:48, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:38:48, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:38:48, 23/6/2020: [esp] Room{
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+09:38:48, 23/6/2020: [esp] Espundefined
+09:39:20, 23/6/2020: [esp] Connect: _9dqvNo_NcJn7DodAAAA
+09:39:20, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:39:42, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+09:45:08, 23/6/2020: [esp] Connect: vYYQrrNeh-Q84budAAAB
+09:45:08, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:45:54, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+09:47:34, 23/6/2020: [esp] Connect: tvRJgIv4099x47geAAAC
+09:47:34, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:48:09, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+09:48:20, 23/6/2020: [app] Connect: 4o71PXKZcJEFOKd9AAAD
+09:48:20, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+09:49:26, 23/6/2020: [esp] Connect: bPpwBDucqrSLpM06AAAE
+09:49:26, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[09:52:05, 23/6/2020]=======================================
+09:52:06, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:52:06, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:52:06, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:52:06, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:52:07, 23/6/2020: [esp] Room{
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: 5ef07c160fce5f0109dd8d4b,
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+09:52:07, 23/6/2020: [esp] Espundefined
+09:52:07, 23/6/2020: [esp] Connect: _ehWKx7cMvwgAAFvAAAA
+09:52:07, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:52:10, 23/6/2020: [app] Connect: PFTjP259KTMKQomMAAAB
+09:52:10, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:52:45, 23/6/2020]=======================================
+09:52:46, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:52:46, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:52:46, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:52:46, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:52:47, 23/6/2020: [esp] Connect: 0R9iIx02b2pPJc7PAAAA
+09:52:47, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:52:49, 23/6/2020: [app] Connect: UgkJATec-iMk-4NTAAAB
+09:52:49, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:53:15, 23/6/2020]=======================================
+09:53:17, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:53:17, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:53:17, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:53:17, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:53:18, 23/6/2020: [esp] Connect: N0L8t2pqfLKtGv3DAAAA
+09:53:18, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:53:20, 23/6/2020: [app] Connect: meSE7K0HcuPWxaalAAAB
+09:53:20, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:53:40, 23/6/2020]=======================================
+09:53:41, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:53:41, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:53:41, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:53:41, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:53:41, 23/6/2020: [esp] Add device: 2
+09:53:42, 23/6/2020: [esp] Connect: 0fk8nTUa5R6qS1WoAAAA
+09:53:42, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:53:44, 23/6/2020: [app] Connect: rbwdtfNL4x7E5c_EAAAB
+09:53:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:55:23, 23/6/2020]=======================================
+09:55:24, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:55:24, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:55:24, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:55:24, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:55:24, 23/6/2020: {
+  pins: [
+    {
+      input: 0,
+      outputType: 0,
+      outputPrimary: 0,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 1,
+      outputType: 3,
+      outputPrimary: 1,
+      outputSecondary: 1,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 2,
+      outputType: 2,
+      outputPrimary: 2,
+      outputSecondary: 3,
+      dualToggleCount: 0,
+      status: 1
+    },
+    {
+      input: 3,
+      outputType: 3,
+      outputPrimary: 3,
+      outputSecondary: 3,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 4,
+      outputType: 2,
+      outputPrimary: 4,
+      outputSecondary: 5,
+      dualToggleCount: 1,
+      status: 0
+    },
+    {
+      input: 5,
+      outputType: 3,
+      outputPrimary: 5,
+      outputSecondary: 5,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 6,
+      outputType: 1,
+      outputPrimary: 6,
+      outputSecondary: 6,
+      dualToggleCount: 0,
+      status: 0
+    },
+    {
+      input: 7,
+      outputType: 1,
+      outputPrimary: 7,
+      outputSecondary: 7,
+      dualToggleCount: 0,
+      status: 0
+    }
+  ],
+  _id: 5ef07c160fce5f0109dd8d4a,
+  name: 'ESP1N403E91636RSC185G2K',
+  online: true,
+  authenticate: true,
+  detail: Map(1) { 'rssi' => '-77' },
+  created_at: 2020-06-22T09:38:30.083Z,
+  updated_at: 2020-06-23T02:54:23.629Z
+} 
+09:55:24, 23/6/2020: [esp] Add device: 2
+09:55:25, 23/6/2020: [esp] Connect: CWme5TZyB_ExgiiWAAAA
+09:55:25, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:55:27, 23/6/2020: [app] Connect: xz4tbcYjvuY7CH6IAAAB
+09:55:28, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:56:21, 23/6/2020]=======================================
+09:56:22, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:56:22, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:56:22, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:56:22, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:56:22, 23/6/2020: [mongo:esp] object
+09:56:22, 23/6/2020: [mongo:esp] undefined
+09:56:22, 23/6/2020: [esp] Add device: 2
+09:56:23, 23/6/2020: [esp] Connect: unw9DFtCN71sRLrdAAAA
+09:56:23, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+09:56:26, 23/6/2020: [app] Connect: a9vPWc0A76RF9ECVAAAB
+09:56:26, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[09:56:31, 23/6/2020]=======================================
+09:56:32, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:56:32, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:56:32, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:56:32, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:56:32, 23/6/2020: [mongo:esp] object
+09:56:32, 23/6/2020: [mongo:esp] object
+09:56:32, 23/6/2020: [esp] Add device: 2
+09:56:32, 23/6/2020: [app] Connect: gZMC3rI9cANjDYq6AAAA
+09:56:32, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+09:56:33, 23/6/2020: [esp] Connect: 8v_4r3De57HRYoBiAAAB
+09:56:33, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[09:56:48, 23/6/2020]=======================================
+09:56:49, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:56:49, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:56:49, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:56:49, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:56:50, 23/6/2020: [mongo:esp] object
+09:56:50, 23/6/2020: [mongo:esp] object
+09:56:50, 23/6/2020: [esp] Add device: 4
+09:56:50, 23/6/2020: [app] Connect: T0WXPPxB3FY9gBzVAAAA
+09:56:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+09:56:51, 23/6/2020: [esp] Connect: NjY7b6DCIbI6ZkxpAAAB
+09:56:51, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[09:56:55, 23/6/2020]=======================================
+09:56:56, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+09:56:56, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+09:56:56, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+09:56:56, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+09:56:56, 23/6/2020: [esp] Add device: 4
+09:56:56, 23/6/2020: [app] Connect: ZcDR4QaOx7NJh6O7AAAA
+09:56:56, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+09:56:57, 23/6/2020: [esp] Connect: Hsyo_FizNLbu0eZeAAAB
+09:56:57, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:01:18, 23/6/2020]=======================================
+10:01:19, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:01:19, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:01:19, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:01:20, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:01:20, 23/6/2020: [app] Connect: ZiKEdL6PDwaLvXLjAAAA
+10:01:20, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:01:21, 23/6/2020: [esp] Connect: F4qL8NMgztWsOu5kAAAB
+10:01:21, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:02:28, 23/6/2020]=======================================
+10:02:29, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:02:29, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:02:29, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:02:29, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:02:30, 23/6/2020: [esp] Connect: CkmkCoa9RphprS_oAAAA
+10:02:30, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:02:30, 23/6/2020: [app] Connect: LJEkNbJU-5ooAHdiAAAB
+10:02:30, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:02:46, 23/6/2020]=======================================
+10:02:47, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:02:47, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:02:47, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:02:47, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:02:49, 23/6/2020: [esp] Connect: FuDncQ9UzvoX9Hz8AAAA
+10:02:49, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:02:51, 23/6/2020: [app] Connect: 6CjocgoyppX8TbDcAAAB
+10:02:51, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:03:07, 23/6/2020]=======================================
+10:03:08, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:03:08, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:03:08, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:03:08, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:03:09, 23/6/2020: [esp] Connect: ZvfCVUIR8gLTt-0DAAAA
+10:03:09, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:03:12, 23/6/2020: [app] Connect: DxCfWRPEknDfVn89AAAB
+10:03:12, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:03:41, 23/6/2020]=======================================
+10:03:42, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:03:42, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:03:42, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:03:42, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:03:42, 23/6/2020: [esp] Add device: 4
+10:03:43, 23/6/2020: [app] Connect: RXjc2pB3KccqenZVAAAA
+10:03:43, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:03:43, 23/6/2020: [esp] Connect: HSZ_v0VY7latOJXWAAAB
+10:03:44, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:07:38, 23/6/2020]=======================================
+10:07:40, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:07:40, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:07:40, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:07:40, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:07:40, 23/6/2020: [mongo:esp] Add device: {
+  _id: 5ef0a31a16962003e0521358,
+  name: 'Đèn trái',
+  pinIndex: 0,
+  room: 5ef07c160fce5f0109dd8d55,
+  esp: 5ef07c160fce5f0109dd8d4a,
+  created_at: 2020-06-22T12:24:58.156Z,
+  updated_at: 2020-06-22T12:24:58.156Z
+}
+10:07:40, 23/6/2020: [esp] Add device: 4
+10:07:40, 23/6/2020: [esp] Connect: K3TiYMd-TR1Wx19TAAAA
+10:07:40, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:07:42, 23/6/2020: [app] Connect: c6JJ66LUqlu2tc_IAAAB
+10:07:42, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:07:49, 23/6/2020]=======================================
+10:07:51, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:07:51, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:07:51, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:07:51, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:07:51, 23/6/2020: [mongo:esp] Add device: {
+  _id: 5ef0a31a16962003e0521358,
+  name: 'Đèn trái',
+  pinIndex: 0,
+  room: 5ef07c160fce5f0109dd8d55,
+  esp: 5ef07c160fce5f0109dd8d4a,
+  created_at: 2020-06-22T12:24:58.156Z,
+  updated_at: 2020-06-22T12:24:58.156Z
+}
+10:07:51, 23/6/2020: [esp] Add device: 4
+10:07:52, 23/6/2020: [esp] Connect: pyeOJ9Ntd3ObnEYWAAAA
+10:07:52, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:07:54, 23/6/2020: [app] Connect: TTfLONdqgnvW9uhWAAAB
+10:07:54, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:08:08, 23/6/2020]=======================================
+10:08:09, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:08:09, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:08:09, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:08:09, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:08:09, 23/6/2020: [app] Connect: E25POQ4M5p2JbjNrAAAA
+10:08:09, 23/6/2020: [mongo:esp] Add device: 
+10:08:10, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:08:10, 23/6/2020: [esp] Add device: 4
+10:08:11, 23/6/2020: [esp] Connect: 3rG9iIwEuJ4J5bC3AAAB
+10:08:11, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:08:17, 23/6/2020]=======================================
+10:08:18, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:08:18, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:08:18, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:08:18, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:08:18, 23/6/2020: [mongo:esp] Add device: object
+10:08:18, 23/6/2020: [esp] Add device: 4
+10:08:19, 23/6/2020: [app] Connect: 358L74JA-etMiR3IAAAA
+10:08:19, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:08:20, 23/6/2020: [esp] Connect: kYwJ_r26JXPp-wp5AAAB
+10:08:20, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:08:30, 23/6/2020]=======================================
+10:08:31, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:08:31, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:08:31, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:08:31, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:08:32, 23/6/2020: [mongo:esp] Add device: 0
+10:08:32, 23/6/2020: [esp] Add device: 4
+10:08:33, 23/6/2020: [esp] Connect: hGi3N2DAp8QzClSQAAAA
+10:08:33, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:08:35, 23/6/2020: [app] Connect: yNbgBgRPOD-VfSJKAAAB
+10:08:35, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:08:36, 23/6/2020]=======================================
+10:08:38, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:08:38, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:08:38, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:08:38, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:08:38, 23/6/2020: [mongo:esp] Add device: 
+10:08:38, 23/6/2020: [esp] Add device: 4
+10:08:39, 23/6/2020: [esp] Connect: -Yh4h6sHP8xOVbmZAAAA
+10:08:39, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:08:41, 23/6/2020: [app] Connect: F4i7HjmpnHBP2qeqAAAB
+10:08:41, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:08:57, 23/6/2020]=======================================
+10:08:59, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:08:59, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:08:59, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:08:59, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:08:59, 23/6/2020: [esp] Add device: 4
+10:09:00, 23/6/2020: [esp] Connect: RswGSeVKeookPIF8AAAA
+10:09:00, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:09:02, 23/6/2020: [app] Connect: oll1OS57CjVwTqhiAAAB
+10:09:02, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:12:59, 23/6/2020]=======================================
+10:13:00, 23/6/2020: [esp] [object Object]
+10:13:00, 23/6/2020: [esp] [object Object]
+10:13:00, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:13:00, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:13:00, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:13:00, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:13:01, 23/6/2020: [esp] Connect: x9YoFE0fyUan7_RFAAAA
+10:13:01, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:13:03, 23/6/2020: [app] Connect: z-dIYHoh_6rjFu6jAAAB
+10:13:04, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:13:09, 23/6/2020]=======================================
+10:13:10, 23/6/2020: [esp] Phòng khách
+10:13:10, 23/6/2020: [esp] Phòng ngủ
+10:13:10, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:13:10, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:13:10, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:13:10, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:13:11, 23/6/2020: [app] Connect: mMmJcAqGWpgHFqCjAAAA
+10:13:11, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:13:11, 23/6/2020: [esp] Connect: DDx6K48uARO7oqT-AAAB
+10:13:11, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:16:48, 23/6/2020]=======================================
+10:16:50, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:16:50, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:16:50, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:16:50, 23/6/2020: [app] Connect: cNNJE7wH0qStsmbNAAAA
+10:16:50, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:16:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:16:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0
+10:16:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1
+10:16:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0
+10:16:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1
+10:16:51, 23/6/2020: [esp] Connect: jXYfiTqN87ky33iEAAAB
+10:16:51, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:17:25, 23/6/2020]=======================================
+10:17:27, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:17:27, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:17:27, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:17:27, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:17:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[4]
+10:17:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[4]
+10:17:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[4]
+10:17:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[4]
+10:17:28, 23/6/2020: [esp] Connect: MCJj19CkcyjcuUXuAAAA
+10:17:28, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:17:30, 23/6/2020: [app] Connect: 1w2-fxwv5qNPPIdUAAAB
+10:17:30, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:17:33, 23/6/2020]=======================================
+10:17:34, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:17:34, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:17:34, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:17:34, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:17:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0 [4]
+10:17:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1 [4]
+10:17:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1 [4]
+10:17:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0 [4]
+10:17:35, 23/6/2020: [esp] Connect: IBlMauWcnGnrR_pgAAAA
+10:17:35, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:17:38, 23/6/2020: [app] Connect: tjTnCmgg88BSqV3KAAAB
+10:17:38, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:18:18, 23/6/2020]=======================================
+10:18:20, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:18:20, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:18:20, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:18:20, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:18:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:18:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:18:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:18:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:18:21, 23/6/2020: [esp] Connect: iZxm-rhFuwVxyeeyAAAA
+10:18:21, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:18:23, 23/6/2020: [app] Connect: bhv41NnkaycPzDx7AAAB
+10:18:24, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:24:09, 23/6/2020]=======================================
+10:24:11, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:24:11, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:24:11, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:24:11, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:24:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:24:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:24:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:24:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:24:12, 23/6/2020: [app] Connect: QpNC2_6cGjUIkmPDAAAA
+10:24:12, 23/6/2020: [esp] Connect: Qz_e26ZfpwTfwPdTAAAB
+10:24:12, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:24:12, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[10:27:28, 23/6/2020]=======================================
+10:27:29, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:27:29, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:27:29, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:27:29, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:27:29, 23/6/2020: [app] Connect: lBD8fRv9oHbaAB3YAAAA
+10:27:29, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:27:29, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:27:29, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:27:29, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:27:29, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:27:30, 23/6/2020: [esp] Connect: Bv3JmeZ8aRedwf5qAAAB
+10:27:30, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:27:54, 23/6/2020]=======================================
+10:27:55, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:27:55, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:27:55, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:27:55, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:27:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:27:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:27:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:27:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:27:56, 23/6/2020: [app] Connect: t2tMv8CDaOUsny1EAAAA
+10:27:56, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:27:56, 23/6/2020: [esp] Connect: bw4UEC_lqh7vPKVJAAAB
+10:27:56, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:32:29, 23/6/2020]=======================================
+10:32:30, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:32:31, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:32:31, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:32:31, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:32:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:31, 23/6/2020: [app] Connect: Ob9jL6KCj1-h4QWKAAAA
+10:32:31, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:32:32, 23/6/2020: [esp] Connect: 5ikwR4GzihJOylgmAAAB
+10:32:32, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:32:43, 23/6/2020]=======================================
+10:32:44, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:32:44, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:32:44, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:32:44, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:32:45, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:45, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:45, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:45, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:45, 23/6/2020: [esp] Connect: J85BdT1dl99c_lDLAAAA
+10:32:45, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+10:32:48, 23/6/2020: [app] Connect: tR8yF5x38Tcp1yecAAAB
+10:32:48, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4e
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4b
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4c
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4d
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4f
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d50
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d51
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d52
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d53
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4e
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4b
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4c
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4d
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d4f
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d50
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d51
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d52
+10:32:48, 23/6/2020: [app] 5ef07c160fce5f0109dd8d53
+=======================================[10:32:57, 23/6/2020]=======================================
+10:32:58, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:32:58, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:32:58, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:32:58, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:32:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:32:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:32:58, 23/6/2020: [app] Connect: 4oaZ13_WDCjf2zFWAAAA
+10:32:59, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:32:59, 23/6/2020: [esp] Connect: XUwLXter2OzFfkarAAAB
+10:32:59, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:33:39, 23/6/2020]=======================================
+10:33:40, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:33:40, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:33:40, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:33:40, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:33:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:41, 23/6/2020: [app] Connect: 2kGvp5pSJ6JhJ9LVAAAA
+10:33:41, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d56,
+  name: 'Phòng bếp',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4d,
+    name: 'kitchen_room',
+    type: 3,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.183Z,
+  updated_at: 2020-06-22T09:38:30.183Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d59,
+  name: 'Phòng ngủ',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4c,
+    name: 'bed_room',
+    type: 2,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.187Z,
+  updated_at: 2020-06-22T09:38:30.187Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d58,
+  name: 'Ban công',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4f,
+    name: 'balcony_room',
+    type: 5,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.186Z,
+  updated_at: 2020-06-22T09:38:30.186Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4b,
+    name: 'living_room',
+    type: 1,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d57,
+  name: 'Phòng tắm',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4e,
+    name: 'bath_room',
+    type: 4,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.184Z,
+  updated_at: 2020-06-22T09:38:30.184Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5a,
+  name: 'Cầu thang',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d50,
+    name: 'stairs_room',
+    type: 6,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.188Z,
+  updated_at: 2020-06-22T09:38:30.188Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5b,
+  name: 'Sân nhà',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d51,
+    name: 'fence_room',
+    type: 7,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.193Z,
+  updated_at: 2020-06-22T09:38:30.193Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5c,
+  name: 'Gác lửng',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d52,
+    name: 'mezzanine_room',
+    type: 8,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.196Z,
+  updated_at: 2020-06-22T09:38:30.196Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5d,
+  name: 'Gác mái',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d53,
+    name: 'roof_room',
+    type: 9,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.198Z,
+  updated_at: 2020-06-22T09:38:30.198Z
+}
+10:33:41, 23/6/2020: [esp] Connect: jJDwCqLiz4zgsv2mAAAB
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d56,
+  name: 'Phòng bếp',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4d,
+    name: 'kitchen_room',
+    type: 3,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.183Z,
+  updated_at: 2020-06-22T09:38:30.183Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d59,
+  name: 'Phòng ngủ',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4c,
+    name: 'bed_room',
+    type: 2,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.187Z,
+  updated_at: 2020-06-22T09:38:30.187Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d58,
+  name: 'Ban công',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4f,
+    name: 'balcony_room',
+    type: 5,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.186Z,
+  updated_at: 2020-06-22T09:38:30.186Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d55,
+  name: 'Phòng khách',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4b,
+    name: 'living_room',
+    type: 1,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.175Z,
+  updated_at: 2020-06-22T09:38:30.175Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d57,
+  name: 'Phòng tắm',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d4e,
+    name: 'bath_room',
+    type: 4,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.184Z,
+  updated_at: 2020-06-22T09:38:30.184Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5a,
+  name: 'Cầu thang',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d50,
+    name: 'stairs_room',
+    type: 6,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.188Z,
+  updated_at: 2020-06-22T09:38:30.188Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5b,
+  name: 'Sân nhà',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d51,
+    name: 'fence_room',
+    type: 7,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.193Z,
+  updated_at: 2020-06-22T09:38:30.193Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5c,
+  name: 'Gác lửng',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d52,
+    name: 'mezzanine_room',
+    type: 8,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.196Z,
+  updated_at: 2020-06-22T09:38:30.196Z
+}
+10:33:41, 23/6/2020: [app] {
+  _id: 5ef07c160fce5f0109dd8d5d,
+  name: 'Gác mái',
+  enable: true,
+  type: {
+    _id: 5ef07c160fce5f0109dd8d53,
+    name: 'roof_room',
+    type: 9,
+    enable: true,
+    created_at: 2020-06-22T09:38:30.102Z,
+    updated_at: 2020-06-22T09:38:30.102Z
+  },
+  created_at: 2020-06-22T09:38:30.198Z,
+  updated_at: 2020-06-22T09:38:30.198Z
+}
+10:33:41, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:33:48, 23/6/2020]=======================================
+10:33:49, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:33:49, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:33:49, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:33:49, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:33:49, 23/6/2020: [app] Connect: E2_BV4ssFT34Q6SLAAAA
+10:33:49, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d56
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d59
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d58
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d55
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d57
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5a
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5b
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5c
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5d
+10:33:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d56
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d59
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d58
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d55
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d57
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5a
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5b
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5c
+10:33:49, 23/6/2020: [app] 5ef07c160fce5f0109dd8d5d
+10:33:50, 23/6/2020: [esp] Connect: 6G2X1pZjbkhG8MM2AAAB
+10:33:50, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[10:33:57, 23/6/2020]=======================================
+10:33:58, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+10:33:58, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+10:33:58, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+10:33:58, 23/6/2020: [mongo] Connection established to mongodb://localhost:27017/smarthome
+10:33:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+10:33:58, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+10:33:59, 23/6/2020: [app] Connect: __va-UVoxQj9v5YwAAAA
+10:33:59, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+10:33:59, 23/6/2020: [esp] Connect: Z7uTMlhXhx40DTWbAAAB
+10:34:00, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:04:02, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:04:03, 23/6/2020: [esp] Connect: o7XBhohysD1HTGoJAAAC
+11:04:03, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:11:58, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:12:06, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+11:12:07, 23/6/2020: [app] Connect: GcV6THdHGIjQmxCcAAAD
+11:12:07, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:12:12, 23/6/2020: [esp] Connect: dEzS9jl1B9JkpHTRAAAE
+11:12:12, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:14:06, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+11:14:09, 23/6/2020: [app] Connect: F0s58CGyNtuXKJAyAAAF
+11:14:09, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:16:02, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+11:16:04, 23/6/2020: [app] Connect: d0Y94hK93N3Z-t-5AAAG
+11:16:04, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:22:21, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+11:22:23, 23/6/2020: [app] Connect: 0CYbqcj4azMNgZZhAAAH
+11:22:23, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:24:37, 23/6/2020]=======================================
+11:24:38, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:24:38, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:24:38, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:24:38, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:24:39, 23/6/2020: [app] Connect: l1EcNEA-oUu1Aw-zAAAA
+11:24:39, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:24:39, 23/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+11:24:39, 23/6/2020: [esp] Connect: YcprmmeJ7c3MQ573AAAB
+11:24:39, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:25:27, 23/6/2020]=======================================
+11:25:28, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:25:28, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:25:28, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:25:28, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:25:29, 23/6/2020: [mongo:room] Create first data room types
+11:25:29, 23/6/2020: [mongo:room] Create first data room list
+11:25:29, 23/6/2020: [app] Connect: 0KLqjcAgC1_kX9SVAAAA
+11:25:29, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:25:29, 23/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+11:25:29, 23/6/2020: [mongo:setting] Created setting first 
+11:25:29, 23/6/2020: [esp] Connect: rVTU0Art5LsvsLlTAAAB
+11:25:29, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:26:25, 23/6/2020]=======================================
+11:26:26, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:26:26, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:26:26, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:26:26, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:26:27, 23/6/2020: [esp] Connect: w-hZOPmIhfNAP-shAAAA
+11:26:27, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:26:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:26:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:26:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:26:27, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:26:29, 23/6/2020: [app] Connect: xaNhOXm_oIxPMjv7AAAB
+11:26:29, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:27:34, 23/6/2020]=======================================
+11:27:36, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:27:36, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:27:36, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:27:36, 23/6/2020: [app] Connect: gQinoQFKMXErWNXlAAAA
+11:27:37, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:27:37, 23/6/2020: [esp] Connect: 8fDXjQ5qTEVSw9cPAAAB
+11:27:37, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:27:40, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:27:41, 23/6/2020: [mongo:room] Create first data room types
+11:27:41, 23/6/2020: [mongo:room] Create first data room list
+11:27:41, 23/6/2020: [mongo:setting] Created setting first 
+11:27:46, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:27:54, 23/6/2020: [esp] Connect: ys8uPbqc2Qw1GUQ7AAAC
+11:27:54, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:28:05, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+11:28:17, 23/6/2020: [app] Connect: l98B-1LtD67ElikPAAAD
+11:28:17, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:31:43, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:31:44, 23/6/2020: [esp] Connect: 0tIc3CFez9pWWFiHAAAE
+11:31:44, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:31:55, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:31:58, 23/6/2020: [esp] Connect: U-NaNhqCeU_3WHuDAAAF
+11:31:59, 23/6/2020: [esp] Disconnect socket unauthorized: U-NaNhqCeU_3WHuDAAAF
+11:31:59, 23/6/2020: [esp] Disconnect: U-NaNhqCeU_3WHuDAAAF
+11:32:06, 23/6/2020: [esp] Connect: 1YaqUM4Tju-NbHJSAAAG
+11:32:06, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:32:09, 23/6/2020]=======================================
+11:32:10, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:32:10, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:32:10, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:32:11, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:32:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:32:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:32:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:32:11, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:32:12, 23/6/2020: [esp] Connect: mN7dZGQCQaetUoGpAAAA
+11:32:13, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:32:14, 23/6/2020: [app] Connect: p5AW1T0E2pMcNA8cAAAB
+11:32:14, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:32:27, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+11:32:30, 23/6/2020: [esp] Connect: b3yrlPLgED_l_MuQAAAC
+11:32:30, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:46:13, 23/6/2020]=======================================
+11:46:14, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:46:14, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:46:14, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:46:14, 23/6/2020: [app] Connect: cgTmV3B6OuQD69DxAAAA
+11:46:14, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:46:14, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:46:15, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:15, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:15, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:15, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:15, 23/6/2020: [esp] Connect: 4LFpg9hQVDhYN4n3AAAB
+11:46:15, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:46:29, 23/6/2020]=======================================
+11:46:30, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:46:30, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:46:30, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:46:30, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:46:31, 23/6/2020: [esp] Connect: ttIHHIZ59iuLZxG4AAAA
+11:46:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:31, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:46:31, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[11:46:33, 23/6/2020]=======================================
+11:46:34, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:46:34, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:46:34, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:46:35, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:46:35, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:35, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:35, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:35, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:36, 23/6/2020: [esp] Connect: UQ_H3nZWtK3C5K-eAAAA
+11:46:36, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:46:36, 23/6/2020: [app] Connect: 0Wq6svtr8pj28JRGAAAB
+11:46:36, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:46:44, 23/6/2020]=======================================
+11:46:46, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:46:46, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:46:46, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:46:46, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:46:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:46:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:46:47, 23/6/2020: [esp] Connect: NPFuOnDVi6xE-9ElAAAA
+11:46:47, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:46:49, 23/6/2020: [app] Connect: qJ-aSEQrHjNUWi_oAAAB
+11:46:49, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:47:18, 23/6/2020]=======================================
+11:47:19, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:47:19, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:47:19, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:47:20, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:47:20, 23/6/2020: [app] Connect: V9L7JjYuxkNNfI7OAAAA
+11:47:20, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:47:20, 23/6/2020: [esp] Connect: -EjD2wV7zzK_Ew35AAAB
+11:47:20, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:47:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:47:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:47:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:47:20, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[11:48:59, 23/6/2020]=======================================
+11:49:01, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:49:01, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:49:01, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:49:01, 23/6/2020: [app] Connect: cnv6HtLd3k8YtTpvAAAA
+11:49:01, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:49:01, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:49:02, 23/6/2020: [esp] Connect: aLLcHNcweYBYxavSAAAB
+11:49:02, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:49:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:49:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[11:49:40, 23/6/2020]=======================================
+11:49:42, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:49:42, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:49:42, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:49:42, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:49:43, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:49:43, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:43, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:43, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:49:43, 23/6/2020: [esp] Connect: d2Jy28qztEm5KovaAAAA
+11:49:43, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:49:45, 23/6/2020: [app] Connect: wBDvA91R2wCA2vsuAAAB
+11:49:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:49:46, 23/6/2020]=======================================
+11:49:48, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:49:48, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:49:48, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:49:48, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:49:49, 23/6/2020: [esp] Connect: kFuJ4DUq-5AA5jQ4AAAA
+11:49:49, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:49:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:49:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:49:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:49:51, 23/6/2020: [app] Connect: ukXugML0NqbKMKS1AAAB
+11:49:51, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:50:01, 23/6/2020]=======================================
+11:50:02, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:50:02, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:50:02, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:50:02, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:50:03, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:03, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:50:03, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:50:03, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:03, 23/6/2020: [esp] Connect: sm1CvnQ7_g6IVaZZAAAA
+11:50:03, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:50:06, 23/6/2020: [app] Connect: iSQRZKxgUMt63UrrAAAB
+11:50:06, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:50:08, 23/6/2020]=======================================
+11:50:09, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:50:09, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:50:09, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:50:10, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:50:10, 23/6/2020: [esp] Connect: 8XQfB3BbM21hbc8EAAAA
+11:50:10, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:50:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:50:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[11:50:11, 23/6/2020]=======================================
+11:50:12, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:50:12, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:50:12, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:50:12, 23/6/2020: [app] Connect: jL5ZD8SSPXeu3XeGAAAA
+11:50:12, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:50:13, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:50:13, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:50:13, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:13, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:50:13, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:50:14, 23/6/2020: [esp] Connect: TAKYTSIZcSIYNp3lAAAB
+11:50:14, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:51:00, 23/6/2020]=======================================
+11:51:01, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:51:01, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:51:01, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:51:01, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:51:02, 23/6/2020: [app] Connect: b66jL02nhzZp6j35AAAA
+11:51:02, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:51:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:51:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:51:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:51:02, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:51:02, 23/6/2020: [esp] Connect: 6KR7jzyXcWNSd3ugAAAB
+11:51:02, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:51:49, 23/6/2020]=======================================
+11:51:50, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:51:50, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:51:50, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:51:51, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:51:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:51:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:51:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:51:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:51:52, 23/6/2020: [esp] Connect: YepxzvzuWz97BWedAAAA
+11:51:52, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:51:54, 23/6/2020: [app] Connect: F8ciU4_MuokJNvjPAAAB
+11:51:54, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:52:30, 23/6/2020]=======================================
+11:52:31, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:52:31, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:52:31, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:52:32, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:52:32, 23/6/2020: [mongo:esp] 0
+11:52:32, 23/6/2020: [mongo:esp] 0
+11:52:32, 23/6/2020: [mongo:esp] 0
+11:52:32, 23/6/2020: [mongo:esp] 0
+11:52:32, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:52:32, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:52:32, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:52:32, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:52:33, 23/6/2020: [esp] Connect: 3ZnP203k3NRwmKhWAAAA
+11:52:33, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:52:35, 23/6/2020: [app] Connect: Y5lJ4fRYEG3Du5clAAAB
+11:52:35, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:53:07, 23/6/2020]=======================================
+11:53:09, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:53:09, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:53:09, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:53:09, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:53:09, 23/6/2020: [mongo:esp] 1
+11:53:09, 23/6/2020: [mongo:esp] 1
+11:53:10, 23/6/2020: [mongo:esp] 1
+11:53:10, 23/6/2020: [mongo:esp] 1
+11:53:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:53:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:53:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:53:10, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:53:10, 23/6/2020: [esp] Connect: 4mvOGIV8pBS0RBbgAAAA
+11:53:10, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:53:12, 23/6/2020: [app] Connect: 3p0q8dhupkvUJkurAAAB
+11:53:12, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:53:48, 23/6/2020]=======================================
+11:53:49, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:53:49, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:53:49, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:53:49, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:53:50, 23/6/2020: [esp] Connect: 9A6tWRZsnZ19wizmAAAA
+11:53:50, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:53:50, 23/6/2020: [mongo:esp] 1
+11:53:50, 23/6/2020: [mongo:esp] 1
+11:53:50, 23/6/2020: [mongo:esp] 1
+11:53:50, 23/6/2020: [mongo:esp] 1
+11:53:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:53:50, 23/6/2020: [app] Connect: AyLx48vA31mB3pYNAAAB
+11:53:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:53:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m3[39m[32m][39m
+11:53:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m3[39m[32m][39m
+11:53:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:54:03, 23/6/2020]=======================================
+11:54:05, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:54:05, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:54:05, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:54:05, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:54:05, 23/6/2020: [app] Connect: hMXqGdr9UvqnGR_KAAAA
+11:54:05, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:54:06, 23/6/2020: [esp] Connect: YeFCY3ssiLSX6r6fAAAB
+11:54:06, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:54:21, 23/6/2020]=======================================
+11:54:22, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:54:22, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:54:22, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:54:23, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:54:23, 23/6/2020: [esp] Connect: 2aLROY2NC3wohnHBAAAA
+11:54:23, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:54:26, 23/6/2020: [app] Connect: UuNIzNUEDA7wLB8kAAAB
+11:54:26, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:54:49, 23/6/2020]=======================================
+11:54:50, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:54:50, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:54:50, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:54:51, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:54:51, 23/6/2020: [esp] Connect: UDXS-hdJ-O0ljkIfAAAA
+11:54:51, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:54:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+11:54:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+11:54:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+11:54:51, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+11:54:54, 23/6/2020: [app] Connect: d4hT-aLNS8vsVO1JAAAB
+11:54:54, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:55:45, 23/6/2020]=======================================
+11:55:46, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:55:46, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:55:46, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:55:47, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:55:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:55:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:55:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:55:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+=======================================[11:55:48, 23/6/2020]=======================================
+11:55:49, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:55:49, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:55:49, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:55:50, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:55:50, 23/6/2020: [app] Connect: Kp4ajUldBvtZWhqGAAAA
+11:55:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:55:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:55:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:55:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:55:50, 23/6/2020: [esp] Connect: r_vlni0s6fuu7x9EAAAB
+11:55:50, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:55:50, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:56:09, 23/6/2020]=======================================
+11:56:11, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:56:11, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:56:11, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:56:11, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:56:11, 23/6/2020: [app] Connect: 8o2QY6apwkf-UOAiAAAA
+11:56:11, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:56:12, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:56:12, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:56:12, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:56:12, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:56:12, 23/6/2020: [esp] Connect: QJk-Bu_F72gsZBTYAAAB
+11:56:12, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:56:23, 23/6/2020]=======================================
+11:56:24, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:56:24, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:56:24, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:56:24, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:56:25, 23/6/2020: [mongo:room] Create first data room types
+11:56:25, 23/6/2020: [mongo:room] Create first data room list
+11:56:25, 23/6/2020: [mongo:setting] Created setting first 
+11:56:25, 23/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+11:56:25, 23/6/2020: [esp] Connect: sQ6MoIrQhMahCZUEAAAA
+11:56:25, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:56:28, 23/6/2020: [app] Connect: upnDmdN3zerBebeWAAAB
+11:56:28, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[11:56:34, 23/6/2020]=======================================
+11:56:35, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:56:35, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:56:35, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:56:36, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:56:36, 23/6/2020: [app] Connect: DgMGa41P2528jWNmAAAA
+11:56:36, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+11:56:36, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:56:36, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:56:36, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:56:36, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:56:37, 23/6/2020: [esp] Connect: lOh6pSkLg1xeWOCMAAAB
+11:56:37, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+=======================================[11:57:50, 23/6/2020]=======================================
+11:57:52, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:57:52, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:57:52, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:57:52, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:57:53, 23/6/2020: [esp] Connect: fj3dqlXOY_yPOZUbAAAA
+11:57:53, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:57:53, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+11:57:53, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+11:57:53, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+11:57:53, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+=======================================[11:57:55, 23/6/2020]=======================================
+11:57:56, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+11:57:56, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+11:57:56, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+11:57:57, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+11:57:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:57:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:57:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+11:57:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+11:57:58, 23/6/2020: [esp] Connect: wZabDuqVoh_mj1aWAAAA
+11:57:58, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+11:57:58, 23/6/2020: [app] Connect: cC1v-6PFIgIAer62AAAB
+11:57:58, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:00:05, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:00:07, 23/6/2020: [app] Connect: -BohxwsaIsyp0IIGAAAC
+12:00:07, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:00:27, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:04:40, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:04:41, 23/6/2020: [esp] Connect: t8zxXNrmqQ1N_ZETAAAD
+12:04:41, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:05:02, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:05:07, 23/6/2020: [esp] Connect: 7TQU3R9-EYTK6o51AAAE
+12:05:07, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:05:38, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:05:48, 23/6/2020: [esp] Connect: pZCO9y3duISX1DeaAAAF
+12:05:48, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:05:50, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:05:53, 23/6/2020: [esp] Connect: l4-KZnkxapBYmdcYAAAG
+12:05:53, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:09:46, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:09:51, 23/6/2020: [esp] Connect: i9KvdsUdEpTEFr0TAAAH
+12:09:52, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:12:28, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:12:34, 23/6/2020: [esp] Connect: CqgiRxhj_WJqQryZAAAI
+12:12:34, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:18:08, 23/6/2020: [app] Connect: fGVppgGFkeqgeIWNAAAJ
+12:18:09, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:19:17, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:19:23, 23/6/2020: [esp] Connect: 7qNPq9qLoIBqQk8WAAAK
+12:19:23, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:21:20, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+12:21:20, 23/6/2020: [esp] Connect: 2UqmskorBmPhbMe1AAAL
+12:21:21, 23/6/2020: [esp] Disconnect socket unauthorized: 2UqmskorBmPhbMe1AAAL
+12:21:21, 23/6/2020: [esp] Disconnect: 2UqmskorBmPhbMe1AAAL
+12:21:22, 23/6/2020: [esp] Connect: qs2LEyPcjo-ctZshAAAM
+12:21:22, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:24:25, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:24:27, 23/6/2020: [app] Connect: 6jcjFqvPtWTSdpI6AAAN
+12:24:27, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:26:24, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:26:25, 23/6/2020: [app] Connect: pO9LVOY-2fXnhLBHAAAO
+12:26:26, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:34:28, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:34:30, 23/6/2020: [app] Connect: VLlSzDRv2psn9LLlAAAP
+12:34:30, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:34:34, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+=======================================[12:44:44, 23/6/2020]=======================================
+12:44:46, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+12:44:46, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:44:46, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+12:44:46, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+12:44:46, 23/6/2020: [esp] Connect: jMN_DK3rweEibjeQAAAA
+12:44:46, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:44:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:44:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:44:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:44:47, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:44:49, 23/6/2020: [app] Connect: V5DggNqkZtfr_XmZAAAB
+12:44:49, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:46:42, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:46:43, 23/6/2020: [app] Connect: _Q5qCtZmn2fz2HoLAAAC
+12:46:43, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:46:48, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+12:47:13, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:47:15, 23/6/2020: [app] Connect: 0MFBRhYW7R0Ezu4zAAAD
+12:47:15, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:47:17, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+12:47:42, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:47:44, 23/6/2020: [app] Connect: _AY5CvYGYIqQQjzjAAAE
+12:47:44, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:47:48, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+=======================================[12:47:54, 23/6/2020]=======================================
+12:47:56, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+12:47:56, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:47:56, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+12:47:56, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+12:47:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:47:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:47:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:47:57, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:47:57, 23/6/2020: [esp] Connect: wSexuG_lHrBY47zSAAAA
+12:47:57, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:47:59, 23/6/2020: [app] Connect: JIhgzXp7pa0l4Ds7AAAB
+12:47:59, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:47:59, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+12:48:48, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:48:50, 23/6/2020: [app] Connect: XeYn06JJ8Z3G3ozbAAAC
+12:48:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:48:56, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+12:49:21, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:49:23, 23/6/2020: [app] Connect: GzQbpHGHe_EaKKuKAAAD
+12:49:23, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:49:50, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+12:49:52, 23/6/2020: [app] Connect: KymHVGDmo6e8mUKtAAAE
+12:49:52, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:49:55, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+=======================================[12:53:05, 23/6/2020]=======================================
+12:53:07, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+12:53:07, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:53:07, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+12:53:08, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+12:53:08, 23/6/2020: [app] Connect: 9pg6q3ClPLxbsO-TAAAA
+12:53:08, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:53:08, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+12:53:08, 23/6/2020: [esp] Connect: 2gRCfSHIGj0z10CiAAAB
+12:53:08, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:53:08, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:08, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:53:08, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:08, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[12:53:22, 23/6/2020]=======================================
+12:53:23, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+12:53:23, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:53:23, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+12:53:24, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+12:53:24, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:24, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:53:24, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:24, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:53:24, 23/6/2020: [app] Connect: lux6ZZSgUsTKcJFoAAAA
+12:53:24, 23/6/2020: [esp] Connect: TyHPfJktMcREtowqAAAB
+12:53:24, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:53:24, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+12:53:24, 23/6/2020: [app] Room device: {id=5ef18b7991380103f05e721c}
+=======================================[12:53:47, 23/6/2020]=======================================
+12:53:48, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+12:53:48, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+12:53:48, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+12:53:48, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+12:53:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:53:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+12:53:49, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+12:53:49, 23/6/2020: [esp] Connect: Gz2QkbR_AKoZJYFgAAAA
+12:53:49, 23/6/2020: [esp] Authenticated socket ESP1N403E91636RSC185G2K
+12:53:52, 23/6/2020: [app] Connect: 7rLgIQtTJmz-ZqJbAAAB
+12:53:52, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+20:32:42, 23/6/2020: [esp] Disconnect: ESP1N403E91636RSC185G2K
+20:32:44, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+=======================================[20:34:37, 23/6/2020]=======================================
+20:34:39, 23/6/2020: [index] Listen server: 192.168.31.106:8080
+20:34:39, 23/6/2020: [esp] Listen server: 192.168.31.106:3190
+20:34:39, 23/6/2020: [app] Listen server: 192.168.31.106:3180
+20:34:39, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:34:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:34:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:34:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:34:40, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[20:47:26, 23/6/2020]=======================================
+20:47:27, 23/6/2020: [index] Listen server: 192.168.31.150:8080
+20:47:27, 23/6/2020: [esp] Listen server: 192.168.31.150:3190
+20:47:27, 23/6/2020: [app] Listen server: 192.168.31.150:3180
+20:47:28, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:47:28, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:47:28, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:47:28, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:47:28, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+=======================================[20:50:51, 23/6/2020]=======================================
+20:50:54, 23/6/2020: [index] Listen server: 192.168.31.150:8080
+20:50:54, 23/6/2020: [esp] Listen server: 192.168.31.150:3190
+20:50:54, 23/6/2020: [app] Listen server: 192.168.31.150:3180
+20:50:54, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:50:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:50:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:50:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:50:55, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+=======================================[20:54:31, 23/6/2020]=======================================
+20:54:33, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+20:54:33, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+20:54:33, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+20:54:34, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:54:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:54:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:54:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m4[39m[32m][39m
+20:54:34, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m4[39m[32m][39m
+20:54:53, 23/6/2020: [app] Connect: DuzrDMRG-u1vuTkyAAAA
+20:54:53, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[20:57:26, 23/6/2020]=======================================
+20:57:28, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+20:57:28, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+20:57:28, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+20:57:28, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:57:30, 23/6/2020: [app] Connect: tAs7rKCRh_ygNmxbAAAA
+20:57:30, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[20:57:57, 23/6/2020]=======================================
+20:57:59, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+20:57:59, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+20:57:59, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+20:57:59, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+=======================================[20:58:01, 23/6/2020]=======================================
+20:58:03, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+20:58:03, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+20:58:03, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+20:58:04, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+20:58:04, 23/6/2020: [app] Connect: gp8eeeHtg8qU2Z34AAAA
+20:58:05, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:00:16, 23/6/2020]=======================================
+21:00:17, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:00:17, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:00:17, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:00:17, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:00:18, 23/6/2020: [app] Connect: GKkndaW8rj3w7RMWAAAA
+21:00:18, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:00:48, 23/6/2020]=======================================
+21:00:50, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:00:50, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:00:50, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:00:50, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:00:53, 23/6/2020: [app] Connect: z6nUu1weGhtjklZbAAAA
+21:00:53, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:01:30, 23/6/2020]=======================================
+21:01:32, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:01:32, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:01:32, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:01:33, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:01:36, 23/6/2020: [app] Connect: TvMAsTnvK1-iAVehAAAA
+21:01:36, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:02:26, 23/6/2020]=======================================
+21:02:28, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:02:28, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:02:28, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:02:29, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:02:31, 23/6/2020: [app] Connect: Y1kPFbxVl8ZFfaSvAAAA
+21:02:32, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:04:26, 23/6/2020]=======================================
+21:04:28, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:04:28, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:04:28, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:04:28, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:04:45, 23/6/2020: [app] Connect: e7Oqd0pDUhYFf2swAAAA
+21:04:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:06:03, 23/6/2020]=======================================
+21:06:06, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:06:06, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:06:06, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:06:06, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:06:07, 23/6/2020: [app] Connect: X5_zukI8p04W5FApAAAA
+21:06:07, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:06:45, 23/6/2020]=======================================
+21:06:47, 23/6/2020: [mongo:room] [object Object]
+21:06:47, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:06:47, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:06:47, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:06:48, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:06:50, 23/6/2020: [app] Connect: d4a_JyeZJMN-gVyUAAAA
+21:06:50, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:07:39, 23/6/2020]=======================================
+21:07:41, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:07:41, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:07:41, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:07:41, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:07:45, 23/6/2020: [app] Connect: w1FitNiHEsLayQKlAAAA
+21:07:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:08:11, 23/6/2020]=======================================
+21:08:13, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:08:13, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:08:13, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:08:13, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:08:14, 23/6/2020: [mongo:room] [object Object]
+21:08:14, 23/6/2020: [mongo:room] [object Object]
+21:08:14, 23/6/2020: [mongo:room] [object Object]
+21:08:14, 23/6/2020: [mongo:room] [object Object]
+21:08:16, 23/6/2020: [app] Connect: AvKxmhDedpKRLTidAAAA
+21:08:16, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:08:37, 23/6/2020]=======================================
+21:08:39, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:08:39, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:08:39, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:08:39, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:08:41, 23/6/2020: [app] Connect: _xCM-tVZS2FipjrEAAAA
+21:08:41, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:09:13, 23/6/2020]=======================================
+21:09:15, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:09:15, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:09:15, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:09:15, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:09:17, 23/6/2020: [app] Connect: GSfWSodQz4mAExkrAAAA
+21:09:18, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:09:28, 23/6/2020]=======================================
+21:09:30, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:09:30, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:09:30, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:09:30, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:09:32, 23/6/2020: [app] Connect: oJ97KqO7gkiWygiKAAAA
+21:09:32, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:10:18, 23/6/2020]=======================================
+21:10:21, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:10:21, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:10:21, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:10:21, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:10:21, 23/6/2020: [mongo:room] object
+21:10:21, 23/6/2020: [mongo:room] object
+21:10:21, 23/6/2020: [mongo:room] object
+21:10:21, 23/6/2020: [mongo:room] object
+21:10:22, 23/6/2020: [app] Connect: A1JHDCDPamR3pKSYAAAA
+21:10:22, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:10:28, 23/6/2020]=======================================
+21:10:30, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:10:30, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:10:30, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:10:31, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:10:31, 23/6/2020: [mongo:room] undefined
+21:10:31, 23/6/2020: [mongo:room] undefined
+21:10:31, 23/6/2020: [mongo:room] undefined
+21:10:31, 23/6/2020: [mongo:room] undefined
+21:10:33, 23/6/2020: [app] Connect: iUAkQxrpZziZ8Tb5AAAA
+21:10:33, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:10:41, 23/6/2020]=======================================
+21:10:42, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:10:42, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:10:42, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:10:42, 23/6/2020: [app] Connect: ykHxtnn0tf1Qx5oDAAAA
+21:10:43, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+21:10:43, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:10:43, 23/6/2020: [mongo:room] undefined
+21:10:43, 23/6/2020: [mongo:room] undefined
+21:10:43, 23/6/2020: [mongo:room] undefined
+21:10:43, 23/6/2020: [mongo:room] undefined
+=======================================[21:11:00, 23/6/2020]=======================================
+21:11:02, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:11:02, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:11:02, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:11:02, 23/6/2020: [app] Connect: 7Hrsh5L3kEPx1MsZAAAA
+21:11:02, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+21:11:02, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:11:03, 23/6/2020: [mongo:room] function
+21:11:03, 23/6/2020: [mongo:room] function
+21:11:03, 23/6/2020: [mongo:room] function
+21:11:03, 23/6/2020: [mongo:room] function
+=======================================[21:11:41, 23/6/2020]=======================================
+21:11:42, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:11:42, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:11:42, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:11:43, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:11:45, 23/6/2020: [app] Connect: ajFhA_9P7KSVi-zhAAAA
+21:11:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:12:01, 23/6/2020]=======================================
+21:12:03, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:12:03, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:12:03, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:12:03, 23/6/2020: [app] Connect: fkml8PC9AmB-LLTHAAAA
+21:12:03, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:12:03, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+21:12:04, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+21:12:04, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng ngủ = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+21:12:04, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn phải|1[32m [[39m[32m0[39m[32m][39m
+21:12:04, 23/6/2020: [esp] Add device[ESP1N403E91636RSC185G2K]: Phòng khách = Đèn trái|0[32m [[39m[32m0[39m[32m][39m
+=======================================[21:12:45, 23/6/2020]=======================================
+21:12:47, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:12:47, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:12:47, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:12:47, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:12:49, 23/6/2020: [app] Connect: sKtb2mMet2_HuvLEAAAA
+21:12:49, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:13:24, 23/6/2020]=======================================
+21:13:26, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:13:26, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:13:26, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:13:27, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:13:29, 23/6/2020: [app] Connect: v5Eiy7RMWavYUQqoAAAA
+21:13:29, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:14:36, 23/6/2020]=======================================
+21:14:38, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:14:38, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:14:38, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:14:39, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:14:45, 23/6/2020: [app] Connect: fDiuq4C1nQjVd7qFAAAA
+21:14:45, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:15:26, 23/6/2020]=======================================
+21:15:28, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:15:28, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:15:28, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:15:29, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:15:30, 23/6/2020: [app] Connect: sJEkhgJhk1BAmKw1AAAA
+21:15:30, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:15:42, 23/6/2020]=======================================
+21:15:44, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:15:44, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:15:44, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:15:44, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:15:46, 23/6/2020: [app] Connect: nGQe_ATyIxUv2Wj9AAAA
+21:15:46, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:16:01, 23/6/2020]=======================================
+21:16:03, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:16:03, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:16:03, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:16:03, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:16:04, 23/6/2020: [mongo:room] Create first data room types
+21:16:04, 23/6/2020: [mongo:room] Create first data room list
+21:16:04, 23/6/2020: [mongo:esp] Push esp module: ESP1N403E91636RSC185G2K
+21:16:04, 23/6/2020: [mongo:setting] Created setting first 
+21:16:06, 23/6/2020: [app] Connect: JwX_Mg5eWD7LV7ScAAAA
+21:16:06, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+=======================================[21:16:11, 23/6/2020]=======================================
+21:16:13, 23/6/2020: [index] Listen server: 192.168.31.104:8080
+21:16:13, 23/6/2020: [esp] Listen server: 192.168.31.104:3190
+21:16:13, 23/6/2020: [app] Listen server: 192.168.31.104:3180
+21:16:13, 23/6/2020: [mongo] Connection established to mongodb://izerocs:khongbiet@izerocs.com/smarthome
+21:16:15, 23/6/2020: [app] Connect: DzuE3346gW0VCK-zAAAA
+21:16:15, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+21:35:08, 23/6/2020: [app] Disconnect: APP1C27HC1P18D5108N10
+21:35:13, 23/6/2020: [app] Connect: eWuSyDFjkaesQPBlAAAB
+21:35:13, 23/6/2020: [app] Authenticated socket APP1C27HC1P18D5108N10
+21:57:57, 23/6/2020: [app] Connect: KsIglovcoV2KHBpNAAAC
+21:57:58, 23/6/2020: [app] Disconnect socket unauthorized: KsIglovcoV2KHBpNAAAC
+21:57:58, 23/6/2020: [app] Disconnect: KsIglovcoV2KHBpNAAAC
+21:58:13, 23/6/2020: [app] Connect: fu7V9Z65_Jb8axOWAAAD
+21:58:14, 23/6/2020: [app] Disconnect socket unauthorized: fu7V9Z65_Jb8axOWAAAD
+21:58:14, 23/6/2020: [app] Disconnect: fu7V9Z65_Jb8axOWAAAD
+22:00:57, 23/6/2020: [app] Connect: jy4mJItGlFW8l3JfAAAE
+22:00:58, 23/6/2020: [app] Disconnect socket unauthorized: jy4mJItGlFW8l3JfAAAE
+22:00:58, 23/6/2020: [app] Disconnect: jy4mJItGlFW8l3JfAAAE
+22:01:12, 23/6/2020: [app] Connect: lkDo-EXfzX0dt7wtAAAF
+22:01:13, 23/6/2020: [app] Disconnect socket unauthorized: lkDo-EXfzX0dt7wtAAAF
+22:01:13, 23/6/2020: [app] Disconnect: lkDo-EXfzX0dt7wtAAAF
+22:10:55, 23/6/2020: [esp] Connect: PQ8wR1ei3s0XjNznAAAG
+22:10:56, 23/6/2020: [esp] Disconnect socket unauthorized: PQ8wR1ei3s0XjNznAAAG
+22:10:56, 23/6/2020: [esp] Disconnect: PQ8wR1ei3s0XjNznAAAG
+22:11:02, 23/6/2020: [app] Connect: 05rpE_cjxwk4vs9UAAAH
+22:11:03, 23/6/2020: [app] Disconnect socket unauthorized: 05rpE_cjxwk4vs9UAAAH
+22:11:03, 23/6/2020: [app] Disconnect: 05rpE_cjxwk4vs9UAAAH
+22:11:32, 23/6/2020: [app] Connect: DxfmwwJNXLr6iSo4AAAI
+22:11:33, 23/6/2020: [app] Disconnect socket unauthorized: DxfmwwJNXLr6iSo4AAAI
+22:11:33, 23/6/2020: [app] Disconnect: DxfmwwJNXLr6iSo4AAAI
+23:01:56, 23/6/2020: [esp] Connect: NsMKxAQ4edkZNxmiAAAJ
+23:01:57, 23/6/2020: [esp] Disconnect socket unauthorized: NsMKxAQ4edkZNxmiAAAJ
+23:01:57, 23/6/2020: [esp] Disconnect: NsMKxAQ4edkZNxmiAAAJ
+23:02:04, 23/6/2020: [app] Connect: R3SfI4hP0YHnRmdYAAAK
+23:02:05, 23/6/2020: [app] Disconnect socket unauthorized: R3SfI4hP0YHnRmdYAAAK
+23:02:05, 23/6/2020: [app] Disconnect: R3SfI4hP0YHnRmdYAAAK

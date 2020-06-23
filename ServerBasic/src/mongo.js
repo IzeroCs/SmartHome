@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const tag      = "[mongo]"
-let   url      = "mongodb://localhost:27017/smarthome"
+let   url      = "mongodb://izerocs:khongbiet@izerocs.com/smarthome"
 
 if (process.env.ENVIRONMENT === "production")
     url = "mongodb://localhost/smarthome"
