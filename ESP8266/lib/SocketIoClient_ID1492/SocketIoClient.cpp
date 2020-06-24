@@ -21,15 +21,19 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 	if (type == WStype_DISCONNECTED) {
 		SOCKETIOCLIENT_DEBUG("[SIoC] Disconnected!\n");
 
-		if (!isDisconnected) {
-			isDisconnected = true;
+		if (!_isDisconnected) {
+			_isDisconnected = true;
 			trigger("disconnect", NULL, 0);
 		}
 
-		isConnected = false;
+		_isConnected = false;
 	} else if (type == WStype_CONNECTED) {
-		isDisconnected = false;
+		_isDisconnected = false;
 		SOCKETIOCLIENT_DEBUG("[SIoC] Connected to url: %s\n",  payload);
+		_webSocket.sendTXT("5");
+
+		if (_nsp != "")
+			_webSocket.sendTXT("40/" + _nsp);
 	} else if (type == WStype_TEXT) {
 		msg = String((char*)payload);
 		if(msg.startsWith("42")) {
@@ -37,10 +41,10 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 		} else if(msg.startsWith("2")) {
 			_webSocket.sendTXT("3");
 		} else if(msg.startsWith("40")) {
-			isConnected = true;
+			_isConnected = true;
 			trigger("connect", NULL, 0);
 		} else if(msg.startsWith("41")) {
-			isConnected = false;
+			_isConnected = false;
 			trigger("disconnect", NULL, 0);
 		}
 	} else if (type == WStype_BIN) {
@@ -49,12 +53,22 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 	}
 }
 
-void SocketIoClient::beginSSL(const char* host, const int port, const char* url, const char* fingerprint) {
+void SocketIoClient::beginSSL(const char* host, const int port, const char* nsp, const char* url, const char* fingerprint) {
+	_nsp = nsp;
+
+	if (_nsp.startsWith("/"))
+		_nsp = _nsp.substring(1);
+
 	_webSocket.beginSSL(host, port, url, fingerprint);
     initialize();
 }
 
-void SocketIoClient::begin(const char* host, const int port, const char* url) {
+void SocketIoClient::begin(const char* host, const int port, const char* nsp, const char* url) {
+	_nsp = nsp;
+
+	if (_nsp.startsWith("/"))
+		_nsp = _nsp.substring(1);
+
 	_webSocket.begin(host, port, url);
     initialize();
 }
@@ -95,6 +109,10 @@ void SocketIoClient::emit(const char* event, const char * payload) {
 
 void SocketIoClient::emit(const char* event, const String payload) {
 	String msg = String("42[\"");
+
+	if (_nsp != "")
+		msg = String("42/" + _nsp + ",[\"");
+
 	msg += event;
 	msg += "\"";
 	if(!payload.isEmpty()) {

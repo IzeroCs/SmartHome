@@ -7,7 +7,7 @@ void SocketClass::begin() {
         onEvent(event, payload, length);
     });
 
-    io.begin(host, port);
+    io.begin(host, port, nsp);
 }
 
 void SocketClass::loop() {
@@ -36,7 +36,7 @@ void SocketClass::loopSyncIO(bool forceChanged) {
         array += "\"" + it->second.toString() + "\"";
     }
 
-    io.emit("sync.io", {{ "io", "{\"data\":[" + array + "]," +
+    io.emit("sync-io", {{ "io", "{\"data\":[" + array + "]," +
         "\"changed\":" + String(IO.isIoStatusChanged()) + "}"}});
 
     loopSyncDetail();
@@ -47,7 +47,7 @@ void SocketClass::loopSyncDetail() {
     if (!io.isConnect())
         return;
 
-    io.emit("sync.detail", {{"detail", "{\"data\":{\"rssi\":\"" + String(WiFi.RSSI()) + "\"}}"}});
+    io.emit("sync-detail", {{"detail", "{\"data\":{\"rssi\":\"" + String(WiFi.RSSI()) + "\"}}"}});
 }
 
 void SocketClass::onEvent(const char * event, const char * payload, size_t length) {
@@ -58,13 +58,13 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
         if (DEBUG)
             Serial.println("[Socket] Connect");
 
-        io.emit("authenticate", {
+        io.emit("auth", {
             { "id", Profile.getSn() + Profile.getSc() },
             { "token", token }
         });
     } else if (evt == "disconnect") {
         Serial.println("[Socket] Disconnect");
-    } else if (evt == "authenticate" || evt == "sync.io" || evt == "sync.detail") {
+    } else if (evt == "auth" || evt == "sync-io" || evt == "sync-detail") {
         IO.setIoStatusChanged(true);
     }
 

@@ -18,6 +18,7 @@
 #else
 	#define DEFAULT_PORT 80
 #endif
+#define DEFAULT_NSP ""
 #define DEFAULT_URL "/socket.io/?transport=websocket"
 #define DEFAULT_FINGERPRINT ""
 
@@ -26,8 +27,9 @@ typedef std::function<void (const char * event,
 
 class SocketIoClient {
 private:
-	bool isConnected;
-	bool isDisconnected;
+	String _nsp;
+	bool _isConnected;
+	bool _isDisconnected;
 
 	std::vector<String> _packets;
 	WebSocketsClient _webSocket;
@@ -39,8 +41,8 @@ private:
 	void webSocketEvent(WStype_t type, uint8_t * payload, size_t length);
     void initialize();
 public:
-    void beginSSL(const char* host, const int port = DEFAULT_PORT, const char* url = DEFAULT_URL, const char* fingerprint = DEFAULT_FINGERPRINT);
-	void begin(const char* host, const int port = DEFAULT_PORT, const char* url = DEFAULT_URL);
+    void beginSSL(const char* host, const int port = DEFAULT_PORT, const char* nsp = DEFAULT_NSP, const char* url = DEFAULT_URL, const char* fingerprint = DEFAULT_FINGERPRINT);
+	void begin(const char* host, const int port = DEFAULT_PORT, const char* nsp = DEFAULT_NSP, const char* url = DEFAULT_URL);
 	void loop();
 	void on(const char* event, std::function<void (const char * payload, size_t length)>);
 	void onBroadcast(SocketIoClientBroadcast broadcast);
@@ -51,7 +53,7 @@ public:
 	void setAuthorization(const char * user, const char * password);
 
 	bool isConnect() {
-		return isConnected;
+		return _isConnected;
 	}
 };
 

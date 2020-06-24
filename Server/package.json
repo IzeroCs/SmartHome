@@ -28,11 +28,20 @@
     "@nestjs/platform-socket.io": "^7.2.0",
     "@nestjs/typeorm": "^7.1.0",
     "@nestjs/websockets": "^7.2.0",
+    "@types/cli-color": "^2.0.0",
+    "@webundsoehne/nestjs-util": "^1.0.0",
+    "cli-color": "^2.0.0",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
+    "node-notifier": "6.0.0",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "underscore": "^1.10.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
