@@ -5,6 +5,15 @@
     "username": "izerocs",
     "password": "khongbiet",
     "database": "smarthome",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
-    "synchronize": true
-  }
+    "cli": {
+        "entitiesDir": "src/database/entity",
+        "migrationsDir": "src/database/migartion",
+        "subscribersDir": "src/database/subscriber"
+    },
+    "entities": [ "dist/database/entity/*.entity{.ts,.js}" ],
+    "migrations": [ "dist/database/migration/**/*.ts" ],
+    "subscribers": ["dist/database/subscriber/**/*.ts"],
+    "migrationsTableName": "migrations_typeorm",
+    "migrationsRun": true,
+    "synchronize": false
+}
