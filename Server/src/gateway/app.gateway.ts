@@ -11,7 +11,7 @@ import { Socket, Server, Namespace } from 'socket.io';
 import { SocketUtil } from '../util/socket.util';
 import { isUndefined, isNull } from 'util';
 import { EspGateway } from './esp.gateway';
-import { CertSecurity } from 'src/security/cert.security';
+import { CertSecurity } from '../security/cert.security';
 
 @WebSocketGateway({
     namespace: '/platform-app',
