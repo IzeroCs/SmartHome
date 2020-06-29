@@ -9,8 +9,8 @@ var SocketUtil = /** @class */ (function () {
         underscore.each(io.server.nsps, function (nsp) {
             if (io.name != nsp.name)
                 return;
-            nsp.on('connect', function (client) {
-                if (!client['auth'])
+            nsp.on("connect", function (client) {
+                if (!client["auth"])
                     delete nsp.connected[client.id];
                 if (logger)
                     logger.log("Removing socket " + nsp.name);

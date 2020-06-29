@@ -18,6 +18,8 @@ var RoomList = /** @class */ (function () {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
+        typeorm_1.OneToOne(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.room; }),
+        typeorm_1.JoinColumn(),
         __metadata("design:type", Number)
     ], RoomList.prototype, "id", void 0);
     __decorate([
@@ -29,13 +31,9 @@ var RoomList = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], RoomList.prototype, "enable", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return room_type_entity_1.RoomType; }, function (type) { return type.lists; }),
+        typeorm_1.ManyToOne(function (type) { return room_type_entity_1.RoomType; }, function (type) { return type.lists; }),
         __metadata("design:type", room_type_entity_1.RoomType)
     ], RoomList.prototype, "type", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.room; }),
-        __metadata("design:type", Array)
-    ], RoomList.prototype, "devices", void 0);
     RoomList = __decorate([
         typeorm_1.Entity()
     ], RoomList);

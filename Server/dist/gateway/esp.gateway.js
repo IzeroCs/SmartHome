@@ -19,14 +19,14 @@ var util_1 = require("util");
 var app_gateway_1 = require("./app.gateway");
 var EspGateway = /** @class */ (function () {
     function EspGateway() {
-        this.logger = new common_1.Logger('EspGateway');
-        this.cert = new cert_security_1.CertSecurity('esp');
+        this.logger = new common_1.Logger("EspGateway");
+        this.cert = new cert_security_1.CertSecurity("esp");
         this.modules = {};
         EspGateway_1.instance = this;
     }
     EspGateway_1 = EspGateway;
     EspGateway.prototype.afterInit = function (server) {
-        this.logger.log('Init socket platform esp');
+        this.logger.log("Init socket platform esp");
         socket_util_1.SocketUtil.removing(this.server, this.logger);
     };
     EspGateway.prototype.handleConnection = function (client) {
@@ -57,8 +57,8 @@ var EspGateway = /** @class */ (function () {
         this.cert.verify(payload.token, function (err, authorized) {
             if (!err && authorized) {
                 _this.logger.log("Authenticate socket " + client.id);
-                client['auth'] = true;
-                client.emit('auth', 'authorized');
+                client["auth"] = true;
+                client.emit("auth", "authorized");
             }
             else {
                 Notify.unAuthorized(client);
@@ -68,16 +68,16 @@ var EspGateway = /** @class */ (function () {
     EspGateway.prototype.handleSyncIO = function (client, payload) {
         if (!EspGateway_1.isClientAuth(client))
             return;
-        var espIO = Pass.io(payload)['io'];
+        var espIO = Pass.io(payload)["io"];
         var ioData = espIO.data;
         var ioChaged = espIO.changed === 1;
         var pinData = null;
         var pinObj = null;
         var pinList = [];
         for (var i = 0; i < ioData.length; ++i) {
-            pinData = ioData[i].replace(/\=/g, ':');
+            pinData = ioData[i].replace(/\=/g, ":");
             pinData = pinData.replace(/([a-z0-9]+):([0-9]+)/gi, '"$1":$2');
-            pinData = '{' + pinData + '}';
+            pinData = "{" + pinData + "}";
             try {
                 pinObj = JSON.parse(pinData);
                 pinList.push(pinObj);
@@ -95,10 +95,10 @@ var EspGateway = /** @class */ (function () {
             return;
         var oldDetail = Pass.detail(this.modules[client.id]);
         var newDetail = Pass.detail(payload);
-        var oldSignal = network_util_1.NetworkUtil.calculateSignalLevel(oldDetail['detail']['data']['rssi']);
-        var newSignal = network_util_1.NetworkUtil.calculateSignalLevel(newDetail['detail']['data']['rssi']);
+        var oldSignal = network_util_1.NetworkUtil.calculateSignalLevel(oldDetail["detail"]["data"]["rssi"]);
+        var newSignal = network_util_1.NetworkUtil.calculateSignalLevel(newDetail["detail"]["data"]["rssi"]);
         if (oldSignal !== newSignal) {
-            this.modules[client.id].detail = newDetail['detail'];
+            this.modules[client.id].detail = newDetail["detail"];
             app_gateway_1.AppGateway.notifyEspModules();
         }
     };
@@ -116,10 +116,10 @@ var EspGateway = /** @class */ (function () {
         return EspGateway_1.getInstance().modules;
     };
     EspGateway.isClientAuth = function (client) {
-        return client['auth'] === true;
+        return client["auth"] === true;
     };
     EspGateway.isEspID = function (id) {
-        return !util_1.isUndefined(id) && id.startsWith('ESP');
+        return !util_1.isUndefined(id) && id.startsWith("ESP");
     };
     var EspGateway_1;
     EspGateway.instance = null;
@@ -128,26 +128,26 @@ var EspGateway = /** @class */ (function () {
         __metadata("design:type", Object)
     ], EspGateway.prototype, "server", void 0);
     __decorate([
-        websockets_1.SubscribeMessage('auth'),
+        websockets_1.SubscribeMessage("auth"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], EspGateway.prototype, "handleAuth", null);
     __decorate([
-        websockets_1.SubscribeMessage('sync-io'),
+        websockets_1.SubscribeMessage("sync-io"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], EspGateway.prototype, "handleSyncIO", null);
     __decorate([
-        websockets_1.SubscribeMessage('sync-detail'),
+        websockets_1.SubscribeMessage("sync-detail"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], EspGateway.prototype, "handleSyncDetail", null);
     EspGateway = EspGateway_1 = __decorate([
         websockets_1.WebSocketGateway({
-            namespace: '/platform-esp',
+            namespace: "/platform-esp",
             pingTimeout: 5000,
             pingInterval: 1000,
         }),
@@ -163,7 +163,7 @@ var Notify = /** @class */ (function () {
         if (EspGateway.isClientAuth(client))
             return;
         EspGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
-        client.emit('auth', 'unauthorized');
+        client.emit("auth", "unauthorized");
         client.disconnect(true);
     };
     return Notify;
@@ -187,8 +187,8 @@ var Pass = /** @class */ (function () {
     };
     Pass.auth = function (obj) {
         return Pass.def({
-            id: '',
-            token: '',
+            id: "",
+            token: "",
         }, obj);
     };
     Pass.module = function (obj) {

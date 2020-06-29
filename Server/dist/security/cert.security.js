@@ -8,15 +8,15 @@ var util_1 = require("util");
 var CertSecurity = /** @class */ (function () {
     function CertSecurity(platform) {
         this.platform = platform;
-        if (platform !== 'app' && platform !== 'esp')
+        if (platform !== "app" && platform !== "esp")
             throw new Error("Platform " + platform + " not support");
-        this.certPrivate = fs.readFileSync(this.resolveAssetsPath('private.key'));
-        this.certPublic = fs.readFileSync(this.resolveAssetsPath('public.key'));
-        this.payloadConfig = require(this.resolveAssetsPath('payload.json'));
+        this.certPrivate = fs.readFileSync(this.resolveAssetsPath("private.key"));
+        this.certPublic = fs.readFileSync(this.resolveAssetsPath("public.key"));
+        this.payloadConfig = require(this.resolveAssetsPath("payload.json"));
     }
     CertSecurity.prototype.token = function () {
         return jwt.sign(this.payloadConfig, this.certPrivate, {
-            algorithm: 'RS256',
+            algorithm: "RS256",
         });
     };
     CertSecurity.prototype.verify = function (token, handle) {
@@ -36,7 +36,7 @@ var CertSecurity = /** @class */ (function () {
         });
     };
     CertSecurity.prototype.resolveAssetsPath = function (filename) {
-        return path.join(__dirname, '..', '..', 'assets/cert', this.platform, filename);
+        return path.join(__dirname, "..", "..", "assets/cert", this.platform, filename);
     };
     return CertSecurity;
 }());

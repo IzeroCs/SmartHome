@@ -1,32 +1,47 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
-import { Esp } from './esp.entity';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    OneToOne,
+    JoinColumn,
+    ManyToOne,
+} from "typeorm"
+import { Esp } from "./esp.entity"
+import { RoomDevice } from "./room_device.entity"
 
 @Entity()
 export class EspPin {
     @PrimaryGeneratedColumn()
-    id: number;
+    @OneToOne(
+        type => RoomDevice,
+        device => device.pin,
+    )
+    id: number
 
-    @OneToOne(type => Esp, esp => esp.pins)
-    esp: Esp;
-
-    @Column("tinyint")
-    name: number;
-
-    @Column("tinyint")
-    input: number;
-
-    @Column("tinyint")
-    outputType: number;
+    @ManyToOne(
+        type => Esp,
+        esp => esp.pins,
+    )
+    esp: Esp
 
     @Column("tinyint")
-    outputPrimary: number;
+    name: number
 
     @Column("tinyint")
-    ouputSecondary: number;
+    input: number
 
     @Column("tinyint")
-    dualToggleCount: number;
+    outputType: number
+
+    @Column("tinyint")
+    outputPrimary: number
+
+    @Column("tinyint")
+    ouputSecondary: number
+
+    @Column("tinyint")
+    dualToggleCount: number
 
     @Column()
-    status: boolean;
+    status: boolean
 }

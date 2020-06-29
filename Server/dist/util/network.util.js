@@ -7,10 +7,10 @@ var NetworkUtil = /** @class */ (function () {
         var _this = this;
         var networks = os.networkInterfaces();
         Object.keys(networks).forEach(function (key) {
-            if (key.startsWith('VirtualBox') || key.startsWith('eth1'))
+            if (key.startsWith("VirtualBox") || key.startsWith("eth1"))
                 return;
             networks[key].forEach(function (iface) {
-                if ('IPv4' !== iface.family ||
+                if ("IPv4" !== iface.family ||
                     iface.internal !== false ||
                     _this.host !== null)
                     return;

@@ -18,14 +18,14 @@ var esp_gateway_1 = require("./esp.gateway");
 var cert_security_1 = require("../security/cert.security");
 var AppGateway = /** @class */ (function () {
     function AppGateway() {
-        this.logger = new common_1.Logger('AppGateway');
-        this.cert = new cert_security_1.CertSecurity('app');
+        this.logger = new common_1.Logger("AppGateway");
+        this.cert = new cert_security_1.CertSecurity("app");
         this.devices = {};
         AppGateway_1.instance = this;
     }
     AppGateway_1 = AppGateway;
     AppGateway.prototype.afterInit = function (server) {
-        this.logger.log('Init socket platform app');
+        this.logger.log("Init socket platform app");
         socket_util_1.SocketUtil.removing(this.server, this.logger);
     };
     AppGateway.prototype.handleConnection = function (client) {
@@ -55,8 +55,8 @@ var AppGateway = /** @class */ (function () {
         this.cert.verify(payload.token, function (err, authorized) {
             if (!err && authorized) {
                 _this.logger.log("Authenticate socket " + client.id);
-                client['auth'] = true;
-                client.emit('auth', 'authorized');
+                client["auth"] = true;
+                client.emit("auth", "authorized");
                 Notify.espModules(client);
                 Notify.roomTypes(client);
                 Notify.roomList(client);
@@ -80,10 +80,10 @@ var AppGateway = /** @class */ (function () {
         Notify.espModules(client);
     };
     AppGateway.isClientAuth = function (client) {
-        return client['auth'] === true;
+        return client["auth"] === true;
     };
     AppGateway.isAppID = function (id) {
-        return !util_1.isUndefined(id) && id.startsWith('ESP');
+        return !util_1.isUndefined(id) && id.startsWith("ESP");
     };
     var AppGateway_1;
     AppGateway.instance = null;
@@ -92,14 +92,14 @@ var AppGateway = /** @class */ (function () {
         __metadata("design:type", Object)
     ], AppGateway.prototype, "server", void 0);
     __decorate([
-        websockets_1.SubscribeMessage('auth'),
+        websockets_1.SubscribeMessage("auth"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleAuth", null);
     AppGateway = AppGateway_1 = __decorate([
         websockets_1.WebSocketGateway({
-            namespace: '/platform-app',
+            namespace: "/platform-app",
             pingTimeout: 5000,
             pingInterval: 1000,
         }),
@@ -115,16 +115,16 @@ var Notify = /** @class */ (function () {
         if (esp_gateway_1.EspGateway.isClientAuth(client))
             return;
         AppGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
-        client.emit('auth', 'unauthorized');
+        client.emit("auth", "unauthorized");
         client.disconnect(true);
     };
     Notify.espModules = function (client) {
         if (client) {
             if (AppGateway.isClientAuth(client))
-                client.emit('esp-list', esp_gateway_1.EspGateway.getModules());
+                client.emit("esp-list", esp_gateway_1.EspGateway.getModules());
         }
         else {
-            AppGateway.getInstance().server.emit('esp-list', esp_gateway_1.EspGateway.getModules());
+            AppGateway.getInstance().server.emit("esp-list", esp_gateway_1.EspGateway.getModules());
         }
     };
     Notify.roomTypes = function (client) { };
@@ -150,8 +150,8 @@ var Pass = /** @class */ (function () {
     };
     Pass.auth = function (obj) {
         return Pass.def({
-            id: '',
-            token: '',
+            id: "",
+            token: "",
         }, obj);
     };
     return Pass;

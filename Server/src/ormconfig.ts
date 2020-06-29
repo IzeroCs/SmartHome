@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions } from "typeorm"
 
 const config: ConnectionOptions = {
     type: "mysql",
@@ -9,19 +9,20 @@ const config: ConnectionOptions = {
     database: "smarthome",
 
     cli: {
-        entitiesDir: 'src/database/entity',
-        migrationsDir: 'src/database/migrations',
-        subscribersDir: 'src/database/subscriber'
+        entitiesDir: "src/database/entity",
+        migrationsDir: "src/database/migrations",
+        subscribersDir: "src/database/subscriber",
     },
 
-    entities: [ __dirname + "/database/**/*.entity{.ts,.js}" ],
-    migrations: [ __dirname + "/database/migrations/**/*{.ts,.js}" ],
-    subscribers: [ __dirname + "/database/subscriber/**/*{.ts,.js}" ],
+    entities: [__dirname + "/database/entity/*.entity{.ts,.js}"],
+    migrations: [__dirname + "/database/migrations/**/*{.ts,.js}"],
+    subscribers: [__dirname + "/database/subscribers/**/*{.ts,.js}"],
+
     migrationsRun: false,
     synchronize: true,
     logging: true,
-    logger: 'file',
-    cache: true
-};
+    logger: "file",
+    cache: true,
+}
 
-export = config;
+export = config

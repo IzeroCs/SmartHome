@@ -50,8 +50,8 @@ function bootstrap() {
                     })];
                 case 1:
                     app = _a.sent();
-                    app.useStaticAssets(path_1.join(__dirname, '..', 'public'));
-                    return [4 /*yield*/, app.listen(3000, '192.168.31.104')];
+                    app.useStaticAssets(path_1.join(__dirname, "..", "public"));
+                    return [4 /*yield*/, app.listen(3000, "192.168.31.104")];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

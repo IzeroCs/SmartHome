@@ -12,15 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EspPin = void 0;
 var typeorm_1 = require("typeorm");
 var esp_entity_1 = require("./esp.entity");
+var room_device_entity_1 = require("./room_device.entity");
 var EspPin = /** @class */ (function () {
     function EspPin() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
+        typeorm_1.OneToOne(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.pin; }),
         __metadata("design:type", Number)
     ], EspPin.prototype, "id", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return esp_entity_1.Esp; }, function (esp) { return esp.pins; }),
+        typeorm_1.ManyToOne(function (type) { return esp_entity_1.Esp; }, function (esp) { return esp.pins; }),
         __metadata("design:type", esp_entity_1.Esp)
     ], EspPin.prototype, "esp", void 0);
     __decorate([

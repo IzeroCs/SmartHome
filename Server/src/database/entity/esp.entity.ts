@@ -1,20 +1,35 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
-import { EspPin } from './esp_pin.entity'
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    OneToMany,
+    JoinColumn,
+    OneToOne,
+} from "typeorm"
+import { EspPin } from "./esp_pin.entity"
+import { RoomDevice } from "./room_device.entity"
 
 @Entity()
 export class Esp {
     @PrimaryGeneratedColumn()
-    id: number;
-
-    @OneToMany(type => EspPin, pin => pin.esp)
-    pins: EspPin[];
-
-    @Column()
-    name: string;
+    @OneToOne(
+        type => RoomDevice,
+        device => device.esp,
+    )
+    id: number
 
     @Column()
-    online: boolean;
+    name: string
 
     @Column()
-    auth: boolean;
+    online: boolean
+
+    @Column()
+    auth: boolean
+
+    @OneToMany(
+        type => EspPin,
+        pin => pin.esp,
+    )
+    pins: EspPin[]
 }

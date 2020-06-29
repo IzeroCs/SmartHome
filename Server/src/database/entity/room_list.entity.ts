@@ -1,21 +1,34 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
-import { RoomType } from './room_type.entity';
-import { RoomDevice } from './room_device.entity';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    OneToOne,
+    JoinColumn,
+    OneToMany,
+    ManyToOne,
+} from "typeorm"
+import { RoomType } from "./room_type.entity"
+import { RoomDevice } from "./room_device.entity"
 
 @Entity()
 export class RoomList {
     @PrimaryGeneratedColumn()
-    id: number;
+    @OneToOne(
+        type => RoomDevice,
+        device => device.room,
+    )
+    @JoinColumn()
+    id: number
 
     @Column()
-    name: string;
+    name: string
 
     @Column()
-    enable: boolean;
+    enable: boolean
 
-    @OneToOne(type => RoomType, type => type.lists)
-    type: RoomType;
-
-    @OneToMany(type => RoomDevice, device => device.room)
-    devices: RoomDevice[];
+    @ManyToOne(
+        type => RoomType,
+        type => type.lists,
+    )
+    type: RoomType
 }

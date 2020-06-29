@@ -24,11 +24,15 @@ var RoomType = /** @class */ (function () {
         __metadata("design:type", String)
     ], RoomType.prototype, "name", void 0);
     __decorate([
+        typeorm_1.Column("tinyint"),
+        __metadata("design:type", Number)
+    ], RoomType.prototype, "type", void 0);
+    __decorate([
         typeorm_1.Column(),
         __metadata("design:type", Boolean)
     ], RoomType.prototype, "enable", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return room_list_entity_1.RoomList; }, function (type) { return type.type; }),
+        typeorm_1.OneToMany(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.type; }),
         __metadata("design:type", Array)
     ], RoomType.prototype, "lists", void 0);
     RoomType = __decorate([

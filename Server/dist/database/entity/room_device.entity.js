@@ -36,7 +36,7 @@ var RoomDevice = /** @class */ (function () {
         __metadata("design:type", esp_entity_1.Esp)
     ], RoomDevice.prototype, "esp", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.devices; }),
+        typeorm_1.OneToOne(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.id; }),
         __metadata("design:type", room_list_entity_1.RoomList)
     ], RoomDevice.prototype, "room", void 0);
     RoomDevice = __decorate([

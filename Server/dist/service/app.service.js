@@ -12,7 +12,7 @@ var AppService = /** @class */ (function () {
     function AppService() {
     }
     AppService.prototype.getHello = function () {
-        return 'SmartHome Server';
+        return "SmartHome Server";
     };
     AppService = __decorate([
         common_1.Injectable()
