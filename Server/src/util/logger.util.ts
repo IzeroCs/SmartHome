@@ -15,34 +15,12 @@ export class AppLogger implements LoggerService {
     }
 
     error(message?: any, trace?: string, ...params: any[]) {
-        notifier.notify({
-            title: "Error: [" + params[0] + "]",
-            subtitle: undefined,
-            message: message,
-            icon: this.icon("error.png"),
-            sound: true,
-            wait: false,
-            timeout: 2000,
-            type: "error",
-        })
-
         process.stderr.write(yellow(`[${params[0]}] `))
         process.stderr.write(red(`${this.format(message)}\n`))
         process.stderr.write(red(trace + "\n"))
     }
 
     warn(message?: any, ...params: any) {
-        notifier.notify({
-            title: "Warning: [" + params[0] + "]",
-            subtitle: undefined,
-            message: message,
-            icon: this.icon("warning.png"),
-            sound: true,
-            wait: false,
-            timeout: 2000,
-            type: "warn",
-        })
-
         process.stderr.write(yellow(`[${params[0]}] `))
         process.stderr.write(yellow(`${this.format(message)}\n`))
     }

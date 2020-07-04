@@ -2,15 +2,14 @@ import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
-    OneToMany,
     JoinColumn,
     OneToOne,
     ManyToOne,
 } from "typeorm"
 import { EspPin } from "./esp_pin.entity"
 import { Esp } from "./esp.entity"
-import { type } from "os"
 import { RoomList } from "./room_list.entity"
+import { DeviceType } from "./device_type.entity"
 
 @Entity()
 export class RoomDevice {
@@ -20,6 +19,21 @@ export class RoomDevice {
     @Column()
     name: string
 
+    @Column({ default: "", nullable: true })
+    descriptor: string
+
+    @Column("tinyint", { default: 0 })
+    widget: number
+
+    @Column("tinyint", { default: 0, nullable: true })
+    status: number
+
+    @ManyToOne(
+        type => DeviceType,
+        type => type.type,
+    )
+    type: DeviceType
+
     @OneToOne(
         type => EspPin,
         pin => pin.id,
@@ -27,14 +41,13 @@ export class RoomDevice {
     @JoinColumn()
     pin: EspPin
 
-    @OneToOne(
+    @ManyToOne(
         type => Esp,
-        esp => esp.id,
+        esp => esp.devices,
     )
-    @JoinColumn()
     esp: Esp
 
-    @OneToOne(
+    @ManyToOne(
         type => RoomList,
         room => room.id,
     )

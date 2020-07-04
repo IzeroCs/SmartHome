@@ -9,6 +9,6 @@ async function bootstrap() {
         logger: new AppLogger(),
     })
     app.useStaticAssets(join(__dirname, "..", "public"))
-    await app.listen(3000, "192.168.31.104")
+    setTimeout(async () => await app.listen(3000, "192.168.31.104"), 2000)
 }
 bootstrap()

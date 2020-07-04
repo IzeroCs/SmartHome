@@ -14,6 +14,7 @@ var typeorm_1 = require("typeorm");
 var esp_pin_entity_1 = require("./esp_pin.entity");
 var esp_entity_1 = require("./esp.entity");
 var room_list_entity_1 = require("./room_list.entity");
+var device_type_entity_1 = require("./device_type.entity");
 var RoomDevice = /** @class */ (function () {
     function RoomDevice() {
     }
@@ -26,17 +27,32 @@ var RoomDevice = /** @class */ (function () {
         __metadata("design:type", String)
     ], RoomDevice.prototype, "name", void 0);
     __decorate([
+        typeorm_1.Column({ default: "", nullable: true }),
+        __metadata("design:type", String)
+    ], RoomDevice.prototype, "descriptor", void 0);
+    __decorate([
+        typeorm_1.Column("tinyint", { default: 0 }),
+        __metadata("design:type", Number)
+    ], RoomDevice.prototype, "widget", void 0);
+    __decorate([
+        typeorm_1.Column("tinyint", { default: 0, nullable: true }),
+        __metadata("design:type", Number)
+    ], RoomDevice.prototype, "status", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return device_type_entity_1.DeviceType; }, function (type) { return type.type; }),
+        __metadata("design:type", device_type_entity_1.DeviceType)
+    ], RoomDevice.prototype, "type", void 0);
+    __decorate([
         typeorm_1.OneToOne(function (type) { return esp_pin_entity_1.EspPin; }, function (pin) { return pin.id; }),
         typeorm_1.JoinColumn(),
         __metadata("design:type", esp_pin_entity_1.EspPin)
     ], RoomDevice.prototype, "pin", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return esp_entity_1.Esp; }, function (esp) { return esp.id; }),
-        typeorm_1.JoinColumn(),
+        typeorm_1.ManyToOne(function (type) { return esp_entity_1.Esp; }, function (esp) { return esp.devices; }),
         __metadata("design:type", esp_entity_1.Esp)
     ], RoomDevice.prototype, "esp", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.id; }),
+        typeorm_1.ManyToOne(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.id; }),
         __metadata("design:type", room_list_entity_1.RoomList)
     ], RoomDevice.prototype, "room", void 0);
     RoomDevice = __decorate([

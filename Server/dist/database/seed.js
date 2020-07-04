@@ -39,17 +39,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SeedDatabase = void 0;
 var fs = require("fs");
 var util_1 = require("util");
+var room_type_seed_1 = require("./seeds/room_type.seed");
+var room_list_seed_1 = require("./seeds/room_list.seed");
+var esp_seed_1 = require("./seeds/esp.seed");
+var esp_pin_seed_1 = require("./seeds/esp_pin.seed");
+var room_device_seed_1 = require("./seeds/room_device.seed");
+var device_type_seed_1 = require("./seeds/device_type.seed");
 var SeedDatabase = /** @class */ (function () {
     function SeedDatabase(connection) {
+        this.seeds = {
+            RoomTypeSeed: room_type_seed_1.RoomTypeSeed,
+            RoomListSeed: room_list_seed_1.RoomListSeed,
+            EspSeed: esp_seed_1.EspSeed,
+            EspPinSeed: esp_pin_seed_1.EspPinSeed,
+            DeviceTypeSeed: device_type_seed_1.DeviceTypeSeed,
+            RoomDeviceSeed: room_device_seed_1.RoomDeviceSeed,
+        };
         this.connection = connection;
     }
     SeedDatabase.prototype.seed = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var readdir, _a, _b, _i, i, file, modules, keys, seed;
+            var readdir, modules, _a, _b, _i, i, file, module_1, keys_1, keys, i, key, seed;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         readdir = fs.readdirSync(__dirname + "/seeds");
+                        modules = [];
                         _a = [];
                         for (_b in readdir)
                             _a.push(_b);
@@ -62,18 +77,34 @@ var SeedDatabase = /** @class */ (function () {
                         if (!file.toLowerCase().endsWith(".seed.js")) return [3 /*break*/, 3];
                         return [4 /*yield*/, Promise.resolve().then(function () { return require(__dirname + "/seeds/" + file); })];
                     case 2:
-                        modules = _c.sent();
-                        keys = Object.keys(modules);
-                        if (keys.length > 0) {
-                            seed = new modules[keys[0]](this.connection, keys[0]);
-                            if (!util_1.isUndefined(seed) && !util_1.isUndefined(seed.seed))
-                                seed.seed();
-                        }
+                        module_1 = _c.sent();
+                        keys_1 = Object.keys(module_1);
+                        if (keys_1.length > 0)
+                            modules[keys_1[0]] = module_1[keys_1[0]];
                         _c.label = 3;
                     case 3:
                         _i++;
                         return [3 /*break*/, 1];
-                    case 4: return [2 /*return*/];
+                    case 4:
+                        keys = Object.keys(this.seeds);
+                        i = 0;
+                        _c.label = 5;
+                    case 5:
+                        if (!(i < keys.length)) return [3 /*break*/, 8];
+                        key = keys[i];
+                        if (!!util_1.isUndefined(modules[key])) return [3 /*break*/, 7];
+                        seed = new modules[key](this.connection, key);
+                        if (!(!util_1.isUndefined(seed) && !util_1.isUndefined(seed.seed))) return [3 /*break*/, 7];
+                        seed.log().log("Seeder " + key + " running...");
+                        return [4 /*yield*/, seed.seed()];
+                    case 6:
+                        _c.sent();
+                        seed.log().log("Seeder " + key + " runned");
+                        _c.label = 7;
+                    case 7:
+                        ++i;
+                        return [3 /*break*/, 5];
+                    case 8: return [2 /*return*/];
                 }
             });
         });

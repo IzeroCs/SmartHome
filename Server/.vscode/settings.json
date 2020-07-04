@@ -1,3 +1,27 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.spec.ts": true,
+        "src/controller": true,
+        "src/service": true,
+        "node_modules": true,
+        "assets": true,
+        "public": true,
+        "test": true,
+        // "dist": true,
+        ".gitignore": true,
+        ".eslintrc.js": true,
+        ".prettierrc": true,
+        "nest-cli.json": true,
+        "README.md": true,
+        "tsconfig.json": true,
+        "tsconfig.build.json": true,
+        "package-lock.json": true,
+        "ormlogs.log": true
+    }
 }

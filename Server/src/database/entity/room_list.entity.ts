@@ -13,11 +13,6 @@ import { RoomDevice } from "./room_device.entity"
 @Entity()
 export class RoomList {
     @PrimaryGeneratedColumn()
-    @OneToOne(
-        type => RoomDevice,
-        device => device.room,
-    )
-    @JoinColumn()
     id: number
 
     @Column()
@@ -25,6 +20,12 @@ export class RoomList {
 
     @Column()
     enable: boolean
+
+    @ManyToOne(
+        type => RoomDevice,
+        device => device.room,
+    )
+    devices: RoomDevice[]
 
     @ManyToOne(
         type => RoomType,

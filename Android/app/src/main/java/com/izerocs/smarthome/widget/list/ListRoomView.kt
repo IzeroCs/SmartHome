@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
-import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.item.RoomListItem
 import com.izerocs.smarthome.widget.manager.GridLayoutManager
 
 /**
@@ -36,9 +36,9 @@ class ListRoomView(context: Context, attributeSet: AttributeSet) : RecyclerView(
     }
 
     fun clear() : Unit = getCatchAdapter().clear()
-    fun add(room : RoomItem) : Boolean = getCatchAdapter().add(room)
-    fun addAll(rooms : MutableList<RoomItem>) : Boolean = getCatchAdapter().addAll(rooms)
-    fun get(position : Int) : RoomItem = getCatchAdapter().get(position)
+    fun add(roomList : RoomListItem) : Boolean = getCatchAdapter().add(roomList)
+    fun addAll(roomLists : MutableList<RoomListItem>) : Boolean = getCatchAdapter().addAll(roomLists)
+    fun get(position : Int) : RoomListItem = getCatchAdapter().get(position)
     fun notifyDataSetChanged() : Unit = getCatchAdapter().notifyDataSetChanged()
 
     fun setOnItemClickListener(listener: ListRoomAdapter.OnItemClickListener?) : Unit =

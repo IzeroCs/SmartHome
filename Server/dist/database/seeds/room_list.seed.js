@@ -50,7 +50,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomListSeed = void 0;
-var seed_base_1 = require("../seed.base");
+var base_seed_1 = require("../base.seed");
 var room_list_entity_1 = require("../entity/room_list.entity");
 var room_type_entity_1 = require("../entity/room_type.entity");
 var util_1 = require("util");
@@ -73,8 +73,7 @@ var RoomListSeed = /** @class */ (function (_super) {
     }
     RoomListSeed.prototype.seed = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var repository, repositoryRoomType;
-            var _this = this;
+            var repository, repositoryRoomType, i, data, name_1, type, roomType, room;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -82,41 +81,39 @@ var RoomListSeed = /** @class */ (function (_super) {
                         repositoryRoomType = this.connection.getRepository(room_type_entity_1.RoomType);
                         return [4 /*yield*/, repository.count()];
                     case 1:
-                        if ((_a.sent()) <= 0) {
-                            this.logger.log("Insert first data room list");
-                            this.datas.forEach(function (data) { return __awaiter(_this, void 0, void 0, function () {
-                                var name, type, roomType, room;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            name = data["name"];
-                                            type = parseInt(data["type"]);
-                                            return [4 /*yield*/, repositoryRoomType.findOne({
-                                                    type: type,
-                                                })];
-                                        case 1:
-                                            roomType = _a.sent();
-                                            if (!!util_1.isNull(roomType)) return [3 /*break*/, 3];
-                                            room = new room_list_entity_1.RoomList();
-                                            room.name = name;
-                                            room.type = roomType;
-                                            room.enable = true;
-                                            return [4 /*yield*/, repository.save(room)];
-                                        case 2:
-                                            _a.sent();
-                                            this.logger.debug("Room list " + name + " has been saved");
-                                            _a.label = 3;
-                                        case 3: return [2 /*return*/];
-                                    }
-                                });
-                            }); });
-                        }
-                        return [2 /*return*/];
+                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 6];
+                        this.logger.debug("Insert first data room list");
+                        i = 0;
+                        _a.label = 2;
+                    case 2:
+                        if (!(i < this.datas.length)) return [3 /*break*/, 6];
+                        data = this.datas[i];
+                        name_1 = data["name"];
+                        type = parseInt(data["type"]);
+                        return [4 /*yield*/, repositoryRoomType.findOne({
+                                type: type,
+                            })];
+                    case 3:
+                        roomType = _a.sent();
+                        if (!!util_1.isNull(roomType)) return [3 /*break*/, 5];
+                        room = new room_list_entity_1.RoomList();
+                        room.name = name_1;
+                        room.type = roomType;
+                        room.enable = true;
+                        return [4 /*yield*/, repository.save(room)];
+                    case 4:
+                        _a.sent();
+                        this.logger.debug("Room list " + name_1 + " has been saved");
+                        _a.label = 5;
+                    case 5:
+                        ++i;
+                        return [3 /*break*/, 2];
+                    case 6: return [2 /*return*/];
                 }
             });
         });
     };
     return RoomListSeed;
-}(seed_base_1.SeedBase));
+}(base_seed_1.BaseSeed));
 exports.RoomListSeed = RoomListSeed;
 //# sourceMappingURL=room_list.seed.js.map

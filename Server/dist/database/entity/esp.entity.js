@@ -18,7 +18,6 @@ var Esp = /** @class */ (function () {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
-        typeorm_1.OneToOne(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.esp; }),
         __metadata("design:type", Number)
     ], Esp.prototype, "id", void 0);
     __decorate([
@@ -26,13 +25,21 @@ var Esp = /** @class */ (function () {
         __metadata("design:type", String)
     ], Esp.prototype, "name", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: false }),
         __metadata("design:type", Boolean)
     ], Esp.prototype, "online", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: false }),
         __metadata("design:type", Boolean)
     ], Esp.prototype, "auth", void 0);
+    __decorate([
+        typeorm_1.Column({ default: -100 }),
+        __metadata("design:type", String)
+    ], Esp.prototype, "detail_rssi", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.esp; }),
+        __metadata("design:type", Array)
+    ], Esp.prototype, "devices", void 0);
     __decorate([
         typeorm_1.OneToMany(function (type) { return esp_pin_entity_1.EspPin; }, function (pin) { return pin.esp; }),
         __metadata("design:type", Array)

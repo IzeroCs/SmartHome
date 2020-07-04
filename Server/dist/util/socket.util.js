@@ -6,27 +6,24 @@ var SocketUtil = /** @class */ (function () {
     function SocketUtil() {
     }
     SocketUtil.removing = function (io, logger) {
-        underscore.each(io.server.nsps, function (nsp) {
-            if (io.name != nsp.name)
-                return;
-            nsp.on("connect", function (client) {
-                if (!client["auth"])
-                    delete nsp.connected[client.id];
-                if (logger)
-                    logger.log("Removing socket " + nsp.name);
-            });
-        });
+        var nsp = io.server.nsps[io.name];
+        var connect = function (client) {
+            if (!client["auth"]) {
+                delete nsp.connected[client.id];
+                nsp.removeListener("connect", connect);
+            }
+            if (logger)
+                logger.log("Removing socket " + client.id);
+        };
+        nsp.on("connect", connect);
     };
     SocketUtil.restoring = function (io, client, logger) {
-        underscore.each(io.server.nsps, function (nsp) {
-            if (io.name != nsp.name)
-                return;
-            if (underscore.findWhere(nsp.sockets, { id: client.id })) {
-                if (logger)
-                    logger.log("Restoring socket to " + nsp.name);
-                nsp.connected[client.id] = client;
-            }
-        });
+        var nsp = io.server.nsps[io.name];
+        if (underscore.findWhere(nsp.sockets, { id: client.id })) {
+            if (logger)
+                logger.log("Restoring socket to " + client.id);
+            nsp.connected[client.id] = client;
+        }
     };
     return SocketUtil;
 }());

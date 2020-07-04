@@ -50,7 +50,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomTypeSeed = void 0;
-var seed_base_1 = require("../seed.base");
+var base_seed_1 = require("../base.seed");
 var room_type_entity_1 = require("../entity/room_type.entity");
 var RoomTypeSeed = /** @class */ (function (_super) {
     __extends(RoomTypeSeed, _super);
@@ -71,41 +71,40 @@ var RoomTypeSeed = /** @class */ (function (_super) {
     }
     RoomTypeSeed.prototype.seed = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var repository;
-            var _this = this;
+            var repository, keys, i, key, name_1, room;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         repository = this.connection.getRepository(room_type_entity_1.RoomType);
+                        keys = Object.keys(this.datas);
                         return [4 /*yield*/, repository.count()];
                     case 1:
-                        if ((_a.sent()) <= 0) {
-                            this.logger.debug("Insert first data room type");
-                            Object.keys(this.datas).forEach(function (key) { return __awaiter(_this, void 0, void 0, function () {
-                                var name, room;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            name = this.datas[key];
-                                            room = new room_type_entity_1.RoomType();
-                                            room.name = name;
-                                            room.type = parseInt(key);
-                                            room.enable = true;
-                                            return [4 /*yield*/, repository.save(room)];
-                                        case 1:
-                                            _a.sent();
-                                            this.logger.debug("Room type " + name + " has been saved");
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); });
-                        }
-                        return [2 /*return*/];
+                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 5];
+                        this.logger.debug("Insert first data room type");
+                        i = 0;
+                        _a.label = 2;
+                    case 2:
+                        if (!(i < keys.length)) return [3 /*break*/, 5];
+                        key = keys[i];
+                        name_1 = this.datas[key];
+                        room = new room_type_entity_1.RoomType();
+                        room.name = name_1;
+                        room.type = parseInt(key);
+                        room.enable = true;
+                        return [4 /*yield*/, repository.save(room)];
+                    case 3:
+                        _a.sent();
+                        this.logger.debug("Room type " + name_1 + " has been saved");
+                        _a.label = 4;
+                    case 4:
+                        ++i;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
     };
     return RoomTypeSeed;
-}(seed_base_1.SeedBase));
+}(base_seed_1.BaseSeed));
 exports.RoomTypeSeed = RoomTypeSeed;
 //# sourceMappingURL=room_type.seed.js.map

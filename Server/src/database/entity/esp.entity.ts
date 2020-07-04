@@ -12,20 +12,25 @@ import { RoomDevice } from "./room_device.entity"
 @Entity()
 export class Esp {
     @PrimaryGeneratedColumn()
-    @OneToOne(
-        type => RoomDevice,
-        device => device.esp,
-    )
     id: number
 
     @Column()
     name: string
 
-    @Column()
+    @Column({ default: false })
     online: boolean
 
-    @Column()
+    @Column({ default: false })
     auth: boolean
+
+    @Column({ default: -100 })
+    detail_rssi: string
+
+    @OneToMany(
+        type => RoomDevice,
+        device => device.esp,
+    )
+    devices: RoomDevice[]
 
     @OneToMany(
         type => EspPin,

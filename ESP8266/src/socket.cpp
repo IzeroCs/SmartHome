@@ -33,11 +33,11 @@ void SocketClass::loopSyncIO(bool forceChanged) {
         if (it->first != IOPin_0)
             array += ",";
 
-        array += "\"" + it->second.toString() + "\"";
+        array += it->second.toJsonString();
     }
 
-    io.emit("sync-io", {{ "io", "{\"data\":[" + array + "]," +
-        "\"changed\":" + String(IO.isIoStatusChanged()) + "}"}});
+    io.emit("sync-io", "{\"pins\":[" + array + "]," +
+        "\"changed\":" + (IO.isIoStatusChanged() ? "true" : "false") + "}");
 
     loopSyncDetail();
     IO.setIoStatusChanged(false);
@@ -47,7 +47,9 @@ void SocketClass::loopSyncDetail() {
     if (!io.isConnect())
         return;
 
-    io.emit("sync-detail", {{"detail", "{\"data\":{\"rssi\":\"" + String(WiFi.RSSI()) + "\"}}"}});
+    io.emit("sync-detail", {
+        { "detail_rssi", String(WiFi.RSSI()) }
+    });
 }
 
 void SocketClass::onEvent(const char * event, const char * payload, size_t length) {
@@ -65,11 +67,13 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
     } else if (evt == "disconnect") {
         Serial.println("[Socket] Disconnect");
     } else if (evt == "auth" || evt == "sync-io" || evt == "sync-detail") {
-        IO.setIoStatusChanged(true);
-    }
+        if (evt == "auth")
+            Serial.println("[Socket] Authenticate: authorized");
 
-    if (DEBUG)
+        IO.setIoStatusChanged(true);
+    } else if (DEBUG) {
         Serial.println("[Socket] Event: " + evt + ", Payload: " + pay);
+    }
 }
 
 SocketClass Socket;

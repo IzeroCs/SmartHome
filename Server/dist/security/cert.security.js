@@ -20,20 +20,20 @@ var CertSecurity = /** @class */ (function () {
         });
     };
     CertSecurity.prototype.verify = function (token, handle) {
-        var _this = this;
-        jwt.verify(token, this.certPublic, function (err, decoded) {
-            if (!err) {
-                var keyPayloads = Object.keys(_this.payloadConfig);
-                for (var i = 0; i < keyPayloads.length; ++i) {
-                    var key = keyPayloads[i];
-                    var value = _this.payloadConfig[key];
-                    if (util_1.isUndefined(decoded[key]) || decoded[key] !== value)
-                        return handle(err, false);
-                }
-                return handle(err, true);
+        try {
+            var decoded = jwt.verify(token, this.certPublic);
+            var keyPayloads = Object.keys(this.payloadConfig);
+            for (var i = 0; i < keyPayloads.length; ++i) {
+                var key = keyPayloads[i];
+                var value = this.payloadConfig[key];
+                if (util_1.isUndefined(decoded[key]) || decoded[key] !== value)
+                    return handle("Undefined decoded key", false);
             }
+            return handle(null, true);
+        }
+        catch (err) {
             return handle(err, false);
-        });
+        }
     };
     CertSecurity.prototype.resolveAssetsPath = function (filename) {
         return path.join(__dirname, "..", "..", "assets/cert", this.platform, filename);

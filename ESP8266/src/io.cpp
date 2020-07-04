@@ -26,7 +26,11 @@ void IOClass::begin() {
     }
 
     setIOData(IOPin_0, IOType_DOUBLE, IOPin_1);
+    setIOData(IOPin_2, IOType_SINGLE);
+    setIOData(IOPin_3, IOType_SINGLE);
     setIOData(IOPin_4, IOType_DUAL_TOGGLE, IOPin_5);
+    setIOData(IOPin_6, IOType_SINGLE);
+    setIOData(IOPin_7, IOType_SINGLE);
     setIoStatusChanged(true);
 
     Output.begin();
@@ -47,7 +51,7 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
     if (curData->outputType == IOType_DISABLE)
         return;
 
-    if (outputType == IOType_SINGLE && (curData->outputType == IOType_DOUBLE || curData->outputType == IOType_DUAL_TOGGLE)) {
+    if (outputType == IOType_SINGLE && curData->outputType == IOType_SINGLE) {
         if (curData->outputSecondary != curData->outputPrimary) {
             IOData * secData = &(datas.at(curData->outputSecondary));
 
@@ -58,6 +62,21 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
 
             storeData(RECORD_ID_IO_BEGIN + (uint8_t)secData->input, datas.at(secData->input));
         }
+
+        curData->outputSecondary = curData->outputPrimary;
+    } else if (outputType == IOType_SINGLE && (curData->outputType == IOType_DOUBLE || curData->outputType == IOType_DUAL_TOGGLE)) {
+        if (curData->outputSecondary != curData->outputPrimary) {
+            IOData * secData = &(datas.at(curData->outputSecondary));
+
+            secData->outputSecondary = secData->outputPrimary;
+            secData->outputType      = IOType_SINGLE;
+            secData->dualToggleCount = 0;
+            secData->status          = false;
+
+            storeData(RECORD_ID_IO_BEGIN + (uint8_t)secData->input, datas.at(secData->input));
+        }
+
+        curData->outputSecondary = curData->outputPrimary;
     } else if (outputType == IOType_DOUBLE || outputType == IOType_DUAL_TOGGLE) {
         if (outputSecondary != curData->outputSecondary) {
             IOData * secData = &(datas.at(outputSecondary));
@@ -86,6 +105,7 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
 
     curData->outputType      = outputType;
     curData->dualToggleCount = 0;
+
     storeData(RECORD_ID_IO_BEGIN + (uint8_t)curData->input, datas.at(pin));
 }
 

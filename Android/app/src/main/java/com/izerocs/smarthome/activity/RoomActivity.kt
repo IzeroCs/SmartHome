@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
-import com.izerocs.smarthome.model.DeviceItem
-import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.item.RoomListItem
+import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.widget.WavesView
 import es.dmoral.toasty.Toasty
@@ -19,59 +19,34 @@ class RoomActivity : BaseActivity(),
     View.OnClickListener, WavesView.OnBackClickListener, ListDeviceAdapter.OnItemClickListener
 {
 
-    private var roomItem : RoomItem? = null
+    private var roomListItem : RoomListItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
 
-        roomItem = getSocketClient().getRoomList()
+        roomListItem = getSocketClient().getRoomList()
             .first { item -> item.getId() == intent.getStringExtra(SmartActivity.EXTRA_ROOM_ID) }
 
-        if (roomItem == null)
+        if (roomListItem == null)
             finish()
 
-        wavesView.setTitle(roomItem?.getName()!!)
+        wavesView.setTitle(roomListItem?.getName()!!)
         wavesView.setOnBackClickListener(this@RoomActivity)
 
         floatButton.setOnClickListener(this)
         listDevice.setOnItemClickListener(this)
-
-        val arr = arrayListOf<HashMap<String, Any>>(
-            hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Trái"),
-            hashMapOf("name" to "Đèn tuýp", "type" to 1, "descriptor" to "Phải"),
-            hashMapOf("name" to "Đèn ngủ", "type" to 1, "widget" to 1, "status" to 1),
-            hashMapOf("name" to "Quạt trần", "type" to 2),
-            hashMapOf("name" to "Quạt đứng", "type" to 2, "status" to 1),
-            hashMapOf("name" to "Bình nóng lạnh", "type" to 3, "widget" to 1)
-        )
-
-        for (i in 0 until arr.size) {
-            val maps = arr[i]
-            val device = DeviceItem(this).apply {
-                setName(maps["name"] as String)
-                setType(maps["type"] as Int)
-
-                if (maps.containsKey("descriptor"))
-                    setDescriptor(maps["descriptor"] as String)
-
-                if (maps.containsKey("widget"))
-                    setWidgetSize(maps["widget"] as Int)
-
-                if (maps.containsKey("status"))
-                    setStatus(maps["status"] as Int)
-            }
-
-            listDevice.add(device)
-        }
     }
 
     override fun onSocketConnect(client : SocketClient) {
-        if (roomItem == null)
+        if (roomListItem == null)
             return
 
-        getSocketClient().queryRoomDevice(roomItem?.getId()!!) {
+        getSocketClient().queryRoomDevice(roomListItem?.getId()!!) { list ->
+            listDevice.clear()
+            listDevice.addAll(list)
 
+            runOnUiThread { listDevice.notifyDataSetChanged() }
         }
     }
 
@@ -92,17 +67,17 @@ class RoomActivity : BaseActivity(),
         (listDevice.adapter as ListDeviceAdapter).run {
             get(position).run {
                 toggleStatus()
-                notifyDataSetChanged()
+                runOnUiThread { notifyDataSetChanged() }
 
                 var message = this@RoomActivity.getString(R.string.deviceStatusOffToast)
 
-                if (getStatus() == DeviceItem.STATUS_ON)
+                if (status == RoomDeviceModel.STATUS_ON)
                     message = this@RoomActivity.getString(R.string.deviceStatusOnToast)
 
                 if (message.isNotEmpty()) {
-                    message = message.replace("\${name}", getName())
+                    message = message.replace("\${name}", name)
 
-                    if (getStatus() == DeviceItem.STATUS_ON)
+                    if (status == RoomDeviceModel.STATUS_ON)
                         Toasty.success(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()
                     else
                         Toasty.info(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()

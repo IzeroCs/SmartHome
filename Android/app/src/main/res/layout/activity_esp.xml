@@ -30,7 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/listEspSpacing">
+                    android:padding="@dimen/listEspSpacing"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -89,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     tools:ignore="UselessParent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -187,6 +189,7 @@
         android:backgroundTint="@color/floatActionBarBackground"
         android:tint="@color/floatActionBarTint"
         android:src="@drawable/ic_refresh"
+        android:visibility="gone"
         android:clickable="true"
         android:focusable="true"
         app:fabSize="normal"

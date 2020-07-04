@@ -11,8 +11,14 @@ import { Socket, Server, Namespace } from "socket.io"
 import { SocketUtil } from "../util/socket.util"
 import { CertSecurity } from "../security/cert.security"
 import { NetworkUtil } from "../util/network.util"
-import { isUndefined, isNull, isObject } from "util"
+import { isUndefined, isNull, isObject, isArray } from "util"
 import { AppGateway } from "./app.gateway"
+import { TypeOrmModule } from "@nestjs/typeorm"
+import { getRepository } from "typeorm"
+import { Esp } from "src/database/entity/esp.entity"
+import { EspModel } from "src/database/model/esp.model"
+import { cli, logger } from "src/ormconfig"
+import clc = require("cli-color")
 
 @WebSocketGateway({
     namespace: "/platform-esp",
@@ -33,26 +39,28 @@ export class EspGateway
     }
 
     afterInit(server: Server) {
-        this.logger.log("Init socket platform esp")
+        this.logger.log("Socket /platform-esp initialized")
         SocketUtil.removing(this.server, this.logger)
     }
 
     handleConnection(client: Socket, ...args: any[]) {
         this.logger.log(`Client connection: ${client.id}`)
         SocketUtil.restoring(this.server, client, this.logger)
+
         setTimeout(() => {
             Notify.unAuthorized(client)
-        }, 1000)
+        }, 5000)
     }
 
     handleDisconnect(client: Socket) {
         this.logger.log(`Client disconnect: ${client.id}`)
         this.updateModule(client, false)
+        EspModel.updateOnline(client.id, false)
         SocketUtil.removing(this.server, this.logger)
     }
 
     @SubscribeMessage("auth")
-    handleAuth(client: Socket, payload: any) {
+    async handleAuth(client: Socket, payload: any) {
         if (EspGateway.isClientAuth(client))
             return this.logger.log(`Authenticate already`)
 
@@ -61,11 +69,13 @@ export class EspGateway
         if (!EspGateway.isEspID(payload.id)) return Notify.unAuthorized(client)
 
         client.id = payload.id
+        EspModel.add(client.id)
         this.updateModule(client, true)
-
         this.cert.verify(payload.token, (err, authorized) => {
             if (!err && authorized) {
                 this.logger.log(`Authenticate socket ${client.id}`)
+                EspModel.updateAuth(client.id, true, true)
+
                 client["auth"] = true
                 client.emit("auth", "authorized")
             } else {
@@ -76,57 +86,55 @@ export class EspGateway
 
     @SubscribeMessage("sync-io")
     handleSyncIO(client: Socket, payload: any) {
-        if (!EspGateway.isClientAuth(client)) return
+        if (!EspGateway.isClientAuth(client)) return Notify.unAuthorized(client)
 
-        const espIO = Pass.io(payload)["io"]
-        const ioData = espIO.data
-        const ioChaged = espIO.changed === 1
+        const espIO = Pass.io(payload)
+        const pinData = espIO.pins
+        const pinChanged = espIO.changed
 
-        let pinData = null
-        let pinObj = null
-        let pinList = []
-
-        for (let i = 0; i < ioData.length; ++i) {
-            pinData = ioData[i].replace(/\=/g, ":")
-            pinData = pinData.replace(/([a-z0-9]+):([0-9]+)/gi, '"$1":$2')
-            pinData = "{" + pinData + "}"
-
-            try {
-                pinObj = JSON.parse(pinData)
-                pinList.push(pinObj)
-            } catch (e) {}
+        if (isArray(pinData)) {
+            for (let i = 0; i < pinData.length; ++i)
+                pinData[i] = Pass.pin(pinData[i])
         }
 
-        if (isObject(this.modules[client.id])) {
-            this.modules[client.id].pins.data = pinList
-            this.modules[client.id].pins.changed = ioChaged
+        if (!isUndefined(this.modules[client.id])) {
+            this.modules[client.id].pins = pinData
+            this.modules[client.id].changed = pinChanged
 
-            AppGateway.notifyEspModules()
+            if (pinChanged) {
+                EspModel.updatePin(client.id, pinData)
+                AppGateway.notifyEspModules()
+            }
         }
     }
 
     @SubscribeMessage("sync-detail")
     handleSyncDetail(client: Socket, payload: any) {
-        if (!EspGateway.isClientAuth(client)) return
+        if (!EspGateway.isClientAuth(client)) return Notify.unAuthorized(client)
 
         const oldDetail = Pass.detail(this.modules[client.id])
         const newDetail = Pass.detail(payload)
 
         const oldSignal = NetworkUtil.calculateSignalLevel(
-            oldDetail["detail"]["data"]["rssi"],
+            oldDetail.detail_rssi,
         )
         const newSignal = NetworkUtil.calculateSignalLevel(
-            newDetail["detail"]["data"]["rssi"],
+            newDetail.detail_rssi,
         )
 
         if (oldSignal !== newSignal) {
-            this.modules[client.id].detail = newDetail["detail"]
+            this.modules[client.id].detail_rssi = newDetail.detail_rssi
+
+            EspModel.updateDetail(client.id, {
+                rssi: newDetail.detail_rssi,
+            })
             AppGateway.notifyEspModules()
         }
     }
 
     private updateModule(client: Socket, online: boolean) {
         this.modules[client.id] = Pass.module(this.modules[client.id])
+        this.modules[client.id].name = client.id
         this.modules[client.id].online = online
     }
 
@@ -158,16 +166,19 @@ class Notify {
         EspGateway.getLogger().log(
             `Disconnect socket unauthorized: ${client.id}`,
         )
+        EspModel.updateAuth(client.id, false, false)
         client.emit("auth", "unauthorized")
         client.disconnect(true)
     }
 }
 
 class Pass {
-    static def(objSrc: Object, objDest: Object): Object {
+    static def(objSrc: Object, objDest: Object): any {
         if (isUndefined(objSrc)) return {}
 
         if (isUndefined(objDest) || isNull(objDest)) objDest = {}
+
+        if (!isObject(objDest)) return objDest
 
         Object.keys(objSrc).forEach(key => {
             if (isUndefined(objDest[key])) objDest[key] = objSrc[key]
@@ -177,7 +188,7 @@ class Pass {
         return objDest
     }
 
-    static auth(obj: Object): Object {
+    static auth(obj: Object): any {
         return Pass.def(
             {
                 id: "",
@@ -187,35 +198,48 @@ class Pass {
         )
     }
 
-    static module(obj: Object): Object {
+    static module(obj: Object): any {
         return Pass.def(
             {
-                online: true,
-                pins: { data: [], changed: false },
-                detail: { data: {} },
+                name: "",
+                online: false,
+                auth: false,
+                changed: false,
+                pins: [],
+                detail_rssi: NetworkUtil.MIN_RSSI,
             },
             obj,
         )
     }
 
-    static io(obj: Object): Object {
+    static io(obj: Object): any {
         return Pass.def(
             {
-                io: {
-                    data: [],
-                    changed: false,
-                },
+                pins: [],
+                changed: "0",
             },
             obj,
         )
     }
 
-    static detail(obj: Object): Object {
+    static pin(obj: Object): any {
         return Pass.def(
             {
-                detail: {
-                    data: { rssi: NetworkUtil.MIN_RSSI },
-                },
+                input: 0,
+                outputType: 0,
+                outputPrimary: 0,
+                outputSecondary: 0,
+                dualToggleCount: 0,
+                status: 0,
+            },
+            obj,
+        )
+    }
+
+    static detail(obj: Object): any {
+        return Pass.def(
+            {
+                detail_rssi: NetworkUtil.MIN_RSSI,
             },
             obj,
         )

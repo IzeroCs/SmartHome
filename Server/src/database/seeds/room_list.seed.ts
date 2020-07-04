@@ -1,9 +1,9 @@
-import { SeedBase } from "../seed.base"
+import { BaseSeed } from "../base.seed"
 import { RoomList } from "../entity/room_list.entity"
 import { RoomType } from "../entity/room_type.entity"
 import { isNull } from "util"
 
-export class RoomListSeed extends SeedBase {
+export class RoomListSeed extends BaseSeed {
     private datas: Array<object> = [
         { name: "Phòng khách", type: 1 },
         { name: "Phòng ngủ", type: 2 },
@@ -21,9 +21,10 @@ export class RoomListSeed extends SeedBase {
         const repositoryRoomType = this.connection.getRepository(RoomType)
 
         if ((await repository.count()) <= 0) {
-            this.logger.log("Insert first data room list")
+            this.logger.debug("Insert first data room list")
 
-            this.datas.forEach(async data => {
+            for (let i = 0; i < this.datas.length; ++i) {
+                const data = this.datas[i]
                 const name = data["name"]
                 const type = parseInt(data["type"])
                 const roomType = await repositoryRoomType.findOne({
@@ -32,7 +33,6 @@ export class RoomListSeed extends SeedBase {
 
                 if (!isNull(roomType)) {
                     const room = new RoomList()
-
                     room.name = name
                     room.type = roomType
                     room.enable = true
@@ -40,7 +40,7 @@ export class RoomListSeed extends SeedBase {
                     await repository.save(room)
                     this.logger.debug(`Room list ${name} has been saved`)
                 }
-            })
+            }
         }
     }
 }

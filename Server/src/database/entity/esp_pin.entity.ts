@@ -24,7 +24,7 @@ export class EspPin {
     )
     esp: Esp
 
-    @Column("tinyint")
+    @Column("tinyint", { nullable: true })
     name: number
 
     @Column("tinyint")
@@ -39,9 +39,9 @@ export class EspPin {
     @Column("tinyint")
     ouputSecondary: number
 
-    @Column("tinyint")
+    @Column("tinyint", { nullable: true, default: 0 })
     dualToggleCount: number
 
-    @Column()
+    @Column({ nullable: true, default: false })
     status: boolean
 }

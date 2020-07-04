@@ -11,7 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
-import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.EspModuleModel
 import com.izerocs.smarthome.network.EspConnectivity
 import com.izerocs.smarthome.network.EspConnectivity.Companion.StationStatus
 import com.izerocs.smarthome.network.EspConnectivity.OnScanerListener
@@ -30,8 +30,8 @@ import kotlinx.android.synthetic.main.dialog_esp_wifi.*
 class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickListener,
     ListEspAdapter.OnItemClickListener, OnScanerListener, OnStationListener
 {
-    private var currentItemScan : EspItem? = null
-    private var currentItemConnected : EspItem? = null
+    private var currentItemScan : EspModuleModel? = null
+    private var currentItemConnected : EspModuleModel? = null
     private var currentItemScanPosition : Int = 0
     private var currentItemConnectedPosition : Int = 0
 
@@ -64,59 +64,60 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
         setContentView(R.layout.activity_esp)
         wavesView.setTitle(R.string.listEspTitle)
         wavesView.setOnBackClickListener(this)
-        floatButton.setOnClickListener(this)
+//        floatButton.setOnClickListener(this)
         listEspScan.setOnItemClickListener(this)
         listEspConnected.setOnItemClickListener(this)
 
-        espConnectivity = EspConnectivity(this)
-        refreshAnimator = ObjectAnimator.ofFloat(floatButton, "rotation", 0F, 360F)
-            .apply {
-                duration    = 800
-                repeatCount = ObjectAnimator.INFINITE
+//        espConnectivity = EspConnectivity(this)
+//        refreshAnimator = ObjectAnimator.ofFloat(floatButton, "rotation", 0F, 360F)
+//            .apply {
+//                duration    = 800
+//                repeatCount = ObjectAnimator.INFINITE
+//
+//                addListener(onAnimatorListener)
+//            }
 
-                addListener(onAnimatorListener)
-            }
+//        preferences.run {
+//            getAll()?.forEach {
+//                val data = getObject(it.key, EspItem.EspDataItem::class.java)
+//
+//                if (EspItem.isMatchEsp(data.ssid))
+//                    listEspScan.add(EspItem(data.ssid, data.level, data.capabilities))
+//            }
+//
+//            runOnUiThread {
+//                listEspScan.notifyDataSetChanged()
+//            }
+//        }
 
-        preferences.run {
-            getAll()?.forEach {
-                val data = getObject(it.key, EspItem.EspDataItem::class.java)
-
-                if (EspItem.isMatchEsp(data.ssid))
-                    listEspScan.add(EspItem(data.ssid, data.level, data.capabilities))
-            }
-
-            runOnUiThread {
-                listEspScan.notifyDataSetChanged()
-            }
-        }
-
-        espConnectivity?.run {
-            setOnScannerListener(this@EspActivity)
-            setOnStationListener(this@EspActivity)
-            startScanModule()
-        }
+//        espConnectivity?.run {
+//            setOnScannerListener(this@EspActivity)
+//            setOnStationListener(this@EspActivity)
+//            startScanModule()
+//        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        espConnectivity?.destroy()
+//        espConnectivity?.destroy()
     }
 
     override fun onCreatePreferences() : SharedPreferences {
         return EspPreferences(this)
     }
 
-    override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspItem>?) {
-        mutableListOf<EspItem>().let { lists ->
-            espModules?.forEach { entry -> lists.add(entry.value) }
-            listEspConnected.clear()
-            listEspConnected.addAll(lists)
-        }
+    override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspModuleModel>?) {
+        espModules?.run {
+            Log.d(TAG, toString())
 
-        runOnUiThread {
-            listEspConnected.notifyDataSetChanged()
-            listEspConnectedTitle.text = getString(R.string.listEspConnectedTitle)
-                .replace("\${count}", espModules?.size.toString())
+            listEspConnected.clear()
+            listEspConnected.addAll(this.values.toMutableList())
+
+            runOnUiThread {
+                listEspConnected.notifyDataSetChanged()
+                listEspConnectedTitle.text = getString(R.string.listEspConnectedTitle)
+                    .replace("\${count}", listEspConnected.size().toString())
+            }
         }
     }
 
@@ -155,19 +156,19 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
             listEspScan.clear()
             preferences.clear()
 
-            forEach {
-                if (EspItem.isMatchEsp(it.SSID)) {
-                    val item = EspItem(it)
-
-                    listEspScan.add(item)
-                    preferences.put((preferences.size()
-                        .plus(1)).toString(), item.toData())
-                }
-            }
-
-            runOnUiThread {
-                listEspScan.notifyDataSetChanged()
-            }
+//            forEach {
+//                if (EspItem.isMatchEsp(it.SSID)) {
+//                    val item = EspItem(it)
+//
+//                    listEspScan.add(item)
+//                    preferences.put((preferences.size()
+//                        .plus(1)).toString(), item.toData())
+//                }
+//            }
+//
+//            runOnUiThread {
+//                listEspScan.notifyDataSetChanged()
+//            }
         }
 
         runOnUiThread {

@@ -6,15 +6,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.*
 import android.net.ConnectivityManager.NetworkCallback
-import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
-import android.net.wifi.WifiNetworkSpecifier
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.EspModuleModel
 import com.izerocs.smarthome.utils.Util
 import org.json.JSONException
 import org.json.JSONObject
@@ -146,73 +144,73 @@ class EspConnectivity(private val context : Context) {
         fun onStationFailed(e : Exception) {}
     }
 
-    fun stationConnect(item : EspItem) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            connectNetworkAndroidQ(item)
-        else
-            connectNetworkPreAndroidQ(item)
+    fun stationConnect(item : EspModuleModel) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+//            connectNetworkAndroidQ(item)
+//        else
+//            connectNetworkPreAndroidQ(item)
     }
 
     @Suppress("DEPRECATION")
-    private fun connectNetworkPreAndroidQ(item : EspItem) {
-        val wifi = WifiConfiguration().apply {
-            this.SSID = "\"${item.getSsid()}\""
-            this.preSharedKey = "\"${item.getSc()}\""
-            this.status = WifiConfiguration.Status.ENABLED
-
-            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
-            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP)
-            this.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK)
-            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
-            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
-            this.allowedProtocols.set(WifiConfiguration.Protocol.RSN)
-        }
-
-        wifiManager.run {
-            val id = this.addNetwork(wifi)
-
-            if (id != -1) {
-                disconnect()
-                enableNetwork(id, true)
-                reconnect()
-
-                isNetworkChanged = true
-                context.registerReceiver(networkStateReceiver, IntentFilter().apply {
-                    addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
-                })
-            } else {
-                onNetworkUnavailable()
-            }
-        }
+    private fun connectNetworkPreAndroidQ(item : EspModuleModel) {
+//        val wifi = WifiConfiguration().apply {
+//            this.SSID = "\"${item.getSsid()}\""
+//            this.preSharedKey = "\"${item.getSc()}\""
+//            this.status = WifiConfiguration.Status.ENABLED
+//
+//            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
+//            this.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP)
+//            this.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK)
+//            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
+//            this.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
+//            this.allowedProtocols.set(WifiConfiguration.Protocol.RSN)
+//        }
+//
+//        wifiManager.run {
+//            val id = this.addNetwork(wifi)
+//
+//            if (id != -1) {
+//                disconnect()
+//                enableNetwork(id, true)
+//                reconnect()
+//
+//                isNetworkChanged = true
+//                context.registerReceiver(networkStateReceiver, IntentFilter().apply {
+//                    addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+//                })
+//            } else {
+//                onNetworkUnavailable()
+//            }
+//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    private fun connectNetworkAndroidQ(item : EspItem) {
-        val specifier = WifiNetworkSpecifier.Builder()
-            .setSsid(item.getSsid())
-            .setWpa2Passphrase(item.getSc())
-            .build()
-
-        val request = NetworkRequest.Builder()
-            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            .setNetworkSpecifier(specifier)
-            .build()
-
-        networkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network : Network) {
-                onNetworkAvailable(network)
-            }
-
-            override fun onUnavailable() {
-                onNetworkUnavailable()
-                unregisterNetworkCallback()
-            }
-        }
-
-        networkCallback?.let {
-            connectivityManager.requestNetwork(request, it)
-        }
+    private fun connectNetworkAndroidQ(item : EspModuleModel) {
+//        val specifier = WifiNetworkSpecifier.Builder()
+//            .setSsid(item.getSsid())
+//            .setWpa2Passphrase(item.getSc())
+//            .build()
+//
+//        val request = NetworkRequest.Builder()
+//            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+//            .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+//            .setNetworkSpecifier(specifier)
+//            .build()
+//
+//        networkCallback = object : ConnectivityManager.NetworkCallback() {
+//            override fun onAvailable(network : Network) {
+//                onNetworkAvailable(network)
+//            }
+//
+//            override fun onUnavailable() {
+//                onNetworkUnavailable()
+//                unregisterNetworkCallback()
+//            }
+//        }
+//
+//        networkCallback?.let {
+//            connectivityManager.requestNetwork(request, it)
+//        }
     }
 
     @Throws(IOException::class, MalformedURLException::class,

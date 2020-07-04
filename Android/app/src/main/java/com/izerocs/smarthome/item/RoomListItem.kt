@@ -1,11 +1,11 @@
-package com.izerocs.smarthome.model
+package com.izerocs.smarthome.item
 
 import android.content.Context
 
 /**
  * Created by IzeroCs on 2020-04-01
  */
-class RoomItem {
+class RoomListItem {
     private var context : Context? = null
     private var id      : String   = ""
     private var name    : String   = ""
@@ -20,11 +20,11 @@ class RoomItem {
         this.id      = idRoom
         this.name    = nameRoom
         this.type    = typeRoom
-        this.iconRes = RoomType.getIconResource(typeRoom)
+        this.iconRes = RoomTypeItem.getIconResource(typeRoom)
     }
 
     constructor(context : Context, idRoom : String, nameRoom : String, typeRoom : String) :
-            this(context, idRoom, nameRoom, RoomType.stringToType(typeRoom))
+            this(context, idRoom, nameRoom, RoomTypeItem.stringToType(typeRoom))
 
     constructor(context : Context, roomItemData : RoomItemData) :
             this(context, roomItemData.id, roomItemData.name, roomItemData.type)

@@ -1,4 +1,4 @@
-package com.izerocs.smarthome.model
+package com.izerocs.smarthome.item
 
 import android.content.Context
 import com.izerocs.smarthome.R
@@ -7,7 +7,7 @@ import java.util.*
 /**
  * Created by IzeroCs on 2020-04-17
  */
-class RoomType {
+class RoomTypeItem {
     private var context : Context? = null
     private var id      : String   = ""
     private var name    : String   = ""
@@ -96,7 +96,7 @@ class RoomType {
         this.name    = nameRoom
         this.type    = typeRoom
         this.title   = typeToName(context, typeRoom)
-        this.iconRes = RoomType.getIconResource(typeRoom)
+        this.iconRes = RoomTypeItem.getIconResource(typeRoom)
     }
 
     constructor(context : Context, roomTypeData : RoomTypeData) :

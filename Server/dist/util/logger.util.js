@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppLogger = void 0;
 var util_1 = require("util");
 var cli_color_1 = require("cli-color");
-var notifier = require("node-notifier");
 var path = require("path");
 var os = require("os");
 var AppLogger = /** @class */ (function () {
@@ -25,16 +24,6 @@ var AppLogger = /** @class */ (function () {
         for (var _i = 2; _i < arguments.length; _i++) {
             params[_i - 2] = arguments[_i];
         }
-        notifier.notify({
-            title: "Error: [" + params[0] + "]",
-            subtitle: undefined,
-            message: message,
-            icon: this.icon("error.png"),
-            sound: true,
-            wait: false,
-            timeout: 2000,
-            type: "error",
-        });
         process.stderr.write(cli_color_1.yellow("[" + params[0] + "] "));
         process.stderr.write(cli_color_1.red(this.format(message) + "\n"));
         process.stderr.write(cli_color_1.red(trace + "\n"));
@@ -44,16 +33,6 @@ var AppLogger = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             params[_i - 1] = arguments[_i];
         }
-        notifier.notify({
-            title: "Warning: [" + params[0] + "]",
-            subtitle: undefined,
-            message: message,
-            icon: this.icon("warning.png"),
-            sound: true,
-            wait: false,
-            timeout: 2000,
-            type: "warn",
-        });
         process.stderr.write(cli_color_1.yellow("[" + params[0] + "] "));
         process.stderr.write(cli_color_1.yellow(this.format(message) + "\n"));
     };

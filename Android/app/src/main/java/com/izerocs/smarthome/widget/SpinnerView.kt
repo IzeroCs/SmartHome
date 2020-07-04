@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.setPadding
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.SpinnerAdapter
-import com.izerocs.smarthome.model.RoomType
+import com.izerocs.smarthome.item.RoomTypeItem
 import com.izerocs.smarthome.widget.form.InputLayout
 
 /**
@@ -64,7 +64,7 @@ class SpinnerView(context: Context, attributeSet: AttributeSet) : AppCompatSpinn
         this.editTextBinder = editText
     }
 
-    fun add(roomType : RoomType) : Unit = (adapter as SpinnerAdapter).add(roomType)
+    fun add(roomTypeItem : RoomTypeItem) : Unit = (adapter as SpinnerAdapter).add(roomTypeItem)
 
     fun setStatusError(text : String)   : Unit = (parent as InputLayout).setStatus(text, R.color.formStatusErrorText)
     fun setStatusWarning(text : String) : Unit = (parent as InputLayout).setStatus(text, R.color.formStatusWarningText)

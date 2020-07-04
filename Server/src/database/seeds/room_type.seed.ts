@@ -1,7 +1,7 @@
-import { SeedBase } from "../seed.base"
+import { BaseSeed } from "../base.seed"
 import { RoomType } from "../entity/room_type.entity"
 
-export class RoomTypeSeed extends SeedBase {
+export class RoomTypeSeed extends BaseSeed {
     private datas: object = {
         1: "living_room",
         2: "bed_room",
@@ -16,11 +16,13 @@ export class RoomTypeSeed extends SeedBase {
 
     async seed() {
         const repository = this.connection.getRepository(RoomType)
+        const keys = Object.keys(this.datas)
 
         if ((await repository.count()) <= 0) {
             this.logger.debug("Insert first data room type")
 
-            Object.keys(this.datas).forEach(async key => {
+            for (let i = 0; i < keys.length; ++i) {
+                const key = keys[i]
                 const name = this.datas[key]
                 const room = new RoomType()
 
@@ -30,7 +32,7 @@ export class RoomTypeSeed extends SeedBase {
 
                 await repository.save(room)
                 this.logger.debug(`Room type ${name} has been saved`)
-            })
+            }
         }
     }
 }

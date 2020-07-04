@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.EspModuleModel
 import com.izerocs.smarthome.widget.list.RecyclerView
 import kotlinx.android.synthetic.main.list_esp_item.view.*
 
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.list_esp_item.view.*
  * Created by IzeroCs on 2020-05-03
  */
 class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEspAdapter.ViewHolder>() {
-    private val esps  : ArrayList<EspItem> = ArrayList()
+    private val esps  : MutableList<EspModuleModel> = mutableListOf()
     private val inflater : LayoutInflater = LayoutInflater.from(context)
     private var onItemClickListener : OnItemClickListener? = null
 
@@ -89,17 +89,17 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         val esp = esps[position]
 
         holder.setSsid(esp.getSn())
-        holder.setSignal(esp.getSignal(), esp.isOnline())
-        holder.setOnline(esp.isOnline())
+        holder.setSignal(esp.getSignal(), esp.online)
+        holder.setOnline(esp.online)
     }
 
     override fun getItemCount() : Int {
         return esps.size
     }
 
-    fun add(item : EspItem) : Boolean {
+    fun add(item : EspModuleModel) : Boolean {
         esps.forEachIndexed { index, esp ->
-            if (esp.getSsid() == item.getSsid()) {
+            if (esp.name == item.name) {
                 esps[index] = item
                 return@add false
             }
@@ -108,12 +108,9 @@ class ListEspAdapter(private val context: Context) : RecyclerView.Adapter<ListEs
         return esps.add(item)
     }
 
-    fun addAll(lists : List<EspItem>) : Boolean = esps.addAll(lists)
     fun clear() : Unit = esps.clear()
-
-    fun get(position : Int) : EspItem {
-        return esps[position]
-    }
+    fun addAll(lists : MutableList<EspModuleModel>) : Boolean = esps.addAll(lists)
+    fun get(position : Int) : EspModuleModel = esps[position]
 
     fun setOnItemClickListener(listener : OnItemClickListener?) {
         onItemClickListener = listener

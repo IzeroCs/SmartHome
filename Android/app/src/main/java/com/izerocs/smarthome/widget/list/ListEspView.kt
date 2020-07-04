@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListEspAdapter
-import com.izerocs.smarthome.model.EspItem
+import com.izerocs.smarthome.model.EspModuleModel
 import com.izerocs.smarthome.widget.manager.LinearLayoutManager
 
 /**
@@ -26,21 +26,14 @@ class ListEspView(context : Context, attributeSet: AttributeSet) : RecyclerView(
         ))
     }
 
-    fun add(item : EspItem) : Boolean = (adapter as ListEspAdapter).add(item)
-    fun addAll(lists : List<EspItem>) : Boolean = (adapter as ListEspAdapter).addAll(lists)
-
     fun clear() : Unit = (adapter as ListEspAdapter).clear()
-
-    fun get(position : Int) : EspItem {
-        return (adapter as ListEspAdapter).get(position)
-    }
-
-    fun size() : Int {
-        return (adapter as ListEspAdapter).itemCount
-    }
+    fun add(item : EspModuleModel) : Boolean = (adapter as ListEspAdapter).add(item)
+    fun addAll(lists : MutableList<EspModuleModel>) : Boolean = (adapter as ListEspAdapter).addAll(lists)
+    fun get(position : Int) : EspModuleModel = (adapter as ListEspAdapter).get(position)
+    fun size() : Int = (adapter as ListEspAdapter).itemCount
+    fun notifyDataSetChanged() : Unit = (adapter as ListEspAdapter).notifyDataSetChanged()
 
     fun setOnItemClickListener(listener : ListEspAdapter.OnItemClickListener) :
             Unit = (adapter as ListEspAdapter).setOnItemClickListener(listener)
 
-    fun notifyDataSetChanged() : Unit = (adapter as ListEspAdapter).notifyDataSetChanged()
 }

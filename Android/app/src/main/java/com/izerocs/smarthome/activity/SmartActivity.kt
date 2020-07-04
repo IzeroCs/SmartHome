@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
-import com.izerocs.smarthome.model.RoomItem
+import com.izerocs.smarthome.item.RoomListItem
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.widget.WavesView
 import kotlinx.android.synthetic.main.activity_smart.*
@@ -34,13 +34,13 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
     }
 
-    override fun onRoomList(client : SocketClient, roomList : MutableList<RoomItem>) {
-        if (roomList.isEmpty())
+    override fun onRoomList(client : SocketClient, roomListList : MutableList<RoomListItem>) {
+        if (roomListList.isEmpty())
             return
 
-        val rooms = mutableListOf<RoomItem>()
+        val rooms = mutableListOf<RoomListItem>()
 
-        roomList.forEach { item -> rooms.add(item) }
+        roomListList.forEach { item -> rooms.add(item) }
         listRoom.clear()
         listRoom.addAll(rooms)
 

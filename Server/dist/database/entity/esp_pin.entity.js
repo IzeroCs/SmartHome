@@ -26,7 +26,7 @@ var EspPin = /** @class */ (function () {
         __metadata("design:type", esp_entity_1.Esp)
     ], EspPin.prototype, "esp", void 0);
     __decorate([
-        typeorm_1.Column("tinyint"),
+        typeorm_1.Column("tinyint", { nullable: true }),
         __metadata("design:type", Number)
     ], EspPin.prototype, "name", void 0);
     __decorate([
@@ -46,11 +46,11 @@ var EspPin = /** @class */ (function () {
         __metadata("design:type", Number)
     ], EspPin.prototype, "ouputSecondary", void 0);
     __decorate([
-        typeorm_1.Column("tinyint"),
+        typeorm_1.Column("tinyint", { nullable: true, default: 0 }),
         __metadata("design:type", Number)
     ], EspPin.prototype, "dualToggleCount", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ nullable: true, default: false }),
         __metadata("design:type", Boolean)
     ], EspPin.prototype, "status", void 0);
     EspPin = __decorate([

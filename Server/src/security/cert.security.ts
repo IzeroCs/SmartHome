@@ -29,23 +29,22 @@ export class CertSecurity {
     }
 
     verify(token, handle) {
-        jwt.verify(token, this.certPublic, (err, decoded) => {
-            if (!err) {
-                const keyPayloads = Object.keys(this.payloadConfig)
+        try {
+            const decoded = jwt.verify(token, this.certPublic)
+            const keyPayloads = Object.keys(this.payloadConfig)
 
-                for (let i = 0; i < keyPayloads.length; ++i) {
-                    const key = keyPayloads[i]
-                    const value = this.payloadConfig[key]
+            for (let i = 0; i < keyPayloads.length; ++i) {
+                const key = keyPayloads[i]
+                const value = this.payloadConfig[key]
 
-                    if (isUndefined(decoded[key]) || decoded[key] !== value)
-                        return handle(err, false)
-                }
-
-                return handle(err, true)
+                if (isUndefined(decoded[key]) || decoded[key] !== value)
+                    return handle("Undefined decoded key", false)
             }
 
+            return handle(null, true)
+        } catch (err) {
             return handle(err, false)
-        })
+        }
     }
 
     private resolveAssetsPath(filename: string): string {

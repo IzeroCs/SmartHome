@@ -49,6 +49,15 @@ struct IOData {
                "dualToggleCount=" + String(dualToggleCount) + "," +
                "status=" + String(status);
     }
+
+    String toJsonString() {
+        return "{\"input\":" + String(input) + "," +
+            "\"outputType\":" + String(outputType) + "," +
+            "\"outputPrimary\":" + String(outputPrimary) + "," +
+            "\"outputSecondary\":" + String(outputSecondary) + "," +
+            "\"dualToggleCount\":" + String(dualToggleCount) + "," +
+            "\"status\":" + (status ? "true" : "false") + "}";
+    }
 };
 
 class IOClass {

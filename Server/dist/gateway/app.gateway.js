@@ -16,6 +16,13 @@ var socket_util_1 = require("../util/socket.util");
 var util_1 = require("util");
 var esp_gateway_1 = require("./esp.gateway");
 var cert_security_1 = require("../security/cert.security");
+var ormconfig_1 = require("../ormconfig");
+var room_type_model_1 = require("../database/model/room_type.model");
+var room_type_entity_1 = require("../database/entity/room_type.entity");
+var room_list_model_1 = require("../database/model/room_list.model");
+var room_list_entity_1 = require("../database/entity/room_list.entity");
+var room_device_model_1 = require("../database/model/room_device.model");
+var room_device_entity_1 = require("../database/entity/room_device.entity");
 var AppGateway = /** @class */ (function () {
     function AppGateway() {
         this.logger = new common_1.Logger("AppGateway");
@@ -25,7 +32,7 @@ var AppGateway = /** @class */ (function () {
     }
     AppGateway_1 = AppGateway;
     AppGateway.prototype.afterInit = function (server) {
-        this.logger.log("Init socket platform app");
+        this.logger.log("Socket /platform-app initialized");
         socket_util_1.SocketUtil.removing(this.server, this.logger);
     };
     AppGateway.prototype.handleConnection = function (client) {
@@ -37,11 +44,12 @@ var AppGateway = /** @class */ (function () {
         socket_util_1.SocketUtil.restoring(this.server, client, this.logger);
         setTimeout(function () {
             Notify.unAuthorized(client);
-        }, 1000);
+        }, 5000);
     };
     AppGateway.prototype.handleDisconnect = function (client) {
         this.logger.log("Client disconnect: " + client.id);
         this.removeDevice(client);
+        socket_util_1.SocketUtil.removing(this.server, this.logger);
     };
     AppGateway.prototype.handleAuth = function (client, payload) {
         var _this = this;
@@ -66,6 +74,26 @@ var AppGateway = /** @class */ (function () {
             }
         });
     };
+    AppGateway.prototype.handleRoomType = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.roomTypes(client);
+    };
+    AppGateway.prototype.handleRoomList = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.roomList(client);
+    };
+    AppGateway.prototype.handleRoomDevice = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.roomDevice(client, payload);
+    };
+    AppGateway.prototype.handleEspList = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.espModules(client);
+    };
     AppGateway.prototype.removeDevice = function (client) {
         if (!util_1.isUndefined(client.id))
             delete this.devices[client.id];
@@ -83,7 +111,7 @@ var AppGateway = /** @class */ (function () {
         return client["auth"] === true;
     };
     AppGateway.isAppID = function (id) {
-        return !util_1.isUndefined(id) && id.startsWith("ESP");
+        return !util_1.isUndefined(id) && id.startsWith("APP");
     };
     var AppGateway_1;
     AppGateway.instance = null;
@@ -97,11 +125,35 @@ var AppGateway = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleAuth", null);
+    __decorate([
+        websockets_1.SubscribeMessage("room-type"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleRoomType", null);
+    __decorate([
+        websockets_1.SubscribeMessage("room-list"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleRoomList", null);
+    __decorate([
+        websockets_1.SubscribeMessage("room-device"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleRoomDevice", null);
+    __decorate([
+        websockets_1.SubscribeMessage("esp-list"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleEspList", null);
     AppGateway = AppGateway_1 = __decorate([
         websockets_1.WebSocketGateway({
             namespace: "/platform-app",
             pingTimeout: 5000,
-            pingInterval: 1000,
+            pingInterval: 100,
         }),
         __metadata("design:paramtypes", [])
     ], AppGateway);
@@ -116,7 +168,7 @@ var Notify = /** @class */ (function () {
             return;
         AppGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
         client.emit("auth", "unauthorized");
-        client.disconnect(true);
+        client.disconnect(false);
     };
     Notify.espModules = function (client) {
         if (client) {
@@ -127,8 +179,53 @@ var Notify = /** @class */ (function () {
             AppGateway.getInstance().server.emit("esp-list", esp_gateway_1.EspGateway.getModules());
         }
     };
-    Notify.roomTypes = function (client) { };
-    Notify.roomList = function (client) { };
+    Notify.roomTypes = function (client) {
+        room_type_model_1.RoomTypeModel.getAll()
+            .then(function (list) {
+            var array = [];
+            if (list.length <= 0)
+                return client.emit("room-type", array);
+            else
+                list.forEach(function (entry) {
+                    array.push({
+                        id: entry.id,
+                        name: entry.name,
+                        type: entry.type,
+                    });
+                });
+            client.emit("room-type", array);
+        })
+            .catch(function (err) { return client.emit("room-type", []); });
+    };
+    Notify.roomList = function (client) {
+        room_list_model_1.RoomListModel.getAll()
+            .then(function (list) {
+            var array = [];
+            if (list.length <= 0)
+                return client.emit("room-list", array);
+            else
+                list.forEach(function (entry) {
+                    array.push({
+                        id: entry.id,
+                        name: entry.name,
+                        type: entry.type.type,
+                    });
+                });
+            client.emit("room-list", array);
+        })
+            .catch(function (err) { return client.emit("room-list", []); });
+    };
+    Notify.roomDevice = function (client, payload) {
+        payload = Pass.roomDevice(payload);
+        room_device_model_1.RoomDeviceModel.getList(payload.id)
+            .then(function (list) {
+            if (list.length <= 0)
+                return client.emit("room-device", []);
+            else
+                return client.emit("room-device", list);
+        })
+            .catch(function (err) { return client.emit("room-device", []); });
+    };
     return Notify;
 }());
 var Pass = /** @class */ (function () {
@@ -152,6 +249,11 @@ var Pass = /** @class */ (function () {
         return Pass.def({
             id: "",
             token: "",
+        }, obj);
+    };
+    Pass.roomDevice = function (obj) {
+        return Pass.def({
+            id: "",
         }, obj);
     };
     return Pass;

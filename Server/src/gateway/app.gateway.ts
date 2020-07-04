@@ -12,11 +12,18 @@ import { SocketUtil } from "../util/socket.util"
 import { isUndefined, isNull } from "util"
 import { EspGateway } from "./esp.gateway"
 import { CertSecurity } from "../security/cert.security"
+import { logger, cli } from "src/ormconfig"
+import { RoomTypeModel } from "src/database/model/room_type.model"
+import { RoomType } from "src/database/entity/room_type.entity"
+import { RoomListModel } from "src/database/model/room_list.model"
+import { RoomList } from "src/database/entity/room_list.entity"
+import { RoomDeviceModel } from "src/database/model/room_device.model"
+import { RoomDevice } from "src/database/entity/room_device.entity"
 
 @WebSocketGateway({
     namespace: "/platform-app",
     pingTimeout: 5000,
-    pingInterval: 1000,
+    pingInterval: 100,
 })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -32,21 +39,23 @@ export class AppGateway
     }
 
     afterInit(server: Server) {
-        this.logger.log("Init socket platform app")
+        this.logger.log("Socket /platform-app initialized")
         SocketUtil.removing(this.server, this.logger)
     }
 
     handleConnection(client: Socket, ...args: any[]) {
         this.logger.log(`Client connection: ${client.id}`)
         SocketUtil.restoring(this.server, client, this.logger)
+
         setTimeout(() => {
             Notify.unAuthorized(client)
-        }, 1000)
+        }, 5000)
     }
 
     handleDisconnect(client: Socket) {
         this.logger.log(`Client disconnect: ${client.id}`)
         this.removeDevice(client)
+        SocketUtil.removing(this.server, this.logger)
     }
 
     @SubscribeMessage("auth")
@@ -76,6 +85,30 @@ export class AppGateway
         })
     }
 
+    @SubscribeMessage("room-type")
+    handleRoomType(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.roomTypes(client)
+    }
+
+    @SubscribeMessage("room-list")
+    handleRoomList(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.roomList(client)
+    }
+
+    @SubscribeMessage("room-device")
+    handleRoomDevice(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.roomDevice(client, payload)
+    }
+
+    @SubscribeMessage("esp-list")
+    handleEspList(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.espModules(client)
+    }
+
     private removeDevice(client: Socket) {
         if (!isUndefined(client.id)) delete this.devices[client.id]
     }
@@ -97,7 +130,7 @@ export class AppGateway
     }
 
     static isAppID(id: string): boolean {
-        return !isUndefined(id) && id.startsWith("ESP")
+        return !isUndefined(id) && id.startsWith("APP")
     }
 }
 
@@ -109,7 +142,7 @@ class Notify {
             `Disconnect socket unauthorized: ${client.id}`,
         )
         client.emit("auth", "unauthorized")
-        client.disconnect(true)
+        client.disconnect(false)
     }
 
     static espModules(client?: Socket) {
@@ -124,9 +157,56 @@ class Notify {
         }
     }
 
-    static roomTypes(client: Socket) {}
+    static roomTypes(client: Socket) {
+        RoomTypeModel.getAll()
+            .then((list: Array<RoomType>) => {
+                const array = []
 
-    static roomList(client: Socket) {}
+                if (list.length <= 0) return client.emit("room-type", array)
+                else
+                    list.forEach(entry => {
+                        array.push({
+                            id: entry.id,
+                            name: entry.name,
+                            type: entry.type,
+                        })
+                    })
+
+                client.emit("room-type", array)
+            })
+            .catch(err => client.emit("room-type", []))
+    }
+
+    static roomList(client: Socket) {
+        RoomListModel.getAll()
+            .then((list: Array<RoomList>) => {
+                const array = []
+
+                if (list.length <= 0) return client.emit("room-list", array)
+                else
+                    list.forEach(entry => {
+                        array.push({
+                            id: entry.id,
+                            name: entry.name,
+                            type: entry.type.type,
+                        })
+                    })
+
+                client.emit("room-list", array)
+            })
+            .catch(err => client.emit("room-list", []))
+    }
+
+    static roomDevice(client: Socket, payload: any) {
+        payload = Pass.roomDevice(payload)
+
+        RoomDeviceModel.getList(payload.id)
+            .then((list: Array<RoomDevice>) => {
+                if (list.length <= 0) return client.emit("room-device", [])
+                else return client.emit("room-device", list)
+            })
+            .catch(err => client.emit("room-device", []))
+    }
 }
 
 class Pass {
@@ -148,6 +228,15 @@ class Pass {
             {
                 id: "",
                 token: "",
+            },
+            obj,
+        )
+    }
+
+    static roomDevice(obj: Object): Object {
+        return Pass.def(
+            {
+                id: "",
             },
             obj,
         )

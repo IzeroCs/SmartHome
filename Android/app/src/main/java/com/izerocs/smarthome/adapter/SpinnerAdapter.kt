@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.model.RoomType
+import com.izerocs.smarthome.item.RoomTypeItem
 import kotlinx.android.synthetic.main.spinne_single_item.view.*
 
 /**
@@ -24,13 +24,13 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         private var view     : View?     = null
         private var context  : Context?  = null
         private var image    : Drawable? = null
-        private var roomType : RoomType? = null
+        private var roomTypeItem : RoomTypeItem? = null
 
-        constructor(context : Context, roomType : RoomType) {
+        constructor(context : Context, roomTypeItem : RoomTypeItem) {
             this.context  = context
-            this.roomType = roomType
+            this.roomTypeItem = roomTypeItem
 
-            this.setImage(roomType.getIconResource())
+            this.setImage(roomTypeItem.getIconResource())
         }
 
         fun cacheView(view : View) {
@@ -61,7 +61,7 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }
 
         fun getTitle() : String {
-            return this.roomType?.getTitle()!!
+            return this.roomTypeItem?.getTitle()!!
         }
 
         fun getView() : View? {
@@ -69,7 +69,7 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }
 
         override fun toString() : String {
-            return this.roomType?.getTitle()!!
+            return this.roomTypeItem?.getTitle()!!
         }
     }
 
@@ -94,5 +94,5 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }?.getView() as View
     }
 
-    fun add(roomType : RoomType) : Unit = add(SpinnerItem(context, roomType))
+    fun add(roomTypeItem : RoomTypeItem) : Unit = add(SpinnerItem(context, roomTypeItem))
 }
