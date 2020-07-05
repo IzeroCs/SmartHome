@@ -13,7 +13,7 @@
         "assets": true,
         "public": true,
         "test": true,
-        // "dist": true,
+        "dist": true,
         ".gitignore": true,
         ".eslintrc.js": true,
         ".prettierrc": true,

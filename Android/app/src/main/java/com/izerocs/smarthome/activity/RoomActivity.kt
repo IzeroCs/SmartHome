@@ -66,11 +66,9 @@ class RoomActivity : BaseActivity(),
         val device  = adapter.get(position)
 
         device?.let { device ->
-            val model = device.copy(
+            getSocketClient().commitRoomDevice(device.copy(
                 status = RoomDeviceModel.STATUS_ON
-            )
-
-            getSocketClient().commitRoomDevice(device) {}
+            ))
         }
 
 //        (listDevice.adapter as ListDeviceAdapter).run {

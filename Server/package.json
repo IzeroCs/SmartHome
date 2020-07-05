@@ -33,6 +33,7 @@
         "@nestjs/websockets": "^7.2.0",
         "@types/cli-color": "^2.0.0",
         "@webundsoehne/nestjs-util": "^1.0.0",
+        "class-validator": "^0.12.2",
         "cli-color": "^2.0.0",
         "fs": "0.0.1-security",
         "jsonwebtoken": "^8.5.1",

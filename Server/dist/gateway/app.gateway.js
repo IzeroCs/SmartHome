@@ -94,6 +94,11 @@ var AppGateway = /** @class */ (function () {
             return Notify.unAuthorized(client);
         Notify.espModules(client);
     };
+    AppGateway.prototype.handleCommitRoomDevice = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.commitRoomDevice(client, payload);
+    };
     AppGateway.prototype.removeDevice = function (client) {
         if (!util_1.isUndefined(client.id))
             delete this.devices[client.id];
@@ -149,6 +154,12 @@ var AppGateway = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleEspList", null);
+    __decorate([
+        websockets_1.SubscribeMessage("commit-room-device"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleCommitRoomDevice", null);
     AppGateway = AppGateway_1 = __decorate([
         websockets_1.WebSocketGateway({
             namespace: "/platform-app",
@@ -209,6 +220,10 @@ var Notify = /** @class */ (function () {
                 return client.emit("room-device", list);
         })
             .catch(function (err) { return client.emit("room-device", []); });
+    };
+    Notify.commitRoomDevice = function (client, payload) {
+        payload = Pass.roomDevice(payload);
+        room_device_model_1.RoomDeviceModel.updateDevice(payload.id, payload);
     };
     return Notify;
 }());

@@ -5,12 +5,13 @@ import {
     JoinColumn,
     OneToOne,
     ManyToOne,
-    OneToMany,
 } from "typeorm"
+import { IsNotEmpty, IsEnum, MinLength, MaxLength } from "class-validator"
 import { EspPin } from "./esp_pin.entity"
 import { Esp } from "./esp.entity"
 import { RoomList } from "./room_list.entity"
 import { DeviceType } from "./device_type.entity"
+import { StatusDevice, WidgetDevice } from "../model/room_device.model"
 
 @Entity()
 export class RoomDevice {
@@ -18,15 +19,20 @@ export class RoomDevice {
     id: number
 
     @Column()
+    @MinLength(5)
+    @MaxLength(30)
+    @IsNotEmpty()
     name: string
 
     @Column({ default: "", nullable: true })
     descriptor: string
 
     @Column("tinyint", { default: 0 })
+    @IsEnum(WidgetDevice)
     widget: number
 
     @Column("tinyint", { default: 0, nullable: true })
+    @IsEnum(StatusDevice)
     status: number
 
     @ManyToOne(

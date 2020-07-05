@@ -19,6 +19,7 @@ class SocketClient(val context : Context) {
     private val port      : String = "3000"
     private val namesapce : String = "/platform-app"
 
+    private var gson   = Gson()
     private var socket = initSocket()
     private val options = IO.Options().apply {
         forceNew = true
@@ -50,6 +51,8 @@ class SocketClient(val context : Context) {
         const val EVENT_ROOM_LIST    = "room-list"
         const val EVENT_ROOM_DEVICE  = "room-device"
         const val EVENT_ESP_LIST     = "esp-list"
+
+        const val EVENT_COMMIT_ROOM_DEVICE = "commit-room-device"
     }
 
     fun connect(makeSocket : Boolean = false) {
@@ -85,7 +88,9 @@ class SocketClient(val context : Context) {
     }
 
     fun commitRoomDevice(roomDevice : RoomDeviceModel, response : ((status : Boolean) -> Unit?)? = null) {
-
+        socket.once(EVENT_COMMIT_ROOM_DEVICE) {
+            Log.d(TAG, it[0].toString())
+        }.emit(EVENT_COMMIT_ROOM_DEVICE, JSONObject(gson.toJson(roomDevice)))
     }
 
     fun queryRoomDeviceList(roomId : Int, callback : (list: MutableList<RoomDeviceModel>) -> Unit) {
@@ -97,7 +102,6 @@ class SocketClient(val context : Context) {
                 return@once
 
             val data = it[0] as JSONArray
-            val gson = Gson()
             val list = mutableListOf<RoomDeviceModel>()
 
             for (i in 0 until  data.length()) {
@@ -179,7 +183,6 @@ class SocketClient(val context : Context) {
 
         val maps = mutableMapOf<String, EspModuleModel>()
         val data = it[0] as JSONObject
-        val gson = Gson()
 
         data.keys().forEach { id ->
             val espID    = id.toString()
@@ -204,7 +207,6 @@ class SocketClient(val context : Context) {
 
         val list = mutableListOf<RoomTypeModel>()
         val data = it[0] as JSONArray
-        val gson = Gson()
 
         for (i in 0 until data.length()) {
             val obj   = data.getJSONObject(i)
@@ -227,7 +229,6 @@ class SocketClient(val context : Context) {
 
         val list = mutableListOf<RoomListModel>()
         val data = it[0] as JSONArray
-        val gson = Gson()
 
         for (i in 0 until data.length()) {
             val obj = data.getJSONObject(i)

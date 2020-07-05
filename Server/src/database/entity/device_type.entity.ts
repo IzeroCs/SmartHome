@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
-import { RoomDevice } from "./room_device.entity"
 
 @Entity()
 export class DeviceType {

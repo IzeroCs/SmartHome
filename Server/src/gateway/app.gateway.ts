@@ -109,6 +109,12 @@ export class AppGateway
         Notify.espModules(client)
     }
 
+    @SubscribeMessage("commit-room-device")
+    handleCommitRoomDevice(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.commitRoomDevice(client, payload)
+    }
+
     private removeDevice(client: Socket) {
         if (!isUndefined(client.id)) delete this.devices[client.id]
     }
@@ -184,6 +190,12 @@ class Notify {
                 else return client.emit("room-device", list)
             })
             .catch(err => client.emit("room-device", []))
+    }
+
+    static commitRoomDevice(client: Socket, payload: any) {
+        payload = Pass.roomDevice(payload)
+
+        RoomDeviceModel.updateDevice(payload.id, payload)
     }
 }
 

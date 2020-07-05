@@ -15,8 +15,8 @@ const config: ConnectionOptions = {
     },
 
     entities: [__dirname + "/database/entity/*.entity{.ts,.js}"],
-    migrations: [__dirname + "/database/migrations/**/*{.ts,.js}"],
-    subscribers: [__dirname + "/database/subscribers/**/*{.ts,.js}"],
+    migrations: [__dirname + "/database/migrations/*{.ts,.js}"],
+    subscribers: [__dirname + "/database/subscribers/*{.ts,.js}"],
 
     migrationsRun: false,
     synchronize: true,
