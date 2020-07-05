@@ -11,6 +11,12 @@ var BaseSeed = /** @class */ (function () {
     BaseSeed.prototype.log = function () {
         return this.logger;
     };
+    BaseSeed.prototype.logSeedRunning = function () {
+        this.logger.log("Seeder " + this.context + " running...");
+    };
+    BaseSeed.prototype.logSeedRunned = function () {
+        this.logger.log("Seeder " + this.context + " runned");
+    };
     return BaseSeed;
 }());
 exports.BaseSeed = BaseSeed;

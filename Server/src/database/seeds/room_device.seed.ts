@@ -26,7 +26,7 @@ export class RoomDeviceSeed extends BaseSeed {
 
         if (deviceCount > 0) return
 
-        this.logger.debug("Insert first data room device")
+        this.logSeedRunning()
         const devices = [
             {
                 name: "Đèn tuýp",
@@ -89,5 +89,7 @@ export class RoomDeviceSeed extends BaseSeed {
                 `Room device ${device.name} added for ${roomFind.name}`,
             )
         }
+
+        this.logSeedRunned()
     }
 }

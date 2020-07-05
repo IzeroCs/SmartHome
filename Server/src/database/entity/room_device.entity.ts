@@ -5,6 +5,7 @@ import {
     JoinColumn,
     OneToOne,
     ManyToOne,
+    OneToMany,
 } from "typeorm"
 import { EspPin } from "./esp_pin.entity"
 import { Esp } from "./esp.entity"
@@ -49,7 +50,7 @@ export class RoomDevice {
 
     @ManyToOne(
         type => RoomList,
-        room => room.id,
+        room => room.devices,
     )
     room: RoomList
 }

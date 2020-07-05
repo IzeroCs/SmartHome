@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.item.RoomListItem
-import com.izerocs.smarthome.item.RoomTypeItem
+import com.izerocs.smarthome.model.RoomListModel
+import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.widget.list.RecyclerView
 import kotlinx.android.synthetic.main.list_room_item.view.*
 
@@ -15,14 +15,14 @@ import kotlinx.android.synthetic.main.list_room_item.view.*
  * Created by IzeroCs on 2020-04-01
  */
 class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListRoomAdapter.ViewHolder>() {
-    private val roomLists : MutableList<RoomListItem> = mutableListOf()
-    private val inflate : LayoutInflater = LayoutInflater.from(context)
-    private var onItemClickListener: OnItemClickListener? = null
+    private val roomLists     : MutableList<RoomListModel> = mutableListOf()
+    private val inflate       : LayoutInflater             = LayoutInflater.from(context)
+    private var clickListener : OnItemClickListener?       = null
 
     class ViewHolder(
         private val context: Context,
         private val view : View,
-        private val onItemClickListener : OnItemClickListener?
+        private val clickListener : OnItemClickListener?
     ) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener
     {
         init {
@@ -30,7 +30,7 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
         }
 
         fun setIcon(type : Int) {
-            val resIcon : Int = RoomTypeItem.getIconResource(type)
+            val resIcon : Int = RoomTypeModel.parseTypeToIcon(type)
 
             if (resIcon != -1)
                 itemView.listRoomIcon.setImageResource(resIcon)
@@ -46,11 +46,11 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
         }
 
         override fun onClick(v : View?) {
-            onItemClickListener?.onItemClick(v, adapterPosition, false)
+            clickListener?.onItemClick(v, adapterPosition, false)
         }
 
         override fun onLongClick(v: View?) : Boolean {
-            onItemClickListener?.onItemClick(v, adapterPosition, true)
+            clickListener?.onItemClick(v, adapterPosition, true)
             return true
         }
     }
@@ -61,24 +61,24 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
 
     @SuppressLint("InflateParams")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder = ViewHolder(
-        context, inflate.inflate(R.layout.list_room_item, null), onItemClickListener)
+        context, inflate.inflate(R.layout.list_room_item, null), clickListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val room = roomLists[position]
 
-        holder.setIcon(room.getType())
-        holder.setName(room.getName())
-        holder.setCount(room.getDeviceCount())
+        holder.setIcon(room.type.type)
+        holder.setName(room.name)
+        holder.setCount(room.devices.size)
     }
 
     override fun getItemCount(): Int = roomLists.size
-    fun add(roomList : RoomListItem) : Boolean = roomLists.add(roomList)
-    fun addAll(list : MutableList<RoomListItem>) : Boolean = roomLists.addAll(list)
+    fun add(roomList : RoomListModel) : Boolean = roomLists.add(roomList)
+    fun addAll(list : MutableList<RoomListModel>) : Boolean = roomLists.addAll(list)
 
     fun clear() : Unit = roomLists.clear()
-    fun get(position: Int) : RoomListItem = roomLists[position]
+    fun get(position: Int) : RoomListModel = roomLists[position]
 
     fun setOnItemClickListener(listener: OnItemClickListener?) {
-        onItemClickListener = listener
+        clickListener = listener
     }
 }

@@ -3,7 +3,6 @@ package com.izerocs.smarthome.activity
 import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.item.RoomListItem
 import com.izerocs.smarthome.preferences.RoomPreferences
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -27,7 +26,8 @@ class AddRoomActivity : BaseActivity(),
         addRoomButton.setOnClickListener(this)
         addRoomType.setEditTextBinder(addRoomName)
 
-        getSocketClient().getRoomTypes().forEach { type -> addRoomType.add(type) }
+        getSocketClient().getRoomTypes()
+            .forEach { type -> addRoomType.add(type) }
     }
 
     override fun onCreatePreferences() : SharedPreferences {
@@ -68,12 +68,12 @@ class AddRoomActivity : BaseActivity(),
 
         val nameLowerCase = name.toLowerCase(Locale.ROOT)
 
-        preferences.getAll()?.forEach {
-            val item = preferences.getObject(it.key, RoomListItem.RoomItemData::class.java)
-
-            if (nameLowerCase == item.name.toLowerCase(Locale.ROOT))
-                return@isNameExists true
-        }
+//        preferences.getAll()?.forEach {
+//            val item = preferences.getObject(it.key, RoomListItem.RoomItemData::class.java)
+//
+//            if (nameLowerCase == item.name.toLowerCase(Locale.ROOT))
+//                return@isNameExists true
+//        }
 
         return false
     }

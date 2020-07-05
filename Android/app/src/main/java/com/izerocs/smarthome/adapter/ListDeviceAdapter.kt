@@ -107,13 +107,13 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     }
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int) {
-        val device = roomDevices[position]
-
-        holder.setLabel(device.name)
-        holder.setSubLabel(device.descriptor)
-        holder.setIcon(device.icon)
-        holder.setStatusVisibility(device.widget)
-        holder.setStatusDevice(device.status)
+        get(position)?.run {
+            holder.setLabel(name)
+            holder.setSubLabel(descriptor)
+            holder.setIcon(icon)
+            holder.setStatusVisibility(widget)
+            holder.setStatusDevice(status)
+        }
     }
 
     override fun getItemCount() : Int {
@@ -130,7 +130,13 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     fun clear() : Unit = roomDevices.clear()
     fun add(itemRoom : RoomDeviceModel) : Boolean = roomDevices.add(itemRoom)
     fun addAll(elements: MutableList<RoomDeviceModel>) : Boolean = roomDevices.addAll(elements)
-    fun get(position : Int) : RoomDeviceModel = roomDevices[position]
+
+    fun get(position : Int) : RoomDeviceModel? {
+        if (position < roomDevices.size)
+            return roomDevices[position]
+
+        return null
+    }
 
     fun setOnItemClickListener(listener : OnItemClickListener?) {
         onItemClickListener = listener

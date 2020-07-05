@@ -81,8 +81,8 @@ var RoomListSeed = /** @class */ (function (_super) {
                         repositoryRoomType = this.connection.getRepository(room_type_entity_1.RoomType);
                         return [4 /*yield*/, repository.count()];
                     case 1:
-                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 6];
-                        this.logger.debug("Insert first data room list");
+                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 7];
+                        this.logSeedRunning();
                         i = 0;
                         _a.label = 2;
                     case 2:
@@ -108,7 +108,10 @@ var RoomListSeed = /** @class */ (function (_super) {
                     case 5:
                         ++i;
                         return [3 /*break*/, 2];
-                    case 6: return [2 /*return*/];
+                    case 6:
+                        this.logSeedRunned();
+                        _a.label = 7;
+                    case 7: return [2 /*return*/];
                 }
             });
         });

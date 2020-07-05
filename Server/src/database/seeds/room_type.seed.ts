@@ -19,7 +19,7 @@ export class RoomTypeSeed extends BaseSeed {
         const keys = Object.keys(this.datas)
 
         if ((await repository.count()) <= 0) {
-            this.logger.debug("Insert first data room type")
+            this.logSeedRunning()
 
             for (let i = 0; i < keys.length; ++i) {
                 const key = keys[i]
@@ -33,6 +33,8 @@ export class RoomTypeSeed extends BaseSeed {
                 await repository.save(room)
                 this.logger.debug(`Room type ${name} has been saved`)
             }
+
+            this.logSeedRunned()
         }
     }
 }

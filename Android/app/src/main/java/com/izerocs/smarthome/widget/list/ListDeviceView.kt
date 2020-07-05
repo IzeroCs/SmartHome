@@ -31,11 +31,12 @@ class ListDeviceView(context : Context, attributeSet: AttributeSet) : RecyclerVi
         )
     }
 
-    fun clear() : Unit = (adapter as ListDeviceAdapter).clear()
-    fun add(itemRoom : RoomDeviceModel) : Boolean = (adapter as ListDeviceAdapter).add(itemRoom)
-    fun addAll(elements : MutableList<RoomDeviceModel>) : Boolean = (adapter as ListDeviceAdapter).addAll(elements)
-    fun get(position : Int) : RoomDeviceModel = (adapter as ListDeviceAdapter).get(position)
-    fun notifyDataSetChanged() : Unit = (adapter as ListDeviceAdapter).notifyDataSetChanged()
+    fun clear() : Unit = getCastAdapter().clear()
+    fun add(itemRoom : RoomDeviceModel) : Boolean = getCastAdapter().add(itemRoom)
+    fun addAll(elements : MutableList<RoomDeviceModel>) : Boolean = getCastAdapter().addAll(elements)
+    fun get(position : Int) : RoomDeviceModel? = getCastAdapter().get(position)
+    fun notifyDataSetChanged() : Unit = getCastAdapter().notifyDataSetChanged()
+    fun getCastAdapter() : ListDeviceAdapter = adapter as ListDeviceAdapter
 
     fun setOnItemClickListener(listener : ListDeviceAdapter.OnItemClickListener) :
             Unit = (adapter as ListDeviceAdapter).setOnItemClickListener(listener)

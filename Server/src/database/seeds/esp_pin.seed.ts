@@ -71,6 +71,7 @@ export class EspPinSeed extends BaseSeed {
                 const pinCount = await repository.count({ esp: espFind })
 
                 if (pinCount >= pins.length) return
+                else this.logSeedRunning()
 
                 for (let p = 0; p < pins.length; ++p) {
                     const pin = pins[p]
@@ -87,9 +88,10 @@ export class EspPinSeed extends BaseSeed {
                         `Pin ${pin.input} added for ${espFind.name}`,
                     )
                 }
-            }
 
-            this.logger.debug(`Esp ${espFind.name} add pin successfully`)
+                this.logger.debug(`Esp ${espFind.name} add pin successfully`)
+                this.logSeedRunned()
+            }
         }
     }
 }

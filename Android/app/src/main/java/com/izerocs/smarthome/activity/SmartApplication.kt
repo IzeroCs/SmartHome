@@ -3,9 +3,9 @@ package com.izerocs.smarthome.activity
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.izerocs.smarthome.item.RoomListItem
-import com.izerocs.smarthome.item.RoomTypeItem
 import com.izerocs.smarthome.model.EspModuleModel
+import com.izerocs.smarthome.model.RoomListModel
+import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.network.SocketClient.OnEventListener
 import com.izerocs.smarthome.preferences.AppPreferences
@@ -43,12 +43,12 @@ class SmartApplication : Application() {
             activityCurrent?.onEspModules(client, espModules.toMutableMap())
         }
 
-        override fun onRoomTypes(client : SocketClient, roomTypeItems : MutableList<RoomTypeItem>) {
-            activityCurrent?.onRoomTypes(client, roomTypeItems.toMutableList())
+        override fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomTypeModel>) {
+            activityCurrent?.onRoomTypes(client, roomTypes.toMutableList())
         }
 
-        override fun onRoomList(client : SocketClient, roomListList : MutableList<RoomListItem>) {
-            activityCurrent?.onRoomList(client, roomListList.toMutableList())
+        override fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {
+            activityCurrent?.onRoomList(client, roomLists.toMutableList())
         }
     }
 
@@ -95,7 +95,7 @@ class SmartApplication : Application() {
             activityCurrent = this
             onSocketConnect(socketClient)
             onRoomTypes(socketClient, socketClient.getRoomTypes())
-            onRoomList(socketClient, socketClient.getRoomList())
+            onRoomList(socketClient, socketClient.getRoomLists())
             onEspModules(socketClient, socketClient.getEspModules())
         }
     }

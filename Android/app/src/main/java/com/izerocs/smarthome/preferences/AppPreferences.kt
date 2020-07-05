@@ -37,7 +37,7 @@ class AppPreferences : SharedPreferences {
         val num : String        = System.currentTimeMillis().shl(1).toString()
 
         val chrRandSize : Int  = APP_ID_CHARS.length
-        var chrDecimal  : Int  = 0
+        var chrDecimal  : Int
 
         for (i in 0 until 20) {
             chrDecimal = num[i].toInt()

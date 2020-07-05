@@ -16,5 +16,13 @@ export abstract class BaseSeed {
         return this.logger
     }
 
+    protected logSeedRunning() {
+        this.logger.log(`Seeder ${this.context} running...`)
+    }
+
+    protected logSeedRunned() {
+        this.logger.log(`Seeder ${this.context} runned`)
+    }
+
     abstract async seed()
 }

@@ -5,10 +5,10 @@ import android.util.Log
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.google.gson.Gson
-import com.izerocs.smarthome.item.RoomListItem
-import com.izerocs.smarthome.item.RoomTypeItem
 import com.izerocs.smarthome.model.EspModuleModel
 import com.izerocs.smarthome.model.RoomDeviceModel
+import com.izerocs.smarthome.model.RoomListModel
+import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.preferences.AppPreferences
 import org.json.JSONArray
 import org.json.JSONObject
@@ -24,11 +24,11 @@ class SocketClient(val context : Context) {
         forceNew = true
     }
 
-    private val espModules : MutableMap<String, EspModuleModel> = mutableMapOf()
-    private val roomTypeItems   : MutableList<RoomTypeItem>       = mutableListOf()
-    private val roomListList    : MutableList<RoomListItem>       = mutableListOf()
-    private var eventListener   : OnEventListener?                = null
-    private var authFailedCount : Int                             = 0
+    private val espModules      : MutableMap<String, EspModuleModel>   = mutableMapOf()
+    private val roomTypes       : MutableList<RoomTypeModel>           = mutableListOf()
+    private val roomLists       : MutableList<RoomListModel>           = mutableListOf()
+    private var eventListener   : OnEventListener?                     = null
+    private var authFailedCount : Int                                  = 0
 
     interface OnEventListener {
         fun onConnect(client : SocketClient) {}
@@ -36,8 +36,8 @@ class SocketClient(val context : Context) {
         fun onDisconnect(client : SocketClient) {}
         fun onAuthorized(client : SocketClient) {}
         fun onEspModules(client : SocketClient, espModules: MutableMap<String, EspModuleModel>) {}
-        fun onRoomTypes(client : SocketClient, roomTypeItems : MutableList<RoomTypeItem>) {}
-        fun onRoomList(client : SocketClient, roomListList : MutableList<RoomListItem>) {}
+        fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomTypeModel>) {}
+        fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {}
     }
 
     companion object {
@@ -59,9 +59,9 @@ class SocketClient(val context : Context) {
         socket.connect()
         socket.run {
             off()
-            on(Socket.EVENT_CONNECT)       { onConnect(it)      }
-            on(Socket.EVENT_CONNECT_ERROR) { onConnectError(it) }
-            on(Socket.EVENT_DISCONNECT)    { onDisconnect(it)   }
+            on(Socket.EVENT_CONNECT)       { onConnect() }
+            on(Socket.EVENT_CONNECT_ERROR) { onConnectError() }
+            on(Socket.EVENT_DISCONNECT)    { onDisconnect() }
             on(EVENT_AUTH)                 { onAuth(it) }
             on(EVENT_ESP_LIST)             { onEspList(it)      }
             on(EVENT_ROOM_TYPES)           { onRoomTypes(it)    }
@@ -76,23 +76,25 @@ class SocketClient(val context : Context) {
 
     fun clear() {
         espModules.clear()
-        roomTypeItems.clear()
-        roomListList.clear()
+        roomTypes.clear()
+        roomLists.clear()
     }
 
     fun setOnEventListener(eventListener : OnEventListener) {
         this.eventListener = eventListener
     }
 
-    fun queryRoomDevice(roomId : String, callback : (list: MutableList<RoomDeviceModel>) -> Unit) {
+    fun commitRoomDevice(roomDevice : RoomDeviceModel, response : ((status : Boolean) -> Unit?)? = null) {
+
+    }
+
+    fun queryRoomDeviceList(roomId : Int, callback : (list: MutableList<RoomDeviceModel>) -> Unit) {
         if (DEBUG)
             Log.d(TAG, "queryRoomDevice: $roomId")
 
-        socket.off(EVENT_ROOM_DEVICE).on(EVENT_ROOM_DEVICE) { it ->
-            if (it[0] !is JSONArray) {
-                socket.off(EVENT_ROOM_DEVICE)
-                return@on
-            }
+        socket.once(EVENT_ROOM_DEVICE) {
+            if (it[0] !is JSONArray)
+                return@once
 
             val data = it[0] as JSONArray
             val gson = Gson()
@@ -105,19 +107,18 @@ class SocketClient(val context : Context) {
                 list.add(deviceModel)
             }
 
-            socket.off(EVENT_ROOM_DEVICE)
             callback(list)
         }.emit(EVENT_ROOM_DEVICE, JSONObject(mapOf("id" to roomId)))
     }
 
-    fun getSocket() : Socket = this.socket
+    fun getSocket()     : Socket                             = this.socket
     fun getEspModules() : MutableMap<String, EspModuleModel> = this.espModules
-    fun getRoomTypes()  : MutableList<RoomTypeItem>       = this.roomTypeItems
-    fun getRoomList()   : MutableList<RoomListItem>       = this.roomListList
+    fun getRoomTypes()  : MutableList<RoomTypeModel>         = this.roomTypes
+    fun getRoomLists()  : MutableList<RoomListModel>         = this.roomLists
 
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port$namesapce", options)
 
-    private fun onConnect(data : Array<Any>) {
+    private fun onConnect() {
         if (DEBUG)
             Log.d(TAG, "onConnect")
 
@@ -129,14 +130,14 @@ class SocketClient(val context : Context) {
         eventListener?.onConnect(this)
     }
 
-    private fun onConnectError(data : Array<Any>) {
+    private fun onConnectError() {
         if (DEBUG)
             Log.d(TAG, "onConnectError")
 
         eventListener?.onConnectError(this)
     }
 
-    private fun onDisconnect(data : Array<Any>) {
+    private fun onDisconnect() {
         if (DEBUG)
             Log.d(TAG, "onDisconnect")
 
@@ -194,64 +195,55 @@ class SocketClient(val context : Context) {
         eventListener?.onEspModules(this, espModules)
     }
 
-    private fun onRoomTypes(data : Array<Any>) {
+    private fun onRoomTypes(it : Array<Any>) {
         if (DEBUG)
             Log.d(TAG, "onRoomTypes")
 
-        if (data.isEmpty() || data[0] !is JSONArray)
+        if (it[0] !is JSONArray)
             return
 
-        (data[0] as JSONArray).let { types ->
-            roomTypeItems.clear()
+        val list = mutableListOf<RoomTypeModel>()
+        val data = it[0] as JSONArray
+        val gson = Gson()
 
-            for (i in 0 until types.length()) {
-                if (types[i] is JSONObject) {
-                    val room = types.getJSONObject(i)
+        for (i in 0 until data.length()) {
+            val obj   = data.getJSONObject(i)
+            val model = gson.fromJson(obj.toString(), RoomTypeModel::class.java)
 
-                    if (room.has("id") && room.has("name") && room.has("type"))
-                        roomTypeItems.add(RoomTypeItem(context, room.getString("id"),
-                            room.getString("name"), room.getInt("type")))
-                }
-            }
-
-            eventListener?.onRoomTypes(this, roomTypeItems)
+            list.add(model)
         }
+
+        roomTypes.clear()
+        roomTypes.addAll(list)
+        eventListener?.onRoomTypes(this, roomTypes)
     }
 
-    private fun onRoomList(data : Array<Any>) {
+    private fun onRoomList(it : Array<Any>) {
         if (DEBUG)
             Log.d(TAG, "onRoomList")
 
-        if (data.isEmpty() || data[0] !is JSONArray)
+        if (it[0] !is JSONArray)
             return
 
-        (data[0] as JSONArray).let { list ->
-            roomListList.clear()
+        val list = mutableListOf<RoomListModel>()
+        val data = it[0] as JSONArray
+        val gson = Gson()
 
-            for (i in 0 until list.length()) {
-                if (list[i] is JSONObject) {
-                    val room = list.getJSONObject(i)
+        for (i in 0 until data.length()) {
+            val obj = data.getJSONObject(i)
+            val model = gson.fromJson(obj.toString(), RoomListModel::class.java)
 
-                    if (room.has("id") && room.has("name") && room.has("type"))
-                        roomListList.add(RoomListItem(context, room.getString("id"),
-                            room.getString("name"), room.getInt("type")))
-                }
-            }
-
-            eventListener?.onRoomList(this, roomListList)
+            list.add(model)
         }
+
+        roomLists.clear()
+        roomLists.addAll(list)
+        eventListener?.onRoomList(this, roomLists)
     }
 
     private fun onRoomDevice(data : Array<Any>) {
         if (DEBUG)
             Log.d(TAG, "onRoomDevice")
     }
-
-//    private fun getCreateEspItem(espID : String) : EspModuleModel {
-//        if (espModules.containsKey(espID))
-//            return espModules[espID] as EspItem
-//
-//        return EspItem(espID)
-//    }
 
 }

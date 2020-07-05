@@ -8,7 +8,7 @@ var RoomListModel = /** @class */ (function () {
     }
     RoomListModel.getAll = function () {
         return typeorm_1.getRepository(room_list_entity_1.RoomList).find({
-            relations: ["type"],
+            relations: ["type", "devices"],
             where: {
                 enable: true,
             },

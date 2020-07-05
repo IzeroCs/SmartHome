@@ -3,7 +3,7 @@ import { Server, Socket, Namespace } from "socket.io"
 import { Logger } from "@nestjs/common"
 
 export class SocketUtil {
-    static removing(io: Namespace, logger: Logger) {
+    static removing(io: Namespace, logger?: Logger) {
         const nsp = io.server.nsps[io.name]
         const connect = (client: Socket) => {
             if (!client["auth"]) {
@@ -17,7 +17,7 @@ export class SocketUtil {
         nsp.on("connect", connect)
     }
 
-    static restoring(io: Namespace, client: Socket, logger: Logger) {
+    static restoring(io: Namespace, client: Socket, logger?: Logger) {
         const nsp = io.server.nsps[io.name]
 
         if (underscore.findWhere(nsp.sockets, { id: client.id })) {

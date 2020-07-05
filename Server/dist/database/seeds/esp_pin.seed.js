@@ -130,12 +130,14 @@ var EspPinSeed = /** @class */ (function (_super) {
                         return [4 /*yield*/, repositoryEsp.findOne({ name: espName })];
                     case 2:
                         espFind = _a.sent();
-                        if (!!util_1.isNull(espFind)) return [3 /*break*/, 7];
+                        if (!!util_1.isNull(espFind)) return [3 /*break*/, 8];
                         return [4 /*yield*/, repository.count({ esp: espFind })];
                     case 3:
                         pinCount = _a.sent();
                         if (pinCount >= pins.length)
                             return [2 /*return*/];
+                        else
+                            this.logSeedRunning();
                         p = 0;
                         _a.label = 4;
                     case 4:
@@ -157,6 +159,7 @@ var EspPinSeed = /** @class */ (function (_super) {
                         return [3 /*break*/, 4];
                     case 7:
                         this.logger.debug("Esp " + espFind.name + " add pin successfully");
+                        this.logSeedRunned();
                         _a.label = 8;
                     case 8:
                         ++i;

@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.item.RoomListItem
-import com.izerocs.smarthome.item.RoomTypeItem
 import com.izerocs.smarthome.model.EspModuleModel
+import com.izerocs.smarthome.model.RoomListModel
+import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.preferences.SharedPreferences
 import com.izerocs.smarthome.widget.WavesView
@@ -63,12 +63,8 @@ abstract class BaseActivity : AppCompatActivity(),
     open fun onSocketConnectError(client : SocketClient) {}
     open fun onSocketDisconnect(client : SocketClient) {}
     open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspModuleModel>?) {}
-
-    open fun onRoomTypes(client : SocketClient, roomTypeItems : MutableList<RoomTypeItem>) {
-
-    }
-
-    open fun onRoomList(client : SocketClient, roomListList : MutableList<RoomListItem>) {}
+    open fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomTypeModel>) {}
+    open fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {}
 
     @MenuRes
     open fun onCreateMenu() : Int? = null

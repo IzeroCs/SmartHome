@@ -95,11 +95,9 @@ var SeedDatabase = /** @class */ (function () {
                         if (!!util_1.isUndefined(modules[key])) return [3 /*break*/, 7];
                         seed = new modules[key](this.connection, key);
                         if (!(!util_1.isUndefined(seed) && !util_1.isUndefined(seed.seed))) return [3 /*break*/, 7];
-                        seed.log().log("Seeder " + key + " running...");
                         return [4 /*yield*/, seed.seed()];
                     case 6:
                         _c.sent();
-                        seed.log().log("Seeder " + key + " runned");
                         _c.label = 7;
                     case 7:
                         ++i;

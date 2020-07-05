@@ -66,7 +66,7 @@ var EspGateway = /** @class */ (function () {
     EspGateway_1 = EspGateway;
     EspGateway.prototype.afterInit = function (server) {
         this.logger.log("Socket /platform-esp initialized");
-        socket_util_1.SocketUtil.removing(this.server, this.logger);
+        socket_util_1.SocketUtil.removing(this.server);
     };
     EspGateway.prototype.handleConnection = function (client) {
         var args = [];
@@ -74,7 +74,7 @@ var EspGateway = /** @class */ (function () {
             args[_i - 1] = arguments[_i];
         }
         this.logger.log("Client connection: " + client.id);
-        socket_util_1.SocketUtil.restoring(this.server, client, this.logger);
+        socket_util_1.SocketUtil.restoring(this.server, client);
         setTimeout(function () {
             Notify.unAuthorized(client);
         }, 5000);

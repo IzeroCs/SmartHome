@@ -108,8 +108,6 @@ class EspActivity : BaseActivity(), View.OnClickListener, WavesView.OnBackClickL
 
     override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspModuleModel>?) {
         espModules?.run {
-            Log.d(TAG, toString())
-
             listEspConnected.clear()
             listEspConnected.addAll(this.values.toMutableList())
 

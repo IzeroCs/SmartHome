@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListRoomAdapter
-import com.izerocs.smarthome.item.RoomListItem
+import com.izerocs.smarthome.model.RoomListModel
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.widget.WavesView
 import kotlinx.android.synthetic.main.activity_smart.*
@@ -20,9 +20,7 @@ class SmartActivity : BaseActivity(),
 
     companion object {
         const val TAG = "SmartActivity"
-        const val EXTRA_ROOM_ID   = "com.izerocs.smarthome.ROOM_ID"
-        const val EXTRA_ROOM_NAME = "com.izerocs.smarthome.ROOM_NAME"
-        const val EXTRA_ROOM_TYPE = "com.izerocs.smarthome.ROOM_TYPE"
+        const val EXTRA_ROOM_ID = "com.izerocs.smarthome.ROOM_ID"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,16 +32,12 @@ class SmartActivity : BaseActivity(),
         floatButton.setOnClickListener(this)
     }
 
-    override fun onRoomList(client : SocketClient, roomListList : MutableList<RoomListItem>) {
-        if (roomListList.isEmpty())
+    override fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {
+        if (roomLists.isEmpty())
             return
 
-        val rooms = mutableListOf<RoomListItem>()
-
-        roomListList.forEach { item -> rooms.add(item) }
         listRoom.clear()
-        listRoom.addAll(rooms)
-
+        listRoom.addAll(roomLists)
         runOnUiThread { listRoom.notifyDataSetChanged() }
     }
 
@@ -63,7 +57,7 @@ class SmartActivity : BaseActivity(),
 
     override fun onItemClick(view: View?, position: Int, isLongClick: Boolean) {
         startActivity(Intent(applicationContext, RoomActivity::class.java).apply {
-            putExtra(EXTRA_ROOM_ID, listRoom.get(position).getId())
+            putExtra(EXTRA_ROOM_ID, listRoom.get(position).id)
         })
     }
 }

@@ -70,7 +70,7 @@ var EspSeed = /** @class */ (function (_super) {
                     case 1:
                         count = _a.sent();
                         if (!(count <= 0)) return [3 /*break*/, 3];
-                        this.logger.debug("Insert first data esp");
+                        this.logSeedRunning();
                         esp = new esp_entity_1.Esp();
                         esp.name = "ESP1N403E91636RSC185G2K";
                         esp.online = false;
@@ -79,6 +79,7 @@ var EspSeed = /** @class */ (function (_super) {
                     case 2:
                         _a.sent();
                         this.logger.debug("Esp " + esp.name + " has been saved");
+                        this.logSeedRunned();
                         _a.label = 3;
                     case 3: return [2 /*return*/];
                 }

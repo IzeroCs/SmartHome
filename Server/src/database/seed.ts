@@ -46,11 +46,8 @@ export class SeedDatabase {
             if (!isUndefined(modules[key])) {
                 const seed = new modules[key](this.connection, key)
 
-                if (!isUndefined(seed) && !isUndefined(seed.seed)) {
-                    seed.log().log(`Seeder ${key} running...`)
+                if (!isUndefined(seed) && !isUndefined(seed.seed))
                     await seed.seed()
-                    seed.log().log(`Seeder ${key} runned`)
-                }
             }
         }
     }

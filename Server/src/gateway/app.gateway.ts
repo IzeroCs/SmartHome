@@ -45,7 +45,7 @@ export class AppGateway
 
     handleConnection(client: Socket, ...args: any[]) {
         this.logger.log(`Client connection: ${client.id}`)
-        SocketUtil.restoring(this.server, client, this.logger)
+        SocketUtil.restoring(this.server, client)
 
         setTimeout(() => {
             Notify.unAuthorized(client)
@@ -55,7 +55,7 @@ export class AppGateway
     handleDisconnect(client: Socket) {
         this.logger.log(`Client disconnect: ${client.id}`)
         this.removeDevice(client)
-        SocketUtil.removing(this.server, this.logger)
+        SocketUtil.removing(this.server)
     }
 
     @SubscribeMessage("auth")
@@ -160,19 +160,8 @@ class Notify {
     static roomTypes(client: Socket) {
         RoomTypeModel.getAll()
             .then((list: Array<RoomType>) => {
-                const array = []
-
-                if (list.length <= 0) return client.emit("room-type", array)
-                else
-                    list.forEach(entry => {
-                        array.push({
-                            id: entry.id,
-                            name: entry.name,
-                            type: entry.type,
-                        })
-                    })
-
-                client.emit("room-type", array)
+                if (list.length <= 0) return client.emit("room-type", [])
+                else client.emit("room-type", list)
             })
             .catch(err => client.emit("room-type", []))
     }
@@ -180,19 +169,8 @@ class Notify {
     static roomList(client: Socket) {
         RoomListModel.getAll()
             .then((list: Array<RoomList>) => {
-                const array = []
-
-                if (list.length <= 0) return client.emit("room-list", array)
-                else
-                    list.forEach(entry => {
-                        array.push({
-                            id: entry.id,
-                            name: entry.name,
-                            type: entry.type.type,
-                        })
-                    })
-
-                client.emit("room-list", array)
+                if (list.length <= 0) return client.emit("room-list", [])
+                else client.emit("room-list", list)
             })
             .catch(err => client.emit("room-list", []))
     }

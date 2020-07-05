@@ -21,7 +21,7 @@ export class RoomListSeed extends BaseSeed {
         const repositoryRoomType = this.connection.getRepository(RoomType)
 
         if ((await repository.count()) <= 0) {
-            this.logger.debug("Insert first data room list")
+            this.logSeedRunning()
 
             for (let i = 0; i < this.datas.length; ++i) {
                 const data = this.datas[i]
@@ -41,6 +41,8 @@ export class RoomListSeed extends BaseSeed {
                     this.logger.debug(`Room list ${name} has been saved`)
                 }
             }
+
+            this.logSeedRunned()
         }
     }
 }

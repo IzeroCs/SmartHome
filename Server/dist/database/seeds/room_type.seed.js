@@ -79,8 +79,8 @@ var RoomTypeSeed = /** @class */ (function (_super) {
                         keys = Object.keys(this.datas);
                         return [4 /*yield*/, repository.count()];
                     case 1:
-                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 5];
-                        this.logger.debug("Insert first data room type");
+                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 6];
+                        this.logSeedRunning();
                         i = 0;
                         _a.label = 2;
                     case 2:
@@ -99,7 +99,10 @@ var RoomTypeSeed = /** @class */ (function (_super) {
                     case 4:
                         ++i;
                         return [3 /*break*/, 2];
-                    case 5: return [2 /*return*/];
+                    case 5:
+                        this.logSeedRunned();
+                        _a.label = 6;
+                    case 6: return [2 /*return*/];
                 }
             });
         });

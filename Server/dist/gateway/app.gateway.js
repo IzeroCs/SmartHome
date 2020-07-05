@@ -41,7 +41,7 @@ var AppGateway = /** @class */ (function () {
             args[_i - 1] = arguments[_i];
         }
         this.logger.log("Client connection: " + client.id);
-        socket_util_1.SocketUtil.restoring(this.server, client, this.logger);
+        socket_util_1.SocketUtil.restoring(this.server, client);
         setTimeout(function () {
             Notify.unAuthorized(client);
         }, 5000);
@@ -49,7 +49,7 @@ var AppGateway = /** @class */ (function () {
     AppGateway.prototype.handleDisconnect = function (client) {
         this.logger.log("Client disconnect: " + client.id);
         this.removeDevice(client);
-        socket_util_1.SocketUtil.removing(this.server, this.logger);
+        socket_util_1.SocketUtil.removing(this.server);
     };
     AppGateway.prototype.handleAuth = function (client, payload) {
         var _this = this;
@@ -182,36 +182,20 @@ var Notify = /** @class */ (function () {
     Notify.roomTypes = function (client) {
         room_type_model_1.RoomTypeModel.getAll()
             .then(function (list) {
-            var array = [];
             if (list.length <= 0)
-                return client.emit("room-type", array);
+                return client.emit("room-type", []);
             else
-                list.forEach(function (entry) {
-                    array.push({
-                        id: entry.id,
-                        name: entry.name,
-                        type: entry.type,
-                    });
-                });
-            client.emit("room-type", array);
+                client.emit("room-type", list);
         })
             .catch(function (err) { return client.emit("room-type", []); });
     };
     Notify.roomList = function (client) {
         room_list_model_1.RoomListModel.getAll()
             .then(function (list) {
-            var array = [];
             if (list.length <= 0)
-                return client.emit("room-list", array);
+                return client.emit("room-list", []);
             else
-                list.forEach(function (entry) {
-                    array.push({
-                        id: entry.id,
-                        name: entry.name,
-                        type: entry.type.type,
-                    });
-                });
-            client.emit("room-list", array);
+                client.emit("room-list", list);
         })
             .catch(function (err) { return client.emit("room-list", []); });
     };

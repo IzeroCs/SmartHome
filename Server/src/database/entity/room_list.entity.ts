@@ -21,7 +21,7 @@ export class RoomList {
     @Column()
     enable: boolean
 
-    @ManyToOne(
+    @OneToMany(
         type => RoomDevice,
         device => device.room,
     )

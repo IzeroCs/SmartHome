@@ -26,7 +26,7 @@ export class DeviceTypeSeed extends BaseSeed {
         const count = await repository.count()
 
         if (count <= 0) {
-            this.logger.debug("Insert first data device type")
+            this.logSeedRunning()
 
             for (let i = 0; i < this.def.length; ++i) {
                 const type = this.def[i]
@@ -39,6 +39,8 @@ export class DeviceTypeSeed extends BaseSeed {
                 await repository.save(record)
                 this.logger.debug(`Added device type ${type.name}`)
             }
+
+            this.logSeedRunned()
         }
     }
 }

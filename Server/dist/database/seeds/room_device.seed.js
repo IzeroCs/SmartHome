@@ -93,7 +93,7 @@ var RoomDeviceSeed = /** @class */ (function (_super) {
                         deviceCount = _a.sent();
                         if (deviceCount > 0)
                             return [2 /*return*/];
-                        this.logger.debug("Insert first data room device");
+                        this.logSeedRunning();
                         devices = [
                             {
                                 name: "Đèn tuýp",
@@ -159,7 +159,9 @@ var RoomDeviceSeed = /** @class */ (function (_super) {
                     case 9:
                         ++i;
                         return [3 /*break*/, 7];
-                    case 10: return [2 /*return*/];
+                    case 10:
+                        this.logSeedRunned();
+                        return [2 /*return*/];
                 }
             });
         });

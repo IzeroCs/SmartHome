@@ -29,7 +29,7 @@ var RoomList = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], RoomList.prototype, "enable", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.room; }),
+        typeorm_1.OneToMany(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.room; }),
         __metadata("design:type", Array)
     ], RoomList.prototype, "devices", void 0);
     __decorate([

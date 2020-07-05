@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import com.izerocs.smarthome.R
-import com.izerocs.smarthome.item.RoomTypeItem
+import com.izerocs.smarthome.model.RoomTypeModel
 import kotlinx.android.synthetic.main.spinne_single_item.view.*
 
 /**
@@ -20,17 +20,14 @@ import kotlinx.android.synthetic.main.spinne_single_item.view.*
 class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAdapter.SpinnerItem>(context, layoutId) {
     private val inflate = LayoutInflater.from(context)
 
-    class SpinnerItem {
+    class SpinnerItem(context : Context, roomType : RoomTypeModel) {
         private var view     : View?     = null
-        private var context  : Context?  = null
+        private var context  : Context?  = context
         private var image    : Drawable? = null
-        private var roomTypeItem : RoomTypeItem? = null
+        private var roomType : RoomTypeModel? = roomType
 
-        constructor(context : Context, roomTypeItem : RoomTypeItem) {
-            this.context  = context
-            this.roomTypeItem = roomTypeItem
-
-            this.setImage(roomTypeItem.getIconResource())
+        init {
+            this.setImage(roomType.getIcon())
         }
 
         fun cacheView(view : View) {
@@ -61,7 +58,7 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }
 
         fun getTitle() : String {
-            return this.roomTypeItem?.getTitle()!!
+            return this.roomType?.getTitle(context!!)!!
         }
 
         fun getView() : View? {
@@ -69,7 +66,7 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }
 
         override fun toString() : String {
-            return this.roomTypeItem?.getTitle()!!
+            return this.roomType?.getTitle(context!!)!!
         }
     }
 
@@ -94,5 +91,5 @@ class SpinnerAdapter(context: Context, layoutId : Int) : ArrayAdapter<SpinnerAda
         }?.getView() as View
     }
 
-    fun add(roomTypeItem : RoomTypeItem) : Unit = add(SpinnerItem(context, roomTypeItem))
+    fun add(roomType : RoomTypeModel) : Unit = add(SpinnerItem(context, roomType))
 }

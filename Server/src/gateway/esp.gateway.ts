@@ -40,12 +40,12 @@ export class EspGateway
 
     afterInit(server: Server) {
         this.logger.log("Socket /platform-esp initialized")
-        SocketUtil.removing(this.server, this.logger)
+        SocketUtil.removing(this.server)
     }
 
     handleConnection(client: Socket, ...args: any[]) {
         this.logger.log(`Client connection: ${client.id}`)
-        SocketUtil.restoring(this.server, client, this.logger)
+        SocketUtil.restoring(this.server, client)
 
         setTimeout(() => {
             Notify.unAuthorized(client)
