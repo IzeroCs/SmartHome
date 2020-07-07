@@ -3,10 +3,7 @@ package com.izerocs.smarthome.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.Rect
+import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
@@ -23,6 +20,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.setPadding
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.utils.Util
 import kotlin.math.sin
@@ -88,14 +86,16 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
         setOnLongClickListener(this@WavesView)
     }
 
-    private var title           : CharSequence     = ""
-    private var viewWidth       : Int              = 0
-    private var viewHeight      : Int              = 0
-    private var titleY          : Int              = -1
-    private var activeBack      : Boolean          = false
-    private val wavesPath       : Path             = Path()
-    private var popupMenu       : PopupMenu?       = null
-    private var menuHelper      : PopupHelper?     = null
+    private var title           : CharSequence          = ""
+    private var titleIcon       : VectorDrawableCompat? = null
+    private var titleIconColor  : ColorStateList        = ColorStateList.valueOf(Color.WHITE)
+    private var viewWidth       : Int                   = 0
+    private var viewHeight      : Int                   = 0
+    private var titleY          : Int                   = -1
+    private var activeBack      : Boolean               = false
+    private val wavesPath       : Path                  = Path()
+    private var popupMenu       : PopupMenu?            = null
+    private var menuHelper      : PopupHelper?          = null
 
     private var onBackClickListener     : OnBackClickListener?     = null
     private var onMenuClickListener     : OnMenuClickListener?     = null
@@ -123,8 +123,10 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.WavesView, 0, 0)
 
         typedArray.run {
-            title = getText(R.styleable.WavesView_text)
             activeBack = getBoolean(R.styleable.WavesView_activeBack, false)
+
+            if (hasValue(R.styleable.WavesView_text))
+                title = getText(R.styleable.WavesView_text)
 
             textPaint.run {
                 color = getColor(R.styleable.WavesView_textColor, ContextCompat.getColor(context, R.color.waveTitle))
@@ -199,6 +201,17 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
 
                     drawText(title.toString(), xOffset, yOffset, textPaint)
                 }
+            } else if (titleIcon != null) {
+                titleIcon?.let { icon ->
+                    val xOffset : Float = ((width - icon.bounds.width()) / 2).toFloat()
+                    val yOffset : Float = ((height - icon.bounds.height()) / 2).toFloat()
+
+                    save()
+                    translate(xOffset, yOffset)
+                    icon.setTintList(titleIconColor)
+                    icon.draw(canvas)
+                    restore()
+                }
             }
         }
 
@@ -270,6 +283,21 @@ class WavesView(context: Context, attrs: AttributeSet) : RelativeLayout(context,
 
     fun setTitle(@StringRes resTitle : Int) {
         setTitle(context.getString(resTitle))
+    }
+
+    fun setTitleIconColor(color : Int) {
+        this.titleIconColor = ColorStateList.valueOf(color)
+    }
+
+    fun setTitleIconVector(@DrawableRes resIcon : Int, width : Int = 0, height : Int = 0) {
+        this.titleIcon = VectorDrawableCompat.create(resources, resIcon, null)
+
+        if (width == 0 || height == 0) {
+            val size = resources.getDimension(R.dimen.waveTitleIconSize).toInt()
+            this.titleIcon?.setBounds(0, 0, size, size)
+        } else {
+            this.titleIcon?.setBounds(0, 0, width, height)
+        }
     }
 
     @SuppressLint("RestrictedApi")

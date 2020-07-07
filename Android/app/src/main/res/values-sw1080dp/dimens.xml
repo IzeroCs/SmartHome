@@ -44,6 +44,7 @@
 	<dimen name="waveHeight">495.00dp</dimen>
 	<dimen name="waveIconMargin">22.50dp</dimen>
 	<dimen name="waveIconPadding">45.00dp</dimen>
+	<dimen name="waveTitleIconSize">216.00dp</dimen>
 	<dimen name="waveTopForChild">247.50dp</dimen>
 	<dimen name="cloudErrorTextSize">45.00sp</dimen>
 	<dimen name="dialogEspWiFiInputTextSize">45.00sp</dimen>

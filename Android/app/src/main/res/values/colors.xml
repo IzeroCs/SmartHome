@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#03dac5</color>
-    <color name="primaryDark">#00a895</color>
-    <color name="accent">#00a895</color>
+    <color name="primary">#D84315</color>
+    <color name="primaryDark">#FF5722</color>
+    <color name="accent">@color/primaryDark</color>
     <color name="background">#fafafa</color>
 
     <color name="mdColorTitle">#666</color>
     <color name="mdColorContent">#444</color>
-    <color name="mdColorButton">#018071</color>
+    <color name="mdColorButton">@color/primaryDark</color>
 
     <color name="cloudTextColor">#aaa</color>
     <color name="cloudIconColor">#aaa</color>
@@ -21,8 +21,8 @@
     <color name="waveBackIconPressed">#50ffffff</color>
     <color name="waveBackIconPressedRipple">#50000000</color>
     <color name="waveShadow">#30000000</color>
-    <color name="waveGradientStart">#03dac5</color>
-    <color name="waveGradientStop">#00a895</color>
+    <color name="waveGradientStart">@color/primary</color>
+    <color name="waveGradientStop">@color/primaryDark</color>
     <color name="waveTitle">#ffffff</color>
     <color name="waveIconInMenu">#777</color>
     <color name="waveTextInMenu">#777</color>
@@ -35,7 +35,7 @@
     <color name="formSpinnerBackground">#fff</color>
     <color name="formSpinnerPopupItemText">#777</color>
     <color name="formButtonUnpressed">@color/accent</color>
-    <color name="formButtonPressed">#00897b</color>
+    <color name="formButtonPressed">@color/primary</color>
     <color name="formButtonPressedRipple">#20000000</color>
     <color name="formButtonText">#fff</color>
     <color name="formStatusErrorText">#f44336</color>
@@ -60,7 +60,7 @@
 
     <color name="listDeviceIconTintStatusOn">@color/primaryDark</color>
     <color name="listDeviceIconTintStatusOff">#ddd</color>
-    <color name="listDeviceStatusTintStatusOn">#80cbc4</color>
+    <color name="listDeviceStatusTintStatusOn">@color/primary</color>
     <color name="listDeviceStatusTintStatusOff">#ddd</color>
     <color name="listDeviceIconBgUnpressed">#fafafa</color>
     <color name="listDeviceIconBgPressed">#f3f3f3</color>

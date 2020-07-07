@@ -19,6 +19,7 @@
     <dimen name="waveTitleShadowDx">2</dimen>
     <dimen name="waveTitleShadowDy">2</dimen>
     <dimen name="waveTitleShadowRadius">15</dimen>
+    <dimen name="waveTitleIconSize">96dp</dimen>
 
     <dimen name="formPaddingVertical">35dp</dimen>
     <dimen name="formPaddingHorizontal">25dp</dimen>

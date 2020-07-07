@@ -27,6 +27,8 @@ class SmartActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_smart)
         listRoom.setOnItemClickListener(this)
+        wavesView.setTitleIconColor(getColor(android.R.color.white))
+        wavesView.setTitleIconVector(R.drawable.ic_smarthome)
         wavesView.setMenuIcon(R.drawable.ic_chipset, true)
         wavesView.setOnMenuClickListener(this)
         floatButton.setOnClickListener(this)

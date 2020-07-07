@@ -35,7 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/waveHeight"
             android:layout_alignParentTop="true"
-            app:text="@string/appName"
             tools:ignore="MissingConstraints" />
 
     </RelativeLayout>
