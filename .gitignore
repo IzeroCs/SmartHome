@@ -2,9 +2,3 @@ Server/logs
 Server/node_modules/*
 Server/package-lock.json
 Server/ormlogs.log
-
-ServerOld/logs
-ServerOld/node_modules/*
-ServerOld/package-lock.json
-
-ServerBackup/package-lock.json
