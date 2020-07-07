@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NetworkUtil = void 0;
 var os = require("os");
-var NetworkUtil = /** @class */ (function () {
+var NetworkUtil = (function () {
     function NetworkUtil() {
         var _this = this;
         var networks = os.networkInterfaces();
@@ -10,9 +10,7 @@ var NetworkUtil = /** @class */ (function () {
             if (key.startsWith("VirtualBox") || key.startsWith("eth1"))
                 return;
             networks[key].forEach(function (iface) {
-                if ("IPv4" !== iface.family ||
-                    iface.internal !== false ||
-                    _this.host !== null)
+                if ("IPv4" !== iface.family || iface.internal !== false || _this.host !== null)
                     return;
                 _this.host = iface.address;
             });

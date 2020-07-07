@@ -16,12 +16,7 @@ export class NetworkUtil {
             if (key.startsWith("VirtualBox") || key.startsWith("eth1")) return
 
             networks[key].forEach(iface => {
-                if (
-                    "IPv4" !== iface.family ||
-                    iface.internal !== false ||
-                    this.host !== null
-                )
-                    return
+                if ("IPv4" !== iface.family || iface.internal !== false || this.host !== null) return
 
                 this.host = iface.address
             })
@@ -29,8 +24,7 @@ export class NetworkUtil {
     }
 
     static getInstance(): NetworkUtil {
-        if (NetworkUtil.instance === null)
-            NetworkUtil.instance = new NetworkUtil()
+        if (NetworkUtil.instance === null) NetworkUtil.instance = new NetworkUtil()
 
         return NetworkUtil.instance
     }
@@ -39,10 +33,7 @@ export class NetworkUtil {
         return NetworkUtil.getInstance().host
     }
 
-    static calculateSignalLevel(
-        rssi: number,
-        numLevels: number = NetworkUtil.MAX_SIGNAL,
-    ): number {
+    static calculateSignalLevel(rssi: number, numLevels: number = NetworkUtil.MAX_SIGNAL): number {
         if (!numLevels) numLevels = NetworkUtil.MAX_RSSI
 
         if (rssi <= NetworkUtil.MIN_RSSI) return NetworkUtil.MIN_SIGNAL
@@ -52,8 +43,6 @@ export class NetworkUtil {
         let inputRange = NetworkUtil.MAX_RSSI - NetworkUtil.MIN_RSSI
         let outputRange = numLevels - 1
 
-        return Math.ceil(
-            ((rssi - NetworkUtil.MIN_RSSI) * outputRange) / inputRange,
-        )
+        return Math.ceil(((rssi - NetworkUtil.MIN_RSSI) * outputRange) / inputRange)
     }
 }

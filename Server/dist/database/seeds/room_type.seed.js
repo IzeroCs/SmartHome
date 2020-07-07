@@ -52,7 +52,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomTypeSeed = void 0;
 var base_seed_1 = require("../base.seed");
 var room_type_entity_1 = require("../entity/room_type.entity");
-var RoomTypeSeed = /** @class */ (function (_super) {
+var RoomTypeSeed = (function (_super) {
     __extends(RoomTypeSeed, _super);
     function RoomTypeSeed() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -65,7 +65,7 @@ var RoomTypeSeed = /** @class */ (function (_super) {
             6: "stairs_room",
             7: "stairs_room",
             8: "mezzanine_room",
-            9: "roof_room",
+            9: "roof_room"
         };
         return _this;
     }
@@ -77,32 +77,32 @@ var RoomTypeSeed = /** @class */ (function (_super) {
                     case 0:
                         repository = this.connection.getRepository(room_type_entity_1.RoomType);
                         keys = Object.keys(this.datas);
-                        return [4 /*yield*/, repository.count()];
+                        return [4, repository.count()];
                     case 1:
-                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 6];
+                        if (!((_a.sent()) <= 0)) return [3, 6];
                         this.logSeedRunning();
                         i = 0;
                         _a.label = 2;
                     case 2:
-                        if (!(i < keys.length)) return [3 /*break*/, 5];
+                        if (!(i < keys.length)) return [3, 5];
                         key = keys[i];
                         name_1 = this.datas[key];
                         room = new room_type_entity_1.RoomType();
                         room.name = name_1;
                         room.type = parseInt(key);
                         room.enable = true;
-                        return [4 /*yield*/, repository.save(room)];
+                        return [4, repository.save(room)];
                     case 3:
                         _a.sent();
                         this.logger.debug("Room type " + name_1 + " has been saved");
                         _a.label = 4;
                     case 4:
                         ++i;
-                        return [3 /*break*/, 2];
+                        return [3, 2];
                     case 5:
                         this.logSeedRunned();
                         _a.label = 6;
-                    case 6: return [2 /*return*/];
+                    case 6: return [2];
                 }
             });
         });

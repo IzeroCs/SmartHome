@@ -1,11 +1,4 @@
-import {
-    SubscribeMessage,
-    WebSocketGateway,
-    WebSocketServer,
-    OnGatewayInit,
-    OnGatewayConnection,
-    OnGatewayDisconnect,
-} from "@nestjs/websockets"
+import { SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets"
 import { Logger } from "@nestjs/common"
 import { Socket, Server, Namespace } from "socket.io"
 import { SocketUtil } from "../util/socket.util"
@@ -23,10 +16,9 @@ import { RoomDevice } from "src/database/entity/room_device.entity"
 @WebSocketGateway({
     namespace: "/platform-app",
     pingTimeout: 5000,
-    pingInterval: 100,
+    pingInterval: 100
 })
-export class AppGateway
-    implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Namespace
 
     private static instance: AppGateway = null
@@ -60,8 +52,7 @@ export class AppGateway
 
     @SubscribeMessage("auth")
     handleAuth(client: Socket, payload: any) {
-        if (AppGateway.isClientAuth(client))
-            return this.logger.log(`Authenticate already`)
+        if (AppGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
 
         payload = Pass.auth(payload)
 
@@ -144,22 +135,16 @@ class Notify {
     static unAuthorized(client: Socket) {
         if (EspGateway.isClientAuth(client)) return
 
-        AppGateway.getLogger().log(
-            `Disconnect socket unauthorized: ${client.id}`,
-        )
+        AppGateway.getLogger().log(`Disconnect socket unauthorized: ${client.id}`)
         client.emit("auth", "unauthorized")
         client.disconnect(false)
     }
 
     static espModules(client?: Socket) {
         if (client) {
-            if (AppGateway.isClientAuth(client))
-                client.emit("esp-list", EspGateway.getModules())
+            if (AppGateway.isClientAuth(client)) client.emit("esp-list", EspGateway.getModules())
         } else {
-            AppGateway.getInstance().server.emit(
-                "esp-list",
-                EspGateway.getModules(),
-            )
+            AppGateway.getInstance().server.emit("esp-list", EspGateway.getModules())
         }
     }
 
@@ -217,18 +202,18 @@ class Pass {
         return Pass.def(
             {
                 id: "",
-                token: "",
+                token: ""
             },
-            obj,
+            obj
         )
     }
 
     static roomDevice(obj: Object): Object {
         return Pass.def(
             {
-                id: "",
+                id: ""
             },
-            obj,
+            obj
         )
     }
 }

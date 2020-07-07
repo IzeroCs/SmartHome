@@ -10,51 +10,51 @@ export class EspPinSeed extends BaseSeed {
                 input: 0,
                 outputType: 0,
                 outputPrimary: 0,
-                outputSecondary: 1,
+                outputSecondary: 1
             },
             {
                 input: 1,
                 outputType: 3,
                 outputPrimary: 1,
-                outputSecondary: 1,
+                outputSecondary: 1
             },
             {
                 input: 2,
                 outputType: 2,
                 outputPrimary: 2,
-                outputSecondary: 3,
+                outputSecondary: 3
             },
             {
                 input: 3,
                 outputType: 3,
                 outputPrimary: 3,
-                outputSecondary: 3,
+                outputSecondary: 3
             },
             {
                 input: 4,
                 outputType: 2,
                 outputPrimary: 4,
-                outputSecondary: 5,
+                outputSecondary: 5
             },
             {
                 input: 5,
                 outputType: 3,
                 outputPrimary: 5,
-                outputSecondary: 5,
+                outputSecondary: 5
             },
             {
                 input: 6,
                 outputType: 1,
                 outputPrimary: 6,
-                outputSecondary: 6,
+                outputSecondary: 6
             },
             {
                 input: 7,
                 outputType: 1,
                 outputPrimary: 7,
-                outputSecondary: 7,
-            },
-        ],
+                outputSecondary: 7
+            }
+        ]
     }
 
     async seed() {
@@ -84,9 +84,7 @@ export class EspPinSeed extends BaseSeed {
                     pinRecord.ouputSecondary = pin.outputSecondary
 
                     await repository.save(pinRecord)
-                    this.logger.debug(
-                        `Pin ${pin.input} added for ${espFind.name}`,
-                    )
+                    this.logger.debug(`Pin ${pin.input} added for ${espFind.name}`)
                 }
 
                 this.logger.debug(`Esp ${espFind.name} add pin successfully`)

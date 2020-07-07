@@ -13,7 +13,7 @@ export class RoomListSeed extends BaseSeed {
         { name: "Cầu thang", type: 6 },
         { name: "Sân nhà", type: 7 },
         { name: "Gác lửng", type: 8 },
-        { name: "Gác mái", type: 9 },
+        { name: "Gác mái", type: 9 }
     ]
 
     async seed() {
@@ -28,7 +28,7 @@ export class RoomListSeed extends BaseSeed {
                 const name = data["name"]
                 const type = parseInt(data["type"])
                 const roomType = await repositoryRoomType.findOne({
-                    type: type,
+                    type: type
                 })
 
                 if (!isNull(roomType)) {

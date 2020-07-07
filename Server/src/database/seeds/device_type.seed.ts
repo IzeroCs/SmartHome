@@ -7,18 +7,18 @@ export class DeviceTypeSeed extends BaseSeed {
         {
             name: "Đèn",
             nsp: "light",
-            type: 1,
+            type: 1
         },
         {
             name: "Quạt",
             nsp: "fan",
-            type: 2,
+            type: 2
         },
         {
             name: "Bình nóng lạnh",
             nsp: "heater",
-            type: 3,
-        },
+            type: 3
+        }
     ]
 
     async seed() {

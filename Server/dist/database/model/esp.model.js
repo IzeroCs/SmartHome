@@ -42,7 +42,7 @@ var esp_entity_1 = require("../entity/esp.entity");
 var common_1 = require("@nestjs/common");
 var util_1 = require("util");
 var esp_pin_entity_1 = require("../entity/esp_pin.entity");
-var EspModel = /** @class */ (function () {
+var EspModel = (function () {
     function EspModel() {
     }
     EspModel.add = function (espName) {
@@ -52,20 +52,20 @@ var EspModel = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(esp_entity_1.Esp);
-                        return [4 /*yield*/, repository.count({ name: espName })];
+                        return [4, repository.count({ name: espName })];
                     case 1:
                         count = _a.sent();
-                        if (!(count <= 0)) return [3 /*break*/, 3];
+                        if (!(count <= 0)) return [3, 3];
                         esp = new esp_entity_1.Esp();
                         esp.name = espName;
                         esp.auth = false;
                         esp.online = false;
-                        return [4 /*yield*/, repository.save(esp)];
+                        return [4, repository.save(esp)];
                     case 2:
                         _a.sent();
                         this.logger.log("Added esp " + espName);
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3: return [2];
                 }
             });
         });
@@ -77,16 +77,16 @@ var EspModel = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(esp_entity_1.Esp);
-                        return [4 /*yield*/, repository.findOne({ name: espName })];
+                        return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!!util_1.isUndefined(espFind)) return [3 /*break*/, 3];
+                        if (!!util_1.isUndefined(espFind)) return [3, 3];
                         espFind.online = online;
-                        return [4 /*yield*/, repository.save(espFind)];
+                        return [4, repository.save(espFind)];
                     case 2:
                         _a.sent();
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3: return [2];
                 }
             });
         });
@@ -98,18 +98,18 @@ var EspModel = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(esp_entity_1.Esp);
-                        return [4 /*yield*/, repository.findOne({ name: espName })];
+                        return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!!util_1.isUndefined(espFind)) return [3 /*break*/, 3];
+                        if (!!util_1.isUndefined(espFind)) return [3, 3];
                         espFind.auth = auth;
                         espFind.online = online;
                         this.logger.log("Updated auth " + espName);
-                        return [4 /*yield*/, repository.update(espFind.id, espFind)];
+                        return [4, repository.update(espFind.id, espFind)];
                     case 2:
                         _a.sent();
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3: return [2];
                 }
             });
         });
@@ -122,15 +122,15 @@ var EspModel = /** @class */ (function () {
                     case 0:
                         repository = typeorm_1.getRepository(esp_entity_1.Esp);
                         repositoryEspPin = typeorm_1.getRepository(esp_pin_entity_1.EspPin);
-                        return [4 /*yield*/, repository.findOne({ name: espName })];
+                        return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!(!util_1.isUndefined(espFind) && util_1.isObject(pins) && pins.length > 0)) return [3 /*break*/, 8];
-                        return [4 /*yield*/, repositoryEspPin.find({ esp: espFind })];
+                        if (!(!util_1.isUndefined(espFind) && util_1.isObject(pins) && pins.length > 0)) return [3, 8];
+                        return [4, repositoryEspPin.find({ esp: espFind })];
                     case 2:
                         espPinFind = _a.sent();
-                        if (!(espPinFind.length != pins.length)) return [3 /*break*/, 4];
-                        return [4 /*yield*/, repositoryEspPin.remove(espPinFind)];
+                        if (!(espPinFind.length != pins.length)) return [3, 4];
+                        return [4, repositoryEspPin.remove(espPinFind)];
                     case 3:
                         _a.sent();
                         _a.label = 4;
@@ -142,32 +142,32 @@ var EspModel = /** @class */ (function () {
                                     case 0:
                                         pin = pins[i];
                                         pinFind = espPinFind.find(function (espPin) { return espPin.input == pin.input; });
-                                        if (!!util_1.isUndefined(pinFind)) return [3 /*break*/, 2];
+                                        if (!!util_1.isUndefined(pinFind)) return [3, 2];
                                         pinFind.status = Boolean(pin.status);
                                         pinFind.outputType = pin.outputType;
                                         pinFind.outputPrimary = pin.outputPrimary;
                                         pinFind.ouputSecondary = pin.outputSecondary;
                                         pinFind.dualToggleCount = pin.dualToggleCount;
-                                        return [4 /*yield*/, repositoryEspPin.update(pinFind.id, pinFind)];
+                                        return [4, repositoryEspPin.update(pinFind.id, pinFind)];
                                     case 1:
                                         _a.sent();
                                         _a.label = 2;
-                                    case 2: return [2 /*return*/];
+                                    case 2: return [2];
                                 }
                             });
                         };
                         i = 0;
                         _a.label = 5;
                     case 5:
-                        if (!(i < pins.length)) return [3 /*break*/, 8];
-                        return [5 /*yield**/, _loop_1(i)];
+                        if (!(i < pins.length)) return [3, 8];
+                        return [5, _loop_1(i)];
                     case 6:
                         _a.sent();
                         _a.label = 7;
                     case 7:
                         ++i;
-                        return [3 /*break*/, 5];
-                    case 8: return [2 /*return*/];
+                        return [3, 5];
+                    case 8: return [2];
                 }
             });
         });
@@ -179,16 +179,16 @@ var EspModel = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(esp_entity_1.Esp);
-                        return [4 /*yield*/, repository.findOne({ name: espName })];
+                        return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!!util_1.isUndefined(espFind)) return [3 /*break*/, 3];
+                        if (!!util_1.isUndefined(espFind)) return [3, 3];
                         espFind.detail_rssi = details.rssi;
-                        return [4 /*yield*/, repository.update(espFind.id, espFind)];
+                        return [4, repository.update(espFind.id, espFind)];
                     case 2:
                         _a.sent();
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3: return [2];
                 }
             });
         });

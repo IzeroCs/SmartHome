@@ -157,6 +157,12 @@ class SocketClient(val context : Context) {
             socket.emit(EVENT_ROOM_LIST)
             eventListener?.onAuthorized(this)
 
+            queryRoomDeviceList(1) { list ->
+                commitRoomDevice(list[0].copy(
+                    status = RoomDeviceModel.STATUS_ON
+                ))
+            }
+
             return
         }
 

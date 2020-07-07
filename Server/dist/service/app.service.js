@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 var common_1 = require("@nestjs/common");
-var AppService = /** @class */ (function () {
+var AppService = (function () {
     function AppService() {
     }
     AppService.prototype.getHello = function () {

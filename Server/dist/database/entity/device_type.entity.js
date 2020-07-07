@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeviceType = void 0;
 var typeorm_1 = require("typeorm");
-var DeviceType = /** @class */ (function () {
+var DeviceType = (function () {
     function DeviceType() {
     }
     __decorate([

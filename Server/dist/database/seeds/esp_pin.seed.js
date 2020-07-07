@@ -54,7 +54,7 @@ var base_seed_1 = require("../base.seed");
 var esp_pin_entity_1 = require("../entity/esp_pin.entity");
 var esp_entity_1 = require("../entity/esp.entity");
 var util_1 = require("util");
-var EspPinSeed = /** @class */ (function (_super) {
+var EspPinSeed = (function (_super) {
     __extends(EspPinSeed, _super);
     function EspPinSeed() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -64,51 +64,51 @@ var EspPinSeed = /** @class */ (function (_super) {
                     input: 0,
                     outputType: 0,
                     outputPrimary: 0,
-                    outputSecondary: 1,
+                    outputSecondary: 1
                 },
                 {
                     input: 1,
                     outputType: 3,
                     outputPrimary: 1,
-                    outputSecondary: 1,
+                    outputSecondary: 1
                 },
                 {
                     input: 2,
                     outputType: 2,
                     outputPrimary: 2,
-                    outputSecondary: 3,
+                    outputSecondary: 3
                 },
                 {
                     input: 3,
                     outputType: 3,
                     outputPrimary: 3,
-                    outputSecondary: 3,
+                    outputSecondary: 3
                 },
                 {
                     input: 4,
                     outputType: 2,
                     outputPrimary: 4,
-                    outputSecondary: 5,
+                    outputSecondary: 5
                 },
                 {
                     input: 5,
                     outputType: 3,
                     outputPrimary: 5,
-                    outputSecondary: 5,
+                    outputSecondary: 5
                 },
                 {
                     input: 6,
                     outputType: 1,
                     outputPrimary: 6,
-                    outputSecondary: 6,
+                    outputSecondary: 6
                 },
                 {
                     input: 7,
                     outputType: 1,
                     outputPrimary: 7,
-                    outputSecondary: 7,
-                },
-            ],
+                    outputSecondary: 7
+                }
+            ]
         };
         return _this;
     }
@@ -124,24 +124,24 @@ var EspPinSeed = /** @class */ (function (_super) {
                         i = 0;
                         _a.label = 1;
                     case 1:
-                        if (!(i < keys.length)) return [3 /*break*/, 9];
+                        if (!(i < keys.length)) return [3, 9];
                         espName = keys[i];
                         pins = this.esps[espName];
-                        return [4 /*yield*/, repositoryEsp.findOne({ name: espName })];
+                        return [4, repositoryEsp.findOne({ name: espName })];
                     case 2:
                         espFind = _a.sent();
-                        if (!!util_1.isNull(espFind)) return [3 /*break*/, 8];
-                        return [4 /*yield*/, repository.count({ esp: espFind })];
+                        if (!!util_1.isNull(espFind)) return [3, 8];
+                        return [4, repository.count({ esp: espFind })];
                     case 3:
                         pinCount = _a.sent();
                         if (pinCount >= pins.length)
-                            return [2 /*return*/];
+                            return [2];
                         else
                             this.logSeedRunning();
                         p = 0;
                         _a.label = 4;
                     case 4:
-                        if (!(p < pins.length)) return [3 /*break*/, 7];
+                        if (!(p < pins.length)) return [3, 7];
                         pin = pins[p];
                         pinRecord = new esp_pin_entity_1.EspPin();
                         pinRecord.esp = espFind;
@@ -149,22 +149,22 @@ var EspPinSeed = /** @class */ (function (_super) {
                         pinRecord.outputType = pin.outputType;
                         pinRecord.outputPrimary = pin.outputPrimary;
                         pinRecord.ouputSecondary = pin.outputSecondary;
-                        return [4 /*yield*/, repository.save(pinRecord)];
+                        return [4, repository.save(pinRecord)];
                     case 5:
                         _a.sent();
                         this.logger.debug("Pin " + pin.input + " added for " + espFind.name);
                         _a.label = 6;
                     case 6:
                         ++p;
-                        return [3 /*break*/, 4];
+                        return [3, 4];
                     case 7:
                         this.logger.debug("Esp " + espFind.name + " add pin successfully");
                         this.logSeedRunned();
                         _a.label = 8;
                     case 8:
                         ++i;
-                        return [3 /*break*/, 1];
-                    case 9: return [2 /*return*/];
+                        return [3, 1];
+                    case 9: return [2];
                 }
             });
         });

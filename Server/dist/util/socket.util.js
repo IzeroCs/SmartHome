@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SocketUtil = void 0;
 var underscore = require("underscore");
-var SocketUtil = /** @class */ (function () {
+var SocketUtil = (function () {
     function SocketUtil() {
     }
     SocketUtil.removing = function (io, logger) {

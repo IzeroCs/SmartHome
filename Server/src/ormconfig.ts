@@ -11,7 +11,7 @@ const config: ConnectionOptions = {
     cli: {
         entitiesDir: "src/database/entity",
         migrationsDir: "src/database/migrations",
-        subscribersDir: "src/database/subscriber",
+        subscribersDir: "src/database/subscriber"
     },
 
     entities: [__dirname + "/database/entity/*.entity{.ts,.js}"],
@@ -22,7 +22,7 @@ const config: ConnectionOptions = {
     synchronize: true,
     logging: true,
     logger: "file",
-    cache: true,
+    cache: true
 }
 
 export = config

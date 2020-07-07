@@ -55,6 +55,7 @@ var room_device_entity_1 = require("../entity/room_device.entity");
 var util_1 = require("util");
 var entity_util_1 = require("../util/entity.util");
 var base_model_1 = require("../base.model");
+var validate_util_1 = require("../util/validate.util");
 var WidgetDevice;
 (function (WidgetDevice) {
     WidgetDevice[WidgetDevice["WidgetSmall"] = 0] = "WidgetSmall";
@@ -72,7 +73,7 @@ var UpdateDevice;
     UpdateDevice["StatusInvalid"] = "STATUS_INVALID";
     UpdateDevice["DeviceNotExists"] = "DEVICE_NOT_EXISTS";
 })(UpdateDevice = exports.UpdateDevice || (exports.UpdateDevice = {}));
-var RoomDeviceModel = /** @class */ (function (_super) {
+var RoomDeviceModel = (function (_super) {
     __extends(RoomDeviceModel, _super);
     function RoomDeviceModel() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -81,27 +82,55 @@ var RoomDeviceModel = /** @class */ (function (_super) {
         return typeorm_1.getRepository(room_device_entity_1.RoomDevice).find({
             relations: ["esp", "room", "type"],
             where: {
-                room: roomID,
-            },
+                room: roomID
+            }
         });
     };
     RoomDeviceModel.updateDevice = function (deviceId, object) {
         return __awaiter(this, void 0, void 0, function () {
-            var repository, find, res;
+            var repository, find, res, validate;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
-                        return [4 /*yield*/, repository.findOne({ id: deviceId })];
+                        return [4, repository.findOne({ id: deviceId })];
                     case 1:
                         find = _a.sent();
                         res = entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, object);
                         if (util_1.isUndefined(find))
-                            return [2 /*return*/, this.response({ code: UpdateDevice.DeviceNotExists })];
-                        this.validate(res)
-                            .then(function (v) { return console.log("Value: ", v); })
-                            .catch(function (err) { return console.log("Error: ", err); });
-                        return [2 /*return*/];
+                            return [2, this.response({ code: UpdateDevice.DeviceNotExists })];
+                        validate = new validate_util_1.Validate([
+                            validate_util_1.checker(["name", "type.type"])
+                                .isRequired()
+                                .isNotEmpty()
+                                .custom("nameInvalid", function (field, value) {
+                                if (field == "name")
+                                    return true;
+                            })
+                                .isLength(4, 30)
+                                .isMin(5)
+                                .isMax(3)
+                                .isNumber(),
+                            validate_util_1.checker("value")
+                                .isRequired()
+                                .isNotEmpty()
+                                .isEmail(),
+                            validate_util_1.checker(["type", "type.v"])
+                                .isRequired()
+                                .isNotEmpty()
+                                .isURL()
+                                .isIn(["google", "google.co", "google.com"])
+                        ]);
+                        validate.execute({
+                            name: "Test",
+                            value: "izerocs.gmail.com",
+                            type: {
+                                id: 1,
+                                type: 2,
+                                v: "google.com"
+                            }
+                        });
+                        return [2];
                 }
             });
         });

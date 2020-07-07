@@ -45,7 +45,7 @@ var esp_seed_1 = require("./seeds/esp.seed");
 var esp_pin_seed_1 = require("./seeds/esp_pin.seed");
 var room_device_seed_1 = require("./seeds/room_device.seed");
 var device_type_seed_1 = require("./seeds/device_type.seed");
-var SeedDatabase = /** @class */ (function () {
+var SeedDatabase = (function () {
     function SeedDatabase(connection) {
         this.seeds = {
             RoomTypeSeed: room_type_seed_1.RoomTypeSeed,
@@ -53,7 +53,7 @@ var SeedDatabase = /** @class */ (function () {
             EspSeed: esp_seed_1.EspSeed,
             EspPinSeed: esp_pin_seed_1.EspPinSeed,
             DeviceTypeSeed: device_type_seed_1.DeviceTypeSeed,
-            RoomDeviceSeed: room_device_seed_1.RoomDeviceSeed,
+            RoomDeviceSeed: room_device_seed_1.RoomDeviceSeed
         };
         this.connection = connection;
     }
@@ -71,11 +71,11 @@ var SeedDatabase = /** @class */ (function () {
                         _i = 0;
                         _c.label = 1;
                     case 1:
-                        if (!(_i < _a.length)) return [3 /*break*/, 4];
+                        if (!(_i < _a.length)) return [3, 4];
                         i = _a[_i];
                         file = readdir[i];
-                        if (!file.toLowerCase().endsWith(".seed.js")) return [3 /*break*/, 3];
-                        return [4 /*yield*/, Promise.resolve().then(function () { return require(__dirname + "/seeds/" + file); })];
+                        if (!file.toLowerCase().endsWith(".seed.js")) return [3, 3];
+                        return [4, Promise.resolve().then(function () { return require(__dirname + "/seeds/" + file); })];
                     case 2:
                         module_1 = _c.sent();
                         keys_1 = Object.keys(module_1);
@@ -84,25 +84,25 @@ var SeedDatabase = /** @class */ (function () {
                         _c.label = 3;
                     case 3:
                         _i++;
-                        return [3 /*break*/, 1];
+                        return [3, 1];
                     case 4:
                         keys = Object.keys(this.seeds);
                         i = 0;
                         _c.label = 5;
                     case 5:
-                        if (!(i < keys.length)) return [3 /*break*/, 8];
+                        if (!(i < keys.length)) return [3, 8];
                         key = keys[i];
-                        if (!!util_1.isUndefined(modules[key])) return [3 /*break*/, 7];
+                        if (!!util_1.isUndefined(modules[key])) return [3, 7];
                         seed = new modules[key](this.connection, key);
-                        if (!(!util_1.isUndefined(seed) && !util_1.isUndefined(seed.seed))) return [3 /*break*/, 7];
-                        return [4 /*yield*/, seed.seed()];
+                        if (!(!util_1.isUndefined(seed) && !util_1.isUndefined(seed.seed))) return [3, 7];
+                        return [4, seed.seed()];
                     case 6:
                         _c.sent();
                         _c.label = 7;
                     case 7:
                         ++i;
-                        return [3 /*break*/, 5];
-                    case 8: return [2 /*return*/];
+                        return [3, 5];
+                    case 8: return [2];
                 }
             });
         });

@@ -19,7 +19,7 @@ var esp_gateway_1 = require("../gateway/esp.gateway");
 var seed_1 = require("../database/seed");
 var OrmConfig = require("../ormconfig");
 var typeorm_2 = require("typeorm");
-var AppModule = /** @class */ (function () {
+var AppModule = (function () {
     function AppModule(connection) {
         this.connection = connection;
         var seed = new seed_1.SeedDatabase(connection);
@@ -30,7 +30,7 @@ var AppModule = /** @class */ (function () {
             imports: [typeorm_1.TypeOrmModule.forRoot(OrmConfig)],
             controllers: [app_controller_1.AppController],
             providers: [app_service_1.AppService, app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
-            exports: [typeorm_1.TypeOrmModule],
+            exports: [typeorm_1.TypeOrmModule]
         }),
         __metadata("design:paramtypes", [typeorm_2.Connection])
     ], AppModule);

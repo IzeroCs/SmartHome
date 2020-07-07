@@ -15,10 +15,7 @@ export class RoomDeviceSeed extends BaseSeed {
         const deviceTypeLight = await repositoryDeviceType.findOne({ type: 1 })
         const deviceTypeFan = await repositoryDeviceType.findOne({ type: 2 })
         const deviceTypeHeater = await repositoryDeviceType.findOne({ type: 3 })
-        const espFind = await repositoryEsp.findOne(
-            { name: "ESP1N403E91636RSC185G2K" },
-            { relations: ["pins"] },
-        )
+        const espFind = await repositoryEsp.findOne({ name: "ESP1N403E91636RSC185G2K" }, { relations: ["pins"] })
 
         if (isNull(roomFind) || isNull(espFind)) return
 
@@ -33,43 +30,43 @@ export class RoomDeviceSeed extends BaseSeed {
                 des: "Trái",
                 pin: espFind.pins[0],
                 type: deviceTypeLight,
-                widget: 0,
+                widget: 0
             },
             {
                 name: "Đèn tuýp",
                 des: "Phải",
                 pin: espFind.pins[1],
                 type: deviceTypeLight,
-                widget: 0,
+                widget: 0
             },
             {
                 name: "Đèn ngủ",
                 des: "",
                 pin: espFind.pins[2],
                 type: deviceTypeLight,
-                widget: 1,
+                widget: 1
             },
             {
                 name: "Quạt trần",
                 des: "",
                 pin: espFind.pins[3],
                 type: deviceTypeFan,
-                widget: 0,
+                widget: 0
             },
             {
                 name: "Quạt đứng",
                 des: "",
                 pin: espFind.pins[4],
                 type: deviceTypeFan,
-                widget: 0,
+                widget: 0
             },
             {
                 name: "Bình nóng lạnh",
                 des: "",
                 pin: espFind.pins[5],
                 type: deviceTypeHeater,
-                widget: 1,
-            },
+                widget: 1
+            }
         ]
 
         for (let i = 0; i < devices.length; ++i) {
@@ -85,9 +82,7 @@ export class RoomDeviceSeed extends BaseSeed {
             deviceRecord.widget = device.widget
 
             await repository.save(deviceRecord)
-            this.logger.debug(
-                `Room device ${device.name} added for ${roomFind.name}`,
-            )
+            this.logger.debug(`Room device ${device.name} added for ${roomFind.name}`)
         }
 
         this.logSeedRunned()

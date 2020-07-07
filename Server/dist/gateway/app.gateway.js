@@ -23,7 +23,7 @@ var room_list_model_1 = require("../database/model/room_list.model");
 var room_list_entity_1 = require("../database/entity/room_list.entity");
 var room_device_model_1 = require("../database/model/room_device.model");
 var room_device_entity_1 = require("../database/entity/room_device.entity");
-var AppGateway = /** @class */ (function () {
+var AppGateway = (function () {
     function AppGateway() {
         this.logger = new common_1.Logger("AppGateway");
         this.cert = new cert_security_1.CertSecurity("app");
@@ -164,14 +164,14 @@ var AppGateway = /** @class */ (function () {
         websockets_1.WebSocketGateway({
             namespace: "/platform-app",
             pingTimeout: 5000,
-            pingInterval: 100,
+            pingInterval: 100
         }),
         __metadata("design:paramtypes", [])
     ], AppGateway);
     return AppGateway;
 }());
 exports.AppGateway = AppGateway;
-var Notify = /** @class */ (function () {
+var Notify = (function () {
     function Notify() {
     }
     Notify.unAuthorized = function (client) {
@@ -227,7 +227,7 @@ var Notify = /** @class */ (function () {
     };
     return Notify;
 }());
-var Pass = /** @class */ (function () {
+var Pass = (function () {
     function Pass() {
     }
     Pass.def = function (objSrc, objDest) {
@@ -247,12 +247,12 @@ var Pass = /** @class */ (function () {
     Pass.auth = function (obj) {
         return Pass.def({
             id: "",
-            token: "",
+            token: ""
         }, obj);
     };
     Pass.roomDevice = function (obj) {
         return Pass.def({
-            id: "",
+            id: ""
         }, obj);
     };
     return Pass;

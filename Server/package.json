@@ -35,6 +35,7 @@
         "@webundsoehne/nestjs-util": "^1.0.0",
         "class-validator": "^0.12.2",
         "cli-color": "^2.0.0",
+        "express-validator": "^6.6.0",
         "fs": "0.0.1-security",
         "jsonwebtoken": "^8.5.1",
         "mysql": "^2.14.1",
@@ -46,7 +47,8 @@
         "rxjs": "^6.5.4",
         "typeorm": "0.2.25",
         "typeorm-seeding": "1.6.1",
-        "underscore": "^1.10.2"
+        "underscore": "^1.10.2",
+        "validator": "^13.1.1"
     },
     "devDependencies": {
         "@nestjs/cli": "^7.0.0",

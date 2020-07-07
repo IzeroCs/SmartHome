@@ -56,7 +56,7 @@ var room_list_entity_1 = require("../entity/room_list.entity");
 var esp_entity_1 = require("../entity/esp.entity");
 var util_1 = require("util");
 var device_type_entity_1 = require("../entity/device_type.entity");
-var RoomDeviceSeed = /** @class */ (function (_super) {
+var RoomDeviceSeed = (function (_super) {
     __extends(RoomDeviceSeed, _super);
     function RoomDeviceSeed() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -71,28 +71,28 @@ var RoomDeviceSeed = /** @class */ (function (_super) {
                         repositoryRoom = this.connection.getRepository(room_list_entity_1.RoomList);
                         repositoryEsp = this.connection.getRepository(esp_entity_1.Esp);
                         repositoryDeviceType = this.connection.getRepository(device_type_entity_1.DeviceType);
-                        return [4 /*yield*/, repositoryRoom.findOne({ name: "Phòng khách" })];
+                        return [4, repositoryRoom.findOne({ name: "Phòng khách" })];
                     case 1:
                         roomFind = _a.sent();
-                        return [4 /*yield*/, repositoryDeviceType.findOne({ type: 1 })];
+                        return [4, repositoryDeviceType.findOne({ type: 1 })];
                     case 2:
                         deviceTypeLight = _a.sent();
-                        return [4 /*yield*/, repositoryDeviceType.findOne({ type: 2 })];
+                        return [4, repositoryDeviceType.findOne({ type: 2 })];
                     case 3:
                         deviceTypeFan = _a.sent();
-                        return [4 /*yield*/, repositoryDeviceType.findOne({ type: 3 })];
+                        return [4, repositoryDeviceType.findOne({ type: 3 })];
                     case 4:
                         deviceTypeHeater = _a.sent();
-                        return [4 /*yield*/, repositoryEsp.findOne({ name: "ESP1N403E91636RSC185G2K" }, { relations: ["pins"] })];
+                        return [4, repositoryEsp.findOne({ name: "ESP1N403E91636RSC185G2K" }, { relations: ["pins"] })];
                     case 5:
                         espFind = _a.sent();
                         if (util_1.isNull(roomFind) || util_1.isNull(espFind))
-                            return [2 /*return*/];
-                        return [4 /*yield*/, repository.count({ esp: espFind })];
+                            return [2];
+                        return [4, repository.count({ esp: espFind })];
                     case 6:
                         deviceCount = _a.sent();
                         if (deviceCount > 0)
-                            return [2 /*return*/];
+                            return [2];
                         this.logSeedRunning();
                         devices = [
                             {
@@ -100,48 +100,48 @@ var RoomDeviceSeed = /** @class */ (function (_super) {
                                 des: "Trái",
                                 pin: espFind.pins[0],
                                 type: deviceTypeLight,
-                                widget: 0,
+                                widget: 0
                             },
                             {
                                 name: "Đèn tuýp",
                                 des: "Phải",
                                 pin: espFind.pins[1],
                                 type: deviceTypeLight,
-                                widget: 0,
+                                widget: 0
                             },
                             {
                                 name: "Đèn ngủ",
                                 des: "",
                                 pin: espFind.pins[2],
                                 type: deviceTypeLight,
-                                widget: 1,
+                                widget: 1
                             },
                             {
                                 name: "Quạt trần",
                                 des: "",
                                 pin: espFind.pins[3],
                                 type: deviceTypeFan,
-                                widget: 0,
+                                widget: 0
                             },
                             {
                                 name: "Quạt đứng",
                                 des: "",
                                 pin: espFind.pins[4],
                                 type: deviceTypeFan,
-                                widget: 0,
+                                widget: 0
                             },
                             {
                                 name: "Bình nóng lạnh",
                                 des: "",
                                 pin: espFind.pins[5],
                                 type: deviceTypeHeater,
-                                widget: 1,
-                            },
+                                widget: 1
+                            }
                         ];
                         i = 0;
                         _a.label = 7;
                     case 7:
-                        if (!(i < devices.length)) return [3 /*break*/, 10];
+                        if (!(i < devices.length)) return [3, 10];
                         device = devices[i];
                         deviceRecord = new room_device_entity_1.RoomDevice();
                         deviceRecord.name = device.name;
@@ -151,17 +151,17 @@ var RoomDeviceSeed = /** @class */ (function (_super) {
                         deviceRecord.room = roomFind;
                         deviceRecord.type = device.type;
                         deviceRecord.widget = device.widget;
-                        return [4 /*yield*/, repository.save(deviceRecord)];
+                        return [4, repository.save(deviceRecord)];
                     case 8:
                         _a.sent();
                         this.logger.debug("Room device " + device.name + " added for " + roomFind.name);
                         _a.label = 9;
                     case 9:
                         ++i;
-                        return [3 /*break*/, 7];
+                        return [3, 7];
                     case 10:
                         this.logSeedRunned();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });

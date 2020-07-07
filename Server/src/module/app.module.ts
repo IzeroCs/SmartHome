@@ -12,7 +12,7 @@ import { Connection } from "typeorm"
     imports: [TypeOrmModule.forRoot(OrmConfig)],
     controllers: [AppController],
     providers: [AppService, AppGateway, EspGateway],
-    exports: [TypeOrmModule],
+    exports: [TypeOrmModule]
 })
 export class AppModule {
     constructor(private connection: Connection) {

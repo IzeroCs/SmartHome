@@ -6,7 +6,7 @@ import { join } from "path"
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-        logger: new AppLogger(),
+        logger: new AppLogger()
     })
     app.useStaticAssets(join(__dirname, "..", "public"))
     setTimeout(async () => await app.listen(3000, "192.168.31.104"), 2000)

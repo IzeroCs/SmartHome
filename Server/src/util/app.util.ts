@@ -1,3 +1,3 @@
 module.exports = {
-    isUndefined: v => typeof v === "undefined",
+    isUndefined: v => typeof v === "undefined"
 }

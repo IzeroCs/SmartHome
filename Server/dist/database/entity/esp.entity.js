@@ -13,7 +13,7 @@ exports.Esp = void 0;
 var typeorm_1 = require("typeorm");
 var esp_pin_entity_1 = require("./esp_pin.entity");
 var room_device_entity_1 = require("./room_device.entity");
-var Esp = /** @class */ (function () {
+var Esp = (function () {
     function Esp() {
     }
     __decorate([

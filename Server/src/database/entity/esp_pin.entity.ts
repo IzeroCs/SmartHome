@@ -1,11 +1,4 @@
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    OneToOne,
-    JoinColumn,
-    ManyToOne,
-} from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from "typeorm"
 import { Esp } from "./esp.entity"
 import { RoomDevice } from "./room_device.entity"
 
@@ -14,13 +7,13 @@ export class EspPin {
     @PrimaryGeneratedColumn()
     @OneToOne(
         type => RoomDevice,
-        device => device.pin,
+        device => device.pin
     )
     id: number
 
     @ManyToOne(
         type => Esp,
-        esp => esp.pins,
+        esp => esp.pins
     )
     esp: Esp
 

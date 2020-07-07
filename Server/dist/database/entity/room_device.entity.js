@@ -11,13 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomDevice = void 0;
 var typeorm_1 = require("typeorm");
-var class_validator_1 = require("class-validator");
 var esp_pin_entity_1 = require("./esp_pin.entity");
 var esp_entity_1 = require("./esp.entity");
 var room_list_entity_1 = require("./room_list.entity");
 var device_type_entity_1 = require("./device_type.entity");
-var room_device_model_1 = require("../model/room_device.model");
-var RoomDevice = /** @class */ (function () {
+var RoomDevice = (function () {
     function RoomDevice() {
     }
     __decorate([
@@ -26,9 +24,6 @@ var RoomDevice = /** @class */ (function () {
     ], RoomDevice.prototype, "id", void 0);
     __decorate([
         typeorm_1.Column(),
-        class_validator_1.MinLength(5),
-        class_validator_1.MaxLength(30),
-        class_validator_1.IsNotEmpty(),
         __metadata("design:type", String)
     ], RoomDevice.prototype, "name", void 0);
     __decorate([
@@ -37,12 +32,10 @@ var RoomDevice = /** @class */ (function () {
     ], RoomDevice.prototype, "descriptor", void 0);
     __decorate([
         typeorm_1.Column("tinyint", { default: 0 }),
-        class_validator_1.IsEnum(room_device_model_1.WidgetDevice),
         __metadata("design:type", Number)
     ], RoomDevice.prototype, "widget", void 0);
     __decorate([
         typeorm_1.Column("tinyint", { default: 0, nullable: true }),
-        class_validator_1.IsEnum(room_device_model_1.StatusDevice),
         __metadata("design:type", Number)
     ], RoomDevice.prototype, "status", void 0);
     __decorate([

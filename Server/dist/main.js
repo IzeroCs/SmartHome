@@ -46,19 +46,19 @@ function bootstrap() {
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, core_1.NestFactory.create(app_module_1.AppModule, {
-                        logger: new logger_util_1.AppLogger(),
+                case 0: return [4, core_1.NestFactory.create(app_module_1.AppModule, {
+                        logger: new logger_util_1.AppLogger()
                     })];
                 case 1:
                     app = _a.sent();
                     app.useStaticAssets(path_1.join(__dirname, "..", "public"));
                     setTimeout(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, app.listen(3000, "192.168.31.104")];
-                            case 1: return [2 /*return*/, _a.sent()];
+                            case 0: return [4, app.listen(3000, "192.168.31.104")];
+                            case 1: return [2, _a.sent()];
                         }
                     }); }); }, 2000);
-                    return [2 /*return*/];
+                    return [2];
             }
         });
     });

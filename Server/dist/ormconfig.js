@@ -9,7 +9,7 @@ var config = {
     cli: {
         entitiesDir: "src/database/entity",
         migrationsDir: "src/database/migrations",
-        subscribersDir: "src/database/subscriber",
+        subscribersDir: "src/database/subscriber"
     },
     entities: [__dirname + "/database/entity/*.entity{.ts,.js}"],
     migrations: [__dirname + "/database/migrations/*{.ts,.js}"],
@@ -18,7 +18,7 @@ var config = {
     synchronize: true,
     logging: true,
     logger: "file",
-    cache: true,
+    cache: true
 };
 module.exports = config;
 //# sourceMappingURL=ormconfig.js.map

@@ -6,8 +6,8 @@ export class RoomListModel {
         return getRepository(RoomList).find({
             relations: ["type", "devices"],
             where: {
-                enable: true,
-            },
+                enable: true
+            }
         })
     }
 }

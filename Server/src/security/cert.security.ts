@@ -12,19 +12,16 @@ export class CertSecurity {
     constructor(platform: string) {
         this.platform = platform
 
-        if (platform !== "app" && platform !== "esp")
-            throw new Error(`Platform ${platform} not support`)
+        if (platform !== "app" && platform !== "esp") throw new Error(`Platform ${platform} not support`)
 
-        this.certPrivate = fs.readFileSync(
-            this.resolveAssetsPath("private.key"),
-        )
+        this.certPrivate = fs.readFileSync(this.resolveAssetsPath("private.key"))
         this.certPublic = fs.readFileSync(this.resolveAssetsPath("public.key"))
         this.payloadConfig = require(this.resolveAssetsPath("payload.json"))
     }
 
     token(): string {
         return jwt.sign(this.payloadConfig, this.certPrivate, {
-            algorithm: "RS256",
+            algorithm: "RS256"
         })
     }
 
@@ -37,8 +34,7 @@ export class CertSecurity {
                 const key = keyPayloads[i]
                 const value = this.payloadConfig[key]
 
-                if (isUndefined(decoded[key]) || decoded[key] !== value)
-                    return handle("Undefined decoded key", false)
+                if (isUndefined(decoded[key]) || decoded[key] !== value) return handle("Undefined decoded key", false)
             }
 
             return handle(null, true)
@@ -48,13 +44,6 @@ export class CertSecurity {
     }
 
     private resolveAssetsPath(filename: string): string {
-        return path.join(
-            __dirname,
-            "..",
-            "..",
-            "assets/cert",
-            this.platform,
-            filename,
-        )
+        return path.join(__dirname, "..", "..", "assets/cert", this.platform, filename)
     }
 }

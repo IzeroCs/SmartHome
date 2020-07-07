@@ -56,7 +56,7 @@ var app_gateway_1 = require("./app.gateway");
 var esp_entity_1 = require("../database/entity/esp.entity");
 var esp_model_1 = require("../database/model/esp.model");
 var ormconfig_1 = require("../ormconfig");
-var EspGateway = /** @class */ (function () {
+var EspGateway = (function () {
     function EspGateway() {
         this.logger = new common_1.Logger("EspGateway");
         this.cert = new cert_security_1.CertSecurity("esp");
@@ -90,10 +90,10 @@ var EspGateway = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 if (EspGateway_1.isClientAuth(client))
-                    return [2 /*return*/, this.logger.log("Authenticate already")];
+                    return [2, this.logger.log("Authenticate already")];
                 payload = Pass.auth(payload);
                 if (!EspGateway_1.isEspID(payload.id))
-                    return [2 /*return*/, Notify.unAuthorized(client)];
+                    return [2, Notify.unAuthorized(client)];
                 client.id = payload.id;
                 esp_model_1.EspModel.add(client.id);
                 this.updateModule(client, true);
@@ -108,7 +108,7 @@ var EspGateway = /** @class */ (function () {
                         Notify.unAuthorized(client);
                     }
                 });
-                return [2 /*return*/];
+                return [2];
             });
         });
     };
@@ -141,7 +141,7 @@ var EspGateway = /** @class */ (function () {
         if (oldSignal !== newSignal) {
             this.modules[client.id].detail_rssi = newDetail.detail_rssi;
             esp_model_1.EspModel.updateDetail(client.id, {
-                rssi: newDetail.detail_rssi,
+                rssi: newDetail.detail_rssi
             });
             app_gateway_1.AppGateway.notifyEspModules();
         }
@@ -194,14 +194,14 @@ var EspGateway = /** @class */ (function () {
         websockets_1.WebSocketGateway({
             namespace: "/platform-esp",
             pingTimeout: 5000,
-            pingInterval: 1000,
+            pingInterval: 1000
         }),
         __metadata("design:paramtypes", [])
     ], EspGateway);
     return EspGateway;
 }());
 exports.EspGateway = EspGateway;
-var Notify = /** @class */ (function () {
+var Notify = (function () {
     function Notify() {
     }
     Notify.unAuthorized = function (client) {
@@ -214,7 +214,7 @@ var Notify = /** @class */ (function () {
     };
     return Notify;
 }());
-var Pass = /** @class */ (function () {
+var Pass = (function () {
     function Pass() {
     }
     Pass.def = function (objSrc, objDest) {
@@ -236,7 +236,7 @@ var Pass = /** @class */ (function () {
     Pass.auth = function (obj) {
         return Pass.def({
             id: "",
-            token: "",
+            token: ""
         }, obj);
     };
     Pass.module = function (obj) {
@@ -246,13 +246,13 @@ var Pass = /** @class */ (function () {
             auth: false,
             changed: false,
             pins: [],
-            detail_rssi: network_util_1.NetworkUtil.MIN_RSSI,
+            detail_rssi: network_util_1.NetworkUtil.MIN_RSSI
         }, obj);
     };
     Pass.io = function (obj) {
         return Pass.def({
             pins: [],
-            changed: "0",
+            changed: "0"
         }, obj);
     };
     Pass.pin = function (obj) {
@@ -262,12 +262,12 @@ var Pass = /** @class */ (function () {
             outputPrimary: 0,
             outputSecondary: 0,
             dualToggleCount: 0,
-            status: 0,
+            status: 0
         }, obj);
     };
     Pass.detail = function (obj) {
         return Pass.def({
-            detail_rssi: network_util_1.NetworkUtil.MIN_RSSI,
+            detail_rssi: network_util_1.NetworkUtil.MIN_RSSI
         }, obj);
     };
     return Pass;

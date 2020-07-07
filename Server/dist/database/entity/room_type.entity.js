@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomType = void 0;
 var typeorm_1 = require("typeorm");
 var room_list_entity_1 = require("./room_list.entity");
-var RoomType = /** @class */ (function () {
+var RoomType = (function () {
     function RoomType() {
     }
     __decorate([

@@ -52,7 +52,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EspSeed = void 0;
 var base_seed_1 = require("../base.seed");
 var esp_entity_1 = require("../entity/esp.entity");
-var EspSeed = /** @class */ (function (_super) {
+var EspSeed = (function (_super) {
     __extends(EspSeed, _super);
     function EspSeed() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -64,24 +64,24 @@ var EspSeed = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         repository = this.connection.getRepository(esp_entity_1.Esp);
-                        return [4 /*yield*/, repository.count({
-                                name: "ESP1N403E91636RSC185G2K",
+                        return [4, repository.count({
+                                name: "ESP1N403E91636RSC185G2K"
                             })];
                     case 1:
                         count = _a.sent();
-                        if (!(count <= 0)) return [3 /*break*/, 3];
+                        if (!(count <= 0)) return [3, 3];
                         this.logSeedRunning();
                         esp = new esp_entity_1.Esp();
                         esp.name = "ESP1N403E91636RSC185G2K";
                         esp.online = false;
                         esp.auth = true;
-                        return [4 /*yield*/, repository.save(esp)];
+                        return [4, repository.save(esp)];
                     case 2:
                         _a.sent();
                         this.logger.debug("Esp " + esp.name + " has been saved");
                         this.logSeedRunned();
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3: return [2];
                 }
             });
         });

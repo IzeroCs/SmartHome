@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EntityUtil = void 0;
 var typeorm_1 = require("typeorm");
 var util_1 = require("util");
-var EntityUtil = /** @class */ (function () {
+var EntityUtil = (function () {
     function EntityUtil() {
     }
     EntityUtil.getEntityManager = function () {

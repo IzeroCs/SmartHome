@@ -11,7 +11,7 @@ export class RoomTypeSeed extends BaseSeed {
         6: "stairs_room",
         7: "stairs_room",
         8: "mezzanine_room",
-        9: "roof_room",
+        9: "roof_room"
     }
 
     async seed() {

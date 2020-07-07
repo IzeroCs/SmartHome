@@ -53,7 +53,7 @@ exports.DeviceTypeSeed = void 0;
 var base_seed_1 = require("../base.seed");
 var typeorm_1 = require("typeorm");
 var device_type_entity_1 = require("../entity/device_type.entity");
-var DeviceTypeSeed = /** @class */ (function (_super) {
+var DeviceTypeSeed = (function (_super) {
     __extends(DeviceTypeSeed, _super);
     function DeviceTypeSeed() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -61,18 +61,18 @@ var DeviceTypeSeed = /** @class */ (function (_super) {
             {
                 name: "Đèn",
                 nsp: "light",
-                type: 1,
+                type: 1
             },
             {
                 name: "Quạt",
                 nsp: "fan",
-                type: 2,
+                type: 2
             },
             {
                 name: "Bình nóng lạnh",
                 nsp: "heater",
-                type: 3,
-            },
+                type: 3
+            }
         ];
         return _this;
     }
@@ -83,32 +83,32 @@ var DeviceTypeSeed = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(device_type_entity_1.DeviceType);
-                        return [4 /*yield*/, repository.count()];
+                        return [4, repository.count()];
                     case 1:
                         count = _a.sent();
-                        if (!(count <= 0)) return [3 /*break*/, 6];
+                        if (!(count <= 0)) return [3, 6];
                         this.logSeedRunning();
                         i = 0;
                         _a.label = 2;
                     case 2:
-                        if (!(i < this.def.length)) return [3 /*break*/, 5];
+                        if (!(i < this.def.length)) return [3, 5];
                         type = this.def[i];
                         record = new device_type_entity_1.DeviceType();
                         record.name = type.name;
                         record.nsp = type.nsp;
                         record.type = type.type;
-                        return [4 /*yield*/, repository.save(record)];
+                        return [4, repository.save(record)];
                     case 3:
                         _a.sent();
                         this.logger.debug("Added device type " + type.name);
                         _a.label = 4;
                     case 4:
                         ++i;
-                        return [3 /*break*/, 2];
+                        return [3, 2];
                     case 5:
                         this.logSeedRunned();
                         _a.label = 6;
-                    case 6: return [2 /*return*/];
+                    case 6: return [2];
                 }
             });
         });

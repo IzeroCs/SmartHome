@@ -54,14 +54,11 @@ export class EspModel {
         if (!isUndefined(espFind) && isObject(pins) && pins.length > 0) {
             const espPinFind = await repositoryEspPin.find({ esp: espFind })
 
-            if (espPinFind.length != pins.length)
-                await repositoryEspPin.remove(espPinFind)
+            if (espPinFind.length != pins.length) await repositoryEspPin.remove(espPinFind)
 
             for (let i = 0; i < pins.length; ++i) {
                 const pin = pins[i]
-                const pinFind = espPinFind.find(
-                    espPin => espPin.input == pin.input,
-                )
+                const pinFind = espPinFind.find(espPin => espPin.input == pin.input)
 
                 if (!isUndefined(pinFind)) {
                     pinFind.status = Boolean(pin.status)

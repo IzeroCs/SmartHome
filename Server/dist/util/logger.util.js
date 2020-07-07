@@ -5,7 +5,7 @@ var util_1 = require("util");
 var cli_color_1 = require("cli-color");
 var path = require("path");
 var os = require("os");
-var AppLogger = /** @class */ (function () {
+var AppLogger = (function () {
     function AppLogger() {
     }
     AppLogger.prototype.log = function (message) {

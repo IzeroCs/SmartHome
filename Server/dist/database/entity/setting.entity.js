@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Setting = void 0;
 var typeorm_1 = require("typeorm");
-var Setting = /** @class */ (function () {
+var Setting = (function () {
     function Setting() {
     }
     __decorate([

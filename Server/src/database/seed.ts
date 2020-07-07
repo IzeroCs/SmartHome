@@ -16,7 +16,7 @@ export class SeedDatabase {
         EspSeed: EspSeed,
         EspPinSeed: EspPinSeed,
         DeviceTypeSeed: DeviceTypeSeed,
-        RoomDeviceSeed: RoomDeviceSeed,
+        RoomDeviceSeed: RoomDeviceSeed
     }
 
     constructor(connection: Connection) {
@@ -46,8 +46,7 @@ export class SeedDatabase {
             if (!isUndefined(modules[key])) {
                 const seed = new modules[key](this.connection, key)
 
-                if (!isUndefined(seed) && !isUndefined(seed.seed))
-                    await seed.seed()
+                if (!isUndefined(seed) && !isUndefined(seed.seed)) await seed.seed()
             }
         }
     }

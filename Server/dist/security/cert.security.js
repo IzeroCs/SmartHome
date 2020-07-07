@@ -5,7 +5,7 @@ var jwt = require("jsonwebtoken");
 var path = require("path");
 var fs = require("fs");
 var util_1 = require("util");
-var CertSecurity = /** @class */ (function () {
+var CertSecurity = (function () {
     function CertSecurity(platform) {
         this.platform = platform;
         if (platform !== "app" && platform !== "esp")
@@ -16,7 +16,7 @@ var CertSecurity = /** @class */ (function () {
     }
     CertSecurity.prototype.token = function () {
         return jwt.sign(this.payloadConfig, this.certPrivate, {
-            algorithm: "RS256",
+            algorithm: "RS256"
         });
     };
     CertSecurity.prototype.verify = function (token, handle) {

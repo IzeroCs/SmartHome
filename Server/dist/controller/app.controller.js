@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 var common_1 = require("@nestjs/common");
 var app_service_1 = require("../service/app.service");
-var AppController = /** @class */ (function () {
+var AppController = (function () {
     function AppController(appService) {
         this.appService = appService;
     }

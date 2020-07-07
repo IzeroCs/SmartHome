@@ -1,11 +1,4 @@
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    OneToMany,
-    JoinColumn,
-    OneToOne,
-} from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne } from "typeorm"
 import { EspPin } from "./esp_pin.entity"
 import { RoomDevice } from "./room_device.entity"
 
@@ -28,13 +21,13 @@ export class Esp {
 
     @OneToMany(
         type => RoomDevice,
-        device => device.esp,
+        device => device.esp
     )
     devices: RoomDevice[]
 
     @OneToMany(
         type => EspPin,
-        pin => pin.esp,
+        pin => pin.esp
     )
     pins: EspPin[]
 }

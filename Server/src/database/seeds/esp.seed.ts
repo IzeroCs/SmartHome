@@ -5,7 +5,7 @@ export class EspSeed extends BaseSeed {
     async seed() {
         const repository = this.connection.getRepository(Esp)
         const count = await repository.count({
-            name: "ESP1N403E91636RSC185G2K",
+            name: "ESP1N403E91636RSC185G2K"
         })
 
         if (count <= 0) {

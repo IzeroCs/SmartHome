@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseSeed = void 0;
 var common_1 = require("@nestjs/common");
-var BaseSeed = /** @class */ (function () {
+var BaseSeed = (function () {
     function BaseSeed(connection, context) {
         this.context = context;
         this.connection = connection;

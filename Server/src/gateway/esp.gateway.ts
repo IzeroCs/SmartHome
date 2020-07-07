@@ -1,11 +1,4 @@
-import {
-    SubscribeMessage,
-    WebSocketGateway,
-    WebSocketServer,
-    OnGatewayInit,
-    OnGatewayConnection,
-    OnGatewayDisconnect,
-} from "@nestjs/websockets"
+import { SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets"
 import { Logger } from "@nestjs/common"
 import { Socket, Server, Namespace } from "socket.io"
 import { SocketUtil } from "../util/socket.util"
@@ -23,10 +16,9 @@ import clc = require("cli-color")
 @WebSocketGateway({
     namespace: "/platform-esp",
     pingTimeout: 5000,
-    pingInterval: 1000,
+    pingInterval: 1000
 })
-export class EspGateway
-    implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Namespace
 
     private static instance: EspGateway = null
@@ -61,8 +53,7 @@ export class EspGateway
 
     @SubscribeMessage("auth")
     async handleAuth(client: Socket, payload: any) {
-        if (EspGateway.isClientAuth(client))
-            return this.logger.log(`Authenticate already`)
+        if (EspGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
 
         payload = Pass.auth(payload)
 
@@ -93,8 +84,7 @@ export class EspGateway
         const pinChanged = espIO.changed
 
         if (isArray(pinData)) {
-            for (let i = 0; i < pinData.length; ++i)
-                pinData[i] = Pass.pin(pinData[i])
+            for (let i = 0; i < pinData.length; ++i) pinData[i] = Pass.pin(pinData[i])
         }
 
         if (!isUndefined(this.modules[client.id])) {
@@ -115,18 +105,14 @@ export class EspGateway
         const oldDetail = Pass.detail(this.modules[client.id])
         const newDetail = Pass.detail(payload)
 
-        const oldSignal = NetworkUtil.calculateSignalLevel(
-            oldDetail.detail_rssi,
-        )
-        const newSignal = NetworkUtil.calculateSignalLevel(
-            newDetail.detail_rssi,
-        )
+        const oldSignal = NetworkUtil.calculateSignalLevel(oldDetail.detail_rssi)
+        const newSignal = NetworkUtil.calculateSignalLevel(newDetail.detail_rssi)
 
         if (oldSignal !== newSignal) {
             this.modules[client.id].detail_rssi = newDetail.detail_rssi
 
             EspModel.updateDetail(client.id, {
-                rssi: newDetail.detail_rssi,
+                rssi: newDetail.detail_rssi
             })
             AppGateway.notifyEspModules()
         }
@@ -163,9 +149,7 @@ class Notify {
     static unAuthorized(client: Socket) {
         if (EspGateway.isClientAuth(client)) return
 
-        EspGateway.getLogger().log(
-            `Disconnect socket unauthorized: ${client.id}`,
-        )
+        EspGateway.getLogger().log(`Disconnect socket unauthorized: ${client.id}`)
         EspModel.updateAuth(client.id, false, false)
         client.emit("auth", "unauthorized")
         client.disconnect(true)
@@ -192,9 +176,9 @@ class Pass {
         return Pass.def(
             {
                 id: "",
-                token: "",
+                token: ""
             },
-            obj,
+            obj
         )
     }
 
@@ -206,9 +190,9 @@ class Pass {
                 auth: false,
                 changed: false,
                 pins: [],
-                detail_rssi: NetworkUtil.MIN_RSSI,
+                detail_rssi: NetworkUtil.MIN_RSSI
             },
-            obj,
+            obj
         )
     }
 
@@ -216,9 +200,9 @@ class Pass {
         return Pass.def(
             {
                 pins: [],
-                changed: "0",
+                changed: "0"
             },
-            obj,
+            obj
         )
     }
 
@@ -230,18 +214,18 @@ class Pass {
                 outputPrimary: 0,
                 outputSecondary: 0,
                 dualToggleCount: 0,
-                status: 0,
+                status: 0
             },
-            obj,
+            obj
         )
     }
 
     static detail(obj: Object): any {
         return Pass.def(
             {
-                detail_rssi: NetworkUtil.MIN_RSSI,
+                detail_rssi: NetworkUtil.MIN_RSSI
             },
-            obj,
+            obj
         )
     }
 }

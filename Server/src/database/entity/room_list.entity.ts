@@ -1,12 +1,4 @@
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    OneToOne,
-    JoinColumn,
-    OneToMany,
-    ManyToOne,
-} from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from "typeorm"
 import { RoomType } from "./room_type.entity"
 import { RoomDevice } from "./room_device.entity"
 
@@ -23,13 +15,13 @@ export class RoomList {
 
     @OneToMany(
         type => RoomDevice,
-        device => device.room,
+        device => device.room
     )
     devices: RoomDevice[]
 
     @ManyToOne(
         type => RoomType,
-        type => type.lists,
+        type => type.lists
     )
     type: RoomType
 }

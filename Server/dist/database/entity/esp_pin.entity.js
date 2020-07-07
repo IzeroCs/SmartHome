@@ -13,7 +13,7 @@ exports.EspPin = void 0;
 var typeorm_1 = require("typeorm");
 var esp_entity_1 = require("./esp.entity");
 var room_device_entity_1 = require("./room_device.entity");
-var EspPin = /** @class */ (function () {
+var EspPin = (function () {
     function EspPin() {
     }
     __decorate([

@@ -9,8 +9,7 @@ export class AppLogger implements LoggerService {
     log(message?: any, ...params: any[]) {
         process.stdout.write(yellow(`[${params[0]}] `))
 
-        if (typeof message !== "object" && typeof message !== "function")
-            process.stdout.write(green(`${this.format(message)}\n`))
+        if (typeof message !== "object" && typeof message !== "function") process.stdout.write(green(`${this.format(message)}\n`))
         else process.stdout.write(blue(`${this.format(message)}\n`))
     }
 
@@ -39,8 +38,7 @@ export class AppLogger implements LoggerService {
         if (!isString(f)) {
             let objects = []
 
-            for (let i = 0; i < arguments.length; i++)
-                objects.push(inspect(arguments[i]))
+            for (let i = 0; i < arguments.length; i++) objects.push(inspect(arguments[i]))
 
             return objects.join(" ")
         }
@@ -80,12 +78,9 @@ export class AppLogger implements LoggerService {
         let file = path.join(__dirname, "..", "assets/icon/" + name)
 
         if (os.release().indexOf("Microsoft")) {
-            file = file.replace(
-                /^\/mnt\/(\w+)\/(.+?)$/g,
-                (x: string, disk: string, path: string): any => {
-                    return `${disk}:/${path}`
-                },
-            )
+            file = file.replace(/^\/mnt\/(\w+)\/(.+?)$/g, (x: string, disk: string, path: string): any => {
+                return `${disk}:/${path}`
+            })
         }
 
         return file

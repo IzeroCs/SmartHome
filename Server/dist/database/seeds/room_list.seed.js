@@ -54,7 +54,7 @@ var base_seed_1 = require("../base.seed");
 var room_list_entity_1 = require("../entity/room_list.entity");
 var room_type_entity_1 = require("../entity/room_type.entity");
 var util_1 = require("util");
-var RoomListSeed = /** @class */ (function (_super) {
+var RoomListSeed = (function (_super) {
     __extends(RoomListSeed, _super);
     function RoomListSeed() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -67,7 +67,7 @@ var RoomListSeed = /** @class */ (function (_super) {
             { name: "Cầu thang", type: 6 },
             { name: "Sân nhà", type: 7 },
             { name: "Gác lửng", type: 8 },
-            { name: "Gác mái", type: 9 },
+            { name: "Gác mái", type: 9 }
         ];
         return _this;
     }
@@ -79,39 +79,39 @@ var RoomListSeed = /** @class */ (function (_super) {
                     case 0:
                         repository = this.connection.getRepository(room_list_entity_1.RoomList);
                         repositoryRoomType = this.connection.getRepository(room_type_entity_1.RoomType);
-                        return [4 /*yield*/, repository.count()];
+                        return [4, repository.count()];
                     case 1:
-                        if (!((_a.sent()) <= 0)) return [3 /*break*/, 7];
+                        if (!((_a.sent()) <= 0)) return [3, 7];
                         this.logSeedRunning();
                         i = 0;
                         _a.label = 2;
                     case 2:
-                        if (!(i < this.datas.length)) return [3 /*break*/, 6];
+                        if (!(i < this.datas.length)) return [3, 6];
                         data = this.datas[i];
                         name_1 = data["name"];
                         type = parseInt(data["type"]);
-                        return [4 /*yield*/, repositoryRoomType.findOne({
-                                type: type,
+                        return [4, repositoryRoomType.findOne({
+                                type: type
                             })];
                     case 3:
                         roomType = _a.sent();
-                        if (!!util_1.isNull(roomType)) return [3 /*break*/, 5];
+                        if (!!util_1.isNull(roomType)) return [3, 5];
                         room = new room_list_entity_1.RoomList();
                         room.name = name_1;
                         room.type = roomType;
                         room.enable = true;
-                        return [4 /*yield*/, repository.save(room)];
+                        return [4, repository.save(room)];
                     case 4:
                         _a.sent();
                         this.logger.debug("Room list " + name_1 + " has been saved");
                         _a.label = 5;
                     case 5:
                         ++i;
-                        return [3 /*break*/, 2];
+                        return [3, 2];
                     case 6:
                         this.logSeedRunned();
                         _a.label = 7;
-                    case 7: return [2 /*return*/];
+                    case 7: return [2];
                 }
             });
         });
