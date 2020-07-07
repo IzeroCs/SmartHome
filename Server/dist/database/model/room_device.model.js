@@ -121,7 +121,8 @@ var RoomDeviceModel = (function (_super) {
                                 .isURL()
                                 .isIn(["google", "google.co", "google.com"])
                         ]);
-                        validate.execute({
+                        validate
+                            .execute({
                             name: "Test",
                             value: "izerocs.gmail.com",
                             type: {
@@ -129,6 +130,12 @@ var RoomDeviceModel = (function (_super) {
                                 type: 2,
                                 v: "google.com"
                             }
+                        })
+                            .then(function () {
+                            console.log("Not error");
+                        })
+                            .catch(function (errs) {
+                            console.log("Errors: ", errs);
                         });
                         return [2];
                 }

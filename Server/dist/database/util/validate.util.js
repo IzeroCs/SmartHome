@@ -18,8 +18,44 @@ var Validate = (function () {
     Validate.prototype.execute = function (object) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.list.forEach(function (check) { return check.run(object); });
+            var errors = new Map();
+            for (var i = 0; i < _this.list.length; ++i) {
+                var check = _this.list[i].run(object);
+                var fields = check.getFields();
+                var results = check.getResults();
+                if (util_1.isArray(fields)) {
+                    for (var f = 0; f < fields.length; ++f) {
+                        var field = fields[f];
+                        var result = results.get(field);
+                        _this.resultToError(field, result, errors);
+                    }
+                }
+                else {
+                    _this.resultToError(fields, results.get(fields), errors);
+                }
+            }
+            if (errors.size > 0)
+                return reject(Array.from(errors.values()));
+            else
+                return resolve();
         });
+    };
+    Validate.prototype.resultToError = function (field, result, errors) {
+        var resultKeys = Object.keys(result);
+        var errorValidate = null;
+        if (errors.has(field)) {
+            errorValidate = errors.get(field);
+        }
+        else {
+            errorValidate = new ValidateError(field);
+            errors.set(field, errorValidate);
+        }
+        for (var i = 0; i < resultKeys.length; ++i) {
+            var key = resultKeys[i];
+            var value = result[key];
+            if (typeof value !== "boolean" || value === false)
+                errorValidate.push(key);
+        }
     };
     return Validate;
 }());
@@ -28,6 +64,18 @@ var ChainResult = (function () {
     function ChainResult() {
     }
     return ChainResult;
+}());
+var ValidateError = (function () {
+    function ValidateError(field) {
+        this.field = "";
+        this.chains = [];
+        this.field = field;
+    }
+    ValidateError.prototype.push = function (chain) {
+        if (this.chains.indexOf(chain) === -1)
+            this.chains.push(chain);
+    };
+    return ValidateError;
 }());
 var ValidateChain = (function () {
     function ValidateChain(object, field, check) {
@@ -68,7 +116,6 @@ var ValidateChain = (function () {
             if (!result)
                 break;
         }
-        console.log("[" + this.field + "]:", chainResult);
     };
     ValidateChain.prototype.isRequired = function () {
         return !util_1.isUndefined(this.find);
@@ -199,6 +246,7 @@ var ValidateCheck = (function () {
         else {
             this.fieldCheck(object, this.fields);
         }
+        return this;
     };
     ValidateCheck.prototype.isRequired = function () {
         return this.push("isRequired");

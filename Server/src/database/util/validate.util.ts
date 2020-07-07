@@ -19,10 +19,49 @@ export class Validate {
         return check
     }
 
-    execute(object: any): Promise<any> {
+    execute(object: any): Promise<ValidateError[]> {
         return new Promise((resolve, reject) => {
-            this.list.forEach(check => check.run(object))
+            const errors = new Map<string, ValidateError>()
+
+            for (let i = 0; i < this.list.length; ++i) {
+                let check = this.list[i].run(object)
+                let fields = check.getFields()
+                let results = check.getResults()
+
+                if (isArray(fields)) {
+                    for (let f = 0; f < fields.length; ++f) {
+                        let field = fields[f]
+                        let result = results.get(field)
+
+                        this.resultToError(field, result, errors)
+                    }
+                } else {
+                    this.resultToError(fields, results.get(fields), errors)
+                }
+            }
+
+            if (errors.size > 0) return reject(Array.from(errors.values()))
+            else return resolve()
         })
+    }
+
+    private resultToError(field: string, result: ChainResult, errors: Map<string, ValidateError>) {
+        let resultKeys = Object.keys(result)
+        let errorValidate: ValidateError = null
+
+        if (errors.has(field)) {
+            errorValidate = errors.get(field)
+        } else {
+            errorValidate = new ValidateError(field)
+            errors.set(field, errorValidate)
+        }
+
+        for (let i = 0; i < resultKeys.length; ++i) {
+            let key = resultKeys[i]
+            let value = result[key]
+
+            if (typeof value !== "boolean" || value === false) errorValidate.push(key)
+        }
     }
 }
 
@@ -52,6 +91,19 @@ interface ValidateChainInterface {
     isIn(array: any)
     isLength(min: number, max: number)
     custom(nsp?: string, handle?: chainHandle)
+}
+
+class ValidateError {
+    private field: string = ""
+    private chains: Array<string> = []
+
+    constructor(field: string) {
+        this.field = field
+    }
+
+    push(chain: string) {
+        if (this.chains.indexOf(chain) === -1) this.chains.push(chain)
+    }
 }
 
 class ValidateChain implements ValidateChainInterface {
@@ -95,8 +147,6 @@ class ValidateChain implements ValidateChainInterface {
             if (verify) chainResult[chain] = result
             if (!result) break
         }
-
-        console.log("[" + this.field + "]:", chainResult)
     }
 
     isRequired(): boolean {
@@ -226,12 +276,14 @@ class ValidateCheck implements ValidateChainInterface {
         }
     }
 
-    run(object: any) {
+    run(object: any): ValidateCheck {
         if (isArray(this.fields)) {
             this.fields.map(field => this.fieldCheck(object, field))
         } else {
             this.fieldCheck(object, this.fields)
         }
+
+        return this
     }
 
     isRequired(): ValidateCheck {

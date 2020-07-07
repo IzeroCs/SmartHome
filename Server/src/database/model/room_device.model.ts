@@ -61,14 +61,21 @@ export class RoomDeviceModel extends BaseModel {
                 .isIn(["google", "google.co", "google.com"])
         ])
 
-        validate.execute({
-            name: "Test",
-            value: "izerocs.gmail.com",
-            type: {
-                id: 1,
-                type: 2,
-                v: "google.com"
-            }
-        })
+        validate
+            .execute({
+                name: "Test",
+                value: "izerocs.gmail.com",
+                type: {
+                    id: 1,
+                    type: 2,
+                    v: "google.com"
+                }
+            })
+            .then(() => {
+                console.log("Not error")
+            })
+            .catch(errs => {
+                console.log("Errors: ", errs)
+            })
     }
 }
