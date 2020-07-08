@@ -12,7 +12,7 @@ data class RoomDeviceModel(
     @SerializedName("type") val type : DeviceTypeModel,
     @SerializedName("esp") val esp : EspModuleModel,
     @SerializedName("room") val room : RoomListModel
-) {
+) : BaseModel() {
     val color : Int
         get() = parseColor()
 

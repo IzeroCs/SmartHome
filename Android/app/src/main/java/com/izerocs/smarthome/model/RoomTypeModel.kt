@@ -9,7 +9,7 @@ data class RoomTypeModel(
     @SerializedName("name") val name : String,
     @SerializedName("type") val type : Int,
     @SerializedName("enable") val enable : Boolean
-) {
+) : BaseModel() {
     private lateinit var title : String
     private var icon : Int? = null
 

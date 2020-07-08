@@ -4,6 +4,8 @@ import { isUndefined, isNumber } from "util"
 import { EntityUtil } from "../util/entity.util"
 import { BaseModel } from "../base.model"
 import { Validate, checker } from "../util/validate.util"
+import { MiddlewareModel } from "../middleware.model"
+import { ErrorModel } from "../error.model"
 
 export enum WidgetDevice {
     WidgetSmall = 0,
@@ -32,50 +34,41 @@ export class RoomDeviceModel extends BaseModel {
         })
     }
 
-    static async updateDevice(deviceId: number, object: any) {
-        const repository = getRepository(RoomDevice)
-        const find = await repository.findOne({ id: deviceId })
-        const res = EntityUtil.create(RoomDevice, object)
+    static updateDevice(deviceId: number, object: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            const repository = getRepository(RoomDevice)
+            const find = await repository.findOne({ id: deviceId })
+            const res = EntityUtil.create(RoomDevice, object)
+            const mid = new MiddlewareModel()
 
-        if (isUndefined(find)) return this.response({ code: UpdateDevice.DeviceNotExists })
+            mid.preProcessed(() => {
+                if (isUndefined(find)) return "deviceNotExists"
+            })
 
-        const validate = new Validate([
-            checker(["name", "type.type"])
-                .isRequired()
-                .isNotEmpty()
-                .custom("nameInvalid", (field: string, value: string) => {
-                    if (field == "name") return true
-                })
-                .isLength(4, 30)
-                .isMin(5)
-                .isMax(3)
-                .isNumber(),
-            checker("value")
-                .isRequired()
-                .isNotEmpty()
-                .isEmail(),
-            checker(["type", "type.v"])
-                .isRequired()
-                .isNotEmpty()
-                .isURL()
-                .isIn(["google", "google.co", "google.com"])
-        ])
+            mid.validate(
+                checker("name")
+                    .isRequired()
+                    .isNotEmpty()
+                    .isLength(5, 30),
 
-        validate
-            .execute({
-                name: "Test",
-                value: "izerocs.gmail.com",
-                type: {
-                    id: 1,
-                    type: 2,
-                    v: "google.com"
-                }
+                checker("status")
+                    .isRequired()
+                    .isNumber()
+            )
+
+            mid.preUpdate(() => {
+                if (find.name === res.name && find.status === res.status) return "hasNotChanged"
             })
-            .then(() => {
-                console.log("Not error")
+
+            mid.update(async () => {
+                await repository.save(res)
             })
-            .catch(errs => {
-                console.log("Errors: ", errs)
+
+            mid.run(res)
+            mid.response((error: ErrorModel) => {
+                if (error) return reject(error)
+                else return resolve(res)
             })
+        })
     }
 }

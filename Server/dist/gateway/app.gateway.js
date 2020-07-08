@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppGateway = void 0;
+exports.AppGateway = exports.EVENTS = void 0;
 var websockets_1 = require("@nestjs/websockets");
 var common_1 = require("@nestjs/common");
 var socket_util_1 = require("../util/socket.util");
@@ -23,6 +23,14 @@ var room_list_model_1 = require("../database/model/room_list.model");
 var room_list_entity_1 = require("../database/entity/room_list.entity");
 var room_device_model_1 = require("../database/model/room_device.model");
 var room_device_entity_1 = require("../database/entity/room_device.entity");
+exports.EVENTS = {
+    AUTH: "auth",
+    ROOM_TYPE: "room-type",
+    ROOM_LIST: "room-list",
+    ROOM_DEVICE: "room-device",
+    ESP_LIST: "esp-list",
+    COMMIT_ROOM_DEVICE: "commit-room-device"
+};
 var AppGateway = (function () {
     function AppGateway() {
         this.logger = new common_1.Logger("AppGateway");
@@ -125,37 +133,37 @@ var AppGateway = (function () {
         __metadata("design:type", Object)
     ], AppGateway.prototype, "server", void 0);
     __decorate([
-        websockets_1.SubscribeMessage("auth"),
+        websockets_1.SubscribeMessage(exports.EVENTS.AUTH),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleAuth", null);
     __decorate([
-        websockets_1.SubscribeMessage("room-type"),
+        websockets_1.SubscribeMessage(exports.EVENTS.ROOM_TYPE),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleRoomType", null);
     __decorate([
-        websockets_1.SubscribeMessage("room-list"),
+        websockets_1.SubscribeMessage(exports.EVENTS.ROOM_LIST),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleRoomList", null);
     __decorate([
-        websockets_1.SubscribeMessage("room-device"),
+        websockets_1.SubscribeMessage(exports.EVENTS.ROOM_DEVICE),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleRoomDevice", null);
     __decorate([
-        websockets_1.SubscribeMessage("esp-list"),
+        websockets_1.SubscribeMessage(exports.EVENTS.ESP_LIST),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleEspList", null);
     __decorate([
-        websockets_1.SubscribeMessage("commit-room-device"),
+        websockets_1.SubscribeMessage(exports.EVENTS.COMMIT_ROOM_DEVICE),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
@@ -178,52 +186,54 @@ var Notify = (function () {
         if (esp_gateway_1.EspGateway.isClientAuth(client))
             return;
         AppGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
-        client.emit("auth", "unauthorized");
+        client.emit(exports.EVENTS.AUTH, "unauthorized");
         client.disconnect(false);
     };
     Notify.espModules = function (client) {
         if (client) {
             if (AppGateway.isClientAuth(client))
-                client.emit("esp-list", esp_gateway_1.EspGateway.getModules());
+                client.emit(exports.EVENTS.ESP_LIST, esp_gateway_1.EspGateway.getModules());
         }
         else {
-            AppGateway.getInstance().server.emit("esp-list", esp_gateway_1.EspGateway.getModules());
+            AppGateway.getInstance().server.emit(exports.EVENTS.ESP_LIST, esp_gateway_1.EspGateway.getModules());
         }
     };
     Notify.roomTypes = function (client) {
         room_type_model_1.RoomTypeModel.getAll()
             .then(function (list) {
             if (list.length <= 0)
-                return client.emit("room-type", []);
+                return client.emit(exports.EVENTS.ROOM_TYPE, []);
             else
-                client.emit("room-type", list);
+                client.emit(exports.EVENTS.ROOM_TYPE, list);
         })
-            .catch(function (err) { return client.emit("room-type", []); });
+            .catch(function (err) { return client.emit(exports.EVENTS.ROOM_TYPE, []); });
     };
     Notify.roomList = function (client) {
         room_list_model_1.RoomListModel.getAll()
             .then(function (list) {
             if (list.length <= 0)
-                return client.emit("room-list", []);
+                return client.emit(exports.EVENTS.ROOM_LIST, []);
             else
-                client.emit("room-list", list);
+                client.emit(exports.EVENTS.ROOM_LIST, list);
         })
-            .catch(function (err) { return client.emit("room-list", []); });
+            .catch(function (err) { return client.emit(exports.EVENTS.ROOM_LIST, []); });
     };
     Notify.roomDevice = function (client, payload) {
         payload = Pass.roomDevice(payload);
         room_device_model_1.RoomDeviceModel.getList(payload.id)
             .then(function (list) {
             if (list.length <= 0)
-                return client.emit("room-device", []);
+                return client.emit(exports.EVENTS.ROOM_DEVICE, []);
             else
-                return client.emit("room-device", list);
+                return client.emit(exports.EVENTS.ROOM_DEVICE, list);
         })
-            .catch(function (err) { return client.emit("room-device", []); });
+            .catch(function (err) { return client.emit(exports.EVENTS.ROOM_DEVICE, []); });
     };
     Notify.commitRoomDevice = function (client, payload) {
         payload = Pass.roomDevice(payload);
-        room_device_model_1.RoomDeviceModel.updateDevice(payload.id, payload);
+        room_device_model_1.RoomDeviceModel.updateDevice(payload.id, payload)
+            .then(function (entity) { return client.emit(exports.EVENTS.COMMIT_ROOM_DEVICE, entity); })
+            .catch(function (error) { return client.emit(exports.EVENTS.COMMIT_ROOM_DEVICE, error); });
     };
     return Notify;
 }());

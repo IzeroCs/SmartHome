@@ -8,4 +8,4 @@ data class RoomListModel(
     @SerializedName("enable") val enable : Boolean,
     @SerializedName("type") val type : RoomTypeModel,
     @SerializedName("devices") val devices : MutableList<RoomDeviceModel>
-)
+) : BaseModel()

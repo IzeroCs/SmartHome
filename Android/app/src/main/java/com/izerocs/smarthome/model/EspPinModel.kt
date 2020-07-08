@@ -9,4 +9,4 @@ data class EspPinModel(
     @SerializedName("outputSecondary") val outputSecondary : Int,
     @SerializedName("dualToggleCount") val dualToggleCount : Int,
     @SerializedName("status") val status : Boolean
-)
+) : BaseModel()

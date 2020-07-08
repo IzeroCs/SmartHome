@@ -64,6 +64,9 @@ class ListRoomAdapter(private val context: Context) : RecyclerView.Adapter<ListR
         context, inflate.inflate(R.layout.list_room_item, null), clickListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (position > roomLists.size - 1)
+            return
+
         val room = roomLists[position]
 
         holder.setIcon(room.type.type)

@@ -7,4 +7,4 @@ data class DeviceTypeModel(
     @SerializedName("name") val name : String,
     @SerializedName("nsp") val nsp : String,
     @SerializedName("type") val type : Int
-)
+) : BaseModel()

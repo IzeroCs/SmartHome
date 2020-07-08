@@ -56,6 +56,7 @@ var util_1 = require("util");
 var entity_util_1 = require("../util/entity.util");
 var base_model_1 = require("../base.model");
 var validate_util_1 = require("../util/validate.util");
+var middleware_model_1 = require("../middleware.model");
 var WidgetDevice;
 (function (WidgetDevice) {
     WidgetDevice[WidgetDevice["WidgetSmall"] = 0] = "WidgetSmall";
@@ -87,8 +88,10 @@ var RoomDeviceModel = (function (_super) {
         });
     };
     RoomDeviceModel.updateDevice = function (deviceId, object) {
-        return __awaiter(this, void 0, void 0, function () {
-            var repository, find, res, validate;
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, find, res, mid;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -97,50 +100,42 @@ var RoomDeviceModel = (function (_super) {
                     case 1:
                         find = _a.sent();
                         res = entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, object);
-                        if (util_1.isUndefined(find))
-                            return [2, this.response({ code: UpdateDevice.DeviceNotExists })];
-                        validate = new validate_util_1.Validate([
-                            validate_util_1.checker(["name", "type.type"])
-                                .isRequired()
-                                .isNotEmpty()
-                                .custom("nameInvalid", function (field, value) {
-                                if (field == "name")
-                                    return true;
-                            })
-                                .isLength(4, 30)
-                                .isMin(5)
-                                .isMax(3)
-                                .isNumber(),
-                            validate_util_1.checker("value")
-                                .isRequired()
-                                .isNotEmpty()
-                                .isEmail(),
-                            validate_util_1.checker(["type", "type.v"])
-                                .isRequired()
-                                .isNotEmpty()
-                                .isURL()
-                                .isIn(["google", "google.co", "google.com"])
-                        ]);
-                        validate
-                            .execute({
-                            name: "Test",
-                            value: "izerocs.gmail.com",
-                            type: {
-                                id: 1,
-                                type: 2,
-                                v: "google.com"
-                            }
-                        })
-                            .then(function () {
-                            console.log("Not error");
-                        })
-                            .catch(function (errs) {
-                            console.log("Errors: ", errs);
+                        mid = new middleware_model_1.MiddlewareModel();
+                        mid.preProcessed(function () {
+                            if (util_1.isUndefined(find))
+                                return "deviceNotExists";
+                        });
+                        mid.validate(validate_util_1.checker("name")
+                            .isRequired()
+                            .isNotEmpty()
+                            .isLength(5, 30), validate_util_1.checker("status")
+                            .isRequired()
+                            .isNumber());
+                        mid.preUpdate(function () {
+                            if (find.name === res.name && find.status === res.status)
+                                return "hasNotChanged";
+                        });
+                        mid.update(function () { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4, repository.save(res)];
+                                    case 1:
+                                        _a.sent();
+                                        return [2];
+                                }
+                            });
+                        }); });
+                        mid.run(res);
+                        mid.response(function (error) {
+                            if (error)
+                                return reject(error);
+                            else
+                                return resolve(res);
                         });
                         return [2];
                 }
             });
-        });
+        }); });
     };
     return RoomDeviceModel;
 }(base_model_1.BaseModel));

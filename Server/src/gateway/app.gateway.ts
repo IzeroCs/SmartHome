@@ -12,6 +12,17 @@ import { RoomListModel } from "src/database/model/room_list.model"
 import { RoomList } from "src/database/entity/room_list.entity"
 import { RoomDeviceModel } from "src/database/model/room_device.model"
 import { RoomDevice } from "src/database/entity/room_device.entity"
+import { ErrorModel } from "../database/error.model"
+
+export const EVENTS = {
+    AUTH: "auth",
+    ROOM_TYPE: "room-type",
+    ROOM_LIST: "room-list",
+    ROOM_DEVICE: "room-device",
+    ESP_LIST: "esp-list",
+
+    COMMIT_ROOM_DEVICE: "commit-room-device"
+}
 
 @WebSocketGateway({
     namespace: "/platform-app",
@@ -50,7 +61,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         SocketUtil.removing(this.server)
     }
 
-    @SubscribeMessage("auth")
+    @SubscribeMessage(EVENTS.AUTH)
     handleAuth(client: Socket, payload: any) {
         if (AppGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
 
@@ -76,31 +87,31 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         })
     }
 
-    @SubscribeMessage("room-type")
+    @SubscribeMessage(EVENTS.ROOM_TYPE)
     handleRoomType(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.roomTypes(client)
     }
 
-    @SubscribeMessage("room-list")
+    @SubscribeMessage(EVENTS.ROOM_LIST)
     handleRoomList(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.roomList(client)
     }
 
-    @SubscribeMessage("room-device")
+    @SubscribeMessage(EVENTS.ROOM_DEVICE)
     handleRoomDevice(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.roomDevice(client, payload)
     }
 
-    @SubscribeMessage("esp-list")
+    @SubscribeMessage(EVENTS.ESP_LIST)
     handleEspList(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.espModules(client)
     }
 
-    @SubscribeMessage("commit-room-device")
+    @SubscribeMessage(EVENTS.COMMIT_ROOM_DEVICE)
     handleCommitRoomDevice(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.commitRoomDevice(client, payload)
@@ -136,34 +147,34 @@ class Notify {
         if (EspGateway.isClientAuth(client)) return
 
         AppGateway.getLogger().log(`Disconnect socket unauthorized: ${client.id}`)
-        client.emit("auth", "unauthorized")
+        client.emit(EVENTS.AUTH, "unauthorized")
         client.disconnect(false)
     }
 
     static espModules(client?: Socket) {
         if (client) {
-            if (AppGateway.isClientAuth(client)) client.emit("esp-list", EspGateway.getModules())
+            if (AppGateway.isClientAuth(client)) client.emit(EVENTS.ESP_LIST, EspGateway.getModules())
         } else {
-            AppGateway.getInstance().server.emit("esp-list", EspGateway.getModules())
+            AppGateway.getInstance().server.emit(EVENTS.ESP_LIST, EspGateway.getModules())
         }
     }
 
     static roomTypes(client: Socket) {
         RoomTypeModel.getAll()
             .then((list: Array<RoomType>) => {
-                if (list.length <= 0) return client.emit("room-type", [])
-                else client.emit("room-type", list)
+                if (list.length <= 0) return client.emit(EVENTS.ROOM_TYPE, [])
+                else client.emit(EVENTS.ROOM_TYPE, list)
             })
-            .catch(err => client.emit("room-type", []))
+            .catch(err => client.emit(EVENTS.ROOM_TYPE, []))
     }
 
     static roomList(client: Socket) {
         RoomListModel.getAll()
             .then((list: Array<RoomList>) => {
-                if (list.length <= 0) return client.emit("room-list", [])
-                else client.emit("room-list", list)
+                if (list.length <= 0) return client.emit(EVENTS.ROOM_LIST, [])
+                else client.emit(EVENTS.ROOM_LIST, list)
             })
-            .catch(err => client.emit("room-list", []))
+            .catch(err => client.emit(EVENTS.ROOM_LIST, []))
     }
 
     static roomDevice(client: Socket, payload: any) {
@@ -171,16 +182,17 @@ class Notify {
 
         RoomDeviceModel.getList(payload.id)
             .then((list: Array<RoomDevice>) => {
-                if (list.length <= 0) return client.emit("room-device", [])
-                else return client.emit("room-device", list)
+                if (list.length <= 0) return client.emit(EVENTS.ROOM_DEVICE, [])
+                else return client.emit(EVENTS.ROOM_DEVICE, list)
             })
-            .catch(err => client.emit("room-device", []))
+            .catch(err => client.emit(EVENTS.ROOM_DEVICE, []))
     }
 
     static commitRoomDevice(client: Socket, payload: any) {
         payload = Pass.roomDevice(payload)
-
         RoomDeviceModel.updateDevice(payload.id, payload)
+            .then((entity: RoomDevice) => client.emit(EVENTS.COMMIT_ROOM_DEVICE, entity))
+            .catch((error: ErrorModel) => client.emit(EVENTS.COMMIT_ROOM_DEVICE, error))
     }
 }
 

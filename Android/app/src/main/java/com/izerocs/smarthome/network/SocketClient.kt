@@ -2,13 +2,11 @@ package com.izerocs.smarthome.network
 
 import android.content.Context
 import android.util.Log
+import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.google.gson.Gson
-import com.izerocs.smarthome.model.EspModuleModel
-import com.izerocs.smarthome.model.RoomDeviceModel
-import com.izerocs.smarthome.model.RoomListModel
-import com.izerocs.smarthome.model.RoomTypeModel
+import com.izerocs.smarthome.model.*
 import com.izerocs.smarthome.preferences.AppPreferences
 import org.json.JSONArray
 import org.json.JSONObject
@@ -63,14 +61,28 @@ class SocketClient(val context : Context) {
         socket.run {
             off()
             on(Socket.EVENT_CONNECT)       { onConnect() }
-            on(Socket.EVENT_CONNECT_ERROR) { onConnectError() }
-            on(Socket.EVENT_DISCONNECT)    { onDisconnect() }
-            on(EVENT_AUTH)                 { onAuth(it) }
-            on(EVENT_ESP_LIST)             { onEspList(it)      }
-            on(EVENT_ROOM_TYPES)           { onRoomTypes(it)    }
-            on(EVENT_ROOM_LIST)            { onRoomList(it)     }
-            on(EVENT_ROOM_DEVICE)          { onRoomDevice(it)   }
+            on(Socket.EVENT_CONNECT_ERROR) { eventListener?.onConnectError(this@SocketClient) }
+            on(Socket.EVENT_DISCONNECT)    { eventListener?.onDisconnect(this@SocketClient) }
         }
+
+        on<String>    (EVENT_AUTH)       { onAuth(it) }
+        on<JSONObject>(EVENT_ESP_LIST)   { onEspList(it) }
+        on<JSONArray>(EVENT_ROOM_TYPES)  { onRoomTypes(it) }
+        on<JSONArray>(EVENT_ROOM_LIST)   { onRoomList(it) }
+        on<JSONArray>(EVENT_ROOM_DEVICE) { onRoomDevice(it) }
+
+
+//        socket.run {
+//            off()
+//            on(Socket.EVENT_CONNECT)       { onConnect() }
+//            on(Socket.EVENT_CONNECT_ERROR) { onConnectError() }
+//            on(Socket.EVENT_DISCONNECT)    { onDisconnect() }
+//            on(EVENT_AUTH)                 { onAuth(it) }
+//            on(EVENT_ESP_LIST)             { onEspList(it)      }
+//            on(EVENT_ROOM_TYPES)           { onRoomTypes(it)    }
+//            on(EVENT_ROOM_LIST)            { onRoomList(it)     }
+//            on(EVENT_ROOM_DEVICE)          { onRoomDevice(it)   }
+//        }
     }
 
     fun disconnect() {
@@ -88,31 +100,25 @@ class SocketClient(val context : Context) {
     }
 
     fun commitRoomDevice(roomDevice : RoomDeviceModel, response : ((status : Boolean) -> Unit?)? = null) {
-        socket.once(EVENT_COMMIT_ROOM_DEVICE) {
-            Log.d(TAG, it[0].toString())
-        }.emit(EVENT_COMMIT_ROOM_DEVICE, JSONObject(gson.toJson(roomDevice)))
+        once<JSONObject>(EVENT_COMMIT_ROOM_DEVICE, roomDevice) { out ->
+            Log.d(TAG, "onceMake")
+            Log.d(TAG, out.toString(4))
+        }
     }
 
     fun queryRoomDeviceList(roomId : Int, callback : (list: MutableList<RoomDeviceModel>) -> Unit) {
-        if (DEBUG)
-            Log.d(TAG, "queryRoomDevice: $roomId")
-
-        socket.once(EVENT_ROOM_DEVICE) {
-            if (it[0] !is JSONArray)
-                return@once
-
-            val data = it[0] as JSONArray
+        once<JSONArray>(EVENT_ROOM_DEVICE, mapOf("id" to roomId)) { out ->
             val list = mutableListOf<RoomDeviceModel>()
 
-            for (i in 0 until  data.length()) {
-                val deviceObject = data.getJSONObject(i)
+            for (i in 0 until  out.length()) {
+                val deviceObject = out.getJSONObject(i)
                 val deviceModel  = gson.fromJson(deviceObject.toString(), RoomDeviceModel::class.java)
 
                 list.add(deviceModel)
             }
 
             callback(list)
-        }.emit(EVENT_ROOM_DEVICE, JSONObject(mapOf("id" to roomId)))
+        }
     }
 
     fun getSocket()     : Socket                             = this.socket
@@ -123,45 +129,18 @@ class SocketClient(val context : Context) {
     private fun initSocket() : Socket = IO.socket("$scheme$host:$port$namesapce", options)
 
     private fun onConnect() {
-        if (DEBUG)
-            Log.d(TAG, "onConnect")
-
         val appPreferences = AppPreferences(context)
         val appID          = appPreferences.getAppID()
         val appToken       = appPreferences.getAppToken()
 
-        socket.emit("auth", JSONObject(mapOf("id" to appID, "token" to appToken)))
+        emit(EVENT_AUTH, mapOf("id" to appID, "token" to appToken))
         eventListener?.onConnect(this)
     }
 
-    private fun onConnectError() {
-        if (DEBUG)
-            Log.d(TAG, "onConnectError")
-
-        eventListener?.onConnectError(this)
-    }
-
-    private fun onDisconnect() {
-        if (DEBUG)
-            Log.d(TAG, "onDisconnect")
-
-        eventListener?.onDisconnect(this)
-    }
-
-    private fun onAuth(data : Array<Any>) {
-        if (DEBUG)
-            Log.d(TAG, "onAuth")
-
-        if (data.isNotEmpty() && data[0] == "authorized") {
-            socket.emit(EVENT_ROOM_TYPES)
-            socket.emit(EVENT_ROOM_LIST)
+    private fun onAuth(auth: String) {
+        if (auth == "authorized") {
+            emit(EVENT_ROOM_TYPES).emit(EVENT_ROOM_LIST)
             eventListener?.onAuthorized(this)
-
-            queryRoomDeviceList(1) { list ->
-                commitRoomDevice(list[0].copy(
-                    status = RoomDeviceModel.STATUS_ON
-                ))
-            }
 
             return
         }
@@ -180,19 +159,12 @@ class SocketClient(val context : Context) {
         }.run()
     }
 
-    private fun onEspList(it : Array<Any>) {
-        if (DEBUG)
-            Log.d(TAG, "onEspList")
-
-        if (it[0] !is JSONObject)
-            return
-
+    private fun onEspList(out : JSONObject) {
         val maps = mutableMapOf<String, EspModuleModel>()
-        val data = it[0] as JSONObject
 
-        data.keys().forEach { id ->
+        out.keys().forEach { id ->
             val espID    = id.toString()
-            val espObj   = data.getJSONObject(espID)
+            val espObj   = out.getJSONObject(espID)
             val espModel = gson.fromJson(espObj.toString(), EspModuleModel::class.java)
 
             maps[espID] = espModel
@@ -204,18 +176,11 @@ class SocketClient(val context : Context) {
         eventListener?.onEspModules(this, espModules)
     }
 
-    private fun onRoomTypes(it : Array<Any>) {
-        if (DEBUG)
-            Log.d(TAG, "onRoomTypes")
-
-        if (it[0] !is JSONArray)
-            return
-
+    private fun onRoomTypes(out : JSONArray) {
         val list = mutableListOf<RoomTypeModel>()
-        val data = it[0] as JSONArray
 
-        for (i in 0 until data.length()) {
-            val obj   = data.getJSONObject(i)
+        for (i in 0 until out.length()) {
+            val obj   = out.getJSONObject(i)
             val model = gson.fromJson(obj.toString(), RoomTypeModel::class.java)
 
             list.add(model)
@@ -226,18 +191,11 @@ class SocketClient(val context : Context) {
         eventListener?.onRoomTypes(this, roomTypes)
     }
 
-    private fun onRoomList(it : Array<Any>) {
-        if (DEBUG)
-            Log.d(TAG, "onRoomList")
-
-        if (it[0] !is JSONArray)
-            return
-
+    private fun onRoomList(out : JSONArray) {
         val list = mutableListOf<RoomListModel>()
-        val data = it[0] as JSONArray
 
-        for (i in 0 until data.length()) {
-            val obj = data.getJSONObject(i)
+        for (i in 0 until out.length()) {
+            val obj = out.getJSONObject(i)
             val model = gson.fromJson(obj.toString(), RoomListModel::class.java)
 
             list.add(model)
@@ -248,9 +206,89 @@ class SocketClient(val context : Context) {
         eventListener?.onRoomList(this, roomLists)
     }
 
-    private fun onRoomDevice(data : Array<Any>) {
-        if (DEBUG)
-            Log.d(TAG, "onRoomDevice")
+    private fun onRoomDevice(out : JSONArray) { }
+
+    private fun emit(event : String) : Emitter
+            = socket.emit(event)
+
+    private fun emit(event : String, model : BaseModel) : Emitter
+            = emit(event, JSONObject(Gson().toJson(model)))
+
+    private fun emit(event : String, map : Map<String, Any>) : Emitter
+            = emit(event, JSONObject(map))
+
+    private fun emit(event : String, json : String) : Emitter
+            = emit(event, JSONObject(json))
+
+    private fun emit(event : String, json : JSONObject) : Emitter
+            = socket.emit(event, json)
+
+    private inline fun <reified T : Any> once(
+        event : String,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = once<T>(event, null, listener)
+
+    private inline fun <reified T : Any> once(
+        event : String, model : BaseModel,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = once(event, JSONObject(Gson().toJson(model)), listener)
+
+    private inline fun <reified T : Any> once(
+        event : String, map : Map<String, Any>,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = once(event, JSONObject(map), listener)
+
+    private inline fun <reified T : Any> once(
+        event : String, json : String,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = once(event, JSONObject(json), listener)
+
+    private inline fun <reified T : Any> once(
+        event : String, json : JSONObject?,
+        crossinline listener : (out: T) -> Unit) : Emitter
+    {
+        val emitter = socket.once(event) {
+            if (it[0] is T)
+                listener(it[0] as T)
+        }
+
+        json?.let { emitter.emit(event, json) }
+        return emitter
     }
 
+    private fun off() : Emitter = socket.off()
+    private fun off(event : String) : Emitter = socket.off(event)
+
+    private inline fun <reified T : Any> on(
+        event : String,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = on<T>(event, null, listener)
+
+    private inline fun <reified T : Any> on(
+        event : String, model : BaseModel,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = on(event, JSONObject(Gson().toJson(model)), listener)
+
+    private inline fun <reified T : Any> on(
+        event : String, map : Map<String, Any>,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = on(event, JSONObject(map), listener)
+
+    private inline fun <reified T : Any> on(
+        event : String, json : String,
+        crossinline listener : (out: T) -> Unit) : Emitter
+            = on(event, JSONObject(json), listener)
+
+    private inline fun <reified T : Any> on(
+        event : String, json : JSONObject?,
+        crossinline listener : (out: T) -> Unit) : Emitter
+    {
+        val emitter = socket.on(event) {
+            if (it[0] is T)
+                listener(it[0] as T)
+        }
+
+        json?.let { emitter.emit(event, json) }
+        return emitter
+    }
 }

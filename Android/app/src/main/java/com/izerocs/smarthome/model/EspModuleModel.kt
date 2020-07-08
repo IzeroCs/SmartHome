@@ -11,7 +11,7 @@ data class EspModuleModel(
     @SerializedName("changed") val changed : Boolean,
     @SerializedName("pins") val pins: MutableList<EspPinModel>,
     @SerializedName("detail_rssi") val detail_rssi : String
-) {
+) : BaseModel() {
     private lateinit var sn : String
     private lateinit var sc : String
     private var signal      : Int? = null
