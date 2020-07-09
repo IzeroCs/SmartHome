@@ -2,6 +2,7 @@ package com.izerocs.smarthome.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
@@ -9,6 +10,7 @@ import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.model.RoomListModel
 import com.izerocs.smarthome.network.SocketClient
 import com.izerocs.smarthome.widget.WavesView
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_room.*
 
 /**
@@ -58,44 +60,33 @@ class RoomActivity : BaseActivity(),
     }
 
     override fun onItemClick(v : View?, position : Int, isLongClick : Boolean) {
+        val adapter = listDevice.getCastAdapter()
 
+        adapter.get(position).let { device ->
+            getSocketClient().queryRoomDevice(device, { model ->
+                Log.d(TAG, "Query: $model")
+            }) { error -> runOnUiThread {
+                Toasty.error(this, error.nsp.toString(), 0).show()
+            }}
+        }
     }
 
     override fun onIconClick(v : View?, position : Int, isLongClick : Boolean) {
         val adapter = listDevice.getCastAdapter()
-        val device  = adapter.get(position)
 
-        device?.let { device ->
+        adapter.get(position).let { device ->
             var status = RoomDeviceModel.STATUS_ON
 
             if (device.status == RoomDeviceModel.STATUS_ON)
                 status = RoomDeviceModel.STATUS_OFF
 
-            getSocketClient().commitRoomDevice(device.copy(
-                status = status
-            ))
+            getSocketClient().commitRoomDevice(device.copy(status = status), { model ->
+                adapter.set(position, model)
+                runOnUiThread { adapter.notifyDataSetChanged() }
+            }) { error -> runOnUiThread {
+                Toasty.error(applicationContext, error.nsp.toString(), 0).show()
+            }}
         }
-
-//        (listDevice.adapter as ListDeviceAdapter).run {
-//            get(position).run {
-//                toggleStatus()
-//                runOnUiThread { notifyDataSetChanged() }
-//
-//                var message = this@RoomActivity.getString(R.string.deviceStatusOffToast)
-//
-//                if (status == RoomDeviceModel.STATUS_ON)
-//                    message = this@RoomActivity.getString(R.string.deviceStatusOnToast)
-//
-//                if (message.isNotEmpty()) {
-//                    message = message.replace("\${name}", name)
-//
-//                    if (status == RoomDeviceModel.STATUS_ON)
-//                        Toasty.success(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()
-//                    else
-//                        Toasty.info(this@RoomActivity, message, Toasty.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
     }
 
     override fun onResume() {

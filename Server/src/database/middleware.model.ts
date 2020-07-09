@@ -1,21 +1,21 @@
 import { ValidateCheck } from "./util/validate/check.validate"
 import { isUndefined, isString } from "util"
-import { ErrorModel } from "./error.model"
+import { ErrorModel, NSP } from "./error.model"
 import { Validate } from "./util/validate.util"
 
-type processHandle = () => any
+type preProcessHandle = () => any
 type preUpdateHandle = (object?: any) => any
 type updateHandle = (object?: any) => any
 
 export class MiddlewareModel {
     private errorModel: ErrorModel = new ErrorModel()
     private validator: Validate = new Validate()
-    private process: Array<processHandle> = []
+    private preProcess: preProcessHandle
     private updates: Array<updateHandle> = []
     private preUpdater: preUpdateHandle
 
-    preProcessed(...process: Array<processHandle>): MiddlewareModel {
-        this.process = process
+    preProcessed(handle: preProcessHandle): MiddlewareModel {
+        this.preProcess = handle
         return this
     }
 
@@ -34,13 +34,12 @@ export class MiddlewareModel {
         return this
     }
 
-    run(object: any): MiddlewareModel {
-        for (let i = 0; i < this.process.length; ++i) {
-            const ps = this.process[i]
-            const rs = ps()
+    run(object?: any): MiddlewareModel {
+        if (!isUndefined(this.preProcessed)) {
+            const ps = this.preProcess()
 
-            if (!isUndefined(rs) && isString(rs)) {
-                this.errorModel.nsp = rs
+            if (!isUndefined(ps) && !isUndefined(NSP[ps])) {
+                this.errorModel.nsp = <NSP>ps
                 return this
             }
         }
@@ -51,8 +50,8 @@ export class MiddlewareModel {
             if (!isUndefined(this.preUpdater)) {
                 const pre = this.preUpdater(object)
 
-                if (!isUndefined(pre) && isString(pre)) {
-                    this.errorModel.nsp = pre
+                if (!isUndefined(pre) && !isUndefined(NSP[pre])) {
+                    this.errorModel.nsp = <NSP>pre
                     return this
                 }
             }
@@ -61,8 +60,8 @@ export class MiddlewareModel {
                 const up = this.updates[i]
                 const rs = up(object)
 
-                if (!isUndefined(rs) && isString(rs)) {
-                    this.errorModel.nsp = rs
+                if (!isUndefined(rs) && !isUndefined(NSP[rs])) {
+                    this.errorModel.nsp = <NSP>rs
                     return this
                 }
             }

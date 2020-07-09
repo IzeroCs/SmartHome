@@ -21,6 +21,7 @@ export const EVENTS = {
     ROOM_DEVICE: "room-device",
     ESP_LIST: "esp-list",
 
+    QUERY_ROOM_DEVICE: "query-room-device",
     COMMIT_ROOM_DEVICE: "commit-room-device"
 }
 
@@ -111,6 +112,12 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         Notify.espModules(client)
     }
 
+    @SubscribeMessage(EVENTS.QUERY_ROOM_DEVICE)
+    handleQueryRoomDevice(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.queryRoomDevice(client, payload)
+    }
+
     @SubscribeMessage(EVENTS.COMMIT_ROOM_DEVICE)
     handleCommitRoomDevice(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
@@ -186,6 +193,13 @@ class Notify {
                 else return client.emit(EVENTS.ROOM_DEVICE, list)
             })
             .catch(err => client.emit(EVENTS.ROOM_DEVICE, []))
+    }
+
+    static queryRoomDevice(client: Socket, payload: any) {
+        payload = Pass.roomDevice(payload)
+        RoomDeviceModel.getDevice(payload.id)
+            .then((entity: RoomDevice) => client.emit(EVENTS.QUERY_ROOM_DEVICE, entity))
+            .catch((error: ErrorModel) => client.emit(EVENTS.QUERY_ROOM_DEVICE, error))
     }
 
     static commitRoomDevice(client: Socket, payload: any) {

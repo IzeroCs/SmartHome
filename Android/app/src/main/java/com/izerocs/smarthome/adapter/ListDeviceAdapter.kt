@@ -130,12 +130,12 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     fun clear() : Unit = roomDevices.clear()
     fun add(itemRoom : RoomDeviceModel) : Boolean = roomDevices.add(itemRoom)
     fun addAll(elements: MutableList<RoomDeviceModel>) : Boolean = roomDevices.addAll(elements)
+    fun get(position : Int) : RoomDeviceModel = roomDevices[position]
 
-    fun get(position : Int) : RoomDeviceModel? {
-        if (position < roomDevices.size)
-            return roomDevices[position]
-
-        return null
+    fun set(position : Int, model : RoomDeviceModel) {
+        synchronized(roomDevices) {
+            roomDevices.set(position, model)
+        }
     }
 
     fun setOnItemClickListener(listener : OnItemClickListener?) {

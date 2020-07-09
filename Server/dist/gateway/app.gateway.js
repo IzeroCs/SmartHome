@@ -29,6 +29,7 @@ exports.EVENTS = {
     ROOM_LIST: "room-list",
     ROOM_DEVICE: "room-device",
     ESP_LIST: "esp-list",
+    QUERY_ROOM_DEVICE: "query-room-device",
     COMMIT_ROOM_DEVICE: "commit-room-device"
 };
 var AppGateway = (function () {
@@ -102,6 +103,11 @@ var AppGateway = (function () {
             return Notify.unAuthorized(client);
         Notify.espModules(client);
     };
+    AppGateway.prototype.handleQueryRoomDevice = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.queryRoomDevice(client, payload);
+    };
     AppGateway.prototype.handleCommitRoomDevice = function (client, payload) {
         if (!AppGateway_1.isClientAuth(client))
             return Notify.unAuthorized(client);
@@ -162,6 +168,12 @@ var AppGateway = (function () {
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleEspList", null);
+    __decorate([
+        websockets_1.SubscribeMessage(exports.EVENTS.QUERY_ROOM_DEVICE),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleQueryRoomDevice", null);
     __decorate([
         websockets_1.SubscribeMessage(exports.EVENTS.COMMIT_ROOM_DEVICE),
         __metadata("design:type", Function),
@@ -228,6 +240,12 @@ var Notify = (function () {
                 return client.emit(exports.EVENTS.ROOM_DEVICE, list);
         })
             .catch(function (err) { return client.emit(exports.EVENTS.ROOM_DEVICE, []); });
+    };
+    Notify.queryRoomDevice = function (client, payload) {
+        payload = Pass.roomDevice(payload);
+        room_device_model_1.RoomDeviceModel.getDevice(payload.id)
+            .then(function (entity) { return client.emit(exports.EVENTS.QUERY_ROOM_DEVICE, entity); })
+            .catch(function (error) { return client.emit(exports.EVENTS.QUERY_ROOM_DEVICE, error); });
     };
     Notify.commitRoomDevice = function (client, payload) {
         payload = Pass.roomDevice(payload);

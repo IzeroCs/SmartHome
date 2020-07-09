@@ -8,15 +8,10 @@ var MiddlewareModel = (function () {
     function MiddlewareModel() {
         this.errorModel = new error_model_1.ErrorModel();
         this.validator = new validate_util_1.Validate();
-        this.process = [];
         this.updates = [];
     }
-    MiddlewareModel.prototype.preProcessed = function () {
-        var process = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            process[_i] = arguments[_i];
-        }
-        this.process = process;
+    MiddlewareModel.prototype.preProcessed = function (handle) {
+        this.preProcess = handle;
         return this;
     };
     MiddlewareModel.prototype.validate = function () {
@@ -40,11 +35,10 @@ var MiddlewareModel = (function () {
         return this;
     };
     MiddlewareModel.prototype.run = function (object) {
-        for (var i = 0; i < this.process.length; ++i) {
-            var ps = this.process[i];
-            var rs = ps();
-            if (!util_1.isUndefined(rs) && util_1.isString(rs)) {
-                this.errorModel.nsp = rs;
+        if (!util_1.isUndefined(this.preProcessed)) {
+            var ps = this.preProcess();
+            if (!util_1.isUndefined(ps) && !util_1.isUndefined(error_model_1.NSP[ps])) {
+                this.errorModel.nsp = ps;
                 return this;
             }
         }
@@ -52,7 +46,7 @@ var MiddlewareModel = (function () {
         if (this.errorModel.validates.length <= 0) {
             if (!util_1.isUndefined(this.preUpdater)) {
                 var pre = this.preUpdater(object);
-                if (!util_1.isUndefined(pre) && util_1.isString(pre)) {
+                if (!util_1.isUndefined(pre) && !util_1.isUndefined(error_model_1.NSP[pre])) {
                     this.errorModel.nsp = pre;
                     return this;
                 }
@@ -60,7 +54,7 @@ var MiddlewareModel = (function () {
             for (var i = 0; i < this.updates.length; ++i) {
                 var up = this.updates[i];
                 var rs = up(object);
-                if (!util_1.isUndefined(rs) && util_1.isString(rs)) {
+                if (!util_1.isUndefined(rs) && !util_1.isUndefined(error_model_1.NSP[rs])) {
                     this.errorModel.nsp = rs;
                     return this;
                 }

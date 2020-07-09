@@ -1,7 +1,6 @@
 package com.izerocs.smarthome.network
 
 import android.content.Context
-import android.util.Log
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
@@ -10,6 +9,10 @@ import com.izerocs.smarthome.model.*
 import com.izerocs.smarthome.preferences.AppPreferences
 import org.json.JSONArray
 import org.json.JSONObject
+
+typealias PassHandler<T> = (model : T) -> Unit
+typealias CatchHandler<T> = (error : T) -> Unit
+typealias ListenerHandler<T> = (out : T) -> Unit
 
 class SocketClient(val context : Context) {
     private val scheme    : String = "http://"
@@ -50,6 +53,7 @@ class SocketClient(val context : Context) {
         const val EVENT_ROOM_DEVICE  = "room-device"
         const val EVENT_ESP_LIST     = "esp-list"
 
+        const val EVENT_QUERY_ROOM_DEVICE  = "query-room-device"
         const val EVENT_COMMIT_ROOM_DEVICE = "commit-room-device"
     }
 
@@ -70,19 +74,6 @@ class SocketClient(val context : Context) {
         on<JSONArray>(EVENT_ROOM_TYPES)  { onRoomTypes(it) }
         on<JSONArray>(EVENT_ROOM_LIST)   { onRoomList(it) }
         on<JSONArray>(EVENT_ROOM_DEVICE) { onRoomDevice(it) }
-
-
-//        socket.run {
-//            off()
-//            on(Socket.EVENT_CONNECT)       { onConnect() }
-//            on(Socket.EVENT_CONNECT_ERROR) { onConnectError() }
-//            on(Socket.EVENT_DISCONNECT)    { onDisconnect() }
-//            on(EVENT_AUTH)                 { onAuth(it) }
-//            on(EVENT_ESP_LIST)             { onEspList(it)      }
-//            on(EVENT_ROOM_TYPES)           { onRoomTypes(it)    }
-//            on(EVENT_ROOM_LIST)            { onRoomList(it)     }
-//            on(EVENT_ROOM_DEVICE)          { onRoomDevice(it)   }
-//        }
     }
 
     fun disconnect() {
@@ -99,10 +90,27 @@ class SocketClient(val context : Context) {
         this.eventListener = eventListener
     }
 
-    fun commitRoomDevice(roomDevice : RoomDeviceModel, response : ((status : Boolean) -> Unit?)? = null) {
+    fun commitRoomDevice(
+        roomDevice : RoomDeviceModel,
+        pass : PassHandler<RoomDeviceModel>? = null,
+        catch : CatchHandler<ErrorModel>? = null)
+    {
         once<JSONObject>(EVENT_COMMIT_ROOM_DEVICE, roomDevice) { out ->
-            Log.d(TAG, "onceMake")
-            Log.d(TAG, out.toString(4))
+            parseOut<RoomDeviceModel>(out,
+                { model -> if (model is RoomDeviceModel && pass != null) pass(model) },
+                { error -> if (error is ErrorModel && catch != null) catch(error) })
+        }
+    }
+
+    fun queryRoomDevice(
+        roomDevice : RoomDeviceModel,
+        pass : PassHandler<RoomDeviceModel>? = null,
+        catch : CatchHandler<ErrorModel>? = null)
+    {
+        once<JSONObject>(EVENT_QUERY_ROOM_DEVICE, roomDevice) { out ->
+            parseOut<RoomDeviceModel>(out,
+                { model -> if (model is RoomDeviceModel && pass != null) pass(model) },
+                { error -> if (error is ErrorModel && catch != null) catch(error) })
         }
     }
 
@@ -223,33 +231,33 @@ class SocketClient(val context : Context) {
     private fun emit(event : String, json : JSONObject) : Emitter
             = socket.emit(event, json)
 
-    private inline fun <reified T : Any> once(
+    private inline fun <reified JSON : Any> once(
         event : String,
-        crossinline listener : (out: T) -> Unit) : Emitter
-            = once<T>(event, null, listener)
+        crossinline listener : ListenerHandler<JSON>) : Emitter
+            = once<JSON>(event, null, listener)
 
-    private inline fun <reified T : Any> once(
+    private inline fun <reified JSON : Any> once(
         event : String, model : BaseModel,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = once(event, JSONObject(Gson().toJson(model)), listener)
 
-    private inline fun <reified T : Any> once(
+    private inline fun <reified JSON : Any> once(
         event : String, map : Map<String, Any>,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = once(event, JSONObject(map), listener)
 
-    private inline fun <reified T : Any> once(
+    private inline fun <reified JSON : Any> once(
         event : String, json : String,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = once(event, JSONObject(json), listener)
 
-    private inline fun <reified T : Any> once(
+    private inline fun <reified JSON : Any> once(
         event : String, json : JSONObject?,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
     {
         val emitter = socket.once(event) {
-            if (it[0] is T)
-                listener(it[0] as T)
+            if (it[0] is JSON)
+                listener(it[0] as JSON)
         }
 
         json?.let { emitter.emit(event, json) }
@@ -259,36 +267,73 @@ class SocketClient(val context : Context) {
     private fun off() : Emitter = socket.off()
     private fun off(event : String) : Emitter = socket.off(event)
 
-    private inline fun <reified T : Any> on(
+    private inline fun <reified JSON : Any> on(
         event : String,
-        crossinline listener : (out: T) -> Unit) : Emitter
-            = on<T>(event, null, listener)
+        crossinline listener : ListenerHandler<JSON>) : Emitter
+            = on<JSON>(event, null, listener)
 
-    private inline fun <reified T : Any> on(
+    private inline fun <reified JSON : Any> on(
         event : String, model : BaseModel,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = on(event, JSONObject(Gson().toJson(model)), listener)
 
-    private inline fun <reified T : Any> on(
+    private inline fun <reified JSON : Any> on(
         event : String, map : Map<String, Any>,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = on(event, JSONObject(map), listener)
 
-    private inline fun <reified T : Any> on(
+    private inline fun <reified JSON : Any> on(
         event : String, json : String,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
             = on(event, JSONObject(json), listener)
 
-    private inline fun <reified T : Any> on(
+    private inline fun <reified JSON : Any> on(
         event : String, json : JSONObject?,
-        crossinline listener : (out: T) -> Unit) : Emitter
+        crossinline listener : ListenerHandler<JSON>) : Emitter
     {
         val emitter = socket.on(event) {
-            if (it[0] is T)
-                listener(it[0] as T)
+            if (it[0] is JSON)
+                listener(it[0] as JSON)
         }
 
         json?.let { emitter.emit(event, json) }
         return emitter
+    }
+
+    private inline fun <reified Model : BaseModel> parseOut(
+        out : Any,
+        pass : (model : Model?) -> Unit)
+    {
+        return parseOut<Model>(out, pass) {}
+    }
+
+    private inline fun <reified Model : BaseModel> parseOut(
+        out   : Any,
+        pass  : (model : Model?) -> Unit,
+        catch : (error : BaseErrorModel) -> Unit)
+    {
+        if (out !is JSONObject)
+            return
+
+        val gson       : Gson = Gson()
+        var model      : Model? = null
+        var errorModel : BaseErrorModel? = null
+
+        if (out.has("error")) {
+            val error = out.get("error")
+
+            if (error is String && error == "ErrorModel")
+                errorModel = gson.fromJson(out.toString(), ErrorModel::class.java)
+        }
+
+        if (errorModel != null)
+            return catch(errorModel)
+
+        model = gson.fromJson(out.toString(), Model::class.java)
+
+        if (model is Model)
+            pass(model)
+        else
+            pass(null)
     }
 }

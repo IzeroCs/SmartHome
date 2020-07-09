@@ -57,6 +57,7 @@ var entity_util_1 = require("../util/entity.util");
 var base_model_1 = require("../base.model");
 var validate_util_1 = require("../util/validate.util");
 var middleware_model_1 = require("../middleware.model");
+var error_model_1 = require("../error.model");
 var WidgetDevice;
 (function (WidgetDevice) {
     WidgetDevice[WidgetDevice["WidgetSmall"] = 0] = "WidgetSmall";
@@ -87,6 +88,34 @@ var RoomDeviceModel = (function (_super) {
             }
         });
     };
+    RoomDeviceModel.getDevice = function (deviceId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, find, mid;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
+                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp", "room", "type"] })];
+                    case 1:
+                        find = _a.sent();
+                        mid = new middleware_model_1.MiddlewareModel();
+                        mid.preProcessed(function () {
+                            if (util_1.isUndefined(find))
+                                return error_model_1.NSP.deviceNotExists;
+                        })
+                            .run()
+                            .response(function (error) {
+                            if (error)
+                                reject(error);
+                            else
+                                resolve(find);
+                        });
+                        return [2];
+                }
+            });
+        }); });
+    };
     RoomDeviceModel.updateDevice = function (deviceId, object) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -96,14 +125,16 @@ var RoomDeviceModel = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
-                        return [4, repository.findOne({ id: deviceId })];
+                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp"] })];
                     case 1:
                         find = _a.sent();
                         res = entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, object);
                         mid = new middleware_model_1.MiddlewareModel();
                         mid.preProcessed(function () {
-                            if (util_1.isUndefined(find))
-                                return "deviceNotExists";
+                            if (util_1.isUndefined(find) || util_1.isUndefined(find.esp))
+                                return error_model_1.NSP.deviceNotExists;
+                            if (!find.esp.online)
+                                return error_model_1.NSP.deviceNotOnline;
                         });
                         mid.validate(validate_util_1.checker("name")
                             .isRequired()
@@ -113,7 +144,7 @@ var RoomDeviceModel = (function (_super) {
                             .isNumber());
                         mid.preUpdate(function () {
                             if (find.name === res.name && find.status === res.status)
-                                return "hasNotChanged";
+                                return error_model_1.NSP.hasNotChanged;
                         });
                         mid.update(function () { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
