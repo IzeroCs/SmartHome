@@ -25,8 +25,8 @@ data class EspPinModel(
     }
 
     enum class StatusCloud() {
-        @SerializedName("0") IDLE,
-        @SerializedName("1") ON,
-        @SerializedName("2") OFF
+        @SerializedName("1") IDLE,
+        @SerializedName("2") ON,
+        @SerializedName("3") OFF
     }
 }

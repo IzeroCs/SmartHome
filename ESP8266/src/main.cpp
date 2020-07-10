@@ -6,13 +6,14 @@
 #include "socket.h"
 #include "io.h"
 
-#define TIMER_COUNT 3
+#define TIMER_COUNT 4
 
 bool isPrintConnect;
 bool isPrintDisconnect;
 
 unsigned long timers[TIMER_COUNT][2] = {
     { millis(), 10  },
+    { millis(), 20 },
     { millis(), 1000 },
     { millis(), 5000 }
 };
@@ -35,10 +36,14 @@ void timer(int position) {
             break;
 
         case 1:
-            Network.loopWait();
+            Socket.loopMain();
             break;
 
         case 2:
+            Network.loopWait();
+            break;
+
+        case 3:
             if (WiFi.status() == WL_CONNECTED) {
                 if (!isPrintConnect) {
                     isPrintConnect    = true;

@@ -43,6 +43,7 @@ var common_1 = require("@nestjs/common");
 var util_1 = require("util");
 var esp_pin_entity_1 = require("../entity/esp_pin.entity");
 var room_device_model_1 = require("./room_device.model");
+var esp_gateway_1 = require("../../gateway/esp.gateway");
 var EspModel = (function () {
     function EspModel() {
     }
@@ -147,7 +148,8 @@ var EspModel = (function () {
         }); });
     };
     EspModel.updateAuth = function (espName, auth, online) {
-        return __awaiter(this, void 0, void 0, function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var repository, espFind;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -156,17 +158,18 @@ var EspModel = (function () {
                         return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!!util_1.isUndefined(espFind)) return [3, 3];
-                        espFind.auth = auth;
-                        espFind.online = online;
-                        return [4, repository.update(espFind.id, espFind)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2];
+                        if (!util_1.isUndefined(espFind)) {
+                            espFind.auth = auth;
+                            espFind.online = online;
+                            repository
+                                .update(espFind.id, espFind)
+                                .then(function (_) { return resolve(); })
+                                .catch(function (err) { return reject(err); });
+                        }
+                        return [2];
                 }
             });
-        });
+        }); });
     };
     EspModel.updatePin = function (espName, pins) {
         var _this = this;
@@ -180,7 +183,7 @@ var EspModel = (function () {
                         return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!(!util_1.isUndefined(espFind) && util_1.isObject(pins) && pins.length > 0)) return [3, 9];
+                        if (!(!util_1.isUndefined(espFind) && util_1.isArray(pins) && pins.length > 0)) return [3, 9];
                         return [4, repositoryEspPin.find({ esp: espFind })];
                     case 2:
                         espPinFind = _a.sent();
@@ -199,6 +202,7 @@ var EspModel = (function () {
                                         pinFind = espPinFind.find(function (espPin) { return espPin.input == pin.input; });
                                         if (!!util_1.isUndefined(pinFind)) return [3, 2];
                                         pinFind.status = Boolean(pin.status);
+                                        pinFind.statusCloud = pin.statusCloud;
                                         pinFind.outputType = pin.outputType;
                                         pinFind.outputPrimary = pin.outputPrimary;
                                         pinFind.ouputSecondary = pin.outputSecondary;

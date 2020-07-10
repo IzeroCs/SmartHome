@@ -26,16 +26,9 @@ export class RoomDeviceSeed extends BaseSeed {
         this.logSeedRunning()
         const devices = [
             {
-                name: "Đèn tuýp",
-                des: "Trái",
+                name: "Đèn chính",
+                des: "",
                 pin: espFind.pins[0],
-                type: deviceTypeLight,
-                widget: 0
-            },
-            {
-                name: "Đèn tuýp",
-                des: "Phải",
-                pin: espFind.pins[1],
                 type: deviceTypeLight,
                 widget: 0
             },
@@ -44,26 +37,33 @@ export class RoomDeviceSeed extends BaseSeed {
                 des: "",
                 pin: espFind.pins[2],
                 type: deviceTypeLight,
-                widget: 1
+                widget: 0
             },
             {
                 name: "Quạt trần",
                 des: "",
                 pin: espFind.pins[3],
-                type: deviceTypeFan,
-                widget: 0
+                type: deviceTypeLight,
+                widget: 1
             },
             {
-                name: "Quạt đứng",
+                name: "Đèn kép",
                 des: "",
                 pin: espFind.pins[4],
                 type: deviceTypeFan,
                 widget: 0
             },
             {
+                name: "Quạt đứng",
+                des: "",
+                pin: espFind.pins[6],
+                type: deviceTypeFan,
+                widget: 0
+            },
+            {
                 name: "Bình nóng lạnh",
                 des: "",
-                pin: espFind.pins[5],
+                pin: espFind.pins[7],
                 type: deviceTypeHeater,
                 widget: 1
             }

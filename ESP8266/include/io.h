@@ -32,9 +32,9 @@ typedef enum {
 } IOPin_t;
 
 typedef enum {
-    StatusCloud_ON = 1,
-    StatusCloud_OFF = 2,
-    StatusCloud_IDLE = 3
+    StatusCloud_IDLE = 1,
+    StatusCloud_ON   = 2,
+    StatusCloud_OFF  = 3
 } StatusCloud_t;
 
 struct IOData {
@@ -44,6 +44,7 @@ struct IOData {
     IOPin_t outputSecondary;
     uint8_t dualToggleCount;
     StatusCloud_t statusCloud;
+    StatusCloud_t statusCloudPrev;
 
     bool status;
     bool statusPrev;
@@ -55,6 +56,7 @@ struct IOData {
                "outputSecondary=" + String(outputSecondary) + "," +
                "dualToggleCount=" + String(dualToggleCount) + "," +
                "statusCloud=" + String(statusCloud) + "," +
+               "statusCloudPrev=" + String(statusCloudPrev) + "," +
                "status=" + String(status);
     }
 
@@ -64,10 +66,13 @@ struct IOData {
             "\"outputPrimary\":" + String(outputPrimary) + "," +
             "\"outputSecondary\":" + String(outputSecondary) + "," +
             "\"dualToggleCount\":" + String(dualToggleCount) + "," +
-            "\"statusCloud\":" + (statusCloud ? "true" : "false") + "," +
+            "\"statusCloud\":" + String(statusCloud) + "," +
+            "\"statusCloudPrev\":" + (statusCloudPrev ? "true" : "false") + "," +
             "\"status\":" + (status ? "true" : "false") + "}";
     }
 };
+
+typedef std::map<IOPin_t, IOData> Map_t;
 
 class IOClass {
 private:
@@ -75,7 +80,7 @@ private:
     const String  SPLIT = "|";
 
     bool ioStatusChanged;
-    std::map<IOPin_t, IOData> datas;
+    Map_t datas;
 
     IOType_t parseOutputType(uint8_t type) {
         switch (type) {
@@ -149,6 +154,10 @@ private:
                         break;
 
                     case 6:
+                        data.statusCloudPrev = (StatusCloud_t)res;
+                        break;
+
+                    case 7:
                         data.status = res == 1;
                         run = false;
                         break;
@@ -234,7 +243,7 @@ public:
         ioStatusChanged = changed;
     }
 
-    std::map<IOPin_t, IOData> getIODatas() {
+    Map_t getIODatas() {
         return datas;
     }
 };

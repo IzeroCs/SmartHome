@@ -74,13 +74,13 @@ var EspPinSeed = (function (_super) {
                 },
                 {
                     input: 2,
-                    outputType: 2,
+                    outputType: 1,
                     outputPrimary: 2,
                     outputSecondary: 3
                 },
                 {
                     input: 3,
-                    outputType: 3,
+                    outputType: 1,
                     outputPrimary: 3,
                     outputSecondary: 3
                 },

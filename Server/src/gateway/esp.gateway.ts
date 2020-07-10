@@ -37,12 +37,12 @@ export enum StatusCloud {
 }
 
 export type EspModulePin = {
-    input: number
-    outputType: number
-    outputPrimary: number
-    outputSecondary: number
-    dualToggleCount: number
-    statusCloud: boolean
+    input: IOPin
+    outputType: IOPin
+    outputPrimary: IOPin
+    outputSecondary: IOPin
+    dualToggleCount: IOPin
+    statusCloud: StatusCloud
     status: boolean
 }
 
@@ -109,10 +109,12 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
             if (!err && authorized) {
                 this.logger.log(`Authenticate socket ${client.id}`)
                 EspModel.updateAuth(client.id, true, true)
-
-                client["auth"] = true
-                client.emit("auth", "authorized")
-                this.updateModule(client, true, true)
+                    .then(_ => {
+                        client["auth"] = true
+                        client.emit("auth", "authorized")
+                        this.updateModule(client, true, true)
+                    })
+                    .catch(_ => client.disconnect())
             } else {
                 EspGateway.notifyUnauthorized(client)
             }

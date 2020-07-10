@@ -1,9 +1,13 @@
 package com.izerocs.smarthome.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.annotation.MenuRes
@@ -35,6 +39,17 @@ abstract class BaseActivity : AppCompatActivity(),
 
     companion object {
         const val TAG = "BaseActivity"
+
+        fun vibrator(context : Context, time : Long) {
+            val service = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+            @Suppress("DEPRECATION")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                service.vibrate(VibrationEffect
+                    .createOneShot(time, VibrationEffect.DEFAULT_AMPLITUDE))
+            else
+                service.vibrate(time)
+        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity", "CheckResult")
@@ -134,9 +149,9 @@ abstract class BaseActivity : AppCompatActivity(),
             (cloudError as CloudErrorView).setVisibility(isShow, type)
     }
 
+    fun vibrator(time : Long) : Unit = Companion.vibrator(this, time)
     fun getRootApplication() : SmartApplication = application as SmartApplication
     fun getSocket() : Socket = getSocketClient().getSocket()
     fun getSocketClient() : SocketClient = getRootApplication().getSocketClient()
     fun getRootView() : View? = rootView
-
 }

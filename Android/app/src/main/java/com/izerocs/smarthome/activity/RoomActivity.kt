@@ -83,9 +83,10 @@ class RoomActivity : BaseActivity(),
         adapter.get(position).let { device ->
             var status = EspPinModel.StatusCloud.OFF
 
-            if (device.pin.statusCloud == EspPinModel.StatusCloud.OFF)
+            if (device.pin.statusCloud != EspPinModel.StatusCloud.ON && !device.pin.status)
                 status = EspPinModel.StatusCloud.ON
 
+            vibrator(100)
             getSocketClient().commitStatusRoomDevice(device.copy(pin = device.pin.copy(
                 statusCloud = status
             )), { model ->

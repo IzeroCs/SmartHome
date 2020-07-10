@@ -121,10 +121,13 @@ var EspGateway = (function () {
                 this.cert.verify(payload.token, function (err, authorized) {
                     if (!err && authorized) {
                         _this.logger.log("Authenticate socket " + client.id);
-                        esp_model_1.EspModel.updateAuth(client.id, true, true);
-                        client["auth"] = true;
-                        client.emit("auth", "authorized");
-                        _this.updateModule(client, true, true);
+                        esp_model_1.EspModel.updateAuth(client.id, true, true)
+                            .then(function (_) {
+                            client["auth"] = true;
+                            client.emit("auth", "authorized");
+                            _this.updateModule(client, true, true);
+                        })
+                            .catch(function (_) { return client.disconnect(); });
                     }
                     else {
                         EspGateway_1.notifyUnauthorized(client);

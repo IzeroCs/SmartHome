@@ -8,7 +8,7 @@ void OutputClass::begin() {
 }
 
 void OutputClass::loop() {
-    byte data = B00000000;
+    byte data = B11111111;
 
     for (uint8_t pin = 0; pin < 8; ++pin) {
         if (IO.getIOPinStatus((IOPin_t)pin))

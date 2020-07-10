@@ -1,9 +1,10 @@
 import { getRepository } from "typeorm"
 import { Esp } from "../entity/esp.entity"
 import { Logger } from "@nestjs/common"
-import { isObject, isUndefined, isNumber } from "util"
+import { isObject, isUndefined, isNumber, isArray } from "util"
 import { EspPin } from "../entity/esp_pin.entity"
 import { RoomDeviceModel } from "./room_device.model"
+import { IOPin, EspModulePin } from "src/gateway/esp.gateway"
 
 export class EspModel {
     private static logger: Logger = new Logger("EspModel")
@@ -64,25 +65,30 @@ export class EspModel {
         })
     }
 
-    static async updateAuth(espName: string, auth: boolean, online: boolean) {
-        const repository = getRepository(Esp)
-        const espFind = await repository.findOne({ name: espName })
+    static updateAuth(espName: string, auth: boolean, online: boolean): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            const repository = getRepository(Esp)
+            const espFind = await repository.findOne({ name: espName })
 
-        if (!isUndefined(espFind)) {
-            espFind.auth = auth
-            espFind.online = online
+            if (!isUndefined(espFind)) {
+                espFind.auth = auth
+                espFind.online = online
 
-            await repository.update(espFind.id, espFind)
-        }
+                repository
+                    .update(espFind.id, espFind)
+                    .then(_ => resolve())
+                    .catch(err => reject(err))
+            }
+        })
     }
 
-    static updatePin(espName: string, pins: any): Promise<any> {
+    static updatePin(espName: string, pins: EspModulePin[]): Promise<any> {
         return new Promise(async resolve => {
             const repository = getRepository(Esp)
             const repositoryEspPin = getRepository(EspPin)
             const espFind = await repository.findOne({ name: espName })
 
-            if (!isUndefined(espFind) && isObject(pins) && pins.length > 0) {
+            if (!isUndefined(espFind) && isArray(pins) && pins.length > 0) {
                 const espPinFind = await repositoryEspPin.find({ esp: espFind })
 
                 if (espPinFind.length != pins.length) await repositoryEspPin.remove(espPinFind)
@@ -93,6 +99,7 @@ export class EspModel {
 
                     if (!isUndefined(pinFind)) {
                         pinFind.status = Boolean(pin.status)
+                        pinFind.statusCloud = pin.statusCloud
                         pinFind.outputType = pin.outputType
                         pinFind.outputPrimary = pin.outputPrimary
                         pinFind.ouputSecondary = pin.outputSecondary

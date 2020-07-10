@@ -76,8 +76,8 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
         IOPin_t pin = (IOPin_t)Pair.get(pay, "pin", "-1").toInt();
         StatusCloud_t status = (StatusCloud_t)Pair.get(pay, "status", String(StatusCloud_IDLE)).toInt();
 
-        Serial.println("Pin: " + String(pin));
-        Serial.println("Status: " + String(status));
+        IO.setIOPinStatusCloud(pin, status);
+        IO.setIoStatusChanged(true);
     } else if (DEBUG) {
         Serial.println("[Socket] Event: " + evt + ", Payload: " + pay);
     }
