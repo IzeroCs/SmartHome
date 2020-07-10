@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.widget.list.RecyclerView
@@ -52,7 +53,7 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
 
         fun setIcon(resIcon : Int) {
             itemView.listDeviceIcon.setImageResource(resIcon)
-            setStatusDevice(RoomDeviceModel.STATUS_OFF)
+            setStatusDevice(false)
         }
 
         fun setStatusVisibility(widgetSize : Int) {
@@ -62,11 +63,11 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
                 itemView.listDeviceStatusWrapper.visibility = View.GONE
         }
 
-        fun setStatusDevice(status : Int) {
+        fun setStatusDevice(status : Boolean) {
             var resColorIcon = R.color.listDeviceIconTintStatusOff
             var resColorStatus = R.color.listDeviceStatusTintStatusOff
 
-            if (status == RoomDeviceModel.STATUS_ON) {
+            if (status) {
                 resColorIcon = R.color.listDeviceIconTintStatusOn
                 resColorStatus = R.color.listDeviceStatusTintStatusOn
             }
@@ -76,6 +77,26 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
 
             itemView.listDeviceStatus.imageTintList = ColorStateList.valueOf(ContextCompat
                 .getColor(context, resColorStatus))
+        }
+
+        fun setStatusModule(status : Boolean) {
+            if (status)
+                itemView.listDeviceQuickInfo.alpha = 1F
+            else
+                itemView.listDeviceQuickInfo.alpha = 0.2F
+
+            itemView.listDeviceWrapper.let { wrapper ->
+                wrapper.isFocusable = status
+                wrapper.isClickable = status
+                wrapper.setAllEnable(status)
+            }
+        }
+
+        fun View.setAllEnable(enabled : Boolean) {
+            isEnabled = enabled
+
+            if (this is ViewGroup)
+                children.forEach { child -> child.setAllEnable(enabled) }
         }
 
         override fun onClick(v : View?) {
@@ -107,12 +128,13 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
     }
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int) {
-        get(position)?.run {
+        get(position).run {
             holder.setLabel(name)
             holder.setSubLabel(descriptor)
             holder.setIcon(icon)
             holder.setStatusVisibility(widget)
-            holder.setStatusDevice(status)
+            holder.setStatusDevice(pin.status)
+            holder.setStatusModule(esp.online)
         }
     }
 
@@ -129,8 +151,14 @@ class ListDeviceAdapter(private val context: Context) : RecyclerView.Adapter<Lis
 
     fun clear() : Unit = roomDevices.clear()
     fun add(itemRoom : RoomDeviceModel) : Boolean = roomDevices.add(itemRoom)
-    fun addAll(elements: MutableList<RoomDeviceModel>) : Boolean = roomDevices.addAll(elements)
     fun get(position : Int) : RoomDeviceModel = roomDevices[position]
+
+    fun addAll(elements: MutableList<RoomDeviceModel>) : Boolean {
+        synchronized(roomDevices) {
+            return roomDevices.addAll(elements)
+        }
+    }
+
 
     fun set(position : Int, model : RoomDeviceModel) {
         synchronized(roomDevices) {

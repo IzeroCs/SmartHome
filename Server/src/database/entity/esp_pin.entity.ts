@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from "typeorm"
 import { Esp } from "./esp.entity"
 import { RoomDevice } from "./room_device.entity"
+import { EspGateway } from "../../gateway/esp.gateway"
 
 @Entity()
 export class EspPin {
@@ -34,6 +35,9 @@ export class EspPin {
 
     @Column("tinyint", { nullable: true, default: 0 })
     dualToggleCount: number
+
+    @Column({ nullable: true, default: 1 })
+    statusCloud: number
 
     @Column({ nullable: true, default: false })
     status: boolean

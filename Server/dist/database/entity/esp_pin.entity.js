@@ -50,6 +50,10 @@ var EspPin = (function () {
         __metadata("design:type", Number)
     ], EspPin.prototype, "dualToggleCount", void 0);
     __decorate([
+        typeorm_1.Column({ nullable: true, default: 1 }),
+        __metadata("design:type", Number)
+    ], EspPin.prototype, "statusCloud", void 0);
+    __decorate([
         typeorm_1.Column({ nullable: true, default: false }),
         __metadata("design:type", Boolean)
     ], EspPin.prototype, "status", void 0);

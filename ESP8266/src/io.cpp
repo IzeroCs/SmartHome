@@ -17,7 +17,7 @@ void IOClass::begin() {
         if (!record.isEmpty() && record.indexOf(SPLIT) != -1) {
             data = parseData(record);
         } else {
-            data = initData(pin, IOType_SINGLE, pin, pin, 0, false);
+            data = initData(pin, IOType_SINGLE, pin, pin, 0, StatusCloud_IDLE, false);
             storeData(i, data);
         }
 
@@ -109,6 +109,10 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
     storeData(RECORD_ID_IO_BEGIN + (uint8_t)curData->input, datas.at(pin));
 }
 
+IOData IOClass::getIOData(IOPin_t pin) {
+    return datas.at(pin);
+}
+
 void IOClass::setIOPinStatus(IOPin_t pin, bool status) {
     IOData * curData = &(datas.at(pin));
 
@@ -169,6 +173,14 @@ void IOClass::setIOPinStatus(IOPin_t pin, bool status) {
 
 bool IOClass::getIOPinStatus(IOPin_t pin) {
     return datas.at(pin).status;
+}
+
+void IOClass::setIOPinStatusCloud(IOPin_t pin, StatusCloud_t status) {
+
+}
+
+StatusCloud_t IOClass::getIOPinStatusCloud(IOPin_t pin) {
+    return datas.at(pin).statusCloud;
 }
 
 IOClass IO;

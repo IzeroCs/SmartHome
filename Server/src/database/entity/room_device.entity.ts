@@ -19,9 +19,6 @@ export class RoomDevice {
     @Column("tinyint", { default: 0 })
     widget: number
 
-    @Column("tinyint", { default: 0, nullable: true })
-    status: number
-
     @ManyToOne(
         type => DeviceType,
         type => type.type

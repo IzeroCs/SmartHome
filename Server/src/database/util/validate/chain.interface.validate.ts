@@ -4,6 +4,7 @@ export interface ValidateChainInterface {
     isRequired()
     isNotEmpty()
     isNumber()
+    isBoolean()
     isString()
     isEmail()
     isURL()

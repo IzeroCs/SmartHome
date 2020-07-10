@@ -42,6 +42,7 @@ var esp_entity_1 = require("../entity/esp.entity");
 var common_1 = require("@nestjs/common");
 var util_1 = require("util");
 var esp_pin_entity_1 = require("../entity/esp_pin.entity");
+var room_device_model_1 = require("./room_device.model");
 var EspModel = (function () {
     function EspModel() {
     }
@@ -70,8 +71,58 @@ var EspModel = (function () {
             });
         });
     };
+    EspModel.getEsp = function (espIdOrName) {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, espFind;
+            return __generator(this, function (_a) {
+                repository = typeorm_1.getRepository(esp_entity_1.Esp);
+                espFind = null;
+                if (util_1.isNumber(espIdOrName))
+                    espFind = repository.findOne({ id: espIdOrName });
+                else
+                    espFind = repository.findOne({ name: espIdOrName });
+                resolve(espFind);
+                return [2];
+            });
+        }); });
+    };
+    EspModel.getEspDevice = function (espIdOrName) {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, espFind, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        repository = typeorm_1.getRepository(esp_entity_1.Esp);
+                        espFind = null;
+                        if (!util_1.isNumber(espIdOrName)) return [3, 2];
+                        return [4, repository.findOne({ id: espIdOrName })];
+                    case 1:
+                        espFind = _b.sent();
+                        return [3, 4];
+                    case 2: return [4, repository.findOne({ name: espIdOrName })];
+                    case 3:
+                        espFind = _b.sent();
+                        _b.label = 4;
+                    case 4:
+                        if (!!util_1.isUndefined(espFind)) return [3, 6];
+                        _a = resolve;
+                        return [4, room_device_model_1.RoomDeviceModel.getDeviceList(espFind.id)];
+                    case 5:
+                        _a.apply(void 0, [_b.sent()]);
+                        return [3, 7];
+                    case 6:
+                        resolve();
+                        _b.label = 7;
+                    case 7: return [2];
+                }
+            });
+        }); });
+    };
     EspModel.updateOnline = function (espName, online) {
-        return __awaiter(this, void 0, void 0, function () {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
             var repository, espFind;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -85,11 +136,15 @@ var EspModel = (function () {
                         return [4, repository.save(espFind)];
                     case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2];
+                        resolve(espFind);
+                        return [3, 4];
+                    case 3:
+                        resolve();
+                        _a.label = 4;
+                    case 4: return [2];
                 }
             });
-        });
+        }); });
     };
     EspModel.updateAuth = function (espName, auth, online) {
         return __awaiter(this, void 0, void 0, function () {
@@ -104,7 +159,6 @@ var EspModel = (function () {
                         if (!!util_1.isUndefined(espFind)) return [3, 3];
                         espFind.auth = auth;
                         espFind.online = online;
-                        this.logger.log("Updated auth " + espName);
                         return [4, repository.update(espFind.id, espFind)];
                     case 2:
                         _a.sent();
@@ -115,7 +169,8 @@ var EspModel = (function () {
         });
     };
     EspModel.updatePin = function (espName, pins) {
-        return __awaiter(this, void 0, void 0, function () {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
             var repository, repositoryEspPin, espFind, espPinFind, _loop_1, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -125,7 +180,7 @@ var EspModel = (function () {
                         return [4, repository.findOne({ name: espName })];
                     case 1:
                         espFind = _a.sent();
-                        if (!(!util_1.isUndefined(espFind) && util_1.isObject(pins) && pins.length > 0)) return [3, 8];
+                        if (!(!util_1.isUndefined(espFind) && util_1.isObject(pins) && pins.length > 0)) return [3, 9];
                         return [4, repositoryEspPin.find({ esp: espFind })];
                     case 2:
                         espPinFind = _a.sent();
@@ -167,10 +222,13 @@ var EspModel = (function () {
                     case 7:
                         ++i;
                         return [3, 5];
-                    case 8: return [2];
+                    case 8:
+                        resolve(espFind);
+                        _a.label = 9;
+                    case 9: return [2];
                 }
             });
-        });
+        }); });
     };
     EspModel.updateDetail = function (espName, details) {
         return __awaiter(this, void 0, void 0, function () {

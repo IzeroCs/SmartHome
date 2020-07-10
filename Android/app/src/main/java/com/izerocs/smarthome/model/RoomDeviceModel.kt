@@ -8,7 +8,7 @@ data class RoomDeviceModel(
     @SerializedName("name") val name : String,
     @SerializedName("descriptor") val descriptor : String,
     @SerializedName("widget") val widget : Int,
-    @SerializedName("status") var status : Int,
+    @SerializedName("pin") val pin : EspPinModel,
     @SerializedName("type") val type : DeviceTypeModel,
     @SerializedName("esp") val esp : EspModuleModel,
     @SerializedName("room") val room : RoomListModel
@@ -26,23 +26,14 @@ data class RoomDeviceModel(
 
         const val WIDGET_SIZE_SMALL = 0
         const val WIDGET_SIZE_LARGE = 1
-
-        const val STATUS_OFF = 0
-        const val STATUS_ON  = 1
     }
 
-    fun modifyStatus(status : Int) {
-        if (status != STATUS_OFF && status != STATUS_ON)
-            this.status = STATUS_OFF
-
-        this.status = status
+    fun modifyStatus(status : Boolean) {
+        this.pin.status = status
     }
 
     fun toggleStatus() {
-        if (status == STATUS_ON)
-            this.status = STATUS_OFF
-        else
-            this.status = STATUS_ON
+        modifyStatus(!this.pin.status)
     }
 
     private fun parseColor() : Int {

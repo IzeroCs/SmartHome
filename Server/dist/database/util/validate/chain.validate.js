@@ -60,6 +60,13 @@ var ValidateChain = (function () {
             return false;
         return true;
     };
+    ValidateChain.prototype.isBoolean = function () {
+        if (!this.isRequired())
+            return false;
+        if (!util_1.isBoolean(this.find) && typeof this.find !== "boolean")
+            return false;
+        return true;
+    };
     ValidateChain.prototype.isString = function () {
         if (!this.isRequired())
             return false;

@@ -1,6 +1,6 @@
 import { ValidateChainInterface } from "./chain.interface.validate"
 import { ValidateCheck } from "./check.validate"
-import { isUndefined, isNumber, isString, isArray } from "util"
+import { isUndefined, isNumber, isString, isArray, isBoolean } from "util"
 import validator from "validator"
 import { ValidateChainResult } from "./chain.result.validate"
 
@@ -61,6 +61,13 @@ export class ValidateChain implements ValidateChainInterface {
     isNumber(): boolean {
         if (!this.isRequired()) return false
         if (!isNumber(this.find) && typeof this.find !== "number") return false
+
+        return true
+    }
+
+    isBoolean(): boolean {
+        if (!this.isRequired()) return false
+        if (!isBoolean(this.find) && typeof this.find !== "boolean") return false
 
         return true
     }

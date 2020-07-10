@@ -13,6 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.github.nkzawa.socketio.client.Socket
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.model.EspModuleModel
+import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.model.RoomListModel
 import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.network.SocketClient
@@ -34,7 +35,6 @@ abstract class BaseActivity : AppCompatActivity(),
 
     companion object {
         const val TAG = "BaseActivity"
-        const val FETCH_ROOM_TYPE = 1
     }
 
     @SuppressLint("SourceLockedOrientationActivity", "CheckResult")
@@ -65,6 +65,7 @@ abstract class BaseActivity : AppCompatActivity(),
     open fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspModuleModel>?) {}
     open fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomTypeModel>) {}
     open fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {}
+    open fun onEspDevices(client : SocketClient, espDevices : MutableList<RoomDeviceModel>) {}
 
     @MenuRes
     open fun onCreateMenu() : Int? = null

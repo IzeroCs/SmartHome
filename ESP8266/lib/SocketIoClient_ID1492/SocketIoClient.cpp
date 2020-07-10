@@ -9,8 +9,8 @@ const String getEventName(const String msg) {
 
 const String getEventPayload(const String msg) {
     int countLoop = 0;
-    int indexQuote = 0;
-    int lastIndexQuote = 0;
+    int16_t indexQuote = 0;
+    int16_t lastIndexQuote = 0;
 
     while ((indexQuote = msg.indexOf("\"", lastIndexQuote)) != -1) {
         if (++countLoop >= 3)
@@ -18,6 +18,9 @@ const String getEventPayload(const String msg) {
 
         lastIndexQuote = indexQuote + 1;
     }
+
+    if (indexQuote == -1 || indexQuote + 1 >= msg.length() - 1)
+        return "";
 
     String result = msg.substring(indexQuote, msg.length() - 1);
 

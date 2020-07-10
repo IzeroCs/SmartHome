@@ -38,6 +38,9 @@ var ValidateCheck = (function () {
     ValidateCheck.prototype.isNumber = function () {
         return this.push("isNumber");
     };
+    ValidateCheck.prototype.isBoolean = function () {
+        return this.push("isBoolean");
+    };
     ValidateCheck.prototype.isString = function () {
         return this.push("isString");
     };

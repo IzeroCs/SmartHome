@@ -1,8 +1,15 @@
-import { SubscribeMessage, WebSocketGateway, WebSocketServer, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets"
+import {
+    SubscribeMessage,
+    WebSocketGateway,
+    WebSocketServer,
+    OnGatewayInit,
+    OnGatewayConnection,
+    OnGatewayDisconnect
+} from "@nestjs/websockets"
 import { Logger } from "@nestjs/common"
 import { Socket, Server, Namespace } from "socket.io"
 import { SocketUtil } from "../util/socket.util"
-import { isUndefined, isNull } from "util"
+import { isUndefined, isNull, isArray, isString, isNumber } from "util"
 import { EspGateway } from "./esp.gateway"
 import { CertSecurity } from "../security/cert.security"
 import { logger, cli } from "src/ormconfig"
@@ -13,22 +20,28 @@ import { RoomList } from "src/database/entity/room_list.entity"
 import { RoomDeviceModel } from "src/database/model/room_device.model"
 import { RoomDevice } from "src/database/entity/room_device.entity"
 import { ErrorModel } from "../database/error.model"
+import { EspModel } from "../database/model/esp.model"
+import { EntityUtil } from "../database/util/entity.util"
 
 export const EVENTS = {
     AUTH: "auth",
+    ESP_LIST: "esp-list",
+    ESP_DEVICES: "esp-devices",
     ROOM_TYPE: "room-type",
     ROOM_LIST: "room-list",
     ROOM_DEVICE: "room-device",
-    ESP_LIST: "esp-list",
+    ROOM_DEVICE_ITEM: "room-device-item",
+    STATUS_CLOUD: "status-cloud",
 
     QUERY_ROOM_DEVICE: "query-room-device",
-    COMMIT_ROOM_DEVICE: "commit-room-device"
+    COMMIT_ROOM_DEVICE: "commit-room-device",
+    COMMIT_STATUS_ROOM_DEVICE: "commit-status-room-device"
 }
 
 @WebSocketGateway({
     namespace: "/platform-app",
     pingTimeout: 5000,
-    pingInterval: 100
+    pingInterval: 500
 })
 export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Namespace
@@ -50,10 +63,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     handleConnection(client: Socket, ...args: any[]) {
         this.logger.log(`Client connection: ${client.id}`)
         SocketUtil.restoring(this.server, client)
-
-        setTimeout(() => {
-            Notify.unAuthorized(client)
-        }, 5000)
+        setTimeout(() => Notify.unAuthorized(client), 5000)
     }
 
     handleDisconnect(client: Socket) {
@@ -64,10 +74,9 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     @SubscribeMessage(EVENTS.AUTH)
     handleAuth(client: Socket, payload: any) {
-        if (AppGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
-
         payload = Pass.auth(payload)
 
+        if (AppGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
         if (!AppGateway.isAppID(payload.id)) return Notify.unAuthorized(client)
 
         client.id = payload.id
@@ -76,6 +85,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         this.cert.verify(payload.token, (err, authorized) => {
             if (!err && authorized) {
                 this.logger.log(`Authenticate socket ${client.id}`)
+
                 client["auth"] = true
                 client.emit("auth", "authorized")
 
@@ -106,10 +116,21 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         Notify.roomDevice(client, payload)
     }
 
+    @SubscribeMessage(EVENTS.ROOM_DEVICE_ITEM)
+    handleRoomDeviceItem(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.roomDeviceItem(client, payload)
+    }
+
     @SubscribeMessage(EVENTS.ESP_LIST)
     handleEspList(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.espModules(client)
+    }
+
+    @SubscribeMessage(EVENTS.ESP_DEVICES)
+    handleEspDevices(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
     }
 
     @SubscribeMessage(EVENTS.QUERY_ROOM_DEVICE)
@@ -122,6 +143,12 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     handleCommitRoomDevice(client: Socket, payload: any) {
         if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
         Notify.commitRoomDevice(client, payload)
+    }
+
+    @SubscribeMessage(EVENTS.COMMIT_STATUS_ROOM_DEVICE)
+    handleCommitStatusRoomDevice(client: Socket, payload: any) {
+        if (!AppGateway.isClientAuth(client)) return Notify.unAuthorized(client)
+        Notify.commitStatusRoomDevice(client, payload)
     }
 
     private removeDevice(client: Socket) {
@@ -140,6 +167,10 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         Notify.espModules(client)
     }
 
+    static notifyEspDevices(client?: Socket, listOrId?: number | string | Array<RoomDeviceModel>) {
+        Notify.espDevices(client, listOrId)
+    }
+
     static isClientAuth(client: Socket): boolean {
         return client["auth"] === true
     }
@@ -151,11 +182,11 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
 class Notify {
     static unAuthorized(client: Socket) {
-        if (EspGateway.isClientAuth(client)) return
+        if (AppGateway.isClientAuth(client)) return
 
         AppGateway.getLogger().log(`Disconnect socket unauthorized: ${client.id}`)
         client.emit(EVENTS.AUTH, "unauthorized")
-        client.disconnect(false)
+        client.disconnect()
     }
 
     static espModules(client?: Socket) {
@@ -164,6 +195,19 @@ class Notify {
         } else {
             AppGateway.getInstance().server.emit(EVENTS.ESP_LIST, EspGateway.getModules())
         }
+    }
+
+    static espDevices(client?: Socket, listOrId?: number | string | Array<RoomDeviceModel>) {
+        if (isNumber(listOrId) || isString(listOrId)) {
+            EspModel.getEspDevice(listOrId).then((list: Array<RoomDeviceModel>) => {
+                Notify.espDevices(client, list)
+            })
+
+            return
+        }
+
+        if (client) client.emit(EVENTS.ESP_DEVICES, listOrId)
+        else AppGateway.getInstance().server.emit(EVENTS.ESP_DEVICES, listOrId)
     }
 
     static roomTypes(client: Socket) {
@@ -195,9 +239,16 @@ class Notify {
             .catch(err => client.emit(EVENTS.ROOM_DEVICE, []))
     }
 
+    static roomDeviceItem(client?: Socket, payload?: any) {
+        if (client && payload) {
+            if (AppGateway.isClientAuth(client)) client.emit(EVENTS.ROOM_DEVICE_ITEM, EspGateway.getModules())
+        } else if (payload) {
+            AppGateway.getInstance().server.emit(EVENTS.ROOM_DEVICE_ITEM, EspGateway.getModules())
+        }
+    }
+
     static queryRoomDevice(client: Socket, payload: any) {
-        payload = Pass.roomDevice(payload)
-        RoomDeviceModel.getDevice(payload.id)
+        RoomDeviceModel.getDevice(Pass.roomDevice(payload).id)
             .then((entity: RoomDevice) => client.emit(EVENTS.QUERY_ROOM_DEVICE, entity))
             .catch((error: ErrorModel) => client.emit(EVENTS.QUERY_ROOM_DEVICE, error))
     }
@@ -208,10 +259,21 @@ class Notify {
             .then((entity: RoomDevice) => client.emit(EVENTS.COMMIT_ROOM_DEVICE, entity))
             .catch((error: ErrorModel) => client.emit(EVENTS.COMMIT_ROOM_DEVICE, error))
     }
+
+    static commitStatusRoomDevice(client: Socket, payload: any) {
+        payload = Pass.roomDevice(payload)
+
+        if (!isUndefined(payload.esp)) {
+            EspGateway.notifyStatusCloud(payload.esp.name, EntityUtil.create(RoomDevice, payload))
+        }
+        // RoomDeviceModel.updateStatusDevice(payload.id, payload)
+        //     .then((entity: RoomDevice) => client.emit(EVENTS.COMMIT_STATUS_ROOM_DEVICE, entity))
+        //     .catch((error: ErrorModel) => client.emit(EVENTS.COMMIT_STATUS_ROOM_DEVICE, error))
+    }
 }
 
 class Pass {
-    static def(objSrc: Object, objDest: Object): Object {
+    static def(objSrc: Object, objDest: Object): any {
         if (isUndefined(objSrc)) return {}
 
         if (isUndefined(objDest) || isNull(objDest)) objDest = {}
@@ -224,7 +286,7 @@ class Pass {
         return objDest
     }
 
-    static auth(obj: Object): Object {
+    static auth(obj: Object): any {
         return Pass.def(
             {
                 id: "",
@@ -234,7 +296,7 @@ class Pass {
         )
     }
 
-    static roomDevice(obj: Object): Object {
+    static roomDevice(obj: Object): any {
         return Pass.def(
             {
                 id: ""

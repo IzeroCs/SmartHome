@@ -35,10 +35,6 @@ var RoomDevice = (function () {
         __metadata("design:type", Number)
     ], RoomDevice.prototype, "widget", void 0);
     __decorate([
-        typeorm_1.Column("tinyint", { default: 0, nullable: true }),
-        __metadata("design:type", Number)
-    ], RoomDevice.prototype, "status", void 0);
-    __decorate([
         typeorm_1.ManyToOne(function (type) { return device_type_entity_1.DeviceType; }, function (type) { return type.type; }),
         __metadata("design:type", device_type_entity_1.DeviceType)
     ], RoomDevice.prototype, "type", void 0);

@@ -8,7 +8,7 @@ data class ValidateErrorModel(
 ) {
     enum class ValiadteChain {
         isRequired, isNotEmpty,
-        isNumber, isString,
+        isNumber, isString, isBoolean,
         isEmail, isURL,
         isMin, isMax, isLength,
 

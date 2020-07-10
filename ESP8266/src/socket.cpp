@@ -1,6 +1,7 @@
 #include "network.h"
 #include "socket.h"
 #include "io.h"
+#include "pair.h"
 
 void SocketClass::begin() {
     io.onBroadcast([&] (const char * event, const char * payload, size_t length) {
@@ -71,6 +72,12 @@ void SocketClass::onEvent(const char * event, const char * payload, size_t lengt
             Serial.println("[Socket] Authenticate: authorized");
 
         IO.setIoStatusChanged(true);
+    } else if (evt == "status-cloud") {
+        IOPin_t pin = (IOPin_t)Pair.get(pay, "pin", "-1").toInt();
+        StatusCloud_t status = (StatusCloud_t)Pair.get(pay, "status", String(StatusCloud_IDLE)).toInt();
+
+        Serial.println("Pin: " + String(pin));
+        Serial.println("Status: " + String(status));
     } else if (DEBUG) {
         Serial.println("[Socket] Event: " + evt + ", Payload: " + pay);
     }

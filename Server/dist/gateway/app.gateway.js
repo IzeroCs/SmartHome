@@ -23,14 +23,20 @@ var room_list_model_1 = require("../database/model/room_list.model");
 var room_list_entity_1 = require("../database/entity/room_list.entity");
 var room_device_model_1 = require("../database/model/room_device.model");
 var room_device_entity_1 = require("../database/entity/room_device.entity");
+var esp_model_1 = require("../database/model/esp.model");
+var entity_util_1 = require("../database/util/entity.util");
 exports.EVENTS = {
     AUTH: "auth",
+    ESP_LIST: "esp-list",
+    ESP_DEVICES: "esp-devices",
     ROOM_TYPE: "room-type",
     ROOM_LIST: "room-list",
     ROOM_DEVICE: "room-device",
-    ESP_LIST: "esp-list",
+    ROOM_DEVICE_ITEM: "room-device-item",
+    STATUS_CLOUD: "status-cloud",
     QUERY_ROOM_DEVICE: "query-room-device",
-    COMMIT_ROOM_DEVICE: "commit-room-device"
+    COMMIT_ROOM_DEVICE: "commit-room-device",
+    COMMIT_STATUS_ROOM_DEVICE: "commit-status-room-device"
 };
 var AppGateway = (function () {
     function AppGateway() {
@@ -51,9 +57,7 @@ var AppGateway = (function () {
         }
         this.logger.log("Client connection: " + client.id);
         socket_util_1.SocketUtil.restoring(this.server, client);
-        setTimeout(function () {
-            Notify.unAuthorized(client);
-        }, 5000);
+        setTimeout(function () { return Notify.unAuthorized(client); }, 5000);
     };
     AppGateway.prototype.handleDisconnect = function (client) {
         this.logger.log("Client disconnect: " + client.id);
@@ -62,9 +66,9 @@ var AppGateway = (function () {
     };
     AppGateway.prototype.handleAuth = function (client, payload) {
         var _this = this;
+        payload = Pass.auth(payload);
         if (AppGateway_1.isClientAuth(client))
             return this.logger.log("Authenticate already");
-        payload = Pass.auth(payload);
         if (!AppGateway_1.isAppID(payload.id))
             return Notify.unAuthorized(client);
         client.id = payload.id;
@@ -98,10 +102,19 @@ var AppGateway = (function () {
             return Notify.unAuthorized(client);
         Notify.roomDevice(client, payload);
     };
+    AppGateway.prototype.handleRoomDeviceItem = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.roomDeviceItem(client, payload);
+    };
     AppGateway.prototype.handleEspList = function (client, payload) {
         if (!AppGateway_1.isClientAuth(client))
             return Notify.unAuthorized(client);
         Notify.espModules(client);
+    };
+    AppGateway.prototype.handleEspDevices = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
     };
     AppGateway.prototype.handleQueryRoomDevice = function (client, payload) {
         if (!AppGateway_1.isClientAuth(client))
@@ -112,6 +125,11 @@ var AppGateway = (function () {
         if (!AppGateway_1.isClientAuth(client))
             return Notify.unAuthorized(client);
         Notify.commitRoomDevice(client, payload);
+    };
+    AppGateway.prototype.handleCommitStatusRoomDevice = function (client, payload) {
+        if (!AppGateway_1.isClientAuth(client))
+            return Notify.unAuthorized(client);
+        Notify.commitStatusRoomDevice(client, payload);
     };
     AppGateway.prototype.removeDevice = function (client) {
         if (!util_1.isUndefined(client.id))
@@ -125,6 +143,9 @@ var AppGateway = (function () {
     };
     AppGateway.notifyEspModules = function (client) {
         Notify.espModules(client);
+    };
+    AppGateway.notifyEspDevices = function (client, listOrId) {
+        Notify.espDevices(client, listOrId);
     };
     AppGateway.isClientAuth = function (client) {
         return client["auth"] === true;
@@ -163,11 +184,23 @@ var AppGateway = (function () {
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleRoomDevice", null);
     __decorate([
+        websockets_1.SubscribeMessage(exports.EVENTS.ROOM_DEVICE_ITEM),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleRoomDeviceItem", null);
+    __decorate([
         websockets_1.SubscribeMessage(exports.EVENTS.ESP_LIST),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleEspList", null);
+    __decorate([
+        websockets_1.SubscribeMessage(exports.EVENTS.ESP_DEVICES),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleEspDevices", null);
     __decorate([
         websockets_1.SubscribeMessage(exports.EVENTS.QUERY_ROOM_DEVICE),
         __metadata("design:type", Function),
@@ -180,11 +213,17 @@ var AppGateway = (function () {
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], AppGateway.prototype, "handleCommitRoomDevice", null);
+    __decorate([
+        websockets_1.SubscribeMessage(exports.EVENTS.COMMIT_STATUS_ROOM_DEVICE),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], AppGateway.prototype, "handleCommitStatusRoomDevice", null);
     AppGateway = AppGateway_1 = __decorate([
         websockets_1.WebSocketGateway({
             namespace: "/platform-app",
             pingTimeout: 5000,
-            pingInterval: 100
+            pingInterval: 500
         }),
         __metadata("design:paramtypes", [])
     ], AppGateway);
@@ -195,11 +234,11 @@ var Notify = (function () {
     function Notify() {
     }
     Notify.unAuthorized = function (client) {
-        if (esp_gateway_1.EspGateway.isClientAuth(client))
+        if (AppGateway.isClientAuth(client))
             return;
         AppGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
         client.emit(exports.EVENTS.AUTH, "unauthorized");
-        client.disconnect(false);
+        client.disconnect();
     };
     Notify.espModules = function (client) {
         if (client) {
@@ -209,6 +248,18 @@ var Notify = (function () {
         else {
             AppGateway.getInstance().server.emit(exports.EVENTS.ESP_LIST, esp_gateway_1.EspGateway.getModules());
         }
+    };
+    Notify.espDevices = function (client, listOrId) {
+        if (util_1.isNumber(listOrId) || util_1.isString(listOrId)) {
+            esp_model_1.EspModel.getEspDevice(listOrId).then(function (list) {
+                Notify.espDevices(client, list);
+            });
+            return;
+        }
+        if (client)
+            client.emit(exports.EVENTS.ESP_DEVICES, listOrId);
+        else
+            AppGateway.getInstance().server.emit(exports.EVENTS.ESP_DEVICES, listOrId);
     };
     Notify.roomTypes = function (client) {
         room_type_model_1.RoomTypeModel.getAll()
@@ -241,9 +292,17 @@ var Notify = (function () {
         })
             .catch(function (err) { return client.emit(exports.EVENTS.ROOM_DEVICE, []); });
     };
+    Notify.roomDeviceItem = function (client, payload) {
+        if (client && payload) {
+            if (AppGateway.isClientAuth(client))
+                client.emit(exports.EVENTS.ROOM_DEVICE_ITEM, esp_gateway_1.EspGateway.getModules());
+        }
+        else if (payload) {
+            AppGateway.getInstance().server.emit(exports.EVENTS.ROOM_DEVICE_ITEM, esp_gateway_1.EspGateway.getModules());
+        }
+    };
     Notify.queryRoomDevice = function (client, payload) {
-        payload = Pass.roomDevice(payload);
-        room_device_model_1.RoomDeviceModel.getDevice(payload.id)
+        room_device_model_1.RoomDeviceModel.getDevice(Pass.roomDevice(payload).id)
             .then(function (entity) { return client.emit(exports.EVENTS.QUERY_ROOM_DEVICE, entity); })
             .catch(function (error) { return client.emit(exports.EVENTS.QUERY_ROOM_DEVICE, error); });
     };
@@ -252,6 +311,12 @@ var Notify = (function () {
         room_device_model_1.RoomDeviceModel.updateDevice(payload.id, payload)
             .then(function (entity) { return client.emit(exports.EVENTS.COMMIT_ROOM_DEVICE, entity); })
             .catch(function (error) { return client.emit(exports.EVENTS.COMMIT_ROOM_DEVICE, error); });
+    };
+    Notify.commitStatusRoomDevice = function (client, payload) {
+        payload = Pass.roomDevice(payload);
+        if (!util_1.isUndefined(payload.esp)) {
+            esp_gateway_1.EspGateway.notifyStatusCloud(payload.esp.name, entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, payload));
+        }
     };
     return Notify;
 }());

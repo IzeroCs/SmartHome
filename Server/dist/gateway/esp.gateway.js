@@ -45,7 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EspGateway = void 0;
+exports.EspGateway = exports.StatusCloud = exports.IOPin = void 0;
 var websockets_1 = require("@nestjs/websockets");
 var common_1 = require("@nestjs/common");
 var socket_util_1 = require("../util/socket.util");
@@ -55,12 +55,31 @@ var util_1 = require("util");
 var app_gateway_1 = require("./app.gateway");
 var esp_entity_1 = require("../database/entity/esp.entity");
 var esp_model_1 = require("../database/model/esp.model");
-var ormconfig_1 = require("../ormconfig");
+var room_device_entity_1 = require("../database/entity/room_device.entity");
+var underscore = require("underscore");
+var IOPin;
+(function (IOPin) {
+    IOPin[IOPin["IOPin_0"] = 0] = "IOPin_0";
+    IOPin[IOPin["IOPin_1"] = 1] = "IOPin_1";
+    IOPin[IOPin["IOPin_2"] = 2] = "IOPin_2";
+    IOPin[IOPin["IOPin_3"] = 3] = "IOPin_3";
+    IOPin[IOPin["IOPin_4"] = 4] = "IOPin_4";
+    IOPin[IOPin["IOPin_5"] = 5] = "IOPin_5";
+    IOPin[IOPin["IOPin_6"] = 6] = "IOPin_6";
+    IOPin[IOPin["IOPin_7"] = 7] = "IOPin_7";
+    IOPin[IOPin["IOPin_NUll"] = 8] = "IOPin_NUll";
+})(IOPin = exports.IOPin || (exports.IOPin = {}));
+var StatusCloud;
+(function (StatusCloud) {
+    StatusCloud[StatusCloud["StatusCloud_IDLE"] = 1] = "StatusCloud_IDLE";
+    StatusCloud[StatusCloud["StatusCloud_ON"] = 2] = "StatusCloud_ON";
+    StatusCloud[StatusCloud["StatusCloud_OFF"] = 3] = "StatusCloud_OFF";
+})(StatusCloud = exports.StatusCloud || (exports.StatusCloud = {}));
 var EspGateway = (function () {
     function EspGateway() {
         this.logger = new common_1.Logger("EspGateway");
         this.cert = new cert_security_1.CertSecurity("esp");
-        this.modules = {};
+        this.modules = new Map();
         EspGateway_1.instance = this;
     }
     EspGateway_1 = EspGateway;
@@ -75,37 +94,40 @@ var EspGateway = (function () {
         }
         this.logger.log("Client connection: " + client.id);
         socket_util_1.SocketUtil.restoring(this.server, client);
-        setTimeout(function () {
-            Notify.unAuthorized(client);
-        }, 5000);
+        setTimeout(function () { return EspGateway_1.notifyUnauthorized(client); }, 5000);
     };
     EspGateway.prototype.handleDisconnect = function (client) {
         this.logger.log("Client disconnect: " + client.id);
         this.updateModule(client, false);
-        esp_model_1.EspModel.updateOnline(client.id, false);
+        esp_model_1.EspModel.updateOnline(client.id, false).then(function (esp) {
+            if (!util_1.isUndefined(esp))
+                app_gateway_1.AppGateway.notifyEspDevices(null, esp.id);
+        });
         socket_util_1.SocketUtil.removing(this.server, this.logger);
     };
     EspGateway.prototype.handleAuth = function (client, payload) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
+                payload = Pass.auth(payload);
                 if (EspGateway_1.isClientAuth(client))
                     return [2, this.logger.log("Authenticate already")];
-                payload = Pass.auth(payload);
                 if (!EspGateway_1.isEspID(payload.id))
-                    return [2, Notify.unAuthorized(client)];
+                    return [2, EspGateway_1.notifyUnauthorized(client)];
+                if (!util_1.isUndefined(this.modules[payload.id]) && this.modules[payload.id].online === true)
+                    return [2, client.disconnect()];
                 client.id = payload.id;
                 esp_model_1.EspModel.add(client.id);
-                this.updateModule(client, true);
                 this.cert.verify(payload.token, function (err, authorized) {
                     if (!err && authorized) {
                         _this.logger.log("Authenticate socket " + client.id);
                         esp_model_1.EspModel.updateAuth(client.id, true, true);
                         client["auth"] = true;
                         client.emit("auth", "authorized");
+                        _this.updateModule(client, true, true);
                     }
                     else {
-                        Notify.unAuthorized(client);
+                        EspGateway_1.notifyUnauthorized(client);
                     }
                 });
                 return [2];
@@ -114,42 +136,62 @@ var EspGateway = (function () {
     };
     EspGateway.prototype.handleSyncIO = function (client, payload) {
         if (!EspGateway_1.isClientAuth(client))
-            return Notify.unAuthorized(client);
+            return EspGateway_1.notifyUnauthorized(client);
         var espIO = Pass.io(payload);
         var pinData = espIO.pins;
         var pinChanged = espIO.changed;
+        var module = this.getModule(client.id);
         if (util_1.isArray(pinData)) {
             for (var i = 0; i < pinData.length; ++i)
                 pinData[i] = Pass.pin(pinData[i]);
-        }
-        if (!util_1.isUndefined(this.modules[client.id])) {
-            this.modules[client.id].pins = pinData;
-            this.modules[client.id].changed = pinChanged;
+            module.pins = pinData;
+            module.changed = pinChanged;
             if (pinChanged) {
-                esp_model_1.EspModel.updatePin(client.id, pinData);
+                esp_model_1.EspModel.updatePin(client.id, pinData).then(function (esp) {
+                    if (!util_1.isUndefined(esp)) {
+                        esp_model_1.EspModel.getEspDevice(esp.id).then(function (list) {
+                            app_gateway_1.AppGateway.notifyEspDevices(null, list);
+                        });
+                    }
+                });
                 app_gateway_1.AppGateway.notifyEspModules();
             }
         }
     };
     EspGateway.prototype.handleSyncDetail = function (client, payload) {
         if (!EspGateway_1.isClientAuth(client))
-            return Notify.unAuthorized(client);
-        var oldDetail = Pass.detail(this.modules[client.id]);
+            return EspGateway_1.notifyUnauthorized(client);
+        var module = this.getModule(client.id);
         var newDetail = Pass.detail(payload);
-        var oldSignal = network_util_1.NetworkUtil.calculateSignalLevel(oldDetail.detail_rssi);
+        var oldSignal = network_util_1.NetworkUtil.calculateSignalLevel(module.detail_rssi);
         var newSignal = network_util_1.NetworkUtil.calculateSignalLevel(newDetail.detail_rssi);
         if (oldSignal !== newSignal) {
-            this.modules[client.id].detail_rssi = newDetail.detail_rssi;
+            module.detail_rssi = newDetail.detail_rssi;
             esp_model_1.EspModel.updateDetail(client.id, {
                 rssi: newDetail.detail_rssi
             });
             app_gateway_1.AppGateway.notifyEspModules();
         }
     };
-    EspGateway.prototype.updateModule = function (client, online) {
-        this.modules[client.id] = Pass.module(this.modules[client.id]);
-        this.modules[client.id].name = client.id;
-        this.modules[client.id].online = online;
+    EspGateway.prototype.getModule = function (id) {
+        if (!this.modules.has(id)) {
+            this.modules.set(id, {
+                name: id,
+                online: false,
+                auth: false,
+                changed: false,
+                pins: [],
+                detail_rssi: network_util_1.NetworkUtil.MIN_RSSI
+            });
+        }
+        return this.modules.get(id);
+    };
+    EspGateway.prototype.updateModule = function (client, online, auth) {
+        var module = this.getModule(client.id);
+        module.name = client.id;
+        module.online = online;
+        if (auth)
+            module.auth = auth;
     };
     EspGateway.getInstance = function () {
         return EspGateway_1.instance;
@@ -160,8 +202,40 @@ var EspGateway = (function () {
     EspGateway.getModules = function () {
         return EspGateway_1.getInstance().modules;
     };
+    EspGateway.notifyUnauthorized = function (client) {
+        if (EspGateway_1.isClientAuth(client))
+            return;
+        EspGateway_1.getLogger().log("Disconnect socket unauthorized: " + client.id);
+        esp_model_1.EspModel.updateAuth(client.id, false, false);
+        client.emit("auth", "unauthorized");
+        client.disconnect(true);
+    };
+    EspGateway.notifyStatusCloud = function (espName, device) {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
+            var sockets, client, module, pin, status_1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                sockets = EspGateway_1.getInstance().server.sockets;
+                client = null;
+                module = null;
+                underscore.each(sockets, function (socket) {
+                    if (socket.id === espName) {
+                        client = socket;
+                        module = _this.getModules().get(espName);
+                    }
+                });
+                if (!util_1.isUndefined(client) && !util_1.isUndefined(module) && device instanceof room_device_entity_1.RoomDevice) {
+                    pin = device.pin.input;
+                    status_1 = device.pin.statusCloud;
+                    client.emit(app_gateway_1.EVENTS.STATUS_CLOUD, "pin=" + pin + ",status=" + status_1);
+                }
+                return [2];
+            });
+        }); });
+    };
     EspGateway.isClientAuth = function (client) {
-        return client["auth"] === true;
+        return client["auth"] === true && EspGateway_1.getInstance().modules.has(client.id);
     };
     EspGateway.isEspID = function (id) {
         return !util_1.isUndefined(id) && id.startsWith("ESP");
@@ -201,19 +275,6 @@ var EspGateway = (function () {
     return EspGateway;
 }());
 exports.EspGateway = EspGateway;
-var Notify = (function () {
-    function Notify() {
-    }
-    Notify.unAuthorized = function (client) {
-        if (EspGateway.isClientAuth(client))
-            return;
-        EspGateway.getLogger().log("Disconnect socket unauthorized: " + client.id);
-        esp_model_1.EspModel.updateAuth(client.id, false, false);
-        client.emit("auth", "unauthorized");
-        client.disconnect(true);
-    };
-    return Notify;
-}());
 var Pass = (function () {
     function Pass() {
     }
@@ -262,7 +323,8 @@ var Pass = (function () {
             outputPrimary: 0,
             outputSecondary: 0,
             dualToggleCount: 0,
-            status: 0
+            statusCloud: false,
+            status: false
         }, obj);
     };
     Pass.detail = function (obj) {

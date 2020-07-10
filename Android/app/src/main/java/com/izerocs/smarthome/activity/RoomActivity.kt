@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.izerocs.smarthome.R
 import com.izerocs.smarthome.adapter.ListDeviceAdapter
+import com.izerocs.smarthome.model.EspPinModel
 import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.model.RoomListModel
 import com.izerocs.smarthome.network.SocketClient
@@ -40,14 +41,19 @@ class RoomActivity : BaseActivity(),
     }
 
     override fun onSocketConnect(client : SocketClient) {
-        roomListItem?.let { room ->
-            getSocketClient().queryRoomDeviceList(room.id) { list ->
-                listDevice.clear()
-                listDevice.addAll(list)
-
-                runOnUiThread { listDevice.notifyDataSetChanged() }
+        roomListItem?.let {
+            room -> getSocketClient().queryRoomDeviceList(room.id) { list ->
+                onEspDevices(getSocketClient(), list)
             }
         }
+    }
+
+    override fun onEspDevices(client : SocketClient, espDevices : MutableList<RoomDeviceModel>) {
+        val list = espDevices.filter { model -> model.room.id == roomListItem?.id }.toMutableList()
+
+        listDevice.clear()
+        listDevice.addAll(list)
+        runOnUiThread { listDevice.notifyDataSetChanged() }
     }
 
     override fun onCreateMenu() : Int? {
@@ -75,16 +81,19 @@ class RoomActivity : BaseActivity(),
         val adapter = listDevice.getCastAdapter()
 
         adapter.get(position).let { device ->
-            var status = RoomDeviceModel.STATUS_ON
+            var status = EspPinModel.StatusCloud.OFF
 
-            if (device.status == RoomDeviceModel.STATUS_ON)
-                status = RoomDeviceModel.STATUS_OFF
+            if (device.pin.statusCloud == EspPinModel.StatusCloud.OFF)
+                status = EspPinModel.StatusCloud.ON
 
-            getSocketClient().commitRoomDevice(device.copy(status = status), { model ->
+            getSocketClient().commitStatusRoomDevice(device.copy(pin = device.pin.copy(
+                statusCloud = status
+            )), { model ->
+                Log.d(TAG, "Model: $model")
                 adapter.set(position, model)
                 runOnUiThread { adapter.notifyDataSetChanged() }
             }) { error -> runOnUiThread {
-                Toasty.error(applicationContext, error.nsp.toString(), 0).show()
+                Toasty.error(applicationContext, "NSP: ${error.nsp}", 0).show()
             }}
         }
     }

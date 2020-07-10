@@ -6,6 +6,7 @@ import { BaseModel } from "../base.model"
 import { Validate, checker } from "../util/validate.util"
 import { MiddlewareModel } from "../middleware.model"
 import { ErrorModel, NSP } from "../error.model"
+import { EspPin } from "../entity/esp_pin.entity"
 
 export enum WidgetDevice {
     WidgetSmall = 0,
@@ -27,7 +28,7 @@ export enum UpdateDevice {
 export class RoomDeviceModel extends BaseModel {
     static getList(roomID: number) {
         return getRepository(RoomDevice).find({
-            relations: ["esp", "room", "type"],
+            relations: ["esp", "pin", "room", "type"],
             where: {
                 room: roomID
             }
@@ -37,7 +38,7 @@ export class RoomDeviceModel extends BaseModel {
     static getDevice(deviceId: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             const repository = getRepository(RoomDevice)
-            const find = await repository.findOne({ id: deviceId }, { relations: ["esp", "room", "type"] })
+            const find = await repository.findOne({ id: deviceId }, { relations: ["esp", "pin", "room", "type"] })
             const mid = new MiddlewareModel()
 
             mid.preProcessed(() => {
@@ -51,10 +52,25 @@ export class RoomDeviceModel extends BaseModel {
         })
     }
 
+    static getDeviceList(espId: number): Promise<any> {
+        return new Promise(async resolve => {
+            const repository = getRepository(RoomDevice)
+            const mid = new MiddlewareModel()
+            const find = await repository.find({
+                relations: ["esp", "pin", "room", "type"],
+                where: {
+                    esp: espId
+                }
+            })
+
+            resolve(find)
+        })
+    }
+
     static updateDevice(deviceId: number, object: any): Promise<any> {
         return new Promise(async (resolve, reject) => {
             const repository = getRepository(RoomDevice)
-            const find = await repository.findOne({ id: deviceId }, { relations: ["esp"] })
+            const find = await repository.findOne({ id: deviceId }, { relations: ["esp", "pin"] })
             const res = EntityUtil.create(RoomDevice, object)
             const mid = new MiddlewareModel()
 
@@ -69,17 +85,60 @@ export class RoomDeviceModel extends BaseModel {
                     .isNotEmpty()
                     .isLength(5, 30),
 
-                checker("status")
+                checker("pin.status")
                     .isRequired()
                     .isNumber()
             )
 
             mid.preUpdate(() => {
-                if (find.name === res.name && find.status === res.status) return NSP.hasNotChanged
+                if (find.name === res.name && find.pin.status === res.pin.status) return NSP.hasNotChanged
             })
 
             mid.update(async () => {
-                await repository.save(res)
+                await repository.update(deviceId, {
+                    name: res.name,
+                    pin: {
+                        status: res.pin.status
+                    }
+                })
+            })
+
+            mid.run(res)
+            mid.response(error => {
+                if (error) return reject(error)
+                else return resolve(res)
+            })
+        })
+    }
+
+    static updateStatusDevice(deviceId: number, object: any): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            const repository = getRepository(RoomDevice)
+            const find = await repository.findOne({ id: deviceId }, { relations: ["esp", "pin"] })
+            const res = EntityUtil.create(RoomDevice, object)
+            const mid = new MiddlewareModel()
+
+            mid.preProcessed(() => {
+                if (isUndefined(find) || isUndefined(find.esp)) return NSP.deviceNotExists
+                if (!find.esp.online) return NSP.deviceNotOnline
+            })
+
+            mid.validate(
+                checker("pin.status")
+                    .isRequired()
+                    .isBoolean()
+            )
+
+            mid.preUpdate(() => {
+                if (find.pin.status === res.pin.status) return NSP.hasNotChanged
+            })
+
+            mid.update(async () => {
+                const repositoryEspPin = await getRepository(EspPin)
+
+                await repositoryEspPin.update(find.pin.id, {
+                    status: res.pin.status
+                })
             })
 
             mid.run(res)

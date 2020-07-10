@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.izerocs.smarthome.model.EspModuleModel
+import com.izerocs.smarthome.model.RoomDeviceModel
 import com.izerocs.smarthome.model.RoomListModel
 import com.izerocs.smarthome.model.RoomTypeModel
 import com.izerocs.smarthome.network.SocketClient
@@ -39,17 +40,25 @@ class SmartApplication : Application() {
             }
         }
 
-        override fun onEspModules(client : SocketClient, espModules : MutableMap<String, EspModuleModel>) {
-            activityCurrent?.onEspModules(client, espModules.toMutableMap())
-        }
+        override fun onEspModules(
+            client : SocketClient,
+            espModules : MutableMap<String, EspModuleModel>
+        ) { activityCurrent?.onEspModules(client, espModules.toMutableMap()) }
 
-        override fun onRoomTypes(client : SocketClient, roomTypes : MutableList<RoomTypeModel>) {
-            activityCurrent?.onRoomTypes(client, roomTypes.toMutableList())
-        }
+        override fun onRoomTypes(
+            client : SocketClient,
+            roomTypes : MutableList<RoomTypeModel>
+        ) { activityCurrent?.onRoomTypes(client, roomTypes.toMutableList()) }
 
-        override fun onRoomList(client : SocketClient, roomLists : MutableList<RoomListModel>) {
-            activityCurrent?.onRoomList(client, roomLists.toMutableList())
-        }
+        override fun onRoomList(
+            client : SocketClient,
+            roomLists : MutableList<RoomListModel>
+        ) { activityCurrent?.onRoomList(client, roomLists.toMutableList()) }
+
+        override fun onEspDevices(
+            client : SocketClient,
+            espDevices : MutableList<RoomDeviceModel>
+        ) { activityCurrent?.onEspDevices(client, espDevices) }
     }
 
     companion object {

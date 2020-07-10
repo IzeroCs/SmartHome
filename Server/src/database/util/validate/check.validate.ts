@@ -44,6 +44,10 @@ export class ValidateCheck implements ValidateChainInterface {
         return this.push("isNumber")
     }
 
+    isBoolean(): ValidateCheck {
+        return this.push("isBoolean")
+    }
+
     isString(): ValidateCheck {
         return this.push("isString")
     }

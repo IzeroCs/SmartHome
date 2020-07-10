@@ -4,6 +4,7 @@ exports.ErrorModel = exports.NSP = void 0;
 var NSP;
 (function (NSP) {
     NSP["hasNotChanged"] = "hasNotChanged";
+    NSP["moduleNotExists"] = "moduleNotExists";
     NSP["deviceNotExists"] = "deviceNotExists";
     NSP["deviceNotOnline"] = "deviceNotOnline";
 })(NSP = exports.NSP || (exports.NSP = {}));

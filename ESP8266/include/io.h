@@ -31,12 +31,19 @@ typedef enum {
     IOPin_NULL = 8
 } IOPin_t;
 
+typedef enum {
+    StatusCloud_ON = 1,
+    StatusCloud_OFF = 2,
+    StatusCloud_IDLE = 3
+} StatusCloud_t;
+
 struct IOData {
     IOPin_t input;
     IOType_t outputType;
     IOPin_t outputPrimary;
     IOPin_t outputSecondary;
     uint8_t dualToggleCount;
+    StatusCloud_t statusCloud;
 
     bool status;
     bool statusPrev;
@@ -47,6 +54,7 @@ struct IOData {
                "outputPrimary=" + String(outputPrimary) + "," +
                "outputSecondary=" + String(outputSecondary) + "," +
                "dualToggleCount=" + String(dualToggleCount) + "," +
+               "statusCloud=" + String(statusCloud) + "," +
                "status=" + String(status);
     }
 
@@ -56,6 +64,7 @@ struct IOData {
             "\"outputPrimary\":" + String(outputPrimary) + "," +
             "\"outputSecondary\":" + String(outputSecondary) + "," +
             "\"dualToggleCount\":" + String(dualToggleCount) + "," +
+            "\"statusCloud\":" + (statusCloud ? "true" : "false") + "," +
             "\"status\":" + (status ? "true" : "false") + "}";
     }
 };
@@ -136,6 +145,10 @@ private:
                         break;
 
                     case 5:
+                        data.statusCloud = (StatusCloud_t)res;
+                        break;
+
+                    case 6:
                         data.status = res == 1;
                         run = false;
                         break;
@@ -150,11 +163,30 @@ private:
         return data;
     }
 
-    IOData initData(uint8_t input, IOType_t outputType, uint8_t outputPrimary, uint8_t outputSecondary, uint8_t dualToggleCount, bool status) {
-        return initData((IOPin_t)input, outputType, (IOPin_t)outputPrimary, (IOPin_t)outputSecondary, dualToggleCount, status);
+    IOData initData(
+        uint8_t input,
+        IOType_t outputType,
+        uint8_t outputPrimary,
+        uint8_t outputSecondary,
+        uint8_t dualToggleCount,
+        uint8_t statusCloud,
+        bool status
+    ) {
+        return initData((IOPin_t)input, outputType,
+            (IOPin_t)outputPrimary,
+            (IOPin_t)outputSecondary, dualToggleCount,
+            (StatusCloud_t)statusCloud, status);
     }
 
-    IOData initData(IOPin_t input, IOType_t outputType, IOPin_t outputPrimary, IOPin_t outputSecondary, uint8_t dualToggleCount, bool status) {
+    IOData initData(
+        IOPin_t input,
+        IOType_t outputType,
+        IOPin_t outputPrimary,
+        IOPin_t outputSecondary,
+        uint8_t dualToggleCount,
+        StatusCloud_t statusCloud,
+        bool status
+    ) {
         IOData data;
 
         data.input           = input;
@@ -162,6 +194,7 @@ private:
         data.outputPrimary   = outputPrimary;
         data.outputSecondary = outputSecondary;
         data.dualToggleCount = dualToggleCount;
+        data.statusCloud     = statusCloud;
         data.status          = status;
 
         return data;
@@ -173,6 +206,7 @@ private:
                buffer += String(data.outputPrimary) + SPLIT;
                buffer += String(data.outputSecondary) + SPLIT;
                buffer += String(data.dualToggleCount) + SPLIT;
+               buffer += String(data.statusCloud) + SPLIT;
                buffer += String(data.status);
 
         Record.write(id, buffer);
@@ -186,7 +220,11 @@ public:
         IOPin_t outputSecondary = IOPin_NULL);
 
     void setIOPinStatus(IOPin_t pin, bool status);
+    void setIOPinStatusCloud(IOPin_t pin, StatusCloud_t status);
     bool getIOPinStatus(IOPin_t pin);
+
+    IOData getIOData(IOPin_t pin);
+    StatusCloud_t getIOPinStatusCloud(IOPin_t pin);
 
     bool isIoStatusChanged() {
         return ioStatusChanged;

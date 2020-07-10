@@ -58,6 +58,7 @@ var base_model_1 = require("../base.model");
 var validate_util_1 = require("../util/validate.util");
 var middleware_model_1 = require("../middleware.model");
 var error_model_1 = require("../error.model");
+var esp_pin_entity_1 = require("../entity/esp_pin.entity");
 var WidgetDevice;
 (function (WidgetDevice) {
     WidgetDevice[WidgetDevice["WidgetSmall"] = 0] = "WidgetSmall";
@@ -82,7 +83,7 @@ var RoomDeviceModel = (function (_super) {
     }
     RoomDeviceModel.getList = function (roomID) {
         return typeorm_1.getRepository(room_device_entity_1.RoomDevice).find({
-            relations: ["esp", "room", "type"],
+            relations: ["esp", "pin", "room", "type"],
             where: {
                 room: roomID
             }
@@ -96,7 +97,7 @@ var RoomDeviceModel = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
-                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp", "room", "type"] })];
+                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp", "pin", "room", "type"] })];
                     case 1:
                         find = _a.sent();
                         mid = new middleware_model_1.MiddlewareModel();
@@ -116,6 +117,29 @@ var RoomDeviceModel = (function (_super) {
             });
         }); });
     };
+    RoomDeviceModel.getDeviceList = function (espId) {
+        var _this = this;
+        return new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, mid, find;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
+                        mid = new middleware_model_1.MiddlewareModel();
+                        return [4, repository.find({
+                                relations: ["esp", "pin", "room", "type"],
+                                where: {
+                                    esp: espId
+                                }
+                            })];
+                    case 1:
+                        find = _a.sent();
+                        resolve(find);
+                        return [2];
+                }
+            });
+        }); });
+    };
     RoomDeviceModel.updateDevice = function (deviceId, object) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -125,7 +149,7 @@ var RoomDeviceModel = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
-                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp"] })];
+                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp", "pin"] })];
                     case 1:
                         find = _a.sent();
                         res = entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, object);
@@ -139,18 +163,78 @@ var RoomDeviceModel = (function (_super) {
                         mid.validate(validate_util_1.checker("name")
                             .isRequired()
                             .isNotEmpty()
-                            .isLength(5, 30), validate_util_1.checker("status")
+                            .isLength(5, 30), validate_util_1.checker("pin.status")
                             .isRequired()
                             .isNumber());
                         mid.preUpdate(function () {
-                            if (find.name === res.name && find.status === res.status)
+                            if (find.name === res.name && find.pin.status === res.pin.status)
                                 return error_model_1.NSP.hasNotChanged;
                         });
                         mid.update(function () { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
-                                    case 0: return [4, repository.save(res)];
+                                    case 0: return [4, repository.update(deviceId, {
+                                            name: res.name,
+                                            pin: {
+                                                status: res.pin.status
+                                            }
+                                        })];
                                     case 1:
+                                        _a.sent();
+                                        return [2];
+                                }
+                            });
+                        }); });
+                        mid.run(res);
+                        mid.response(function (error) {
+                            if (error)
+                                return reject(error);
+                            else
+                                return resolve(res);
+                        });
+                        return [2];
+                }
+            });
+        }); });
+    };
+    RoomDeviceModel.updateStatusDevice = function (deviceId, object) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var repository, find, res, mid;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        repository = typeorm_1.getRepository(room_device_entity_1.RoomDevice);
+                        return [4, repository.findOne({ id: deviceId }, { relations: ["esp", "pin"] })];
+                    case 1:
+                        find = _a.sent();
+                        res = entity_util_1.EntityUtil.create(room_device_entity_1.RoomDevice, object);
+                        mid = new middleware_model_1.MiddlewareModel();
+                        mid.preProcessed(function () {
+                            if (util_1.isUndefined(find) || util_1.isUndefined(find.esp))
+                                return error_model_1.NSP.deviceNotExists;
+                            if (!find.esp.online)
+                                return error_model_1.NSP.deviceNotOnline;
+                        });
+                        mid.validate(validate_util_1.checker("pin.status")
+                            .isRequired()
+                            .isBoolean());
+                        mid.preUpdate(function () {
+                            if (find.pin.status === res.pin.status)
+                                return error_model_1.NSP.hasNotChanged;
+                        });
+                        mid.update(function () { return __awaiter(_this, void 0, void 0, function () {
+                            var repositoryEspPin;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4, typeorm_1.getRepository(esp_pin_entity_1.EspPin)];
+                                    case 1:
+                                        repositoryEspPin = _a.sent();
+                                        return [4, repositoryEspPin.update(find.pin.id, {
+                                                status: res.pin.status
+                                            })];
+                                    case 2:
                                         _a.sent();
                                         return [2];
                                 }
