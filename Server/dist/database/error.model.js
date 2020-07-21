@@ -8,12 +8,11 @@ var NSP;
     NSP["deviceNotExists"] = "deviceNotExists";
     NSP["deviceNotOnline"] = "deviceNotOnline";
 })(NSP = exports.NSP || (exports.NSP = {}));
-var ErrorModel = (function () {
-    function ErrorModel() {
+class ErrorModel {
+    constructor() {
         this.error = "ErrorModel";
         this.validates = [];
     }
-    return ErrorModel;
-}());
+}
 exports.ErrorModel = ErrorModel;
 //# sourceMappingURL=error.model.js.map

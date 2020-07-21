@@ -1,8 +1,8 @@
 import { ValidateChainInterface } from "./chain.interface.validate"
 import { ValidateCheck } from "./check.validate"
 import { isUndefined, isNumber, isString, isArray, isBoolean } from "util"
-import validator from "validator"
 import { ValidateChainResult } from "./chain.result.validate"
+import validator from "validator"
 
 export class ValidateChain implements ValidateChainInterface {
     private object: any

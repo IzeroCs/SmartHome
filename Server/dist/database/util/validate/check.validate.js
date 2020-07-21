@@ -1,96 +1,93 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ValidateCheck = void 0;
-var util_1 = require("util");
-var chain_validate_1 = require("./chain.validate");
-var chain_result_validate_1 = require("./chain.result.validate");
-var ValidateCheck = (function () {
-    function ValidateCheck(fields, message) {
-        var _this = this;
+const util_1 = require("util");
+const chain_validate_1 = require("./chain.validate");
+const chain_result_validate_1 = require("./chain.result.validate");
+class ValidateCheck {
+    constructor(fields, message) {
         this.chains = new Map();
         this.chainCustoms = new Map();
         this.results = new Map();
         this.fields = fields;
         this.message = message;
         if (util_1.isArray(this.fields)) {
-            this.fields.map(function (field) { return _this.results.set(field, new chain_result_validate_1.ValidateChainResult()); });
+            this.fields.map(field => this.results.set(field, new chain_result_validate_1.ValidateChainResult()));
         }
         else {
             this.results.set(this.fields, new chain_result_validate_1.ValidateChainResult());
         }
     }
-    ValidateCheck.prototype.run = function (object) {
-        var _this = this;
+    run(object) {
         if (util_1.isArray(this.fields)) {
-            this.fields.map(function (field) { return _this.fieldCheck(object, field); });
+            this.fields.map(field => this.fieldCheck(object, field));
         }
         else {
             this.fieldCheck(object, this.fields);
         }
         return this;
-    };
-    ValidateCheck.prototype.isRequired = function () {
+    }
+    isRequired() {
         return this.push("isRequired");
-    };
-    ValidateCheck.prototype.isNotEmpty = function () {
+    }
+    isNotEmpty() {
         return this.push("isNotEmpty");
-    };
-    ValidateCheck.prototype.isNumber = function () {
+    }
+    isNumber() {
         return this.push("isNumber");
-    };
-    ValidateCheck.prototype.isBoolean = function () {
+    }
+    isBoolean() {
         return this.push("isBoolean");
-    };
-    ValidateCheck.prototype.isString = function () {
+    }
+    isString() {
         return this.push("isString");
-    };
-    ValidateCheck.prototype.isEmail = function () {
+    }
+    isEmail() {
         return this.push("isEmail");
-    };
-    ValidateCheck.prototype.isURL = function () {
+    }
+    isURL() {
         return this.push("isURL");
-    };
-    ValidateCheck.prototype.isIn = function (array) {
+    }
+    isIn(array) {
         return this.push("isIn", { in: array });
-    };
-    ValidateCheck.prototype.isMin = function (min) {
+    }
+    isMin(min) {
         return this.push("isMin", { min: min });
-    };
-    ValidateCheck.prototype.isMax = function (max) {
+    }
+    isMax(max) {
         return this.push("isMax", { max: max });
-    };
-    ValidateCheck.prototype.isLength = function (min, max) {
+    }
+    isLength(min, max) {
         return this.push("isLength", { min: min, max: max });
-    };
-    ValidateCheck.prototype.custom = function (nsp, handle) {
+    }
+    custom(nsp, handle) {
         this.push(nsp);
         this.chainCustoms.set(nsp, handle);
         return this;
-    };
-    ValidateCheck.prototype.hasCustom = function (nsp) {
+    }
+    hasCustom(nsp) {
         return this.chainCustoms.has(nsp);
-    };
-    ValidateCheck.prototype.getCustomHandle = function (nsp) {
+    }
+    getCustomHandle(nsp) {
         return this.chainCustoms.get(nsp);
-    };
-    ValidateCheck.prototype.getFields = function () {
+    }
+    getFields() {
         return this.fields;
-    };
-    ValidateCheck.prototype.getChains = function () {
+    }
+    getChains() {
         return this.chains;
-    };
-    ValidateCheck.prototype.getResults = function () {
+    }
+    getResults() {
         return this.results;
-    };
-    ValidateCheck.prototype.push = function (key, options) {
+    }
+    push(key, options) {
         if (!this.chains.has(key))
             this.chains.set(key, options);
         return this;
-    };
-    ValidateCheck.prototype.fieldCheck = function (object, field) {
+    }
+    fieldCheck(object, field) {
         new chain_validate_1.ValidateChain(object, field, this).run();
-    };
-    return ValidateCheck;
-}());
+    }
+}
 exports.ValidateCheck = ValidateCheck;
 //# sourceMappingURL=check.validate.js.map

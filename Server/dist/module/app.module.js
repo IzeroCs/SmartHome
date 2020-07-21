@@ -10,31 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-var common_1 = require("@nestjs/common");
-var typeorm_1 = require("@nestjs/typeorm");
-var app_controller_1 = require("../controller/app.controller");
-var app_service_1 = require("../service/app.service");
-var app_gateway_1 = require("../gateway/app.gateway");
-var esp_gateway_1 = require("../gateway/esp.gateway");
-var seed_1 = require("../database/seed");
-var OrmConfig = require("../ormconfig");
-var typeorm_2 = require("typeorm");
-var AppModule = (function () {
-    function AppModule(connection) {
+const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const app_controller_1 = require("../controller/app.controller");
+const app_service_1 = require("../service/app.service");
+const app_gateway_1 = require("../gateway/app.gateway");
+const esp_gateway_1 = require("../gateway/esp.gateway");
+const seed_1 = require("../database/seed");
+const OrmConfig = require("../ormconfig");
+const typeorm_2 = require("typeorm");
+let AppModule = class AppModule {
+    constructor(connection) {
         this.connection = connection;
-        var seed = new seed_1.SeedDatabase(connection);
+        const seed = new seed_1.SeedDatabase(connection);
         seed.seed();
     }
-    AppModule = __decorate([
-        common_1.Module({
-            imports: [typeorm_1.TypeOrmModule.forRoot(OrmConfig)],
-            controllers: [app_controller_1.AppController],
-            providers: [app_service_1.AppService, app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
-            exports: [typeorm_1.TypeOrmModule]
-        }),
-        __metadata("design:paramtypes", [typeorm_2.Connection])
-    ], AppModule);
-    return AppModule;
-}());
+};
+AppModule = __decorate([
+    common_1.Module({
+        imports: [typeorm_1.TypeOrmModule.forRoot(OrmConfig)],
+        controllers: [app_controller_1.AppController],
+        providers: [app_service_1.AppService, app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
+        exports: [typeorm_1.TypeOrmModule]
+    }),
+    __metadata("design:paramtypes", [typeorm_2.Connection])
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

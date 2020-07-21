@@ -1,23 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseSeed = void 0;
-var common_1 = require("@nestjs/common");
-var BaseSeed = (function () {
-    function BaseSeed(connection, context) {
+const common_1 = require("@nestjs/common");
+class BaseSeed {
+    constructor(connection, context) {
         this.context = context;
         this.connection = connection;
         this.logger = new common_1.Logger(context);
     }
-    BaseSeed.prototype.log = function () {
+    log() {
         return this.logger;
-    };
-    BaseSeed.prototype.logSeedRunning = function () {
-        this.logger.log("Seeder " + this.context + " running...");
-    };
-    BaseSeed.prototype.logSeedRunned = function () {
-        this.logger.log("Seeder " + this.context + " runned");
-    };
-    return BaseSeed;
-}());
+    }
+    logSeedRunning() {
+        this.logger.log(`Seeder ${this.context} running...`);
+    }
+    logSeedRunned() {
+        this.logger.log(`Seeder ${this.context} runned`);
+    }
+}
 exports.BaseSeed = BaseSeed;
 //# sourceMappingURL=base.seed.js.map

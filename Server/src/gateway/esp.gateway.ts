@@ -17,6 +17,7 @@ import { Esp } from "src/database/entity/esp.entity"
 import { EspModel } from "src/database/model/esp.model"
 import { RoomDevice } from "src/database/entity/room_device.entity"
 import * as underscore from "underscore"
+import Wildcard = require("socketio-wildcard")
 
 export enum IOPin {
     IOPin_0 = 0,
@@ -67,6 +68,7 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     private logger: Logger = new Logger("EspGateway")
     private cert: CertSecurity = new CertSecurity("esp")
     private modules: Map<String, EspModule> = new Map()
+    private middleware = Wildcard()
 
     constructor() {
         EspGateway.instance = this
@@ -74,6 +76,7 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     afterInit(server: Server) {
         this.logger.log("Socket /platform-esp initialized")
+        this.server.use(this.middleware)
         SocketUtil.removing(this.server)
     }
 
@@ -93,6 +96,9 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
         SocketUtil.removing(this.server, this.logger)
     }
+
+    @SubscribeMessage("*")
+    handle(client: Socket, packet: any) {}
 
     @SubscribeMessage("auth")
     async handleAuth(client: Socket, payload: any) {

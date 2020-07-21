@@ -10,18 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Setting = void 0;
-var typeorm_1 = require("typeorm");
-var Setting = (function () {
-    function Setting() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], Setting.prototype, "id", void 0);
-    Setting = __decorate([
-        typeorm_1.Entity()
-    ], Setting);
-    return Setting;
-}());
+const typeorm_1 = require("typeorm");
+let Setting = class Setting {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], Setting.prototype, "id", void 0);
+Setting = __decorate([
+    typeorm_1.Entity()
+], Setting);
 exports.Setting = Setting;
 //# sourceMappingURL=setting.entity.js.map

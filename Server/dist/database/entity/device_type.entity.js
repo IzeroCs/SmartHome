@@ -10,30 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeviceType = void 0;
-var typeorm_1 = require("typeorm");
-var DeviceType = (function () {
-    function DeviceType() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], DeviceType.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], DeviceType.prototype, "name", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], DeviceType.prototype, "nsp", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], DeviceType.prototype, "type", void 0);
-    DeviceType = __decorate([
-        typeorm_1.Entity()
-    ], DeviceType);
-    return DeviceType;
-}());
+const typeorm_1 = require("typeorm");
+let DeviceType = class DeviceType {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], DeviceType.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], DeviceType.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], DeviceType.prototype, "nsp", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], DeviceType.prototype, "type", void 0);
+DeviceType = __decorate([
+    typeorm_1.Entity()
+], DeviceType);
 exports.DeviceType = DeviceType;
 //# sourceMappingURL=device_type.entity.js.map

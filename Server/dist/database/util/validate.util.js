@@ -1,40 +1,38 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checker = exports.Validate = void 0;
-var util_1 = require("util");
-var check_validate_1 = require("./validate/check.validate");
-var error_validate_1 = require("./validate/error.validate");
-var Validate = (function () {
-    function Validate(checks) {
-        var _this = this;
+const util_1 = require("util");
+const check_validate_1 = require("./validate/check.validate");
+const error_validate_1 = require("./validate/error.validate");
+class Validate {
+    constructor(checks) {
         this.list = [];
         if (checks)
-            checks.map(function (check) { return _this.list.push(check); });
+            checks.map(check => this.list.push(check));
     }
-    Validate.prototype.add = function (check) {
+    add(check) {
         this.list.push(check);
         return check;
-    };
-    Validate.prototype.addAll = function (checks) {
-        var _this = this;
+    }
+    addAll(checks) {
         if (util_1.isArray(checks))
-            checks.map(function (check) { return _this.add(check); });
-    };
-    Validate.prototype.check = function (fields, message) {
-        var check = new check_validate_1.ValidateCheck(fields, message);
+            checks.map(check => this.add(check));
+    }
+    check(fields, message) {
+        const check = new check_validate_1.ValidateCheck(fields, message);
         this.list.push(check);
         return check;
-    };
-    Validate.prototype.execute = function (object) {
-        var errors = new Map();
-        for (var i = 0; i < this.list.length; ++i) {
-            var check = this.list[i].run(object);
-            var fields = check.getFields();
-            var results = check.getResults();
+    }
+    execute(object) {
+        const errors = new Map();
+        for (let i = 0; i < this.list.length; ++i) {
+            let check = this.list[i].run(object);
+            let fields = check.getFields();
+            let results = check.getResults();
             if (util_1.isArray(fields)) {
-                for (var f = 0; f < fields.length; ++f) {
-                    var field = fields[f];
-                    var result = results.get(field);
+                for (let f = 0; f < fields.length; ++f) {
+                    let field = fields[f];
+                    let result = results.get(field);
                     this.resultToError(field, result, errors);
                 }
             }
@@ -43,25 +41,24 @@ var Validate = (function () {
             }
         }
         return Array.from(errors.values());
-    };
-    Validate.prototype.resultToError = function (field, result, errors) {
-        var resultKeys = Object.keys(result);
-        var errorValidate = null;
+    }
+    resultToError(field, result, errors) {
+        let resultKeys = Object.keys(result);
+        let errorValidate = null;
         if (errors.has(field))
             errorValidate = errors.get(field);
         else
             errorValidate = new error_validate_1.ValidateError(field);
-        for (var i = 0; i < resultKeys.length; ++i) {
-            var key = resultKeys[i];
-            var value = result[key];
+        for (let i = 0; i < resultKeys.length; ++i) {
+            let key = resultKeys[i];
+            let value = result[key];
             if (typeof value !== "boolean" || value === false)
                 errorValidate.push(key);
         }
         if (errorValidate.getChains().length > 0)
             errors.set(field, errorValidate);
-    };
-    return Validate;
-}());
+    }
+}
 exports.Validate = Validate;
 function checker(fields, message) {
     return new check_validate_1.ValidateCheck(fields, message);

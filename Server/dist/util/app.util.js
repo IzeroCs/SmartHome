@@ -1,4 +1,4 @@
 module.exports = {
-    isUndefined: function (v) { return typeof v === "undefined"; }
+    isUndefineds: v => typeof v === "undefined"
 };
 //# sourceMappingURL=app.util.js.map

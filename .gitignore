@@ -1,4 +1,6 @@
 Server/logs
+Server/dist
+Server/build
 Server/node_modules/*
 Server/package-lock.json
 Server/ormlogs.log

@@ -12,7 +12,6 @@ import { SocketUtil } from "../util/socket.util"
 import { isUndefined, isNull, isArray, isString, isNumber } from "util"
 import { EspGateway } from "./esp.gateway"
 import { CertSecurity } from "../security/cert.security"
-import { logger, cli } from "src/ormconfig"
 import { RoomTypeModel } from "src/database/model/room_type.model"
 import { RoomType } from "src/database/entity/room_type.entity"
 import { RoomListModel } from "src/database/model/room_list.model"
@@ -22,6 +21,7 @@ import { RoomDevice } from "src/database/entity/room_device.entity"
 import { ErrorModel } from "../database/error.model"
 import { EspModel } from "../database/model/esp.model"
 import { EntityUtil } from "../database/util/entity.util"
+import Wildcard = require("socketio-wildcard")
 
 export const EVENTS = {
     AUTH: "auth",
@@ -50,6 +50,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     private logger: Logger = new Logger("AppGateway")
     private cert: CertSecurity = new CertSecurity("app")
     private devices: Object = {}
+    private middleware = Wildcard()
 
     constructor() {
         AppGateway.instance = this
@@ -57,6 +58,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     afterInit(server: Server) {
         this.logger.log("Socket /platform-app initialized")
+        this.server.use(this.middleware)
         SocketUtil.removing(this.server, this.logger)
     }
 
@@ -70,6 +72,11 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         this.logger.log(`Client disconnect: ${client.id}`)
         this.removeDevice(client)
         SocketUtil.removing(this.server)
+    }
+
+    @SubscribeMessage("*")
+    handle(client: Socket, packet: any) {
+        console.log("Packet app: ", packet)
     }
 
     @SubscribeMessage(EVENTS.AUTH)

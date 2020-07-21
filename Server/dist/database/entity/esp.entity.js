@@ -10,44 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Esp = void 0;
-var typeorm_1 = require("typeorm");
-var esp_pin_entity_1 = require("./esp_pin.entity");
-var room_device_entity_1 = require("./room_device.entity");
-var Esp = (function () {
-    function Esp() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], Esp.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Esp.prototype, "name", void 0);
-    __decorate([
-        typeorm_1.Column({ default: false }),
-        __metadata("design:type", Boolean)
-    ], Esp.prototype, "online", void 0);
-    __decorate([
-        typeorm_1.Column({ default: false }),
-        __metadata("design:type", Boolean)
-    ], Esp.prototype, "auth", void 0);
-    __decorate([
-        typeorm_1.Column({ default: -100 }),
-        __metadata("design:type", String)
-    ], Esp.prototype, "detail_rssi", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return room_device_entity_1.RoomDevice; }, function (device) { return device.esp; }),
-        __metadata("design:type", Array)
-    ], Esp.prototype, "devices", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return esp_pin_entity_1.EspPin; }, function (pin) { return pin.esp; }),
-        __metadata("design:type", Array)
-    ], Esp.prototype, "pins", void 0);
-    Esp = __decorate([
-        typeorm_1.Entity()
-    ], Esp);
-    return Esp;
-}());
+const typeorm_1 = require("typeorm");
+const esp_pin_entity_1 = require("./esp_pin.entity");
+const room_device_entity_1 = require("./room_device.entity");
+let Esp = class Esp {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], Esp.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Esp.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column({ default: false }),
+    __metadata("design:type", Boolean)
+], Esp.prototype, "online", void 0);
+__decorate([
+    typeorm_1.Column({ default: false }),
+    __metadata("design:type", Boolean)
+], Esp.prototype, "auth", void 0);
+__decorate([
+    typeorm_1.Column({ default: -100 }),
+    __metadata("design:type", String)
+], Esp.prototype, "detail_rssi", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => room_device_entity_1.RoomDevice, device => device.esp),
+    __metadata("design:type", Array)
+], Esp.prototype, "devices", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => esp_pin_entity_1.EspPin, pin => pin.esp),
+    __metadata("design:type", Array)
+], Esp.prototype, "pins", void 0);
+Esp = __decorate([
+    typeorm_1.Entity()
+], Esp);
 exports.Esp = Esp;
 //# sourceMappingURL=esp.entity.js.map

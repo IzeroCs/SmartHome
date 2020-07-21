@@ -10,51 +10,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomDevice = void 0;
-var typeorm_1 = require("typeorm");
-var esp_pin_entity_1 = require("./esp_pin.entity");
-var esp_entity_1 = require("./esp.entity");
-var room_list_entity_1 = require("./room_list.entity");
-var device_type_entity_1 = require("./device_type.entity");
-var RoomDevice = (function () {
-    function RoomDevice() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], RoomDevice.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], RoomDevice.prototype, "name", void 0);
-    __decorate([
-        typeorm_1.Column({ default: "", nullable: true }),
-        __metadata("design:type", String)
-    ], RoomDevice.prototype, "descriptor", void 0);
-    __decorate([
-        typeorm_1.Column("tinyint", { default: 0 }),
-        __metadata("design:type", Number)
-    ], RoomDevice.prototype, "widget", void 0);
-    __decorate([
-        typeorm_1.ManyToOne(function (type) { return device_type_entity_1.DeviceType; }, function (type) { return type.type; }),
-        __metadata("design:type", device_type_entity_1.DeviceType)
-    ], RoomDevice.prototype, "type", void 0);
-    __decorate([
-        typeorm_1.OneToOne(function (type) { return esp_pin_entity_1.EspPin; }, function (pin) { return pin.id; }),
-        typeorm_1.JoinColumn(),
-        __metadata("design:type", esp_pin_entity_1.EspPin)
-    ], RoomDevice.prototype, "pin", void 0);
-    __decorate([
-        typeorm_1.ManyToOne(function (type) { return esp_entity_1.Esp; }, function (esp) { return esp.devices; }),
-        __metadata("design:type", esp_entity_1.Esp)
-    ], RoomDevice.prototype, "esp", void 0);
-    __decorate([
-        typeorm_1.ManyToOne(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.devices; }),
-        __metadata("design:type", room_list_entity_1.RoomList)
-    ], RoomDevice.prototype, "room", void 0);
-    RoomDevice = __decorate([
-        typeorm_1.Entity()
-    ], RoomDevice);
-    return RoomDevice;
-}());
+const typeorm_1 = require("typeorm");
+const esp_pin_entity_1 = require("./esp_pin.entity");
+const esp_entity_1 = require("./esp.entity");
+const room_list_entity_1 = require("./room_list.entity");
+const device_type_entity_1 = require("./device_type.entity");
+let RoomDevice = class RoomDevice {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], RoomDevice.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], RoomDevice.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column({ default: "", nullable: true }),
+    __metadata("design:type", String)
+], RoomDevice.prototype, "descriptor", void 0);
+__decorate([
+    typeorm_1.Column("tinyint", { default: 0 }),
+    __metadata("design:type", Number)
+], RoomDevice.prototype, "widget", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => device_type_entity_1.DeviceType, type => type.type),
+    __metadata("design:type", device_type_entity_1.DeviceType)
+], RoomDevice.prototype, "type", void 0);
+__decorate([
+    typeorm_1.OneToOne(type => esp_pin_entity_1.EspPin, pin => pin.id),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", esp_pin_entity_1.EspPin)
+], RoomDevice.prototype, "pin", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => esp_entity_1.Esp, esp => esp.devices),
+    __metadata("design:type", esp_entity_1.Esp)
+], RoomDevice.prototype, "esp", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => room_list_entity_1.RoomList, room => room.devices),
+    __metadata("design:type", room_list_entity_1.RoomList)
+], RoomDevice.prototype, "room", void 0);
+RoomDevice = __decorate([
+    typeorm_1.Entity()
+], RoomDevice);
 exports.RoomDevice = RoomDevice;
 //# sourceMappingURL=room_device.entity.js.map

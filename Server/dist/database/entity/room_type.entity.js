@@ -10,35 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomType = void 0;
-var typeorm_1 = require("typeorm");
-var room_list_entity_1 = require("./room_list.entity");
-var RoomType = (function () {
-    function RoomType() {
-    }
-    __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
-        __metadata("design:type", Number)
-    ], RoomType.prototype, "id", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], RoomType.prototype, "name", void 0);
-    __decorate([
-        typeorm_1.Column("tinyint"),
-        __metadata("design:type", Number)
-    ], RoomType.prototype, "type", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Boolean)
-    ], RoomType.prototype, "enable", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return room_list_entity_1.RoomList; }, function (room) { return room.type; }),
-        __metadata("design:type", Array)
-    ], RoomType.prototype, "lists", void 0);
-    RoomType = __decorate([
-        typeorm_1.Entity()
-    ], RoomType);
-    return RoomType;
-}());
+const typeorm_1 = require("typeorm");
+const room_list_entity_1 = require("./room_list.entity");
+let RoomType = class RoomType {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
+], RoomType.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], RoomType.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column("tinyint"),
+    __metadata("design:type", Number)
+], RoomType.prototype, "type", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], RoomType.prototype, "enable", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => room_list_entity_1.RoomList, room => room.type),
+    __metadata("design:type", Array)
+], RoomType.prototype, "lists", void 0);
+RoomType = __decorate([
+    typeorm_1.Entity()
+], RoomType);
 exports.RoomType = RoomType;
 //# sourceMappingURL=room_type.entity.js.map

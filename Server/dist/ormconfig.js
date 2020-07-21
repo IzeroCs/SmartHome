@@ -1,5 +1,5 @@
 "use strict";
-var config = {
+const config = {
     type: "mysql",
     host: "localhost",
     port: 3306,
