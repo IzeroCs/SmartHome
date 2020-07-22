@@ -84,10 +84,6 @@ class SocketClient(val context : Context) {
         socket.disconnect()
     }
 
-    fun subscribe() {
-
-    }
-
     fun clear() {
         espModules.clear()
         roomTypes.clear()

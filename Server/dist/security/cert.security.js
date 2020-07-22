@@ -27,12 +27,12 @@ class CertSecurity {
                 const key = keyPayloads[i];
                 const value = this.payloadConfig[key];
                 if (util_1.isUndefined(decoded[key]) || decoded[key] !== value)
-                    return handle("Undefined decoded key", false);
+                    return handle(false, "Undefined decoded key");
             }
-            return handle(null, true);
+            return handle(true, null);
         }
         catch (err) {
-            return handle(err, false);
+            return handle(false, err);
         }
     }
     resolveAssetsPath(filename) {

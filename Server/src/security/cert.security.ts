@@ -25,7 +25,7 @@ export class CertSecurity {
         })
     }
 
-    verify(token, handle) {
+    verify(token, handle: (authorized: boolean, err: any) => any) {
         try {
             const decoded = jwt.verify(token, this.certPublic)
             const keyPayloads = Object.keys(this.payloadConfig)
@@ -34,12 +34,12 @@ export class CertSecurity {
                 const key = keyPayloads[i]
                 const value = this.payloadConfig[key]
 
-                if (isUndefined(decoded[key]) || decoded[key] !== value) return handle("Undefined decoded key", false)
+                if (isUndefined(decoded[key]) || decoded[key] !== value) return handle(false, "Undefined decoded key")
             }
 
-            return handle(null, true)
+            return handle(true, null)
         } catch (err) {
-            return handle(err, false)
+            return handle(false, err)
         }
     }
 

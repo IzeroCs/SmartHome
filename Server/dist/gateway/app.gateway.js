@@ -43,7 +43,7 @@ let AppGateway = AppGateway_1 = class AppGateway {
     constructor() {
         this.logger = new common_1.Logger("AppGateway");
         this.cert = new cert_security_1.CertSecurity("app");
-        this.devices = {};
+        this.devices = new Map();
         this.middleware = Wildcard();
         AppGateway_1.instance = this;
     }
@@ -62,9 +62,7 @@ let AppGateway = AppGateway_1 = class AppGateway {
         this.removeDevice(client);
         socket_util_1.SocketUtil.removing(this.server);
     }
-    handle(client, packet) {
-        console.log("Packet app: ", packet);
-    }
+    handle(client, packet) { }
     handleAuth(client, payload) {
         payload = Pass.auth(payload);
         if (AppGateway_1.isClientAuth(client))
@@ -73,8 +71,8 @@ let AppGateway = AppGateway_1 = class AppGateway {
             return Notify.unAuthorized(client);
         client.id = payload.id;
         this.devices[client.id] = {};
-        this.cert.verify(payload.token, (err, authorized) => {
-            if (!err && authorized) {
+        this.cert.verify(payload.token, (authorized) => {
+            if (authorized) {
                 this.logger.log(`Authenticate socket ${client.id}`);
                 client["auth"] = true;
                 client.emit("auth", "authorized");

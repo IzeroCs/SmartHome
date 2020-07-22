@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const app_controller_1 = require("../controller/app.controller");
-const app_service_1 = require("../service/app.service");
 const app_gateway_1 = require("../gateway/app.gateway");
 const esp_gateway_1 = require("../gateway/esp.gateway");
 const seed_1 = require("../database/seed");
@@ -29,8 +27,8 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     common_1.Module({
         imports: [typeorm_1.TypeOrmModule.forRoot(OrmConfig)],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
+        controllers: [],
+        providers: [app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
         exports: [typeorm_1.TypeOrmModule]
     }),
     __metadata("design:paramtypes", [typeorm_2.Connection])

@@ -38,6 +38,14 @@ export const EVENTS = {
     COMMIT_STATUS_ROOM_DEVICE: "commit-status-room-device"
 }
 
+export type Device = {
+    id?: string
+    token?: string
+    auth?: boolean
+    subscribes?: Array<string>
+    interval?: any
+}
+
 @WebSocketGateway({
     namespace: "/platform-app",
     pingTimeout: 5000,
@@ -49,14 +57,14 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     private static instance: AppGateway = null
     private logger: Logger = new Logger("AppGateway")
     private cert: CertSecurity = new CertSecurity("app")
-    private devices: Object = {}
+    private devices: Map<string, Device> = new Map()
     private middleware = Wildcard()
 
     constructor() {
         AppGateway.instance = this
     }
 
-    afterInit(server: Server) {
+    afterInit(server: Namespace) {
         this.logger.log("Socket /platform-app initialized")
         this.server.use(this.middleware)
         SocketUtil.removing(this.server, this.logger)
@@ -75,9 +83,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     }
 
     @SubscribeMessage("*")
-    handle(client: Socket, packet: any) {
-        console.log("Packet app: ", packet)
-    }
+    handle(client: Socket, packet: any) {}
 
     @SubscribeMessage(EVENTS.AUTH)
     handleAuth(client: Socket, payload: any) {
@@ -89,8 +95,8 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         client.id = payload.id
         this.devices[client.id] = {}
 
-        this.cert.verify(payload.token, (err, authorized) => {
-            if (!err && authorized) {
+        this.cert.verify(payload.token, (authorized: boolean) => {
+            if (authorized) {
                 this.logger.log(`Authenticate socket ${client.id}`)
 
                 client["auth"] = true
