@@ -19,7 +19,7 @@
         ".prettierrc": true,
         "nest-cli.json": true,
         "README.md": true,
-        "tsconfig.json": true,
+        // "tsconfig.json": true,
         "tsconfig.build.json": true,
         "package-lock.json": true,
         "ormlogs.log": true

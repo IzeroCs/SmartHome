@@ -155,7 +155,15 @@ class SocketClient(val context : Context) {
     fun getRoomTypes()  : MutableList<RoomTypeModel>         = this.roomTypes
     fun getRoomLists()  : MutableList<RoomListModel>         = this.roomLists
 
-    private fun initSocket() : Socket = IO.socket("$scheme$host:$port$namesapce", options)
+    private fun initSocket() : Socket {
+        var host = this.host
+        val netType = NetworkProvider.getConnectType(context)
+
+        if (netType == NetworkProvider.CONNECT_TYPE_MOBILE)
+            host = "izerocs.com"
+        
+        return IO.socket("$scheme$host:$port$namesapce", options)
+    }
 
     private fun onConnect() {
         val appPreferences = AppPreferences(context)

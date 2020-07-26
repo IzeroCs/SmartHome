@@ -18,7 +18,6 @@ const cert_security_1 = require("../security/cert.security");
 const network_util_1 = require("../util/network.util");
 const util_1 = require("util");
 const app_gateway_1 = require("./app.gateway");
-const esp_entity_1 = require("../database/entity/esp.entity");
 const esp_model_1 = require("../database/model/esp.model");
 const room_device_entity_1 = require("../database/entity/room_device.entity");
 const underscore = require("underscore");

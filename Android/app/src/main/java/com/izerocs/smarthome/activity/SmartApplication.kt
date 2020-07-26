@@ -17,7 +17,7 @@ import com.izerocs.smarthome.preferences.AppPreferences
 class SmartApplication : Application() {
     private var activityCurrent : BaseActivity?   = null
     private var appPreferences  : AppPreferences? = null
-    private val socketClient    : SocketClient    = SocketClient(this)
+    private var socketClient    : SocketClient?   = null
     private val socketEvent     : OnEventListener = object : OnEventListener {
         override fun onConnect(client : SocketClient) {
             activityCurrent?.run {
@@ -75,8 +75,9 @@ class SmartApplication : Application() {
         lifecycle()
         selfInstance = this
         appPreferences = AppPreferences(this)
-        socketClient.setOnEventListener(socketEvent)
-        socketClient.connect()
+        socketClient = SocketClient(this)
+        socketClient?.setOnEventListener(socketEvent)
+        socketClient?.connect()
     }
 
     private fun lifecycle() {
@@ -86,8 +87,8 @@ class SmartApplication : Application() {
 
             override fun onActivityDestroyed(activity : Activity) {
                 if (activity is SmartActivity) {
-                    socketClient.disconnect()
-                    socketClient.clear()
+                    socketClient?.disconnect()
+                    socketClient?.clear()
                     unregisterActivityLifecycleCallbacks(this)
                 }
             }
@@ -102,10 +103,12 @@ class SmartApplication : Application() {
     fun setCurrentActivity(activity : BaseActivity?) {
         activity?.run {
             activityCurrent = this
-            onSocketConnect(socketClient)
-            onRoomTypes(socketClient, socketClient.getRoomTypes())
-            onRoomList(socketClient, socketClient.getRoomLists())
-            onEspModules(socketClient, socketClient.getEspModules())
+            socketClient?.let { socket ->
+                onSocketConnect(socket)
+                onRoomTypes(socket, socket.getRoomTypes())
+                onRoomList(socket, socket.getRoomLists())
+                onEspModules(socket, socket.getEspModules())
+            }
         }
     }
 
@@ -114,6 +117,6 @@ class SmartApplication : Application() {
     }
 
     fun getSocketClient() : SocketClient {
-        return socketClient
+        return socketClient as SocketClient
     }
 }
