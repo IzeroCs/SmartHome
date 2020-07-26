@@ -48,7 +48,7 @@ export type Device = {
 
 @WebSocketGateway({
     namespace: "/platform-app",
-    pingTimeout: 5000,
+    pingTimeout: 1000,
     pingInterval: 500
 })
 export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {

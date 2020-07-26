@@ -1,13 +1,14 @@
 import { Module } from "@nestjs/common"
+import { ConfigModule } from "@nestjs/config"
+import { DatabaseModule } from "./database.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { AppGateway } from "../gateway/app.gateway"
 import { EspGateway } from "../gateway/esp.gateway"
 import { SeedDatabase } from "../database/seed"
-import * as OrmConfig from "../ormconfig"
 import { Connection } from "typeorm"
 
 @Module({
-    imports: [TypeOrmModule.forRoot(OrmConfig)],
+    imports: [ConfigModule.forRoot(), DatabaseModule.forRoot()],
     controllers: [],
     providers: [AppGateway, EspGateway],
     exports: [TypeOrmModule]

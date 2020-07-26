@@ -29,9 +29,13 @@
 #include "Wire.h"
 
 
+PCF8574::PCF8574(uint8_t address) {
+	_wire = &Wire;
+	_address = address;
+}
+
 PCF8574::PCF8574(uint8_t address, uint8_t sda, uint8_t scl){
 	_wire = &Wire;
-
 	_address = address;
 	_sda = sda;
 	_scl = scl;
@@ -57,7 +61,7 @@ PCF8574::PCF8574(uint8_t address, uint8_t sda, uint8_t scl){
  * Wake up i2c controller
  */
 void PCF8574::begin() {
-	_wire->begin(_sda, _scl);
+	_wire->begin();
 
 	// Check if there are pins to set low
 	if (writeMode>0 || readMode>0) {
@@ -76,8 +80,16 @@ void PCF8574::begin() {
 		byteBuffered = initialBuffer;
 		writeByteBuffered = writeModeUp;
 
-		_wire->endTransmission();
-	}
+        _isConnected = _wire->endTransmission() == 0;
+	} else {
+        _wire->beginTransmission(_address);
+        _isConnected = _wire->endTransmission() == 0;
+    }
+
+    if (_isConnected)
+        Serial.println("[PCF8574] Connected");
+    else
+        Serial.println("[PCF8574] Not connected");
 
 	// inizialize last read
 	lastReadMillis = millis();

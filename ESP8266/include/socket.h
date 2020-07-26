@@ -17,6 +17,7 @@ private:
     const char * nsp  = "/platform-esp";
     const int    port = 3000;
 
+    String id = "";
     String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXplcm9DcyIsInN1YiI6IkVTUDgyNjYiLCJpYXQiOjQxMDI0NDQ4MDB9.HAU4zKdQnfHqj0kfLYoLH5blr3BUSgQo-DgxT0JvIjd9t6b0AloTjA1mUfbk9LRipe-OMC58LYIHG2kbpYAyCg";
     SocketIoClient io;
 
@@ -28,6 +29,14 @@ public:
     void loopMain();
     void loopSyncIO(bool forceChanged = false);
     void loopSyncDetail();
+
+protected:
+    void onConnect();
+    void onDisconnect();
+    void onId(String payload);
+    void onAuth(String payload);
+    void onSync(String payload);
+    void onStatusCloud(String payload);
 };
 
 extern SocketClass Socket;

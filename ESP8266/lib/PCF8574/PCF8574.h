@@ -56,6 +56,7 @@
 
 class PCF8574 {
 public:
+    PCF8574(uint8_t address);
 	PCF8574(uint8_t address, uint8_t sda, uint8_t scl);
 
 #ifdef ESP32
@@ -74,6 +75,10 @@ public:
 		return latency;
 	}
 
+    bool isConnected() {
+        return _isConnected;
+    }
+
 	void setLatency(int latency = 10) {
 		this->latency = latency;
 	}
@@ -82,6 +87,7 @@ private:
 	uint8_t _address;
 	uint8_t _sda = DEFAULT_SDA;
 	uint8_t _scl = DEFAULT_SCL;
+    bool _isConnected = false;
 
 	TwoWire *_wire;
 

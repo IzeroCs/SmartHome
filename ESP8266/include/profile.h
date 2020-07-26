@@ -14,13 +14,19 @@
 
 class ProfileClass {
 private:
-    String sn = "ESP1N403E91636R";
-    String sc = "SC185G2K";
+    const String FILE = "profile.txt";
+
+    String sn = "";
+    String sc = "";
 
 public:
     void begin();
     String getSn();
     String getSc();
+
+    static bool verify(String sn, String sc) {
+        return sn.startsWith("ESP") && sc.startsWith("SC");
+    }
 
 protected:
     void make();

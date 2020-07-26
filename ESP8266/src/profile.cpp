@@ -2,8 +2,27 @@
 #include "main.h"
 #include "profile.h"
 #include "record.h"
+#include "ffs.h"
 
 void ProfileClass::begin() {
+    if (FFS.exists(FILE)) {
+        String str = FFS.readString(FILE);
+        int splitIndex = str.indexOf("|");
+
+        if (splitIndex != -1) {
+            String snBuff = str.substring(0, splitIndex);
+            String scBuff = str.substring(splitIndex + 1);
+
+            if (Profile.verify(snBuff, scBuff)) {
+                sn = snBuff;
+                sc = scBuff;
+
+                Serial.println("[Profile] " + sn + sc);
+            }
+        }
+    }
+
+    delay(1000);
     make();
 }
 
@@ -16,9 +35,8 @@ String ProfileClass::getSc() {
 }
 
 void ProfileClass::make() {
-    if (sn.length() > 0 && sc.length() > 0) {
+    if (sn.length() > 0 && sc.length() > 0)
         return;
-    }
 
     char buffSn[20];
     char buffSc[20];
@@ -65,7 +83,10 @@ void ProfileClass::make() {
     sn = snCreate;
     sc = scCreate;
 
-    Serial.println("[Profile] Make: SN[" + sn + "], SC[" + sc + "]");
+    Serial.println("[Profile] Make: SN[" + snCreate + "], SC[" + scCreate + "]");
+    FFS.write(FILE, [snCreate, scCreate] (File file) {
+        file.print(snCreate + "|" + scCreate);
+    });
 }
 
 ProfileClass Profile;

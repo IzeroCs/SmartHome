@@ -44,7 +44,6 @@ struct IOData {
     IOPin_t outputSecondary;
     uint8_t dualToggleCount;
     StatusCloud_t statusCloud;
-    StatusCloud_t statusCloudPrev;
 
     bool status;
     bool statusPrev;
@@ -56,7 +55,6 @@ struct IOData {
                "outputSecondary=" + String(outputSecondary) + "," +
                "dualToggleCount=" + String(dualToggleCount) + "," +
                "statusCloud=" + String(statusCloud) + "," +
-               "statusCloudPrev=" + String(statusCloudPrev) + "," +
                "status=" + String(status);
     }
 
@@ -67,7 +65,6 @@ struct IOData {
             "\"outputSecondary\":" + String(outputSecondary) + "," +
             "\"dualToggleCount\":" + String(dualToggleCount) + "," +
             "\"statusCloud\":" + String(statusCloud) + "," +
-            "\"statusCloudPrev\":" + (statusCloudPrev ? "true" : "false") + "," +
             "\"status\":" + (status ? "true" : "false") + "}";
     }
 };
@@ -154,10 +151,6 @@ private:
                         break;
 
                     case 6:
-                        data.statusCloudPrev = (StatusCloud_t)res;
-                        break;
-
-                    case 7:
                         data.status = res == 1;
                         run = false;
                         break;

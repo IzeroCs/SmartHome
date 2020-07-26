@@ -9,7 +9,7 @@ void FFSClass::begin() {
 }
 
 char * FFSClass::readCharArray(String path) {
-    File file = LittleFS.open("/data/" + path, "r");
+    File file = LittleFS.open(BASE + path, "r");
 
     if (!file)
         return nullptr;
@@ -25,7 +25,7 @@ char * FFSClass::readCharArray(String path) {
 }
 
 String FFSClass::readString(String path) {
-    File file = LittleFS.open("/data/" + path, "r");
+    File file = LittleFS.open(BASE + path, "r");
     String buffer = "";
     int chr = 0;
 
@@ -37,6 +37,23 @@ String FFSClass::readString(String path) {
 
     file.close();
     return buffer;
+}
+
+bool FFSClass::write(String path, WriteHandle handle) {
+    File file = LittleFS.open(BASE + path, "w+");
+
+    if (!file)
+        return false;
+
+    handle(file);
+    file.flush();
+    file.close();
+
+    return true;
+}
+
+bool FFSClass::exists(String path) {
+    return LittleFS.exists(BASE + path);
 }
 
 FFSClass FFS;

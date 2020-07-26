@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <Ticker.h>
 
 #define RECORD_ID_IO_BEGIN 0
 #define RECORD_ID_IO_END 8

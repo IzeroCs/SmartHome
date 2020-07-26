@@ -11,11 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
+const database_module_1 = require("./database.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_gateway_1 = require("../gateway/app.gateway");
 const esp_gateway_1 = require("../gateway/esp.gateway");
 const seed_1 = require("../database/seed");
-const OrmConfig = require("../ormconfig");
 const typeorm_2 = require("typeorm");
 let AppModule = class AppModule {
     constructor(connection) {
@@ -26,7 +27,7 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forRoot(OrmConfig)],
+        imports: [config_1.ConfigModule.forRoot(), database_module_1.DatabaseModule.forRoot()],
         controllers: [],
         providers: [app_gateway_1.AppGateway, esp_gateway_1.EspGateway],
         exports: [typeorm_1.TypeOrmModule]

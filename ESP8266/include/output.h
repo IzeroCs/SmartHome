@@ -5,9 +5,9 @@
 
 class OutputClass {
 private:
-    const int SDA_PIN  = D2;
-    const int SCK_PIN  = D1;
-    const int DATA_PIN = D0;
+    const int SCK_PIN  = D5;
+    const int STR_PIN  = D6;
+    const int DATA_PIN = D7;
 
 public:
     void begin();

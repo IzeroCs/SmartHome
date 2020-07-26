@@ -6,16 +6,11 @@
 
 class InputClass {
 private:
-    const byte ADDRESS = 0x38;
-
-    const int INT_PIN = D7;
-    const int SCL_PIN = D6;
-    const int SDA_PIN = D5;
-
+    byte ADDRESS = 0x38;
     PCF8574 pcf;
 
 public:
-    InputClass() : pcf(ADDRESS, SDA_PIN, SCL_PIN) {}
+    InputClass() : pcf(ADDRESS) {}
 
     void begin();
     void loop();

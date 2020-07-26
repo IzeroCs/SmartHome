@@ -20,13 +20,13 @@ export class EspPinSeed extends BaseSeed {
             },
             {
                 input: 2,
-                outputType: 1,
+                outputType: 2,
                 outputPrimary: 2,
                 outputSecondary: 3
             },
             {
                 input: 3,
-                outputType: 1,
+                outputType: 3,
                 outputPrimary: 3,
                 outputSecondary: 3
             },

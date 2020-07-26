@@ -25,10 +25,10 @@ void IOClass::begin() {
         pin++;
     }
 
-    setIOData(IOPin_0, IOType_DOUBLE, IOPin_1);
-    setIOData(IOPin_2, IOType_SINGLE);
-    setIOData(IOPin_3, IOType_SINGLE);
-    setIOData(IOPin_4, IOType_DUAL_TOGGLE, IOPin_5);
+    setIOData(IOPin_0, IOType_DUAL_TOGGLE, IOPin_1);
+    setIOData(IOPin_2, IOType_DUAL_TOGGLE, IOPin_3);
+    setIOData(IOPin_4, IOType_SINGLE);
+    setIOData(IOPin_5, IOType_SINGLE);
     setIOData(IOPin_6, IOType_SINGLE);
     setIOData(IOPin_7, IOType_SINGLE);
     setIoStatusChanged(true);
@@ -58,7 +58,6 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
             secData->outputSecondary = secData->outputPrimary;
             secData->outputType      = IOType_SINGLE;
             secData->dualToggleCount = 0;
-            secData->statusCloudPrev = StatusCloud_IDLE;
             secData->statusCloud     = StatusCloud_IDLE;
             secData->statusPrev      = false;
             secData->status          = false;
@@ -74,7 +73,6 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
             secData->outputSecondary = secData->outputPrimary;
             secData->outputType      = IOType_SINGLE;
             secData->dualToggleCount = 0;
-            secData->statusCloudPrev = StatusCloud_IDLE;
             secData->statusCloud     = StatusCloud_IDLE;
             secData->statusPrev      = false;
             secData->status          = false;
@@ -90,8 +88,7 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
             secData->outputSecondary = secData->outputPrimary;
             secData->outputType      = IOType_DISABLE;
             secData->dualToggleCount = 0;
-            secData->statusCloudPrev = StatusCloud_IDLE;
-            secData->statusCloud = StatusCloud_IDLE;
+            secData->statusCloud     = StatusCloud_IDLE;
             secData->statusPrev      = false;
             secData->status          = false;
 
@@ -103,7 +100,6 @@ void IOClass::setIOData(IOPin_t pin, IOType_t outputType, IOPin_t outputSecondar
                 secData->outputSecondary = secData->outputPrimary;
                 secData->outputType      = IOType_SINGLE;
                 secData->dualToggleCount = 0;
-                secData->statusCloudPrev = StatusCloud_IDLE;
                 secData->statusCloud     = StatusCloud_IDLE;
                 secData->statusPrev      = false;
                 secData->status          = false;
@@ -216,7 +212,6 @@ void IOClass::setIOPinStatusCloud(IOPin_t pin, StatusCloud_t status) {
     IOData * curData = &(datas.at(pin));
 
     if (curData->outputType == IOType_SINGLE) {
-        curData->statusCloudPrev = curData->statusCloud;
         curData->statusCloud = status;
     } else if (curData->outputType == IOType_DISABLE) {
         Map_t::iterator it;
@@ -228,7 +223,6 @@ void IOClass::setIOPinStatusCloud(IOPin_t pin, StatusCloud_t status) {
             }
         }
     } else if (curData->outputType == IOType_DOUBLE || curData->outputType == IOType_DUAL_TOGGLE) {
-        curData->statusCloudPrev = curData->statusCloud;
         curData->statusCloud = status;
     }
 }

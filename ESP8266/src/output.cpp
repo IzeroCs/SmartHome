@@ -2,7 +2,7 @@
 #include "output.h"
 
 void OutputClass::begin() {
-    pinMode(SDA_PIN,  OUTPUT);
+    pinMode(STR_PIN,  OUTPUT);
     pinMode(SCK_PIN,  OUTPUT);
     pinMode(DATA_PIN, OUTPUT);
 }
@@ -17,9 +17,9 @@ void OutputClass::loop() {
             bitWrite(data, pin, 0);
     }
 
-    digitalWrite(SDA_PIN, LOW);
-    shiftOut(DATA_PIN, SCK_PIN, MSBFIRST, data);
-    digitalWrite(SDA_PIN, HIGH);
+    digitalWrite(STR_PIN, LOW);
+    shiftOut(DATA_PIN, SCK_PIN, LSBFIRST, data);
+    digitalWrite(STR_PIN, HIGH);
 }
 
 OutputClass Output;

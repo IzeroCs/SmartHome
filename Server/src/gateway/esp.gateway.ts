@@ -17,7 +17,6 @@ import { Esp } from "src/database/entity/esp.entity"
 import { EspModel } from "src/database/model/esp.model"
 import { RoomDevice } from "src/database/entity/room_device.entity"
 import * as underscore from "underscore"
-import Wildcard = require("socketio-wildcard")
 
 export enum IOPin {
     IOPin_0 = 0,
@@ -68,7 +67,6 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     private logger: Logger = new Logger("EspGateway")
     private cert: CertSecurity = new CertSecurity("esp")
     private modules: Map<String, EspModule> = new Map()
-    private middleware = Wildcard()
 
     constructor() {
         EspGateway.instance = this
@@ -76,14 +74,31 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     afterInit(server: Server) {
         this.logger.log("Socket /platform-esp initialized")
-        this.server.use(this.middleware)
         SocketUtil.removing(this.server)
+
+        setInterval(() => {
+            const now = Date.now()
+            underscore.each(this.server.connected, (client: Socket) => {
+                let intervalID = client["interval_id"] || 0
+                let intervalAuth = client["interval_auth"] || 0
+
+                if (!EspGateway.isEspID(client.id)) {
+                    if (now - intervalID > 5000) {
+                        intervalID = now
+                        client.emit("id")
+                    }
+                } else if (!EspGateway.isClientAuth(client)) {
+                    if (now - intervalAuth > 5000) {
+                        intervalAuth = now
+                        client.emit("auth")
+                    }
+                }
+            })
+        }, 1000)
     }
 
     handleConnection(client: Socket, ...args: any[]) {
-        this.logger.log(`Client connection: ${client.id}`)
         SocketUtil.restoring(this.server, client)
-        setTimeout(() => EspGateway.notifyUnauthorized(client), 5000)
     }
 
     handleDisconnect(client: Socket) {
@@ -94,42 +109,45 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
             if (!isUndefined(esp)) AppGateway.notifyEspDevices(null, esp.id)
         })
 
-        SocketUtil.removing(this.server, this.logger)
+        SocketUtil.removing(this.server)
     }
 
-    @SubscribeMessage("*")
-    handle(client: Socket, packet: any) {}
+    @SubscribeMessage("id")
+    handleId(client: Socket, payload: any) {
+        if (isUndefined(payload.id)) return
+        if (!EspGateway.isEspID(payload.id)) return
+
+        client.id = payload.id
+        client["interval_id"] = 0
+
+        this.logger.log(`Client id: ${payload.id}`)
+        this.initModule(payload.id)
+        this.updateModule(client, true, false)
+        EspModel.add(payload.id)
+    }
 
     @SubscribeMessage("auth")
     async handleAuth(client: Socket, payload: any) {
-        payload = Pass.auth(payload)
+        if (isUndefined(payload.token)) return
+        if (EspGateway.isClientAuth(client)) return
 
-        if (EspGateway.isClientAuth(client)) return this.logger.log(`Authenticate already`)
-        if (!EspGateway.isEspID(payload.id)) return EspGateway.notifyUnauthorized(client)
-        if (!isUndefined(this.modules[payload.id]) && this.modules[payload.id].online === true)
-            return client.disconnect()
+        this.cert.verify(payload.token, (authorized: boolean) => {
+            if (authorized) {
+                this.logger.log(`Client authenticate: ${client.id}`)
+                EspModel.updateAuth(client.id, true, true).then(_ => {
+                    client["auth"] = true
+                    client["interval_auth"] = 0
 
-        client.id = payload.id
-        EspModel.add(client.id)
-        this.cert.verify(payload.token, (err, authorized) => {
-            if (!err && authorized) {
-                this.logger.log(`Authenticate socket ${client.id}`)
-                EspModel.updateAuth(client.id, true, true)
-                    .then(_ => {
-                        client["auth"] = true
-                        client.emit("auth", "authorized")
-                        this.updateModule(client, true, true)
-                    })
-                    .catch(_ => client.disconnect())
-            } else {
-                EspGateway.notifyUnauthorized(client)
+                    client.emit("auth", "authorized")
+                    this.updateModule(client, true, true)
+                })
             }
         })
     }
 
     @SubscribeMessage("sync-io")
     handleSyncIO(client: Socket, payload: any) {
-        if (!EspGateway.isClientAuth(client)) return EspGateway.notifyUnauthorized(client)
+        if (!EspGateway.isClientAuth(client)) return
 
         const espIO = Pass.io(payload)
         const pinData = espIO.pins
@@ -158,17 +176,15 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     @SubscribeMessage("sync-detail")
     handleSyncDetail(client: Socket, payload: any) {
-        if (!EspGateway.isClientAuth(client)) return EspGateway.notifyUnauthorized(client)
+        if (!EspGateway.isClientAuth(client)) return
 
         const module = this.getModule(client.id)
         const newDetail = Pass.detail(payload)
-
         const oldSignal = NetworkUtil.calculateSignalLevel(module.detail_rssi)
         const newSignal = NetworkUtil.calculateSignalLevel(newDetail.detail_rssi)
 
         if (oldSignal !== newSignal) {
             module.detail_rssi = newDetail.detail_rssi
-
             EspModel.updateDetail(client.id, {
                 rssi: newDetail.detail_rssi
             })
@@ -176,7 +192,7 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         }
     }
 
-    private getModule(id: string): EspModule {
+    private initModule(id: string) {
         if (!this.modules.has(id)) {
             this.modules.set(id, {
                 name: id,
@@ -187,7 +203,10 @@ export class EspGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
                 detail_rssi: NetworkUtil.MIN_RSSI
             })
         }
+    }
 
+    private getModule(id: string): EspModule {
+        this.initModule(id)
         return this.modules.get(id)
     }
 

@@ -26,35 +26,42 @@ class RoomDeviceSeed extends base_seed_1.BaseSeed {
         this.logSeedRunning();
         const devices = [
             {
-                name: "Đèn chính",
+                name: "Đèn ngủ",
                 des: "",
                 pin: espFind.pins[0],
                 type: deviceTypeLight,
                 widget: 0
             },
             {
-                name: "Đèn ngủ",
+                name: "Đèn chính",
                 des: "",
                 pin: espFind.pins[2],
                 type: deviceTypeLight,
                 widget: 0
             },
             {
-                name: "Quạt trần",
+                name: "Đèn phụ",
                 des: "",
                 pin: espFind.pins[3],
                 type: deviceTypeLight,
-                widget: 1
+                widget: 0
             },
             {
-                name: "Đèn kép",
+                name: "Quạt đứng",
                 des: "",
                 pin: espFind.pins[4],
                 type: deviceTypeFan,
                 widget: 0
             },
             {
-                name: "Quạt đứng",
+                name: "Quạt trần",
+                des: "",
+                pin: espFind.pins[5],
+                type: deviceTypeLight,
+                widget: 1
+            },
+            {
+                name: "Đèn bàn",
                 des: "",
                 pin: espFind.pins[6],
                 type: deviceTypeFan,
@@ -65,7 +72,7 @@ class RoomDeviceSeed extends base_seed_1.BaseSeed {
                 des: "",
                 pin: espFind.pins[7],
                 type: deviceTypeHeater,
-                widget: 1
+                widget: 0
             }
         ];
         for (let i = 0; i < devices.length; ++i) {

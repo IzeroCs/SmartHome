@@ -5,3 +5,4 @@ dist/
 tmp/
 temp/
 ormlogs.log
+.env

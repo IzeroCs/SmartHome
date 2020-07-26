@@ -22,7 +22,6 @@ const esp_entity_1 = require("../database/entity/esp.entity");
 const esp_model_1 = require("../database/model/esp.model");
 const room_device_entity_1 = require("../database/entity/room_device.entity");
 const underscore = require("underscore");
-const Wildcard = require("socketio-wildcard");
 var IOPin;
 (function (IOPin) {
     IOPin[IOPin["IOPin_0"] = 0] = "IOPin_0";
@@ -46,18 +45,33 @@ let EspGateway = EspGateway_1 = class EspGateway {
         this.logger = new common_1.Logger("EspGateway");
         this.cert = new cert_security_1.CertSecurity("esp");
         this.modules = new Map();
-        this.middleware = Wildcard();
         EspGateway_1.instance = this;
     }
     afterInit(server) {
         this.logger.log("Socket /platform-esp initialized");
-        this.server.use(this.middleware);
         socket_util_1.SocketUtil.removing(this.server);
+        setInterval(() => {
+            const now = Date.now();
+            underscore.each(this.server.connected, (client) => {
+                let intervalID = client["interval_id"] || 0;
+                let intervalAuth = client["interval_auth"] || 0;
+                if (!EspGateway_1.isEspID(client.id)) {
+                    if (now - intervalID > 5000) {
+                        intervalID = now;
+                        client.emit("id");
+                    }
+                }
+                else if (!EspGateway_1.isClientAuth(client)) {
+                    if (now - intervalAuth > 5000) {
+                        intervalAuth = now;
+                        client.emit("auth");
+                    }
+                }
+            });
+        }, 1000);
     }
     handleConnection(client, ...args) {
-        this.logger.log(`Client connection: ${client.id}`);
         socket_util_1.SocketUtil.restoring(this.server, client);
-        setTimeout(() => EspGateway_1.notifyUnauthorized(client), 5000);
     }
     handleDisconnect(client) {
         this.logger.log(`Client disconnect: ${client.id}`);
@@ -66,38 +80,40 @@ let EspGateway = EspGateway_1 = class EspGateway {
             if (!util_1.isUndefined(esp))
                 app_gateway_1.AppGateway.notifyEspDevices(null, esp.id);
         });
-        socket_util_1.SocketUtil.removing(this.server, this.logger);
+        socket_util_1.SocketUtil.removing(this.server);
     }
-    handle(client, packet) { }
-    async handleAuth(client, payload) {
-        payload = Pass.auth(payload);
-        if (EspGateway_1.isClientAuth(client))
-            return this.logger.log(`Authenticate already`);
+    handleId(client, payload) {
+        if (util_1.isUndefined(payload.id))
+            return;
         if (!EspGateway_1.isEspID(payload.id))
-            return EspGateway_1.notifyUnauthorized(client);
-        if (!util_1.isUndefined(this.modules[payload.id]) && this.modules[payload.id].online === true)
-            return client.disconnect();
+            return;
         client.id = payload.id;
-        esp_model_1.EspModel.add(client.id);
-        this.cert.verify(payload.token, (err, authorized) => {
-            if (!err && authorized) {
-                this.logger.log(`Authenticate socket ${client.id}`);
-                esp_model_1.EspModel.updateAuth(client.id, true, true)
-                    .then(_ => {
+        client["interval_id"] = 0;
+        this.logger.log(`Client id: ${payload.id}`);
+        this.initModule(payload.id);
+        this.updateModule(client, true, false);
+        esp_model_1.EspModel.add(payload.id);
+    }
+    async handleAuth(client, payload) {
+        if (util_1.isUndefined(payload.token))
+            return;
+        if (EspGateway_1.isClientAuth(client))
+            return;
+        this.cert.verify(payload.token, (authorized) => {
+            if (authorized) {
+                this.logger.log(`Client authenticate: ${client.id}`);
+                esp_model_1.EspModel.updateAuth(client.id, true, true).then(_ => {
                     client["auth"] = true;
+                    client["interval_auth"] = 0;
                     client.emit("auth", "authorized");
                     this.updateModule(client, true, true);
-                })
-                    .catch(_ => client.disconnect());
-            }
-            else {
-                EspGateway_1.notifyUnauthorized(client);
+                });
             }
         });
     }
     handleSyncIO(client, payload) {
         if (!EspGateway_1.isClientAuth(client))
-            return EspGateway_1.notifyUnauthorized(client);
+            return;
         const espIO = Pass.io(payload);
         const pinData = espIO.pins;
         const pinChanged = espIO.changed;
@@ -121,7 +137,7 @@ let EspGateway = EspGateway_1 = class EspGateway {
     }
     handleSyncDetail(client, payload) {
         if (!EspGateway_1.isClientAuth(client))
-            return EspGateway_1.notifyUnauthorized(client);
+            return;
         const module = this.getModule(client.id);
         const newDetail = Pass.detail(payload);
         const oldSignal = network_util_1.NetworkUtil.calculateSignalLevel(module.detail_rssi);
@@ -134,7 +150,7 @@ let EspGateway = EspGateway_1 = class EspGateway {
             app_gateway_1.AppGateway.notifyEspModules();
         }
     }
-    getModule(id) {
+    initModule(id) {
         if (!this.modules.has(id)) {
             this.modules.set(id, {
                 name: id,
@@ -145,6 +161,9 @@ let EspGateway = EspGateway_1 = class EspGateway {
                 detail_rssi: network_util_1.NetworkUtil.MIN_RSSI
             });
         }
+    }
+    getModule(id) {
+        this.initModule(id);
         return this.modules.get(id);
     }
     updateModule(client, online, auth) {
@@ -202,11 +221,11 @@ __decorate([
     __metadata("design:type", Object)
 ], EspGateway.prototype, "server", void 0);
 __decorate([
-    websockets_1.SubscribeMessage("*"),
+    websockets_1.SubscribeMessage("id"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
-], EspGateway.prototype, "handle", null);
+], EspGateway.prototype, "handleId", null);
 __decorate([
     websockets_1.SubscribeMessage("auth"),
     __metadata("design:type", Function),

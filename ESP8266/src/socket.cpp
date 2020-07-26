@@ -4,8 +4,25 @@
 #include "pair.h"
 
 void SocketClass::begin() {
-    io.onBroadcast([&] (const char * event, const char * payload, size_t length) {
-        onEvent(event, payload, length);
+    id = Profile.getSn() + Profile.getSc();
+    io.onBroadcast([&] (const char * ev, const char * payload, size_t length) {
+        String event = String(ev);
+        String data = String(payload);
+
+        if (event == "connect")
+            onConnect();
+        else if (event == "disconnect")
+            onDisconnect();
+        else if (event == "id")
+            onId(data);
+        else if (event == "auth")
+            onAuth(data);
+        else if (event == "sync-io" || event == "sync-detail")
+            onSync(data);
+        else if (event == "status-cloud")
+            onStatusCloud(data);
+        else if (DEBUG)
+            Serial.println("[Socket] Event: " + event + ", Payload: " + payload);
     });
 
     io.begin(host, port, nsp);
@@ -53,34 +70,43 @@ void SocketClass::loopSyncDetail() {
     });
 }
 
-void SocketClass::onEvent(const char * event, const char * payload, size_t length) {
-    String evt = String(event);
-    String pay = String(payload);
+void SocketClass::onConnect() {
+    if (DEBUG)
+        Serial.println("[Socket] Connect");
+}
 
-    if (evt == "connect") {
-        if (DEBUG)
-            Serial.println("[Socket] Connect");
-
-        io.emit("auth", {
-            { "id", Profile.getSn() + Profile.getSc() },
-            { "token", token }
-        });
-    } else if (evt == "disconnect") {
+void SocketClass::onDisconnect() {
+    if (DEBUG)
         Serial.println("[Socket] Disconnect");
-    } else if (evt == "auth" || evt == "sync-io" || evt == "sync-detail") {
-        if (evt == "auth")
-            Serial.println("[Socket] Authenticate: authorized");
+}
 
-        IO.setIoStatusChanged(true);
-    } else if (evt == "status-cloud") {
-        IOPin_t pin = (IOPin_t)Pair.get(pay, "pin", "-1").toInt();
-        StatusCloud_t status = (StatusCloud_t)Pair.get(pay, "status", String(StatusCloud_IDLE)).toInt();
+void SocketClass::onId(String payload) {
+    if (DEBUG)
+        Serial.println("[Socket] Id: " + id);
 
-        IO.setIOPinStatusCloud(pin, status);
+    io.emit("id", {{ "id", id }});
+}
+
+void SocketClass::onAuth(String payload) {
+    if (DEBUG)
+        Serial.println("[Socket] Authenticate: " + payload);
+
+    if (payload != "authorized")
+        io.emit("auth", {{ "token", token }});
+    else
         IO.setIoStatusChanged(true);
-    } else if (DEBUG) {
-        Serial.println("[Socket] Event: " + evt + ", Payload: " + pay);
-    }
+}
+
+void SocketClass::onSync(String payload) {
+    IO.setIoStatusChanged(true);
+}
+
+void SocketClass::onStatusCloud(String payload) {
+    IOPin_t pin = (IOPin_t)Pair.get(payload, "pin", "-1").toInt();
+    StatusCloud_t status = (StatusCloud_t)Pair.get(payload, "status", String(StatusCloud_IDLE)).toInt();
+
+    IO.setIOPinStatusCloud(pin, status);
+    IO.setIoStatusChanged(true);
 }
 
 SocketClass Socket;

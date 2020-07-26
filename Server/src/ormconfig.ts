@@ -1,12 +1,18 @@
 import { ConnectionOptions } from "typeorm"
 
+const host: any = process.env.DB_HOST || "localhost"
+const port: any = process.env.DB_PORT || 3306
+const user: any = process.env.DB_USER || "root"
+const pass: any = process.env.DB_PASS || ""
+const name: any = process.env.DB_NAME || "smarthome"
+
 const config: ConnectionOptions = {
     type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "izerocs",
-    password: "khongbiet",
-    database: "smarthome",
+    host: host,
+    port: port,
+    username: user,
+    password: pass,
+    database: name,
 
     cli: {
         entitiesDir: "src/database/entity",
