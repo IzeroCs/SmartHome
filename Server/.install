@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 pm2 stop smarthome
 pm2 kill
 cd /home/izerocs/smarthome/current/Server
