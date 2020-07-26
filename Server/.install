@@ -1,8 +1,8 @@
 #!/bin/bash
-pm2 stop smarthome
-pm2 kill
+sudo pm2 stop smarthome
+sudo pm2 kill
 cd /home/izerocs/smarthome/source/Server
-npm install
-npm run build
-pm2 kill
-pm2 reload ecosystem.config.js --env production
+sudo npm install
+sudo npm run build
+sudo pm2 kill
+sudo pm2 reload ecosystem.config.js --env production
