@@ -6,7 +6,15 @@ module.exports = {
             instances: "max",
             exec_mode: "cluster",
             cwd: "/home/izerocs/smarthome/source/Server",
-            watch: false
+            watch: false,
+
+            env: {
+                NODE_ENV: "local"
+            },
+
+            env_production: {
+                NODE_ENV: "production"
+            }
         }
     ],
 
