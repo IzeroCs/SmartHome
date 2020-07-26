@@ -13,7 +13,7 @@ async function bootstrap() {
     await app.useStaticAssets(join(__dirname, "..", "public"))
     await app.useWebSocketAdapter(new WildcardAdapter(app))
 
-    if (process.env.ENVIRONMENT == "product") setTimeout(async () => await app.listen(3000, "0.0.0.0"), 2000)
+    if (process.env.NODE_ENV == "production") setTimeout(async () => await app.listen(3000, "0.0.0.0"), 2000)
     else setTimeout(async () => await app.listen(3000, "192.168.31.104"), 2000)
 }
 bootstrap()
