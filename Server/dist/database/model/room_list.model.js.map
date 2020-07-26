@@ -1,1 +1,0 @@
-{"version":3,"file":"room_list.model.js","sourceRoot":"","sources":["../../../src/database/model/room_list.model.ts"],"names":[],"mappings":";;;AAAA,qCAAuC;AACvC,iEAAqD;AAErD,MAAa,aAAa;IACtB,MAAM,CAAC,MAAM;QACT,OAAO,uBAAa,CAAC,2BAAQ,CAAC,CAAC,IAAI,CAAC;YAChC,SAAS,EAAE,CAAC,MAAM,EAAE,SAAS,CAAC;YAC9B,KAAK,EAAE;gBACH,MAAM,EAAE,IAAI;aACf;SACJ,CAAC,CAAA;IACN,CAAC;CACJ;AATD,sCASC"}
