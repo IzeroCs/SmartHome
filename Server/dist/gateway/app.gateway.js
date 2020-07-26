@@ -224,8 +224,8 @@ __decorate([
 AppGateway = AppGateway_1 = __decorate([
     websockets_1.WebSocketGateway({
         namespace: "/platform-app",
-        pingTimeout: 1000,
-        pingInterval: 500
+        pingTimeout: 10000,
+        pingInterval: 1000
     }),
     __metadata("design:paramtypes", [])
 ], AppGateway);

@@ -1,5 +1,3 @@
-#include "main.h"
-#include "record.h"
 #include "io.h"
 
 void IOClass::begin() {
@@ -169,7 +167,7 @@ void IOClass::setIOPinStatus(IOPin_t pin, bool status) {
             secData->dualToggleCount = 0;
 
             if (hasChanged)
-                storeData(RECORD_ID_IO_BEGIN + (uint8_t)curData->input, datas.at(pin));
+                flushData(curData->input);
         } else if (curData->outputType == IOType_DUAL_TOGGLE) {
             if (curData->dualToggleCount == 0) {
                 if (status) {
@@ -191,7 +189,7 @@ void IOClass::setIOPinStatus(IOPin_t pin, bool status) {
                 }
             }
 
-            storeData(RECORD_ID_IO_BEGIN + (uint8_t)curData->input, datas.at(pin));
+            flushData(curData->input);
         }
 
         return;
@@ -201,7 +199,7 @@ void IOClass::setIOPinStatus(IOPin_t pin, bool status) {
     curData->status = status;
 
     if (hasChanged)
-        storeData(RECORD_ID_IO_BEGIN + (uint8_t)curData->input, datas.at(pin));
+        flushData(curData->input);
 }
 
 bool IOClass::getIOPinStatus(IOPin_t pin) {
@@ -225,6 +223,8 @@ void IOClass::setIOPinStatusCloud(IOPin_t pin, StatusCloud_t status) {
     } else if (curData->outputType == IOType_DOUBLE || curData->outputType == IOType_DUAL_TOGGLE) {
         curData->statusCloud = status;
     }
+
+    flushData(curData->input);
 }
 
 StatusCloud_t IOClass::getIOPinStatusCloud(IOPin_t pin) {

@@ -7,9 +7,12 @@ using namespace std;
 #include <map>
 #include <vector>
 
+#include "main.h"
 #include "record.h"
 #include "output.h"
 #include "input.h"
+#include "record.h"
+#include "io.h"
 
 typedef enum {
     IOType_DOUBLE,
@@ -200,6 +203,10 @@ private:
         data.status          = status;
 
         return data;
+    }
+
+    void flushData(IOPin_t pin) {
+        storeData(RECORD_ID_IO_BEGIN + (uint8_t)pin, datas.at(pin));
     }
 
     void storeData(uint8_t id, IOData data) {

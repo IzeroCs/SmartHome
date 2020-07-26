@@ -34,7 +34,7 @@ void setup() {
     Network.begin();
     IO.begin();
 
-    // ticker.attach_ms(10, [&] { IO.loop(); });
+    ticker.attach_ms(10, [&] { IO.loop(); });
 }
 
 void timer(int position) {
@@ -88,14 +88,14 @@ void timer(int position) {
 }
 
 void loop() {
-    // unsigned long currentMillis = millis();
+    unsigned long currentMillis = millis();
 
-    // for (uint8_t i = 0; i < TIMER_COUNT; ++i) {
-    //     if ((unsigned long)(currentMillis - timers[i][0]) > timers[i][1]) {
-    //         timer(i);
-    //         timers[i][0] = currentMillis;
-    //     }
-    // }
+    for (uint8_t i = 0; i < TIMER_COUNT; ++i) {
+        if ((unsigned long)(currentMillis - timers[i][0]) > timers[i][1]) {
+            timer(i);
+            timers[i][0] = currentMillis;
+        }
+    }
 
-    // Socket.loopMain();
+    Socket.loopMain();
 }
