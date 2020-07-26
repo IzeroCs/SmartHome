@@ -23,7 +23,8 @@
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config dist/ormconfig.js",
         "typeorm:migrate": "npm run typeorm migration:generate -- -n",
-        "typeorm:run": "npm run typeorm migration:run"
+        "typeorm:run": "npm run typeorm migration:run",
+        "deploy": "pm2 deploy production update --force"
     },
     "dependencies": {
         "@nestjs/common": "^7.0.0",
