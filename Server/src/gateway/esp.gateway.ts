@@ -13,9 +13,9 @@ import { CertSecurity } from "../security/cert.security"
 import { NetworkUtil } from "../util/network.util"
 import { isUndefined, isNull, isObject, isArray } from "util"
 import { AppGateway, EVENTS } from "./app.gateway"
-import { Esp } from "src/database/entity/esp.entity"
-import { EspModel } from "src/database/model/esp.model"
-import { RoomDevice } from "src/database/entity/room_device.entity"
+import { Esp } from "../database/entity/esp.entity"
+import { EspModel } from "../database/model/esp.model"
+import { RoomDevice } from "../database/entity/room_device.entity"
 import * as underscore from "underscore"
 
 export enum IOPin {
