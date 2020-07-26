@@ -15,7 +15,7 @@ export class RoomDeviceSeed extends BaseSeed {
         const deviceTypeLight = await repositoryDeviceType.findOne({ type: 1 })
         const deviceTypeFan = await repositoryDeviceType.findOne({ type: 2 })
         const deviceTypeHeater = await repositoryDeviceType.findOne({ type: 3 })
-        const espFind = await repositoryEsp.findOne({ name: "ESP1N403E91636RSC185G2K" }, { relations: ["pins"] })
+        const espFind = await repositoryEsp.findOne({ name: "ESP2Z4R1U8L2U0ZSC1T5K3M" }, { relations: ["pins"] })
 
         if (isNull(roomFind) || isNull(espFind)) return
 
@@ -26,45 +26,45 @@ export class RoomDeviceSeed extends BaseSeed {
         this.logSeedRunning()
         const devices = [
             {
-                name: "Đèn ngủ",
-                des: "",
+                name: "Đèn",
+                des: "Trái",
                 pin: espFind.pins[0],
                 type: deviceTypeLight,
                 widget: 0
             },
             {
-                name: "Đèn chính",
-                des: "",
+                name: "Đèn",
+                des: "Phải",
                 pin: espFind.pins[2],
                 type: deviceTypeLight,
                 widget: 0
             },
             {
-                name: "Đèn phụ",
-                des: "",
-                pin: espFind.pins[3],
-                type: deviceTypeLight,
-                widget: 0
-            },
-            {
-                name: "Quạt đứng",
-                des: "",
-                pin: espFind.pins[4],
-                type: deviceTypeFan,
-                widget: 0
-            },
-            {
                 name: "Quạt trần",
                 des: "",
-                pin: espFind.pins[5],
+                pin: espFind.pins[4],
                 type: deviceTypeLight,
                 widget: 1
             },
             {
-                name: "Đèn bàn",
+                name: "Quạt đứng",
+                des: "",
+                pin: espFind.pins[5],
+                type: deviceTypeFan,
+                widget: 0
+            },
+            {
+                name: "Quạt bàn",
                 des: "",
                 pin: espFind.pins[6],
                 type: deviceTypeFan,
+                widget: 0
+            },
+            {
+                name: "Bình nóng lạnh",
+                des: "",
+                pin: espFind.pins[7],
+                type: deviceTypeHeater,
                 widget: 0
             },
             {

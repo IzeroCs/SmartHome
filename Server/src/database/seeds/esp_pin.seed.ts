@@ -5,10 +5,10 @@ import { isNull } from "util"
 
 export class EspPinSeed extends BaseSeed {
     private esps = {
-        ESP1N403E91636RSC185G2K: [
+        ESP2Z4R1U8L2U0ZSC1T5K3M: [
             {
                 input: 0,
-                outputType: 0,
+                outputType: 2,
                 outputPrimary: 0,
                 outputSecondary: 1
             },
@@ -32,13 +32,13 @@ export class EspPinSeed extends BaseSeed {
             },
             {
                 input: 4,
-                outputType: 2,
+                outputType: 1,
                 outputPrimary: 4,
                 outputSecondary: 5
             },
             {
                 input: 5,
-                outputType: 3,
+                outputType: 1,
                 outputPrimary: 5,
                 outputSecondary: 5
             },

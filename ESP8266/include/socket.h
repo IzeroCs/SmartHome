@@ -13,7 +13,7 @@ class SocketClass {
 private:
     const static bool DEBUG = true;
 
-    const char * host = "192.168.31.104";
+    const char * host = "izerocs.com";
     const char * nsp  = "/platform-esp";
     const int    port = 3000;
 
