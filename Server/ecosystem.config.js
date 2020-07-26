@@ -27,7 +27,8 @@ module.exports = {
             path: "/home/izerocs/smarthome",
             ssh_options: "StrictHostKeyChecking=no",
             "pre-deploy-local": "",
-            "post-deploy": "/home/izerocs/smarthome/current/.install",
+            "post-deploy":
+                "chmod +x /home/izerocs/smarthome/current/.install && /home/izerocs/smarthome/current/.install",
             "pre-setup": ""
         }
     }
