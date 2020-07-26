@@ -28,7 +28,7 @@ module.exports = {
             ssh_options: "StrictHostKeyChecking=no",
             "pre-deploy-local": "",
             "post-deploy":
-                "chmod +x /home/izerocs/smarthome/current/.install && /home/izerocs/smarthome/current/.install",
+                "chmod +x /home/izerocs/smarthome/current/Server/.install && /home/izerocs/smarthome/current/Server/.install",
             "pre-setup": ""
         }
     }
