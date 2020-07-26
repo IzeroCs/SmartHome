@@ -1,6 +1,7 @@
 #!/bin/bash
 pm2 stop smarthome
 pm2 kill
+fuser -k 3000/tcp
 cd /home/izerocs/smarthome/source/Server
 npm install
 npm run build

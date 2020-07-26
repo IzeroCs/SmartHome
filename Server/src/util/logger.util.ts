@@ -9,7 +9,8 @@ export class AppLogger implements LoggerService {
     log(message?: any, ...params: any[]) {
         process.stdout.write(yellow(`[${params[0]}] `))
 
-        if (typeof message !== "object" && typeof message !== "function") process.stdout.write(green(`${this.format(message)}\n`))
+        if (typeof message !== "object" && typeof message !== "function")
+            process.stdout.write(green(`${this.format(message)}\n`))
         else process.stdout.write(blue(`${this.format(message)}\n`))
     }
 
