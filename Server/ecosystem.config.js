@@ -5,7 +5,7 @@ module.exports = {
             script: "dist/main.js",
             instances: "max",
             exec_mode: "cluster",
-            cwd: "/home/izerocs/smarthome/current/Server",
+            cwd: "/home/izerocs/smarthome/source/Server",
             watch: false,
 
             env: {
@@ -28,7 +28,7 @@ module.exports = {
             ssh_options: "StrictHostKeyChecking=no",
             "pre-deploy-local": "",
             "post-deploy":
-                "chmod +x /home/izerocs/smarthome/current/Server/.install && /home/izerocs/smarthome/current/Server/.install",
+                "chmod +x /home/izerocs/smarthome/source/Server/.install && /home/izerocs/smarthome/source/Server/.install",
             "pre-setup": ""
         }
     }
