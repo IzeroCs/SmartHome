@@ -38,7 +38,7 @@
         "@types/cli-color": "^2.0.0",
         "@types/socketio-wildcard": "^2.0.3",
         "@webundsoehne/nestjs-util": "^1.0.0",
-        "class-transformer": "^0.2.3",
+        "class-transformer": "^0.3.1",
         "cli-color": "^2.0.0",
         "dotenv": "^8.2.0",
         "fastify-swagger": "^3.1.2",
