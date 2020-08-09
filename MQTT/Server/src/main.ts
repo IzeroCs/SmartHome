@@ -2,7 +2,7 @@ import { Server, Client, Packet, ServerOptions, persistence } from "mosca"
 
 const server = new Server({
     port: 1883,
-    host: "127.0.0.1",
+    host: "192.168.31.104",
     http: {
         port: 8383
     },
