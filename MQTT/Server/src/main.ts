@@ -29,13 +29,16 @@ server.on("clientDisconnected", (client: Client) => {
 })
 
 server.on("published", (packet: Packet, client: Client) => {
+    if (packet.payload instanceof Buffer) packet.payload = packet.payload.toString()
     console.log("[] Published", packet)
 })
 
 server.on("subscribed", (packet: Packet, client: Client) => {
+    if (packet.payload instanceof Buffer) packet.payload = packet.payload.toString()
     console.log("[] Subscribed", packet)
 })
 
 server.on("unsubscribed", (packet: Packet, client: Client) => {
+    if (packet.payload instanceof Buffer) packet.payload = packet.payload.toString()
     console.log("[] Unsubcribed", packet)
 })
