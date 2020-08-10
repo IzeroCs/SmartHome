@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "monitor.h"
+#include "config.h"
 #include "wireless.h"
 
 #endif
