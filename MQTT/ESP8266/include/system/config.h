@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <ESP_EEPROM.h>
 
-#include "monitor.h"
+#include "stream/monitor.h"
 
 struct ConfigStruct {
     String stationSSID;
@@ -17,8 +17,14 @@ struct IOStruct {
 
 class ConfigClass {
 private:
-    ConfigStruct config;
-    IOStruct io;
+    ConfigStruct config = {
+        .stationSSID = "",
+        .stationPass = ""
+    };
+
+    IOStruct io = {
+        .version = "1.0"
+    };
 
 public:
     void begin();

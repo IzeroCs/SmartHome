@@ -7,6 +7,8 @@
 class MonitorClass : public Print {
 public:
     void begin();
+    bool ledStatus();
+    void led(bool enable);
 
     virtual size_t write(uint8_t c) {
         return Serial.write(c);
