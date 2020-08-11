@@ -8,8 +8,10 @@ void ConfigClass::begin() {
         EEPROM.get(0, config);
         EEPROM.get(1, io);
         Monitor.println("[Config] Has data eeprom");
+        delay(100);
     } else {
         Monitor.println("[Config] Default config save eeprom");
+        delay(100);
         save();
     }
 }
@@ -19,9 +21,9 @@ void ConfigClass::save() {
     EEPROM.put(1, io);
 
     if (EEPROM.commit())
-        Monitor.println("[Config] Save config failed");
+        Monitor.println("[Config] Save successful");
     else
-        Monitor.println("[Config] Save config success");
+        Monitor.println("[Config] Save unsuccessful");
 }
 
 ConfigClass Config;

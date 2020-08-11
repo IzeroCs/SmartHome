@@ -84,7 +84,10 @@ bool FFSClass::remove(String path) {
     if (!isBegin)
         begin();
 
-    return LittleFS.remove(path);
+    if (exists(path))
+        return LittleFS.remove(BASE + path);
+
+    return false;
 }
 
 bool FFSClass::format() {

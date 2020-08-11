@@ -8,11 +8,14 @@
 #include "system/seri.h"
 #include "system/config.h"
 #include "network/ota.h"
+#include "network/cloud.h"
 
 class WirelessClass {
 private:
-    unsigned long now;
-    unsigned int period = 1000;
+    WiFiClient wifiClient;
+
+    ulong now = 0;
+    uint period = 1000;
 
     bool waitConnect       = false;
     bool printConnected    = false;
@@ -28,6 +31,7 @@ public:
 
     bool isStationConnect() { return WiFi.status() == WL_CONNECTED; }
     wl_status_t statusStation() { return WiFi.status(); }
+    WiFiClient getWiFiClient() { return wifiClient; }
 };
 
 extern WirelessClass Wireless;

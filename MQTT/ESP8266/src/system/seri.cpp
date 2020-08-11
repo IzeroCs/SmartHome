@@ -5,13 +5,18 @@ void SeriClass::begin() {
         file.read((uint8_t *)&seri, sizeof(seri));
     });
 
-    if (isEmpty()) {
+    if (isEmpty() || isChange()) {
+        if (isChange())
+            Monitor.println("[Seri] Version change");
+
+        delay(100);
         generator();
     } else if (verify(getSN(), getSC())) {
         Monitor.println("[Seri] SN: " + getSN() + ", SC: " + getSC());
     } else {
         Monitor.println("[Seri] Verify SN, SC failed, restart...");
         delay(2000);
+        FFS.remove(SERI_FILE);
         ESP.restart();
     }
 }
@@ -61,6 +66,7 @@ void SeriClass::generator() {
 
     strcpy(seri.sn, snStr.c_str());
     strcpy(seri.sc, scStr.c_str());
+    strcpy(seri.v, String(SERI_VERSION).c_str());
 
     Monitor.println("[Seri] Generator");
     Monitor.println("[Seri] SN: " + String(seri.sn) + ", SC: " + String(seri.sc));

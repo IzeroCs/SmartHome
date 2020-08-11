@@ -4,16 +4,12 @@ void WirelessClass::begin() {
     Monitor.println("[Wireless] Begin");
     WiFi.persistent(false);
 
-    if (WiFi.hostname(Seri.getHostname()))
-        Monitor.println("[Wireless] Hostname set failed");
-    else
-        Monitor.println("[Wireless] Hostname: " + WiFi.hostname());
-
     beginStation("IzeroCs Guest", "nhutheday");
 }
 
 void WirelessClass::beginStation(String ssid, String pass) {
     Config.setStationConfig(ssid, pass);
+    Config.save();
 }
 
 void WirelessClass::loop() {
@@ -33,6 +29,7 @@ void WirelessClass::loop() {
             }
 
             OTA.begin();
+            Cloud.begin(wifiClient);
         } else {
             printConnected = false;
 
@@ -53,6 +50,11 @@ void WirelessClass::loop() {
                 Monitor.led(true);
                 WiFi.begin(Config.getStationSSID(),
                            Config.getStationPass());
+
+                if (WiFi.hostname(Seri.getHostname()))
+                    Monitor.println("[Wireless] Hostname: " + Seri.getHostname());
+                else
+                    Monitor.println("[Wireless] Hostname change unsuccessful");
             } else if (waitConnect) {
                 Monitor.println("[Wirelees] Connecting(" + String(countConnect) + "): " + Config.getStationSSID());
             }
@@ -60,6 +62,7 @@ void WirelessClass::loop() {
     }
 
     OTA.loop();
+    Cloud.handle();
 }
 
 WirelessClass Wireless;

@@ -7,32 +7,26 @@
 #include "stream/monitor.h"
 
 struct ConfigStruct {
-    String stationSSID;
-    String stationPass;
+    char stationSSID[30];
+    char stationPass[30];
 };
 
 struct IOStruct {
-    String version;
+    char version[5];
 };
 
 class ConfigClass {
 private:
-    ConfigStruct config = {
-        .stationSSID = "",
-        .stationPass = ""
-    };
-
-    IOStruct io = {
-        .version = "1.0"
-    };
+    ConfigStruct config;
+    IOStruct io;
 
 public:
     void begin();
     void save();
 
     void setStationConfig(String ssid, String pass) {
-        config.stationSSID = ssid;
-        config.stationPass = pass;
+        strcpy(config.stationSSID, ssid.c_str());
+        strcpy(config.stationPass, pass.c_str());
     }
 
     String getStationSSID() { return config.stationSSID; }
