@@ -12,8 +12,6 @@
 
 class WirelessClass {
 private:
-    WiFiClient wifiClient;
-
     ulong now = 0;
     uint period = 1000;
 
@@ -31,7 +29,6 @@ public:
 
     bool isStationConnect() { return WiFi.status() == WL_CONNECTED; }
     wl_status_t statusStation() { return WiFi.status(); }
-    WiFiClient getWiFiClient() { return wifiClient; }
 };
 
 extern WirelessClass Wireless;

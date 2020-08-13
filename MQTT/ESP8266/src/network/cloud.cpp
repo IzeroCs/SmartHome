@@ -1,6 +1,6 @@
 #include "network/cloud.h"
 
-void CloudClass::begin(WiFiClient wifiClient) {
+void CloudClass::begin() {
     if (initializing)
         return;
 
@@ -8,45 +8,43 @@ void CloudClass::begin(WiFiClient wifiClient) {
 
     Monitor.println("[Cloud] Begin");
     Monitor.println("[Cloud] Connect");
-
-    mqtt.begin(host, port, wifiClient);
-    mqtt.setOptions(1000, true, 10000);
-
-    // client.setCallback()
-
-    // mqtt.begin("192.168.31.104", 1883, Seri.getHostname().c_str());
-    // mqtt.enableDebuggingMessages(true);
-    // mqtt.setOnConnectionEstablishedCallback([&] { connection(); });
+    mqtt.setServer(host, port);
 }
 
 void CloudClass::handle() {
-    if (!initializing)
+    if (!initializing || WiFi.status() != WL_CONNECTED)
         return;
 
-    if (mqttConnected) {
-        if (intervalNow == 0)
-            intervalNow = millis();
+    if (!mqtt.connected()) {
+        if (mqttConnected)
+            disconnection();
 
-        if (millis() - intervalNow >= intervalPeriod) {
-            intervalNow = millis();
-            mqtt.loop();
-            Monitor.println("[Cloud] Interval");
-        }
-    }
+        mqttConnected = false;
 
-    if (!mqttConnected) {
-        if (millis() - connectNow >= connectPeriod) {
-            Monitor.println("[Cloud] Connecting broker: " + String(host) + ":" + String(port));
+        if (millis() - connectNow > connectPeriod) {
+            if (!mqttReconnected)
+                Monitor.println("[Cloud] Attempting MQTT connection...");
+
+            mqttReconnected = true;
             connectNow = millis();
-            mqttConnected = false;
 
             if (mqtt.connect(Seri.getHostname().c_str())) {
                 mqttConnected = true;
+                mqttReconnected = false;
+                preStateConnect = -100;
                 connection();
             } else {
-                Monitor.println("[Cloud] Connect failure, reconnect in " + String(connectPeriod / 1000) + "s");
+                mqttConnected = false;
+                mqttReconnected = false;
+
+                if (preStateConnect != mqtt.state()) {
+                    preStateConnect = mqtt.state();
+                    Monitor.print("[Cloud] MQTT connect error: " + connectError(mqtt.state()));
+                }
             }
         }
+    } else {
+        mqtt.loop();
     }
 }
 
@@ -56,6 +54,10 @@ void CloudClass::connection() {
     // mqtt.subscribe("esp/authentication", [] (String msg) {
     //     Monitor.println("[Cloud] Authentacation: " + msg);
     // });
+}
+
+void CloudClass::disconnection() {
+    Monitor.println("[Cloud] Disconnection");
 }
 
 CloudClass Cloud;

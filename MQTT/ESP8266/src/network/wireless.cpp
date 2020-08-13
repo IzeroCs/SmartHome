@@ -29,7 +29,7 @@ void WirelessClass::loop() {
             }
 
             OTA.begin();
-            Cloud.begin(wifiClient);
+            Cloud.begin();
         } else {
             printConnected = false;
 
@@ -62,7 +62,6 @@ void WirelessClass::loop() {
     }
 
     OTA.loop();
-    Cloud.handle();
 }
 
 WirelessClass Wireless;

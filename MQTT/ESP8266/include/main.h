@@ -9,5 +9,6 @@
 #include "system/config.h"
 #include "io/io.h"
 #include "network/wireless.h"
+#include "network/cloud.h"
 
 #endif

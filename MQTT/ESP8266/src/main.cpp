@@ -15,4 +15,6 @@ void setup() {
 
 void loop() {
     Wireless.loop();
+    Cloud.handle();
+    yield();
 }
