@@ -29,6 +29,17 @@ public:
 
     bool isStationConnect() { return WiFi.status() == WL_CONNECTED; }
     wl_status_t statusStation() { return WiFi.status(); }
+
+    String statusStationString(wl_status_t status) {
+        if (status == WL_CONNECTION_LOST)
+            return "Connection Lost";
+        if (status == WL_NO_SSID_AVAIL)
+            return "No SSID available";
+        if (status == WL_IDLE_STATUS)
+            return "Idle Status";
+
+        return "Disconnected";
+    }
 };
 
 extern WirelessClass Wireless;

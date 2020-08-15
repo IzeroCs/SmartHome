@@ -9,12 +9,15 @@
 #include "stream/monitor.h"
 #include "system/seri.h"
 
-#define CLOUD_TOPIC_AUTHENTICATION "esp/authentication"
+#define CLOUD_TOPIC_SYNC_IO "sync-io"
+#define CLOUD_TOPIC_SYNC_DETAIL "sync-detail"
 
 class CloudClass {
 private:
-    const char * host = "192.168.31.104";
-    const uint16_t port = 1883;
+    String   host = "192.168.31.104";
+    uint16_t port = 1883;
+
+    String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXplcm9DcyIsInN1YiI6IkVTUDgyNjYiLCJpYXQiOjQxMDI0NDQ4MDB9.HAU4zKdQnfHqj0kfLYoLH5blr3BUSgQo-DgxT0JvIjd9t6b0AloTjA1mUfbk9LRipe-OMC58LYIHG2kbpYAyCg";
 
     WiFiClient client;
     PubSubClient mqtt;
@@ -23,7 +26,9 @@ private:
     bool mqttReconnected;
 
     int preStateConnect = 0;
+    ulong loopNow = 0;
     ulong connectNow = 0;
+    ulong loopPeriod = 1000;
     ulong connectPeriod = 1000;
 
 public:
@@ -31,8 +36,24 @@ public:
 
     void begin();
     void handle();
+    void callback(const char * topic, const char * payload, const uint size);
+
+    bool subscribe(const char * topic) {
+        return mqtt.subscribe(("client/esp/" + Seri.getHostname() + "/" + String(topic))
+                .c_str());
+    }
+
+    bool unsubscribe(const char * topic) {
+        return mqtt.unsubscribe(("client/esp/" + Seri.getHostname() + "/" + String(topic))
+                   .c_str());
+    }
+
+    bool publish(const char * topic, const char * payload) {
+        return mqtt.publish(("server/esp/" + Seri.getHostname() + "/" + String(topic)).c_str(), payload);
+    }
 
 private:
+    void loop();
     void connection();
     void disconnection();
 
