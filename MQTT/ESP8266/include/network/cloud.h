@@ -38,6 +38,10 @@ public:
     void handle();
     void callback(const char * topic, const char * payload, const uint size);
 
+    bool isMQTTConnect() {
+        return mqttConnected;
+    }
+
     bool subscribe(const char * topic) {
         return mqtt.subscribe(("client/esp/" + Seri.getHostname() + "/" + String(topic))
                 .c_str());

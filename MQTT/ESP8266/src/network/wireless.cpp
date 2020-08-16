@@ -32,6 +32,7 @@ void WirelessClass::loop() {
 
                 Monitor.led(false);
                 Monitor.println("[Wireless] Connected: " + WiFi.SSID());
+                Config.save();
             }
 
             OTA.begin();
@@ -69,7 +70,7 @@ void WirelessClass::loop() {
         }
     }
 
-    // OTA.loop();
+    OTA.loop();
 }
 
 WirelessClass Wireless;

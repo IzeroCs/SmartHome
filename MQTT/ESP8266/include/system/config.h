@@ -2,35 +2,41 @@
 #define CONFIG_H
 
 #include <Arduino.h>
-#include <ESP_EEPROM.h>
 
 #include "stream/monitor.h"
+#include "system/erom.h"
+#include "io/io_def.h"
 
-struct ConfigStruct {
-    char stationSSID[30];
-    char stationPass[30];
-};
+#define ID_STATION_SSID 0
+#define ID_STATION_PASS 1
+#define ID_IO_MAP_BEGIN 2
+#define ID_IO_MAP_END   10
 
-struct IOStruct {
-    char version[5];
-};
+#define SIZE_STATION_SSID 30
+#define SIZE_STATION_PASS 30
+#define IO_MAP_IT_SIZE 20
 
 class ConfigClass {
 private:
-    ConfigStruct config;
-    IOStruct io;
+    String stationSSID;
+    String stationPass;
 
 public:
     void begin();
     void save();
 
     void setStationConfig(String ssid, String pass) {
-        strcpy(config.stationSSID, ssid.c_str());
-        strcpy(config.stationPass, pass.c_str());
+        Monitor.println("[Config] Setter station config");
+
+        stationSSID = ssid;
+        stationPass = pass;
     }
 
-    String getStationSSID() { return config.stationSSID; }
-    String getStationPass() { return config.stationPass; }
+    void writeIOMap(IOMap_t ioMap);
+    void readIOMap(IOMap_t & ioMapBuffer);
+
+    String getStationSSID() { return String(stationSSID); }
+    String getStationPass() { return String(stationPass); }
 };
 
 extern ConfigClass Config;
