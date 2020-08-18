@@ -12,9 +12,6 @@
 
 class IOClass {
 private:
-    IOMap_t ioMap;
-    bool forceChanged;
-
     void initIOMap();
 
 public:

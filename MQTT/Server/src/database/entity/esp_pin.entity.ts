@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
-import { StatusCloud, IOPin } from "../../mqtt/esp.enum"
+import { StatusCloud, IOPin } from "../../mqtt/esp.def"
 import { Esp } from "./esp.entity"
 
 @Entity()

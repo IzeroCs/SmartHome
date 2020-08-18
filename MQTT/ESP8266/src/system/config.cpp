@@ -26,7 +26,9 @@ void ConfigClass::save() {
         Monitor.println("[Config] Save unsuccessful");
 }
 
-void ConfigClass::writeIOMap(IOMap_t ioMap) {
+void ConfigClass::updateIOMap() {
+    IOMap_t ioMap = IODef.getIOMap();
+
     if (ioMap.empty()) {
         Monitor.println("[Config] IO map empty, write unsuccessfy");
         return;
@@ -51,24 +53,25 @@ void ConfigClass::writeIOMap(IOMap_t ioMap) {
         Monitor.println("[Config] Write IO map unsuccessfy");
 }
 
-void ConfigClass::readIOMap(IOMap_t & ioMapBuffer) {
-    IOPin_t pin = IOPin_0;
+void ConfigClass::readIOMap() {
+    IOMap_t & ioMap = IODef.getIOMap();
+    IOPin_t   pin   = IOPin_0;
     String ioBuffer = "";
 
-    ioMapBuffer.clear();
+    ioMap.clear();
 
     for (uint8_t id = ID_IO_MAP_BEGIN; id < ID_IO_MAP_END; ++id) {
         ioBuffer = EROM.readString(id);
 
         if (ioBuffer.isEmpty() || !IODef.validate(ioBuffer))
-            ioMapBuffer.insert({ pin, IODef.initIOData(pin, IOType_SINGLE, pin, pin, 0, StatusCloud_IDLE, false) });
+            ioMap.insert({ pin, IODef.initIOData(pin, IOType_SINGLE, pin, pin, 0, StatusCloud_IDLE, false) });
         else
-            ioMapBuffer.insert({ pin, IODef.parseIOData(ioBuffer) });
+            ioMap.insert({ pin, IODef.parseIOData(ioBuffer) });
 
         pin = (IOPin_t)((uint8_t)pin + 1);
     }
 
-    writeIOMap(ioMapBuffer);
+    updateIOMap();
 }
 
 ConfigClass Config;

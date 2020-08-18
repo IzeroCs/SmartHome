@@ -9,7 +9,7 @@ void IOClass::begin() {
 
 void IOClass::initIOMap() {
     Monitor.println("[IO] IO map reader");
-    Config.readIOMap(ioMap);
+    Config.readIOMap();
 }
 
 void IOClass::handle() {

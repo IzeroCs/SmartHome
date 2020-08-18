@@ -63,13 +63,35 @@ void CloudClass::loop() {
     if (millis() - loopNow >= loopPeriod) {
         loopNow = millis();
 
-        publish(CLOUD_TOPIC_SYNC_IO, "IO");
-        publish(CLOUD_TOPIC_SYNC_DETAIL, "Detail");
+        if (IODef.isForceChanged() || IODef.isStatusChanged()) {
+            String pinArray = "";
+            String changed = "false";
+            IOMap_t::iterator it;
+            IOMap_t ioMap = IODef.getIOMap();
+
+            if (IODef.isStatusChanged())
+                changed = "true";
+
+            for (it = ioMap.begin(); it != ioMap.end(); ++it) {
+                if (it->first != IOPin_0)
+                    pinArray += ",";
+
+                pinArray += it->second.toJSON();
+            }
+
+            publish(CLOUD_TOPIC_SYNC_IO, "{\"pins\":[" + pinArray + "],\"changed\":" + changed + "}");
+
+            IODef.setForceChanged(false);
+            IODef.setStatusChanged(false);
+        }
+
+        publish(CLOUD_TOPIC_SYNC_DETAIL, "{\"detail_rssi\":" + String(WiFi.RSSI()) + "}");
     }
 }
 
 void CloudClass::connection() {
     Monitor.println("[Cloud] Connection");
+    IODef.setForceChanged(true);
 
     subscribe(CLOUD_TOPIC_SYNC_IO);
     subscribe(CLOUD_TOPIC_SYNC_DETAIL);

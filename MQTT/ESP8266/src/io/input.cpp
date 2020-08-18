@@ -12,6 +12,7 @@ void InputClass::begin() {
         }
 
         printUndetected = false;
+        printDetected   = true;
     } else {
         Monitor.println("[Input] Begin hardware not detected");
     }
@@ -19,7 +20,7 @@ void InputClass::begin() {
 
 void InputClass::loop() {
     if (pcf.isConnected()) {
-        if (printUndetected)
+        if (printDetected)
             Monitor.println("[Input] Loop hardware detected");
 
         byte digital = pcf.digitalReadAll();
@@ -27,9 +28,10 @@ void InputClass::loop() {
 
         for (uint8_t pin = 0; pin < 8; ++pin) {
             bit = bitRead(digital, pin);
+            IODef.setIOPinStatusClient((IOPin_t)pin, bit == 1);
         }
 
-        printUndetected = false;
+        printDetected = false;
     } else if (!printUndetected) {
         printUndetected = true;
         Monitor.println("[Input] Loop hardware not detected");

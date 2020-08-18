@@ -8,6 +8,8 @@
 
 #include "stream/monitor.h"
 #include "system/seri.h"
+#include "io/io_def.h"
+#include "io/io.h"
 
 #define CLOUD_TOPIC_SYNC_IO "sync-io"
 #define CLOUD_TOPIC_SYNC_DETAIL "sync-detail"
@@ -54,6 +56,10 @@ public:
 
     bool publish(const char * topic, const char * payload) {
         return mqtt.publish(("server/esp/" + Seri.getHostname() + "/" + String(topic)).c_str(), payload);
+    }
+
+    bool publish(String topic, String payload) {
+        return publish(topic.c_str(), payload.c_str());
     }
 
 private:

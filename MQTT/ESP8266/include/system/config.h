@@ -32,8 +32,8 @@ public:
         stationPass = pass;
     }
 
-    void writeIOMap(IOMap_t ioMap);
-    void readIOMap(IOMap_t & ioMapBuffer);
+    void updateIOMap();
+    void readIOMap();
 
     String getStationSSID() { return String(stationSSID); }
     String getStationPass() { return String(stationPass); }

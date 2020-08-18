@@ -1,12 +1,13 @@
 import { Server, persistence, Client, Packet } from "mosca"
 import { Logger } from "../stream/logger"
 import { EspMQTT } from "./esp"
-import { isUndefined } from "util"
+import { isUndefined, isObject } from "util"
 import { blue, red } from "cli-color"
 import express, { Application } from "express"
 import http from "http"
 import path from "path"
 import { AppMQTT } from "./app"
+import { logger } from "../database/ormconfig"
 
 export type authorizeCallback = (obj: any, authorized: boolean) => void
 
@@ -149,7 +150,16 @@ export class MQTT {
                 propertys[i] = propertys[i].replace("-", "_")
                 propertys[i] = propertys[i].toLowerCase()
 
-                if (packet.topic === propertys[i]) return classes[propertys[i]](packet, client)
+                if (packet.topic.replace("-", "_").toLowerCase() === propertys[i]) {
+                    try {
+                        const obj = JSON.parse(packet.payload)
+                        if (isObject(obj)) packet.payload = obj
+                    } catch (e) {
+                        MQTT.mqtt.logger.error(e.message, e.stack)
+                    }
+
+                    return classes[propertys[i]](packet, client)
+                }
             }
         }
 

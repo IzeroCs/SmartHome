@@ -1,15 +1,15 @@
-import { TypeOrm } from "./database/typeorm"
-import { MQTT } from "./mqtt/mqtt"
 import dotenv from "dotenv"
+import { TypeOrm } from "./database/typeorm"
+import { Websocket } from "./socket/websocket"
 
 const typeOrm: TypeOrm = new TypeOrm()
-const mqtt: MQTT = new MQTT()
+const websocket: Websocket = new Websocket()
 
 async function bootstrap() {
     await dotenv.config()
     await typeOrm.connection()
-    await mqtt.setup()
-    await mqtt.run()
+    await websocket.setup()
+    await websocket.listen()
 }
 
 bootstrap()

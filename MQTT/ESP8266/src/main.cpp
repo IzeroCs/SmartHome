@@ -1,6 +1,7 @@
 #include "main.h"
 
-Ticker ticker;
+Ticker ioTicker;
+Ticker ledTicker;
 
 void setup() {
     Monitor.begin();
@@ -10,8 +11,8 @@ void setup() {
     IO.begin();
     Wireless.begin();
 
-    ticker.attach_ms(500, [] { IO.handle(); });
-    ticker.attach_ms(1000, [] {
+    ioTicker.attach_ms(10, [] { IO.handle(); });
+    ledTicker.attach_ms(1000, [] {
         if (WiFi.status() == WL_CONNECTED)
             Monitor.led(!Monitor.ledStatus());
         else

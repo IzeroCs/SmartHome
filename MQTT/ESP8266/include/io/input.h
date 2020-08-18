@@ -5,10 +5,13 @@
 #include <PCF8574.h>
 
 #include "stream/monitor.h"
+#include "io/io_def.h"
+#include "io/io.h"
 
 class InputClass {
 private:
     PCF8574 pcf;
+    bool printDetected = true;
     bool printUndetected = true;
 
 public:
