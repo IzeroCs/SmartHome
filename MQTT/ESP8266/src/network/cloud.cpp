@@ -4,62 +4,42 @@ void CloudClass::begin() {
     if (initializing)
         return;
 
-    mqttConnected = false;
-    initializing = true;
+    Monitor.println("[Cloud] Begin socket");
 
-    Monitor.println("[Cloud] Begin");
-    Monitor.println("[Cloud] Connect");
-    mqtt.setServer(host.c_str(), port);
-    mqtt.setBufferSize(512);
+    socket.onBroadcast([&] (const char * eventName, const char * payload, size_t length) {
+        String event = String(eventName);
+        String data  = String(payload);
 
-    mqtt.setCallback([&] (char * topic, char * payload, uint size) {
-        String mqttTopic   = String(topic);
-        String mqttPrefix  = "server/esp/" + Seri.getHostname() + "/";
-
-        if (mqttTopic.startsWith(mqttPrefix))
-            callback(mqttTopic.substring(mqttPrefix.length()).c_str(), payload, size);
+        if (event == CLOUD_EVENT_CONNECT)
+            onConnect();
+        else if (event == CLOUD_EVENT_DISCONNECT)
+            onDisconnect();
+        else if (event == CLOUD_EVENT_AUTHENTICATION)
+            onAuthentication(data);
+        else if (event == CLOUD_EVENT_STATUS_CLOUD)
+            onStatusCloud(data);
+        else if (event == CLOUD_EVENT_SYNC_IO || event == CLOUD_EVENT_SYNC_DETAIL)
+            onSyncIO(data);
+        else
+            Monitor.println("[Cloud] Event: " + String(event) + ", Payload: " + data);
     });
+
+    socket.begin(host.c_str(), port, nsp.c_str());
+    initializing = true;
 }
 
 void CloudClass::handle() {
     if (!initializing || WiFi.status() != WL_CONNECTED)
         return;
 
-    if (!mqtt.connected()) {
-        if (mqttConnected)
-            disconnection();
-
-        mqttConnected = false;
-
-        if (millis() - connectNow >= connectPeriod) {
-            if (!mqttReconnected)
-                Monitor.println("[Cloud] Attempting MQTT connection...");
-
-            mqttReconnected = true;
-            connectNow = millis();
-
-            if (mqtt.connect(Seri.getHostname().c_str(), "ESP", token.c_str())) {
-                mqttConnected = true;
-                mqttReconnected = false;
-                preStateConnect = -100;
-                connection();
-            } else {
-                mqttConnected = false;
-                mqttReconnected = false;
-
-                if (preStateConnect != mqtt.state()) {
-                    preStateConnect = mqtt.state();
-                    Monitor.println("[Cloud] MQTT connect error: " + connectError(mqtt.state()));
-                }
-            }
-        }
-    } else {
-        mqtt.loop();
-        loop();
-    }
+    socket.loop();
+    loop();
 }
 
 void CloudClass::loop() {
+    if (!socket.isConnect())
+        return;
+
     if (millis() - loopNow >= loopPeriod) {
         loopNow = millis();
 
@@ -79,31 +59,38 @@ void CloudClass::loop() {
                 pinArray += it->second.toJSON();
             }
 
-            publish(CLOUD_TOPIC_SYNC_IO, "{\"pins\":[" + pinArray + "],\"changed\":" + changed + "}");
+            socket.emit(CLOUD_EVENT_SYNC_IO, "{\"pins\":[" + pinArray + "],\"changed\":" + changed + "}");
 
             IODef.setForceChanged(false);
             IODef.setStatusChanged(false);
         }
 
-        publish(CLOUD_TOPIC_SYNC_DETAIL, "{\"detail_rssi\":" + String(WiFi.RSSI()) + "}");
+        socket.emit(CLOUD_EVENT_SYNC_DETAIL, "{\"detail_rssi\":" + String(WiFi.RSSI()) + "}");
     }
 }
 
-void CloudClass::connection() {
-    Monitor.println("[Cloud] Connection");
+void CloudClass::onConnect() {
+    Monitor.println("[Cloud] Socket connection");
     IODef.setForceChanged(true);
-
-    subscribe(CLOUD_TOPIC_SYNC_IO);
-    subscribe(CLOUD_TOPIC_SYNC_DETAIL);
 }
 
-void CloudClass::disconnection() {
-    Monitor.println("[Cloud] Disconnection");
+void CloudClass::onDisconnect() {
+    Monitor.println("[Cloud] Socket disconnection");
 }
 
-void CloudClass::callback(const char * topic, const char * payload, const uint size) {
-    Monitor.println("[Cloud] Topic: " + String(topic));
-    Monitor.println("[Cloud] Payload: " + String(payload));
+void CloudClass::onAuthentication(String data) {
+    if (data != "authorized")
+        socket.emit(CLOUD_EVENT_AUTHENTICATION, "\{\"id\":\"" + Seri.getHostname() + "\", \"token\":\"" + token + "\"}");
+    else
+        IODef.setForceChanged(true);
+}
+
+void CloudClass::onStatusCloud(String data) {
+
+}
+
+void CloudClass::onSyncIO(String data) {
+    IODef.setForceChanged(true);
 }
 
 CloudClass Cloud;

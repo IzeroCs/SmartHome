@@ -10,6 +10,15 @@ import { WebsocketPlatform } from "./websocket.platform"
 import { Namespace, Socket, Server } from "socket.io"
 import { isUndefined } from "util"
 
+export const EVENT_CONNECTION = "connection"
+export const EVENT_DISCONNECT = "disconnect"
+export const EVENT_AUTHENTICATION = "authentication"
+
+export type AuthenticationData = {
+    id: string
+    token: string
+}
+
 export class Websocket {
     private static _socket: Websocket
 
@@ -40,7 +49,6 @@ export class Websocket {
             pingInterval: 10000,
             pingTimeout: 5000,
             cookie: false,
-            maxHttpBufferSize: 1024,
             transports: ["websocket", "polling"]
         })
 
@@ -60,40 +68,50 @@ export class Websocket {
         this._nspApp = this._io.of("/" + AppPlatform.platform)
         this._nspEsp = this._io.of("/" + EspPlatform.platform)
 
-        this._nspApp.use(this._wildcard)
-        this._nspEsp.use(this._wildcard)
-
-        this._nspApp.on("connection", (socket: Socket) => Websocket.onEvent(this._appPlatform, socket))
-        this._nspEsp.on("connection", (socket: Socket) => Websocket.onEvent(this._espPlatform, socket))
+        this.onEvent(this._nspApp, this._appPlatform)
+        this.onEvent(this._nspEsp, this._espPlatform)
 
         this._appPlatform.ready(this._nspApp)
         this._espPlatform.ready(this._nspEsp)
     }
 
-    private static onEvent(platform: WebsocketPlatform, socket: Socket) {
-        platform.onConnection(socket)
+    static isSocketAuthentication(socket: Socket): boolean {
+        return !isUndefined(socket["authentication"]) && socket["authetication"] === true
+    }
 
-        socket.on("*", (packet: any) => {
-            if (isUndefined(packet)) return
-            if (isUndefined(packet.data)) return
+    static setSocketAuthentication(socket: Socket, authorized: boolean) {
+        socket["authentication"] = authorized
+    }
 
-            let event: string = packet.data[0]
-            let data: any = packet.data[1]
+    private onEvent(nsp: Namespace, platform: WebsocketPlatform) {
+        nsp.use(this._wildcard)
+        nsp.on(EVENT_CONNECTION, (socket: Socket) => {
+            platform.onConnection(socket)
 
-            event = event.toLowerCase()
-            event = event.replace(/[\-\.]+/g, " ")
-            event = event.replace(/(^|\s)([a-z]{1})/g, (match: string, ...args: any[]): string => {
-                return args[1].toUpperCase()
-            })
-            event = "on" + event
+            socket
+                .on("*", (packet: any) => {
+                    if (!Websocket.isSocketAuthentication(socket)) return
 
-            if (!isUndefined(platform[event])) {
-                platform[event](socket, data)
-            }
-        })
+                    if (isUndefined(packet)) return
+                    if (isUndefined(packet.data)) return
 
-        socket.on("disconnect", () => {
-            platform.onDisconnection(socket)
+                    let event: string = packet.data[0]
+                    let data: any = packet.data[1]
+
+                    event = event.toLowerCase()
+                    event = event.replace(/[\-\.]+/g, " ")
+                    event = event.replace(/(^|\s)([a-z]{1})/g, (match: string, ...args: any[]): string => {
+                        return args[1].toUpperCase()
+                    })
+                    event = "on" + event
+
+                    if (!isUndefined(platform[event])) {
+                        platform[event](socket, data)
+                    }
+                })
+                .on(EVENT_DISCONNECT, () => platform.onDisconnection(socket))
+                .on(EVENT_AUTHENTICATION, (data: AuthenticationData) => platform.onAuthentication(socket, data))
+                .emit(EVENT_AUTHENTICATION)
         })
     }
 }

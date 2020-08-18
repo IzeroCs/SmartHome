@@ -1,7 +1,7 @@
-import { Websocket } from "./websocket"
+import { Websocket, AuthenticationData } from "./websocket"
 import { Logger } from "../stream/logger"
 import { WebsocketPlatform } from "./websocket.platform"
-import { blue } from "cli-color"
+import { blue, red } from "cli-color"
 import { Namespace, Socket } from "socket.io"
 
 export class EspPlatform implements WebsocketPlatform {
@@ -32,7 +32,15 @@ export class EspPlatform implements WebsocketPlatform {
         this._logger.log("Client ESP disconnect:", blue(socket.id))
     }
 
-    onSync(socket: Socket, data: any) {
-        this._logger.log(socket.id, data)
+    onAuthentication(socket: Socket, data: AuthenticationData) {
+        this._logger.log("onAuthentication:", red(data))
+    }
+
+    onSyncIo(socket: Socket, data: any) {
+        this._logger.log("onSyncIO", red(data))
+    }
+
+    onSyncDetail(socket: Socket, data: any) {
+        this._logger.log("onSyncDetail", red(data))
     }
 }

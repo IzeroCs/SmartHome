@@ -1,8 +1,8 @@
-import { Websocket } from "./websocket"
+import { Websocket, AuthenticationData } from "./websocket"
 import { Logger } from "../stream/logger"
 import { WebsocketPlatform } from "./websocket.platform"
 import { Namespace, Socket } from "socket.io"
-import { blue } from "cli-color"
+import { blue, red } from "cli-color"
 
 export class AppPlatform implements WebsocketPlatform {
     public static platform = "platform.app"
@@ -30,6 +30,10 @@ export class AppPlatform implements WebsocketPlatform {
 
     onDisconnection(socket: Socket) {
         this._logger.log("Client APP disconnect:", blue(socket.id))
+    }
+
+    onAuthentication(socket: Socket, data: AuthenticationData) {
+        this._logger.log("onAuthentication:", red(data))
     }
 
     onSync(socket: Socket, data: any) {
