@@ -10,9 +10,11 @@ export class Cert {
     private payloadConfig: Object
 
     constructor(platform: string) {
-        this.platform = platform.toLowerCase()
+        this.platform = platform.toLowerCase().replace("platform.", "")
 
-        if (this.platform !== "app" && this.platform !== "esp") throw new Error(`Platform ${this.platform} not support`)
+        if (this.platform !== "app" && this.platform !== "esp") {
+            throw new Error(`Platform ${this.platform} not support`)
+        }
 
         this.certPrivate = fs.readFileSync(this.resolveAssetsPath("private.key"))
         this.certPublic = fs.readFileSync(this.resolveAssetsPath("public.key"))

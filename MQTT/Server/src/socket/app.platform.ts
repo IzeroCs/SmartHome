@@ -1,8 +1,10 @@
-import { Websocket, AuthenticationData } from "./websocket"
+import { Websocket } from "./websocket"
 import { Logger } from "../stream/logger"
 import { WebsocketPlatform } from "./websocket.platform"
 import { Namespace, Socket } from "socket.io"
 import { blue, red } from "cli-color"
+import { isString } from "util"
+import { AuthenticationData } from "./websocket.const"
 
 export class AppPlatform implements WebsocketPlatform {
     public static platform = "platform.app"
@@ -19,6 +21,18 @@ export class AppPlatform implements WebsocketPlatform {
         this._logger = new Logger(AppPlatform)
     }
 
+    getLogger(): Logger {
+        return this._logger
+    }
+
+    getPlatformName(): string {
+        return AppPlatform.platform
+    }
+
+    isPlatformId(id: string) {
+        return isString(id) && id.startsWith("APP")
+    }
+
     ready(nsp: Namespace) {
         this._logger.log("Platform APP is ready")
         this._nsp = nsp
@@ -32,7 +46,7 @@ export class AppPlatform implements WebsocketPlatform {
         this._logger.log("Client APP disconnect:", blue(socket.id))
     }
 
-    onAuthentication(socket: Socket, data: AuthenticationData) {
+    onAuthentication(socket: Socket, data: AuthenticationData, authorized: boolean) {
         this._logger.log("onAuthentication:", red(data))
     }
 

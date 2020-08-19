@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
-import { StatusCloud, IOPin } from "../../mqtt/esp.def"
+import { StatusCloudEnum, IOPinEnum } from "../../socket/esp.const"
 import { Esp } from "./esp.entity"
 
 @Entity()
@@ -14,22 +14,22 @@ export class EspPin {
     name: string
 
     @Column("tinyint")
-    input: IOPin
+    input: IOPinEnum
 
     @Column("tinyint")
-    outputType: IOPin
+    outputType: IOPinEnum
 
     @Column("tinyint")
-    outputPrimary: IOPin
+    outputPrimary: IOPinEnum
 
     @Column("tinyint")
-    ouputSecondary: IOPin
+    ouputSecondary: IOPinEnum
 
     @Column("tinyint", { nullable: true, default: 0 })
-    dualToggleCount: IOPin
+    dualToggleCount: IOPinEnum
 
     @Column({ nullable: true, default: 1 })
-    statusCloud: StatusCloud
+    statusCloud: StatusCloudEnum
 
     @Column({ nullable: true, default: false })
     statusClient: boolean

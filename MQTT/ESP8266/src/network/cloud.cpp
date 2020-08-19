@@ -10,16 +10,18 @@ void CloudClass::begin() {
         String event = String(eventName);
         String data  = String(payload);
 
-        if (event == CLOUD_EVENT_CONNECT)
-            onConnect();
-        else if (event == CLOUD_EVENT_DISCONNECT)
-            onDisconnect();
-        else if (event == CLOUD_EVENT_AUTHENTICATION)
-            onAuthentication(data);
-        else if (event == CLOUD_EVENT_STATUS_CLOUD)
+        if (event == CLOUD_EVENT_STATUS_CLOUD)
             onStatusCloud(data);
         else if (event == CLOUD_EVENT_SYNC_IO || event == CLOUD_EVENT_SYNC_DETAIL)
             onSyncIO(data);
+        else if (event == CLOUD_EVENT_SOCKET_ID)
+            onSocketId(data);
+        else if (event == CLOUD_EVENT_AUTHENTICATION)
+            onAuthentication(data);
+        else if (event == CLOUD_EVENT_CONNECT)
+            onConnect();
+        else if (event == CLOUD_EVENT_DISCONNECT)
+            onDisconnect();
         else
             Monitor.println("[Cloud] Event: " + String(event) + ", Payload: " + data);
     });
@@ -40,10 +42,12 @@ void CloudClass::loop() {
     if (!socket.isConnect())
         return;
 
-    if (millis() - loopNow >= loopPeriod) {
+    bool ioChanged = IODef.isForceChanged() || IODef.isStatusChanged();
+
+    if (millis() - loopNow >= loopPeriod || ioChanged) {
         loopNow = millis();
 
-        if (IODef.isForceChanged() || IODef.isStatusChanged()) {
+        if (ioChanged) {
             String pinArray = "";
             String changed = "false";
             IOMap_t::iterator it;
@@ -76,6 +80,10 @@ void CloudClass::onConnect() {
 
 void CloudClass::onDisconnect() {
     Monitor.println("[Cloud] Socket disconnection");
+}
+
+void CloudClass::onSocketId(String data) {
+    socket.emit(CLOUD_EVENT_SOCKET_ID, "{\"id\":\"" + Seri.getHostname() + "\"}");
 }
 
 void CloudClass::onAuthentication(String data) {

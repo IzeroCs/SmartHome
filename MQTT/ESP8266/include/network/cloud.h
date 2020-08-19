@@ -14,6 +14,7 @@
 
 #define CLOUD_EVENT_CONNECT        "connect"
 #define CLOUD_EVENT_DISCONNECT     "disconnect"
+#define CLOUD_EVENT_SOCKET_ID      "socket.id"
 #define CLOUD_EVENT_AUTHENTICATION "authentication"
 #define CLOUD_EVENT_SYNC_IO        "sync.io"
 #define CLOUD_EVENT_SYNC_DETAIL    "sync.detail"
@@ -44,6 +45,7 @@ protected:
     void loop();
     void onConnect();
     void onDisconnect();
+    void onSocketId(String data);
     void onAuthentication(String data);
     void onStatusCloud(String data);
     void onSyncIO(String data);
