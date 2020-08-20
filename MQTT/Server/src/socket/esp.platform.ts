@@ -7,6 +7,7 @@ import { Network } from "../util/network"
 import { isUndefined, isString } from "util"
 import { AuthenticationData } from "./websocket.const"
 import { EspModuleType, EspSyncDetailType, EspSyncIoType, EspPinType, EspPinCast } from "./esp.const"
+import { EspModel } from "../database/model/esp.model"
 
 export class EspPlatform implements WebsocketPlatform {
     public static platform = "platform.esp"
@@ -48,6 +49,7 @@ export class EspPlatform implements WebsocketPlatform {
 
     onDisconnection(socket: Socket) {
         this._logger.log("Client ESP disconnect:", blue(socket.id))
+        this._espModule.updateModule(socket.id, false, false)
     }
 
     onAuthentication(socket: Socket, data: AuthenticationData, authorized: boolean) {
@@ -102,7 +104,7 @@ class EspModule {
             this.modules.set(id, {
                 name: id,
                 online: false,
-                authorized: false,
+                authentication: false,
                 changed: false,
                 pins: [],
                 detail_rssi: Network.MIN_RSSI
@@ -115,13 +117,16 @@ class EspModule {
         return this.modules.get(id)
     }
 
-    updateModule(id: string, online: boolean, authorized?: boolean) {
+    updateModule(id: string, online: boolean, authentication?: boolean) {
         const module = this.getModule(id)
+
+        if (isUndefined(authentication)) authentication = false
 
         module.name = id
         module.online = online
+        module.authentication = authentication
 
-        if (authorized) module.authorized = authorized
+        EspModel.updateAuthentication(id, module.authentication, module.online)
     }
 
     updatePins(id: string, pins: Array<EspPinType>, changed?: boolean) {
@@ -132,11 +137,14 @@ class EspModule {
         }
 
         module.pins = pins
+        EspModel.updatePins(id, module.pins)
     }
 
     updateDetail(id: string, detail: EspSyncDetailType) {
         const module = this.getModule(id)
 
-        if (detail.detail_rssi) module.detail_rssi = detail.detail_rssi
+        if (!isUndefined(detail.detail_rssi)) module.detail_rssi = detail.detail_rssi
+
+        EspModel.updateDetail(id, module.detail_rssi)
     }
 }

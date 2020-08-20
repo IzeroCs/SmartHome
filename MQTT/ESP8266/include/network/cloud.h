@@ -30,8 +30,12 @@ private:
     String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXplcm9DcyIsInN1YiI6IkVTUDgyNjYiLCJpYXQiOjQxMDI0NDQ4MDB9.HAU4zKdQnfHqj0kfLYoLH5blr3BUSgQo-DgxT0JvIjd9t6b0AloTjA1mUfbk9LRipe-OMC58LYIHG2kbpYAyCg";
 
     bool initializing;
+    bool storeData;
+
     ulong loopNow = 0;
+    ulong storeNow = 0;
     ulong loopPeriod = 1000;
+    ulong storePeriod = 1000;
 
 public:
     void begin();

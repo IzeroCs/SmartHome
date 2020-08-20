@@ -158,12 +158,12 @@ export class Websocket {
 
             if (!platform.isPlatformId(socket.id)) {
                 if (now - intervalSocketId > 5000) {
-                    intervalSocketId = now
+                    socket["interval_socketid"] = now
                     socket.emit(EVENT_SOCKET_ID)
                 }
             } else if (!Websocket.isSocketAuthentication(socket)) {
                 if (now - intervalAuthentication > 5000) {
-                    intervalAuthentication = now
+                    socket["interval_authentication"] = now
                     socket.emit(EVENT_AUTHENTICATION)
                 }
             }

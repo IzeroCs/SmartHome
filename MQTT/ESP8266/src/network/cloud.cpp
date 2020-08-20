@@ -53,6 +53,8 @@ void CloudClass::loop() {
             IOMap_t::iterator it;
             IOMap_t ioMap = IODef.getIOMap();
 
+            storeData = true;
+
             if (IODef.isStatusChanged())
                 changed = "true";
 
@@ -70,6 +72,15 @@ void CloudClass::loop() {
         }
 
         socket.emit(CLOUD_EVENT_SYNC_DETAIL, "{\"detail_rssi\":" + String(WiFi.RSSI()) + "}");
+
+        if (millis() - storeNow >= storePeriod) {
+            storeNow = millis();
+
+            if (storeData) {
+                storeData = false;
+                Config.updateIOMap();
+            }
+        }
     }
 }
 

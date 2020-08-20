@@ -28,6 +28,9 @@ export class EspPin {
     @Column("tinyint", { nullable: true, default: 0 })
     dualToggleCount: IOPinEnum
 
+    @Column("mediumint", { nullable: true, default: 0 })
+    dualToggleTime: number
+
     @Column({ nullable: true, default: 1 })
     statusCloud: StatusCloudEnum
 

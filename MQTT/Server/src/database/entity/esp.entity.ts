@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne, Unique, Index } from "typeorm"
 import { EspPin } from "./esp_pin.entity"
 
 @Entity()
@@ -7,26 +7,27 @@ export class Esp {
     id: number
 
     @Column()
+    @Index({ unique: true })
     name: string
 
-    @Column({ default: false })
+    @Column({ nullable: true, default: false })
     online: boolean
 
-    @Column({ default: false })
-    auth: boolean
+    @Column({ nullable: true, default: false })
+    authentication: boolean
 
-    @Column({ default: false })
+    @Column({ nullable: true, default: "" })
     token: string
 
-    @Column({ default: false })
+    @Column({ nullable: true, default: false })
     token_generator: string
 
-    @Column({ default: -100 })
-    detail_rssi: string
+    @Column({ nullable: true, default: -100 })
+    detail_rssi: number
 
     @OneToMany(type => EspPin, pin => pin.esp)
     pins: EspPin[]
 
-    @Column({ default: false })
-    auth_at: Date
+    @Column({ nullable: true, default: false })
+    authentication_at: Date
 }

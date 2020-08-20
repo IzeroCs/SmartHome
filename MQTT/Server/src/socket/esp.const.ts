@@ -39,12 +39,13 @@ export type EspPinType = {
 }
 
 export type EspModuleType = {
-    name: string
-    online: boolean
-    authorized: boolean
-    changed: boolean
-    pins: Array<EspPinType>
-    detail_rssi: number
+    name?: string
+    online?: boolean
+    authentication?: boolean
+    changed?: boolean
+    token?: string
+    pins?: Array<EspPinType>
+    detail_rssi?: number
 }
 
 export type EspSyncIoType = {
