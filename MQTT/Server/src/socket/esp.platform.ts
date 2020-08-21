@@ -3,11 +3,25 @@ import { Logger } from "../stream/logger"
 import { WebsocketPlatform } from "./websocket.platform"
 import { blue, red, green } from "cli-color"
 import { Namespace, Socket } from "socket.io"
-import { Network } from "../util/network"
+import { Network } from "../util/network.util"
 import { isUndefined, isString } from "util"
 import { AuthenticationData } from "./websocket.const"
-import { EspModuleType, EspSyncDetailType, EspSyncIoType, EspPinType, EspPinCast } from "./esp.const"
+import {
+    EspModuleType,
+    EspSyncDetailType,
+    EspSyncIoType,
+    EspPinType,
+    EspPinCast,
+    EspDetailDefineKeys,
+    EspSystemDefineKeys
+} from "./esp.const"
 import { EspModel } from "../database/model/esp.model"
+import { defineKeys } from "../util/array.util"
+import { EspSyncSystemType } from "./esp.const"
+
+const EVENT_SYNC_IO = "sync.io"
+const EVENT_SYNC_DETAIL = "sync.detail"
+const EVENT_SYNC_SYSTEM = "sync.system"
 
 export class EspPlatform implements WebsocketPlatform {
     public static platform = "platform.esp"
@@ -54,7 +68,8 @@ export class EspPlatform implements WebsocketPlatform {
 
     onAuthentication(socket: Socket, data: AuthenticationData, authorized: boolean) {
         if (authorized) {
-            this._espModule.updateModule(socket.id, true, true)
+            this._espModule.updateModule(socket.id, true, true, data.token)
+            socket.emit(EVENT_SYNC_SYSTEM)
         }
     }
 
@@ -79,19 +94,25 @@ export class EspPlatform implements WebsocketPlatform {
         this._espModule.updatePins(socket.id, pins, changed)
     }
 
-    onSyncDetail(socket: Socket, data: EspSyncDetailType) {
+    onSyncDetail(socket: Socket, data: Array<any>) {
         if (isUndefined(data)) return
 
-        if (data.detail_rssi) {
+        const detail = <EspSyncDetailType>defineKeys(EspDetailDefineKeys, data)
+
+        if (detail.detail_rssi) {
             const module = this._espModule.getModule(socket.id)
 
             const signalModule = Network.calculateSignalLevel(module.detail_rssi)
-            const signalClient = Network.calculateSignalLevel(data.detail_rssi)
+            const signalClient = Network.calculateSignalLevel(detail.detail_rssi)
 
-            if (signalModule != signalClient) {
-                this._espModule.updateDetail(socket.id, data)
+            if (signalModule != signalClient || module.detail_heap != detail.detail_heap) {
+                this._espModule.updateDetail(socket.id, detail)
             }
         }
+    }
+
+    onSyncSystem(socket: Socket, data: Array<any>) {
+        this._espModule.updateSystem(socket.id, <EspSyncSystemType>defineKeys(EspSystemDefineKeys, data))
     }
 }
 
@@ -107,7 +128,11 @@ class EspModule {
                 authentication: false,
                 changed: false,
                 pins: [],
-                detail_rssi: Network.MIN_RSSI
+                detail_rssi: Network.MIN_RSSI,
+                detail_heap: 0,
+                esp_chip_id: 0,
+                esp_free_sketch: 0,
+                esp_boot_version: 0
             })
         }
     }
@@ -117,16 +142,18 @@ class EspModule {
         return this.modules.get(id)
     }
 
-    updateModule(id: string, online: boolean, authentication?: boolean) {
+    updateModule(id: string, online: boolean, authentication?: boolean, token?: string) {
         const module = this.getModule(id)
 
+        if (isUndefined(token)) token = ""
         if (isUndefined(authentication)) authentication = false
 
         module.name = id
         module.online = online
+        module.token = token
         module.authentication = authentication
 
-        EspModel.updateAuthentication(id, module.authentication, module.online)
+        EspModel.updateAuthentication(id, module.authentication, module.online, module.token)
     }
 
     updatePins(id: string, pins: Array<EspPinType>, changed?: boolean) {
@@ -144,7 +171,18 @@ class EspModule {
         const module = this.getModule(id)
 
         if (!isUndefined(detail.detail_rssi)) module.detail_rssi = detail.detail_rssi
+        if (!isUndefined(detail.detail_heap)) module.detail_heap = detail.detail_heap
 
-        EspModel.updateDetail(id, module.detail_rssi)
+        EspModel.updateDetail(id, module.detail_rssi, module.detail_heap)
+    }
+
+    updateSystem(id: string, system: EspSyncSystemType) {
+        const module = this.getModule(id)
+
+        if (!isUndefined(system.esp_chip_id)) module.esp_chip_id = system.esp_chip_id
+        if (!isUndefined(system.esp_free_sketch)) module.esp_free_sketch = system.esp_free_sketch
+        if (!isUndefined(system.esp_boot_version)) module.esp_boot_version = system.esp_boot_version
+
+        EspModel.updateSystem(id, module.esp_chip_id, module.esp_free_sketch, module.esp_boot_version)
     }
 }

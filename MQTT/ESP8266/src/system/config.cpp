@@ -43,7 +43,6 @@ void ConfigClass::updateIOMap() {
         data   = it->second;
         buffer = data.toEROM();
 
-        Monitor.println("[Config] Wirte IO map: " + buffer);
         EROM.write(id++, buffer);
     }
 

@@ -4,8 +4,12 @@ Ticker ioTicker;
 Ticker ledTicker;
 
 void setup() {
+    ESP.wdtEnable(WDTO_8S);
+
     Monitor.begin();
     Monitor.println("[Main] Client running");
+    Monitor.println("[Main] Watchdog enable 8 second");
+
     Seri.begin();
     Config.begin();
     IO.begin();
@@ -21,6 +25,13 @@ void setup() {
 }
 
 void loop() {
-    Wireless.loop();
-    Cloud.handle();
+    try {
+        Wireless.loop();
+        Cloud.handle();
+        ESP.wdtFeed();
+    } catch (...) {
+        Monitor.println("Exception");
+    }
+
+    yield();
 }

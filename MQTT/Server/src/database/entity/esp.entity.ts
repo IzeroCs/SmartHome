@@ -19,11 +19,23 @@ export class Esp {
     @Column({ nullable: true, default: "" })
     token: string
 
-    @Column({ nullable: true, default: false })
+    @Column({ nullable: true, default: "" })
     token_generator: string
 
     @Column({ nullable: true, default: -100 })
     detail_rssi: number
+
+    @Column({ nullable: true, default: 0 })
+    detail_heap: number
+
+    @Column({ nullable: true, default: 0 })
+    esp_chip_id: number
+
+    @Column({ nullable: true, default: 0 })
+    esp_free_sketch: number
+
+    @Column({ nullable: true, default: 0 })
+    esp_boot_version: number
 
     @OneToMany(type => EspPin, pin => pin.esp)
     pins: EspPin[]

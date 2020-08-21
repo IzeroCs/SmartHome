@@ -9,7 +9,7 @@ import { AppPlatform } from "./app.platform"
 import { EspPlatform } from "./esp.platform"
 import { WebsocketPlatform } from "./websocket.platform"
 import { Namespace, Socket, Server } from "socket.io"
-import { isUndefined, isString } from "util"
+import { isUndefined, isString, isArray, isObject } from "util"
 import { AuthenticationData, SocketIdData } from "./websocket.const"
 import { Cert } from "../security/cert"
 
@@ -45,7 +45,7 @@ export class Websocket {
         this._wildcard = wildcard()
         this._io = socketio(this._http, {
             serveClient: false,
-            pingInterval: 10000,
+            pingInterval: 5000,
             pingTimeout: 5000,
             cookie: false,
             transports: ["websocket", "polling"]
@@ -100,10 +100,18 @@ export class Websocket {
                     if (isUndefined(packet)) return
                     if (isUndefined(packet.data)) return
                     if (!Websocket.isSocketAuthentication(socket)) return
+                    if (!platform.isPlatformId(socket.id)) return
                     if (packet.data[0].toLowerCase() == EVENT_AUTHENTICATION) return
 
                     let event: string = packet.data[0]
                     let data: any = packet.data[1]
+
+                    if (isString(data)) {
+                        try {
+                            let json = JSON.parse(data)
+                            if (isArray(json) || isObject(json)) data = json
+                        } catch (e) {}
+                    }
 
                     event = event.toLowerCase()
                     event = event.replace(/[\-\.]+/g, " ")

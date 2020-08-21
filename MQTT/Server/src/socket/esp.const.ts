@@ -1,3 +1,24 @@
+export const EspPinDefineKeys = [
+    "input",
+    "outputType",
+    "outputPrimary",
+    "outputSecondary",
+    "dualToggleCount",
+    "dualToggleTime",
+    "statusClient",
+    "statusCloud"
+]
+
+export const EspDetailDefineKeys = ["detail_rssi", "detail_heap"]
+
+export const EspSystemDefineKeys = [
+    "esp_chip_id",
+    "esp_free_sketch",
+    "esp_boot_version",
+    "esp_sdk_version",
+    "esp_full_version"
+]
+
 export enum IOPinEnum {
     IOPin_0 = 0,
     IOPin_1 = 1,
@@ -46,6 +67,10 @@ export type EspModuleType = {
     token?: string
     pins?: Array<EspPinType>
     detail_rssi?: number
+    detail_heap?: number
+    esp_chip_id?: number
+    esp_free_sketch?: number
+    esp_boot_version?: number
 }
 
 export type EspSyncIoType = {
@@ -55,4 +80,11 @@ export type EspSyncIoType = {
 
 export type EspSyncDetailType = {
     detail_rssi?: number
+    detail_heap?: number
+}
+
+export type EspSyncSystemType = {
+    esp_chip_id?: number
+    esp_free_sketch?: number
+    esp_boot_version?: number
 }

@@ -14,6 +14,8 @@ void CloudClass::begin() {
             onStatusCloud(data);
         else if (event == CLOUD_EVENT_SYNC_IO || event == CLOUD_EVENT_SYNC_DETAIL)
             onSyncIO(data);
+        else if (event == CLOUD_EVENT_SYNC_SYSTEM)
+            onSyncSystem(data);
         else if (event == CLOUD_EVENT_SOCKET_ID)
             onSocketId(data);
         else if (event == CLOUD_EVENT_AUTHENTICATION)
@@ -71,7 +73,10 @@ void CloudClass::loop() {
             IODef.setStatusChanged(false);
         }
 
-        socket.emit(CLOUD_EVENT_SYNC_DETAIL, "{\"detail_rssi\":" + String(WiFi.RSSI()) + "}");
+        socket.emit(CLOUD_EVENT_SYNC_DETAIL, "[" +
+            String(WiFi.RSSI()) + "," +
+            String(ESP.getFreeHeap()) +
+        "]");
 
         if (millis() - storeNow >= storePeriod) {
             storeNow = millis();
@@ -86,7 +91,6 @@ void CloudClass::loop() {
 
 void CloudClass::onConnect() {
     Monitor.println("[Cloud] Socket connection");
-    IODef.setForceChanged(true);
 }
 
 void CloudClass::onDisconnect() {
@@ -98,10 +102,11 @@ void CloudClass::onSocketId(String data) {
 }
 
 void CloudClass::onAuthentication(String data) {
-    if (data != "authorized")
+    if (data != "authorized") {
         socket.emit(CLOUD_EVENT_AUTHENTICATION, "\{\"id\":\"" + Seri.getHostname() + "\", \"token\":\"" + token + "\"}");
-    else
+    } else {
         IODef.setForceChanged(true);
+    }
 }
 
 void CloudClass::onStatusCloud(String data) {
@@ -110,6 +115,14 @@ void CloudClass::onStatusCloud(String data) {
 
 void CloudClass::onSyncIO(String data) {
     IODef.setForceChanged(true);
+}
+
+void CloudClass::onSyncSystem(String data) {
+    socket.emit(CLOUD_EVENT_SYNC_SYSTEM, "[" +
+        String(ESP.getChipId()) + "," +
+        String(ESP.getFreeSketchSpace()) + "," +
+        String(ESP.getBootVersion()) +
+    "]");
 }
 
 CloudClass Cloud;

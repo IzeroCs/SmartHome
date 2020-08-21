@@ -19,10 +19,15 @@ export class EspModel {
         }
 
         if (!isUndefined(data.name)) esp.name = data.name
-        if (!isUndefined(esp.token)) esp.token = data.token
+        if (!isUndefined(data.token)) esp.token = data.token
         if (!isUndefined(data.online)) esp.online = data.online
         if (!isUndefined(data.detail_rssi)) esp.detail_rssi = data.detail_rssi
+        if (!isUndefined(data.detail_heap)) esp.detail_heap = data.detail_heap
         if (!isUndefined(data.authentication)) esp.authentication = data.authentication
+
+        if (!isUndefined(data.esp_chip_id)) esp.esp_chip_id = data.esp_chip_id
+        if (!isUndefined(data.esp_free_sketch)) esp.esp_free_sketch = data.esp_free_sketch
+        if (!isUndefined(data.esp_boot_version)) esp.esp_boot_version = data.esp_boot_version
 
         if (!isUndefined(data.pins)) {
             await EspPinModel.update(esp, data.pins)
@@ -47,9 +52,16 @@ export class EspModel {
         return await getRepository(Esp).save(esp)
     }
 
-    static updateAuthentication(espName: string, authentication: boolean, online: boolean): Promise<any> {
+    static updateAuthentication(
+        espName: string,
+        authentication: boolean,
+        online: boolean,
+        token?: string
+    ): Promise<any> {
         return new Promise(async (resolve, reject) => {
+            if (isUndefined(token)) token = ""
             this.update(espName, {
+                token: token,
                 online: online,
                 authentication: authentication
             })
@@ -64,10 +76,26 @@ export class EspModel {
         })
     }
 
-    static updateDetail(espName: string, detail_rssi: number): Promise<any> {
+    static updateDetail(espName: string, detail_rssi: number, detail_heap: number): Promise<any> {
         return new Promise(async (resolve, reject) => {
             this.update(espName, {
-                detail_rssi: detail_rssi
+                detail_rssi: detail_rssi,
+                detail_heap: detail_heap
+            })
+        })
+    }
+
+    static updateSystem(
+        espName: string,
+        esp_chip_id: number,
+        esp_free_sketch: number,
+        esp_boot_version: number
+    ): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            this.update(espName, {
+                esp_chip_id: esp_chip_id,
+                esp_free_sketch: esp_free_sketch,
+                esp_boot_version: esp_boot_version
             })
         })
     }

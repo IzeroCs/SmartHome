@@ -18,6 +18,7 @@
 #define CLOUD_EVENT_AUTHENTICATION "authentication"
 #define CLOUD_EVENT_SYNC_IO        "sync.io"
 #define CLOUD_EVENT_SYNC_DETAIL    "sync.detail"
+#define CLOUD_EVENT_SYNC_SYSTEM    "sync.system"
 #define CLOUD_EVENT_STATUS_CLOUD   "status.cloud"
 
 class CloudClass {
@@ -34,8 +35,8 @@ private:
 
     ulong loopNow = 0;
     ulong storeNow = 0;
-    ulong loopPeriod = 1000;
-    ulong storePeriod = 1000;
+    ulong loopPeriod = 2000;
+    ulong storePeriod = 2000;
 
 public:
     void begin();
@@ -53,6 +54,7 @@ protected:
     void onAuthentication(String data);
     void onStatusCloud(String data);
     void onSyncIO(String data);
+    void onSyncSystem(String data);
 };
 
 extern CloudClass Cloud;
